@@ -1,0 +1,678 @@
+[
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "safe-write.o",
+            "safe-write.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "safe-write.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "localcharset.o",
+            "localcharset.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "localcharset.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "close-stream.o",
+            "close-stream.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "close-stream.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xalloc-die.o",
+            "xalloc-die.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "xalloc-die.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "basename-lgpl.o",
+            "basename-lgpl.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "basename-lgpl.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "version.o",
+            "version.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "version.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "binary-io.o",
+            "binary-io.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "binary-io.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fflush.o",
+            "fflush.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "fflush.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "open-safer.o",
+            "open-safer.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "open-safer.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "mbrtoc32.o",
+            "mbrtoc32.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "mbrtoc32.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "c-strcasecmp.o",
+            "c-strcasecmp.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "c-strcasecmp.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xbinary-io.o",
+            "xbinary-io.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "xbinary-io.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "mkstemp-safer.o",
+            "mkstemp-safer.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "mkstemp-safer.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "setlocale_null-unlocked.o",
+            "setlocale_null-unlocked.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "setlocale_null-unlocked.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fseeko.o",
+            "fseeko.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "fseeko.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "progname.o",
+            "progname.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "progname.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "stdbit.o",
+            "stdbit.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "stdbit.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fcntl.o",
+            "fcntl.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "fcntl.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "split.o",
+            "split.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "split.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "closeout.o",
+            "closeout.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "closeout.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "sig2str.o",
+            "sig2str.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "sig2str.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xmalloc.o",
+            "xmalloc.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "xmalloc.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fd-safer-flag.o",
+            "fd-safer-flag.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "fd-safer-flag.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xdectoumax.o",
+            "xdectoumax.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "xdectoumax.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "mbszero.o",
+            "mbszero.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "mbszero.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "setlocale_null.o",
+            "setlocale_null.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "setlocale_null.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xdectoimax.o",
+            "xdectoimax.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "xdectoimax.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "dup-safer.o",
+            "dup-safer.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "dup-safer.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fpurge.o",
+            "fpurge.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "fpurge.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "stdc_leading_zeros.o",
+            "stdc_leading_zeros.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "stdc_leading_zeros.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "version-etc-fsf.o",
+            "version-etc-fsf.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "version-etc-fsf.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fclose.o",
+            "fclose.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "fclose.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xalignalloc.o",
+            "xalignalloc.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "xalignalloc.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "same-inode.o",
+            "same-inode.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "same-inode.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fadvise.o",
+            "fadvise.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "fadvise.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fd-reopen.o",
+            "fd-reopen.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "fd-reopen.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "ialloc.o",
+            "ialloc.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "ialloc.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "c-ctype.o",
+            "c-ctype.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "c-ctype.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "c32isprint.o",
+            "c32isprint.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "c32isprint.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "version-etc.o",
+            "version-etc.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "version-etc.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "tmpdir.o",
+            "tmpdir.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "tmpdir.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "exitfail.o",
+            "exitfail.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "exitfail.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "dup-safer-flag.o",
+            "dup-safer-flag.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "dup-safer-flag.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "propername-lite.o",
+            "propername-lite.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "propername-lite.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "temp-stream.o",
+            "temp-stream.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "temp-stream.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "alignalloc.o",
+            "alignalloc.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "alignalloc.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "full-write.o",
+            "full-write.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "full-write.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xstrtoimax.o",
+            "xstrtoimax.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "xstrtoimax.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "hard-locale.o",
+            "hard-locale.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "hard-locale.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fd-safer.o",
+            "fd-safer.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "fd-safer.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "quotearg.o",
+            "quotearg.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "quotearg.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xstrtoumax.o",
+            "xstrtoumax.c"
+        ],
+        "directory": "/home/luiz/Documents/c2rust_corpus/coreutils/split/c",
+        "file": "xstrtoumax.c"
+    }
+]
