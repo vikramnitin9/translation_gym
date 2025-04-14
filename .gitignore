@@ -1,3 +1,6 @@
+# Compile commands can contain full system paths
+compile_commands.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
