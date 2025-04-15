@@ -42,21 +42,83 @@ fn main() {
     let new_path = format!("{}:{}", parsec_build_dir.display(), env::var("PATH").unwrap_or_default());
     env::set_var("PATH", new_path);
 
-    // Expand "*.c" files in the src directory
-    let c_files: Vec<String> = glob(&format!("{}/*.c", c_src_dir))
-        .expect("Failed to read glob pattern")
-        .filter_map(Result::ok) // Filter out errors
-        .map(|path| path.display().to_string()) // Convert to string
-        .collect();
+    // First run bear to generate compile_commands.json
+    let status = Command::new("make")
+    .arg("clean")
+    .current_dir(&c_src_dir)
+    .status()
+    .expect(&format!("Failed to make clean in {}", c_src_dir.as_str()));
 
-    if c_files.is_empty() {
-        panic!("No .c files found in {}", c_src_dir);
+    // Check bear version. If > 3, run "bear -- make". Otherwise run "bear make"
+    let bear_version = Command::new("bear")
+        .arg("--version")
+        .output()
+        .expect("Failed to get bear version");
+    let bear_version = String::from_utf8_lossy(&bear_version.stdout);
+    let bear_version = bear_version.trim();
+    let bear_version_parts: Vec<&str> = bear_version.split('.').collect();
+    let major_version: u32 = bear_version_parts[0].parse().unwrap_or(0);
+    let minor_version: u32 = bear_version_parts.get(1).and_then(|s| s.parse().ok()).unwrap_or(0);
+    let patch_version: u32 = bear_version_parts.get(2).and_then(|s| s.parse().ok()).unwrap_or(0);
+    let bear_version = (major_version, minor_version, patch_version);
+    if bear_version >= (3, 0, 0) {
+        // If bear version is >= 3.0.0, run "bear -- make"
+        let status = Command::new("bear")
+            .arg("--")
+            .arg("make")
+            .current_dir(&c_src_dir)
+            .status()
+            .expect(&format!("Failed to generate compile_commands in {}", c_src_dir.as_str()));
+    } else {
+        // If bear version is < 3.0.0, run "bear make"
+        let status = Command::new("bear")
+        .arg("make")
+        .current_dir(&c_src_dir)
+        .status()
+        .expect(&format!("Failed to generate compile_commands in {}", c_src_dir.as_str()));
+    }
+    if !status.success() {
+        panic!("Bear failed with exit code: {:?}", status.code());
     }
 
-    // First run parsec to generate libfoo.a
+    // Go through c_src/compile_commands.json, get the list of files
+    let compile_commands_path = PathBuf::from("c_src/compile_commands.json");
+    let compile_commands = std::fs::read_to_string(compile_commands_path)
+        .expect("Unable to read compile_commands.json");
+    let compile_commands: serde_json::Value = serde_json::from_str(&compile_commands)
+        .expect("Unable to parse compile_commands.json");
+    let files = compile_commands.as_array().expect("Expected an array");
+    let source_paths = files.iter().map(|file| {
+        let file = file.as_object().expect("Expected an object");
+        let directory = file.get("directory").expect("Expected a directory").as_str().expect("Expected a string");
+        let file_path = file.get("file").expect("Expected a file path").as_str().expect("Expected a string");
+        // Check if the file path is absolute or relative
+        // If it's relative, make it absolute by joining with the directory
+        // If it's absolute, just use it as is
+        // Create a PathBuf depending on whether the path is absolute
+        let full_path = if Path::new(file_path).is_absolute() {
+            PathBuf::from(file_path)
+        } else {
+            Path::new(directory).join(file_path)
+        };
+        full_path
+    }).collect::<Vec<_>>();
+
+    // // Expand "*.c" files in the src directory
+    // let c_files: Vec<String> = glob(&format!("{}/*.c", c_src_dir))
+    //     .expect("Failed to read glob pattern")
+    //     .filter_map(Result::ok) // Filter out errors
+    //     .map(|path| path.display().to_string()) // Convert to string
+    //     .collect();
+
+    if source_paths.is_empty() {
+        panic!("No .c files found in compile_commands.json");
+    }
+
+    // Run parsec to generate libfoo.a
     let status = Command::new("parsec")
         .current_dir(&c_src_dir)
-        .args(&c_files)
+        .args(&source_paths)
         .status()
         .expect("Failed to run parsec");
     
@@ -78,18 +140,8 @@ fn main() {
         .generate_inline_functions(true)
         .parse_callbacks(Box::new(Renamer)); // Need to rename main as main_0
     
-    // Go through c_src/compile_commands.json, get the list of files
-    // and add all of them to the builder
-    let compile_commands_path = PathBuf::from("c_src/compile_commands.json");
-    let compile_commands = std::fs::read_to_string(compile_commands_path)
-        .expect("Unable to read compile_commands.json");
-    let compile_commands: serde_json::Value = serde_json::from_str(&compile_commands)
-        .expect("Unable to parse compile_commands.json");
-    let files = compile_commands.as_array().expect("Expected an array");
-    let mut bindings = files.iter().fold(bindings, |bindings, file| {
-        let file = file.as_object().expect("Expected an object");
-        let file_path = file.get("file").expect("Expected a file path").as_str().expect("Expected a string");
-        let file_path = PathBuf::from(file_path);
+    let mut bindings = source_paths.iter().fold(bindings, |bindings, file_path| {
+        // For each file in compile_commands.json, add it to the builder
         bindings.header(file_path.to_str().unwrap())
     });
     // Also for each entry in compile_commands, read the "arguments" list and look for "-I.."

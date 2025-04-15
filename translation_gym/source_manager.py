@@ -2,10 +2,8 @@ from translation_gym.helpers import *
 
 class SourceManager:
 
-    def __init__(self, code_dir, test_dir):
+    def __init__(self, code_dir):
         self.code_dir = code_dir
-        self.test_dir = test_dir
-        self.test_paths = None
         self.c_code_dir = Path(self.code_dir)/'c_src'
         self.cargo_bin_target = 'foo' # Placeholder
         self.bindgen_blocklist = Path(self.code_dir, 'bindgen_blocklist.txt')
@@ -85,20 +83,6 @@ class SourceManager:
             raise Exception("Executable not found. Please compile the code first.")
         return executable
     
-    def get_test_paths(self):
-        if self.test_paths is not None:
-            return self.test_paths
-        elif self.test_dir == '':
-            self.test_paths = []
-            return []
-        else:
-            # Get a list of .sh files in test_dir
-            test_files = [f for f in os.listdir(self.test_dir) if f.endswith('.sh')]
-            return [Path(os.path.join(self.test_dir, test_file)) for test_file in test_files]
-    
-    def set_test_paths(self, test_paths):
-        self.test_paths = test_paths
-    
     def compile(self, verbose=False):
         cwd = os.getcwd()
         cmd = 'cd {} && RUSTFLAGS="-Awarnings" cargo build'.format(self.code_dir)
@@ -107,7 +91,7 @@ class SourceManager:
             result = subprocess.run(
                         cmd,
                         shell=True,
-                        timeout=30,
+                        timeout=60,
                         stderr=subprocess.STDOUT if verbose else subprocess.PIPE,
                         stdout=None if verbose else subprocess.PIPE,
                     )

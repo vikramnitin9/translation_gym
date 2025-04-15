@@ -1,20 +1,25 @@
 from translation_gym.helpers import *
+from translation_gym.source_manager import SourceManager
+from translation_gym.test_manager import TestManager
+from translation_gym.orchestrator import Orchestrator
+from translation_gym.translator import Translator
+from translation_gym.validator import Validator
 
 class TranslationEngine:
 
     def __init__(self,
-                code_dir: Path,
-                test_dir: Path,
+                dataset: dict,
+                output_dir: str,
                 model: str,
                 num_attempts: int=5,
                 verbose: bool=False):
         
-        self.code_dir = code_dir
-        self.test_dir = test_dir
+        self.dataset = dataset
         self.verbose = verbose
+        self.output_dir = Path(output_dir)
         self.setup() # Sets up self.source_manager
         self.num_attempts = num_attempts
-        self.log_file = Path(self.code_dir, 'log.json')
+        self.log_file = Path(self.output_dir, 'log.json')
 
         self.log = {'date': f"{datetime.datetime.now()}",
                     'attempts': num_attempts,
@@ -26,27 +31,24 @@ class TranslationEngine:
 
     def setup(self):
 
-        prCyan("Translating code in directory: {}".format(self.code_dir.absolute()))
+        code_dir = Path("data")/Path(self.dataset["code_dir"])
+        assert Path(code_dir).exists(), f"Code directory {code_dir} does not exist"
 
-        assert Path(self.code_dir, 'compile_commands.json').exists(),\
-                f"{self.code_dir}/compile_commands.json does not exist"
-        
+        prCyan("Translating code in directory: {}".format(code_dir.absolute()))
+
         # Creating new subdirectories
         # Create a folder called `rust_bench` in the parent directory of the code dir
-        rust_bench_dir = Path(self.code_dir).parent / 'rust_bench'
-        if rust_bench_dir.exists():
-            # Call it rust_bench{i} where i is the lowest number that doesn't exist
-            i = 2
-            while (rust_bench_dir.parent / f'rust_bench{i}').exists():
-                i += 1
-            rust_bench_dir = (rust_bench_dir.parent / f'rust_bench{i}')
+        output_dir = Path(self.output_dir)
+        if output_dir.exists():
+            prRed(f"Directory {output_dir} already exists. Please remove it before running the script.")
+            raise FileExistsError(f"Directory {output_dir} already exists. Please remove it before running the script.")
             
-        shutil.copytree('rust_wrapper', rust_bench_dir)
-        shutil.copytree(self.code_dir, rust_bench_dir/'c_src')
+        shutil.copytree('rust_wrapper', output_dir)
+        shutil.copytree(code_dir, output_dir/'c_src')
 
-        self.code_dir = rust_bench_dir
-        prCyan("Copied over the code to {}".format(self.code_dir.absolute()))
-        self.source_manager = SourceManager(self.code_dir, self.test_dir)
+        code_dir = output_dir
+        prCyan("Copied over the code to {}".format(code_dir.absolute()))
+        self.source_manager = SourceManager(code_dir)
         target = self.source_manager.get_bin_target()
         self.source_manager.set_cargo_bin_target(target)
 
@@ -61,26 +63,29 @@ class TranslationEngine:
         
         executable = self.source_manager.get_executable()
         prGreen("Generated executable: {}".format(executable))
-        test_paths = self.source_manager.get_test_paths()
-        selected_tests = []
-        prCyan("Running tests in directory: {}".format(self.test_dir))
-        # Run each test file
-        for test_path in test_paths:
-            # Run the test file
-            cmd = f'PATH="{executable.parent.absolute()}:$PATH" bash {test_path}'
-            try:
-                run(cmd)
-                prGreen(f"Test passed: {test_path}")
-                selected_tests.append(test_path)
-            except RunException as e:
-                prRed(f"Test failed: {test_path}. This will be skipped")
-                if self.verbose:
-                    prCyan(f"Command: {cmd}")
-                    prLightGray(e)
-        
-        self.source_manager.set_test_paths(selected_tests)
-        prCyan("Tests selected: {}".format([t.name for t in selected_tests]))
 
+        test_dir = Path("data")/Path(self.dataset["test_dir"])
+        if test_dir != "":
+            assert Path(test_dir).exists(), f"Code directory {test_dir} does not exist"
+        test_paths = self.dataset["test_scripts"]
+        test_paths = [Path(test_dir)/Path(t) for t in test_paths]
+        for test_path in test_paths:
+            assert Path(test_path).exists(), f"Test file {test_path} does not exist"
+        if self.dataset["setup_script"] != "":
+            setup_script = Path("data")/Path(self.dataset["setup_script"])
+        else:
+            setup_script = None
+        
+        self.test_manager = TestManager(test_paths, setup_script, verbose=self.verbose)
+        test_statuses = self.test_manager.run_tests(executable)
+        selected_tests = []
+        for status in test_statuses:
+            if status['status'] == "passed":
+                prGreen("Test passed: {}".format(status['test']))
+                selected_tests.append(status['test'])
+            else:
+                prRed(f"Test failed: {test_path}. This will be skipped")
+        
         return 
     
     def run(self,
@@ -91,7 +96,7 @@ class TranslationEngine:
         for func in orchestrator.function_iter(self.source_manager):
             prCyan("Translating function: {}".format(func['name']))
             translation = translator.translate(func, self.source_manager, self.verbose)
-            result = validator.validate(func, translation, self.source_manager)
+            result = validator.validate(func, translation, self.source_manager, self.test_manager)
 
             for i in range(self.num_attempts):
                 prCyan(f"Attempt {i+1}/{self.num_attempts}")
@@ -107,7 +112,7 @@ class TranslationEngine:
                     if i == self.num_attempts - 1:
                         break
                     translation = translator.repair(result, self.source_manager, self.verbose)
-                    result = validator.validate(func, translation, self.source_manager)
+                    result = validator.validate(func, translation, self.source_manager, self.test_manager)
             
             self.log['results'].append({'function': func['name'],
                                    'results': "Success" if result['success'] else result['category']})

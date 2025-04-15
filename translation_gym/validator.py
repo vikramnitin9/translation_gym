@@ -5,24 +5,7 @@ class Validator:
     def __init__(self, compile_attempts=5):
         self.compile_attempts = 5
 
-    def run_tests(self, source_manager):
-        executable = source_manager.get_executable()
-        test_paths = source_manager.get_test_paths()
-        # Run each test file
-        for test_path in test_paths:
-            # Run the test file
-            cmd = f'PATH="{executable.parent.absolute()}:$PATH" bash {test_path}'
-            try:
-                run(cmd)
-                prGreen(f"Test passed: {test_path}")
-            except RunException as e:
-                prRed(f"Test failed: {test_path}")
-                # If the test fails, return False
-                return (False, str(e))
-        # If all tests pass, return True
-        return (True, '')
-
-    def validate(self, func, translation, source_manager):
+    def validate(self, func, translation, source_manager, test_manager):
         source_manager.insert_translation(func, translation)
 
         compile_success = False
@@ -50,12 +33,14 @@ class Validator:
         
         # If we get here, the code compiled successfully
         # Run the test suite
-        test_success, error_message = self.run_tests(source_manager)
-        if not test_success:
-            return {"success": False,
-                    "category": "Test Failure",
-                    "message" : error_message}
-
-        return {"success": True,
+        executable = source_manager.get_executable()
+        test_res = test_manager.run_tests(executable, stop_on_failure=True)
+        if test_manager.passed():
+            return {"success": True,
                 "category": "",
                 "message" : ""}
+        else:
+            failed_test = [res for res in test_res if res['status'] == 'failed'][0]
+            return {"success": False,
+                    "category": "Test Failure",
+                    "message" : failed_test['error']}

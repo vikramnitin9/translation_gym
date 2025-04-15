@@ -1,0 +1,11 @@
+{
+  "toy" : {
+    "description": "A small dataset for testing purposes.",
+    "code_dir": "toy",
+    "test_dir": "toy/tests",
+    "setup_script": "",
+    "test_scripts": [
+      "test.sh"
+    ]
+  }
+}
