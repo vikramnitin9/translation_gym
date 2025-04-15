@@ -4,7 +4,7 @@ This is an environment for quickly implementing and benchmarking LLM-based progr
 
 First put your OpenAI API key in `models/.env`.
 ```sh
-echo 'OPENAI_API_KEY="<your_key_here>"' > models/.env
+echo 'OPENAI_API_KEY="<your_key_here>"' > translation_gym/models/.env
 ```
 Now you are ready to run translation. The easiest way to run this tool is with Docker.
 ```sh
