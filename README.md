@@ -2,16 +2,12 @@
 
 This is an environment for quickly implementing and benchmarking LLM-based program translation agents. As of now, we support only C to Rust translation.
 
-First setup our C parser utility:
+First put your OpenAI API key in `models/.env`.
 ```sh
-cd parsec
-mkdir build && cd build
-cmake .. && make -j
-export PARSEC_BUILD_DIR="$(pwd)"
-cd ../..
+echo 'OPENAI_API_KEY="<your_key_here>"' > models/.env
 ```
-
-Now you are ready to run translation.
+Now you are ready to run translation. The easiest way to run this tool is with Docker.
 ```sh
-python -m translation_gym.main --code_dir data/toy --test_dir data/toy/tests --verbose --model gpt4o
+bash run.sh toy gpt4o
 ```
+Here, `toy` is the name of a sample program, corresponding to a dataset config in `data/datasets.json`.
