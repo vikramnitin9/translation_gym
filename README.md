@@ -16,7 +16,7 @@ Now you are ready to run translation.
 ```sh
 bash run.sh toy gpt4o
 ```
-Here, `toy` is the name of a sample C program, corresponding to a dataset config in `data/datasets.json`. `gpt4o` is a model name, defined in `translation_gym/models/__init__.py`.
+Here, `toy` is the name of a sample C program, corresponding to a dataset config in [`data/datasets.json`](data/datasets.json). `gpt4o` is a model name, defined in [`translation_gym/models/__init__.py`](translation_gym/models/__init__.py).
 You should see output like this:
 ```
 Translating code in directory: /app/data/toy
