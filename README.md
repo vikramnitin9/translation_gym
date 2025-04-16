@@ -85,4 +85,9 @@ engine = TranslationEngine(dataset=dataset,
 engine.run(translator=my_translator,
             orchestrator=orchestrator,
             validator=validator)
+...
+```
+The translation can be run as usual:
+```sh
+bash run.sh toy gpt4o
 ```
