@@ -16,7 +16,24 @@ Now you are ready to run translation.
 ```sh
 bash run.sh toy gpt4o
 ```
-Here, `toy` is the name of a sample program, corresponding to a dataset config in `data/datasets.json`. `gpt4o` is a model name, defined in `translation_gym/models/__init__.py`.
+Here, `toy` is the name of a sample C program, corresponding to a dataset config in `data/datasets.json`. `gpt4o` is a model name, defined in `translation_gym/models/__init__.py`.
+You should see output like this:
+```
+Translating code in directory: /app/data/toy
+Copied over the code to /app/output/toy
+Found executable target: toy
+Compilation succeeded
+Generated executable: /app/output/toy/target/debug/toy
+Running tests against the following executable: /app/output/toy/target/debug/toy
+Test passed: data/toy/tests/test.sh
+Translating function: subtract
+Calling LLM for translation
+LLM response received
+Running tests against the following executable: /app/output/toy/target/debug/toy
+Attempt 1/5
+Translation succeeded
+```
+At the end of this process, the translated Rust project will be in `output/toy`.
 
 ## Customization
 
