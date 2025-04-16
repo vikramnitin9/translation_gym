@@ -3,6 +3,52 @@ from translation_gym.helpers import *
 
 class Translator:
 
+    """
+    Base class for translators. This class is responsible for translating the code.
+    """
+
+    def __init__(self, model):
+        self.model = get_model_from_name(model)
+        self.conversation = []
+
+    def translate(self, func, source_manager, verbose=False):
+        """
+        Translate the given function to Rust.
+        :param func: The function to translate
+            {'name': 'function name',
+             'body': 'function body',
+             'signature': 'function signature',
+             'calledFunctions': ['func1', 'func2', ...]
+            }
+        :param source_manager: The source manager
+        :param verbose: Whether to print verbose output
+        :return: A dictionary with the translated function
+                {"func": "translated function",
+                 "wrapper": "wrapper function",
+                 "imports": "imports"}
+        """
+        raise NotImplementedError("Subclasses must implement this method")
+    
+    def repair(self, result, source_manager, verbose=False):
+        """
+        Repair the given function.
+        :param result: The result of the translation
+            {"success": True/False,
+             "category": "Compile Error" or "Test Failure",
+             "message": "Error message"
+            }
+        :param source_manager: The source manager
+        :param verbose: Whether to print verbose output
+        :return: A dictionary with the repaired function
+                {"func": "repaired function body",
+                 "wrapper": "repaired wrapper function",
+                 "imports": "imports"}
+        """
+        raise NotImplementedError("Subclasses must implement this method")
+
+
+class DefaultTranslator(Translator):
+
     def __init__(self, model):
         self.model = get_model_from_name(model)
         self.conversation = []

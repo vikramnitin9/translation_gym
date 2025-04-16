@@ -1,9 +1,9 @@
 from translation_gym.helpers import *
-from translation_gym.source_manager import SourceManager
-from translation_gym.test_manager import TestManager
-from translation_gym.orchestrator import Orchestrator
-from translation_gym.translator import Translator
-from translation_gym.validator import Validator
+from translation_gym.core.source_manager import SourceManager
+from translation_gym.core.test_manager import TestManager
+from translation_gym.modules.orchestrator import Orchestrator
+from translation_gym.modules.translator import Translator
+from translation_gym.modules.validator import Validator
 
 class TranslationEngine:
 

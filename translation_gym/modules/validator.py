@@ -1,6 +1,26 @@
 from translation_gym.helpers import *
 
 class Validator:
+    """
+    Base class for validators. This class is responsible for validating the translated code.
+    """
+    def validate(self, func, translation, source_manager, test_manager):
+        """
+        Validate the translated code.
+
+        :param func: The original function
+        :param translation: The translated function
+        :param source_manager: The source manager
+        :param test_manager: The test manager
+        :return: A dictionary with the validation result
+                {"success": True/False,
+                 "category": "Compile Error" or "Test Failure",
+                 "message": "Error message"}
+        """
+        raise NotImplementedError("Subclasses must implement this method")
+    
+    
+class DefaultValidator(Validator):
 
     def __init__(self, compile_attempts=5):
         self.compile_attempts = 5

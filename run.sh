@@ -7,6 +7,7 @@ docker run -it \
     -u $USER_ID:$GROUP_ID \
     -v $PWD/output:/app/output \
     -v $PWD/translation_gym:/app/translation_gym \
+    -v $PWD/main.py:/app/main.py \
     -v $PWD/data:/app/data \
     translation_gym:latest \
-    /bin/bash -c "python -m translation_gym.main --dataset $1 --model $2 --output_dir /app/output/$1"
+    /bin/bash -c "python main.py --dataset $1 --model $2 --output_dir /app/output/$1"

@@ -2,6 +2,21 @@ from translation_gym.helpers import *
 
 class Orchestrator:
 
+    """
+    Base class for orchestrators. This class is responsible for orchestrating the translation process.
+    """
+
+    def function_iter(self, source_manager):
+        """
+        Iterate over the functions in the source code.
+        :param source_manager: The source manager
+        :return: An iterator over the functions
+        """
+        raise NotImplementedError("Subclasses must implement this method")
+
+
+class DefaultOrchestrator(Orchestrator):
+
     def function_iter(self, source_manager):
         static_analysis_results = source_manager.get_static_analysis_results()
         # Build call graph of functions

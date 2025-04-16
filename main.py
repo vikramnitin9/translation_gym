@@ -1,18 +1,12 @@
 import argparse
-import shutil
-import os
-from pathlib import Path
-import subprocess
 import json
-import networkx as nx
-import datetime
-from typing import List, Dict, Tuple
 
-from translation_gym.orchestrator import Orchestrator
-from translation_gym.translator import Translator
-from translation_gym.validator import Validator
-from translation_gym.translation_engine import TranslationEngine
+from translation_gym.core.translation_engine import TranslationEngine
 from translation_gym.helpers import *
+
+from translation_gym.modules.orchestrator import DefaultOrchestrator
+from translation_gym.modules.translator import DefaultTranslator
+from translation_gym.modules.validator import DefaultValidator
         
 if __name__ == '__main__':
 
@@ -29,9 +23,9 @@ if __name__ == '__main__':
     dataset = datasets[args.dataset]
     assert 'code_dir' in dataset, f"Code directory not specified for dataset {args.dataset}"
 
-    orchestrator = Orchestrator()
-    translator = Translator(args.model)
-    validator = Validator(compile_attempts=5) # In case compilation times out, how many times to retry
+    orchestrator = DefaultOrchestrator()
+    translator = DefaultTranslator(args.model)
+    validator = DefaultValidator(compile_attempts=5) # In case compilation times out, how many times to retry
 
     engine = TranslationEngine(dataset=dataset,
                                output_dir=args.output_dir,
