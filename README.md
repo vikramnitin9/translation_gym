@@ -33,7 +33,20 @@ Running tests against the following executable: /app/output/toy/target/debug/toy
 Attempt 1/5
 Translation succeeded
 ```
-At the end of this process, the translated Rust project will be in `output/toy`.
+At the end of this process, the translated Rust project will be in `output/toy`. The results will be printed like this:
+```
++-------------+---------------+----------+
+|   Function  |     Result    | Attempts |
++-------------+---------------+----------+
+|   subtract  |    Success    |    1     |
+| concatenate |    Success    |    1     |
+|     add     |    Success    |    1     |
+|    main_0   |    Success    |    5     |
++-------------+---------------+----------+
+|   Overall   |      4/4      |          |
++-------------+---------------+----------+
+```
+These results are also logged to `output/toy/log.json`.
 
 ## Customization
 

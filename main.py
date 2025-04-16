@@ -36,3 +36,5 @@ if __name__ == '__main__':
     engine.run(translator=translator,
                orchestrator=orchestrator,
                validator=validator)
+ 
+    engine.print_results()

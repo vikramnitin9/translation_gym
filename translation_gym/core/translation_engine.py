@@ -115,6 +115,19 @@ class TranslationEngine:
                     result = validator.validate(func, translation, self.source_manager, self.test_manager)
             
             self.log['results'].append({'function': func['name'],
-                                   'results': "Success" if result['success'] else result['category']})
+                                   'results': "Success" if result['success'] else result['category'],
+                                   'attempts': i+1})
             with open(self.log_file, 'w') as f:
                 f.write(json.dumps(self.log, indent=4))
+    
+    def print_results(self):
+        # Draw an ascii table with the results
+        import prettytable
+        table = prettytable.PrettyTable()
+        table.field_names = ["Function", "Result", "Attempts"]
+        for result in self.log['results']:
+            table.add_row([result['function'], result['results'], result['attempts']])
+        table.add_divider()
+        table.add_row(['Overall', "{}/{}".format(len([r for r in self.log['results'] if r['results'] == "Success"]), len(self.log['results'])), ''])
+        print(table)
+        return
