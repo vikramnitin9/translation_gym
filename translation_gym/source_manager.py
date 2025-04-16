@@ -83,7 +83,7 @@ class SourceManager:
             raise Exception("Executable not found. Please compile the code first.")
         return executable
     
-    def compile(self, verbose=False):
+    def compile(self, timeout=60, verbose=False):
         cwd = os.getcwd()
         cmd = 'cd {} && RUSTFLAGS="-Awarnings" cargo build'.format(self.code_dir)
 
@@ -91,7 +91,7 @@ class SourceManager:
             result = subprocess.run(
                         cmd,
                         shell=True,
-                        timeout=60,
+                        timeout=timeout,
                         stderr=subprocess.STDOUT if verbose else subprocess.PIPE,
                         stdout=None if verbose else subprocess.PIPE,
                     )

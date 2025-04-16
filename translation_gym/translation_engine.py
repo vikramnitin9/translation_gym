@@ -53,7 +53,7 @@ class TranslationEngine:
         self.source_manager.set_cargo_bin_target(target)
 
         try:
-            self.source_manager.compile()
+            self.source_manager.compile(timeout=120) # Increase time for first compile
             prGreen("Compilation succeeded")
         except CompileException as e:
             prRed("Compilation failed")
