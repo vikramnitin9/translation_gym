@@ -12,7 +12,7 @@ class TestManager:
         cmd = f"docker run -it -v {executable}:/executable/toy {self.test_docker}"
 
         try:
-            run(cmd)
+            run(cmd, self.verbose)
             if self.verbose:
                 prGreen(f"Test passed")
             return {'status': 'passed'}

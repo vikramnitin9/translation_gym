@@ -25,7 +25,7 @@ class CompileException(Exception):
 class RunException(Exception):
     pass
 
-def run(command):
+def run(command, verbose=False):
 
     try:
         result = subprocess.run(
@@ -39,6 +39,8 @@ def run(command):
             exec_output = result.stderr.decode('utf-8', errors='ignore')
             if exec_output.strip() == '':
                 exec_output = result.stdout.decode('utf-8', errors='ignore')
+            if verbose:
+                prLightGray(exec_output)
             raise RunException(exec_output)
     except subprocess.TimeoutExpired:
         raise RunException("Timeout")
@@ -46,3 +48,6 @@ def run(command):
         raise RunException(e.output.decode('utf-8', errors='ignore'))
     except Exception as e:
         raise RunException(str(e))
+    
+    if verbose:
+        prLightGray(result.stdout.decode('utf-8', errors='ignore'))

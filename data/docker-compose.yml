@@ -3,8 +3,8 @@ version: '3'
 services:
   toy:
     build:
-      context: ./toy/tests
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./toy/tests/Dockerfile
     working_dir: /app
     image: toy:latest
     container_name: toy
