@@ -64,6 +64,8 @@ RUN ["sh", "-c", "tests/setup_test_env.sh"]
 
 ENV PATH="/app/getlimits:/executable:${PATH}"
 
-CMD ["bash", "-c", "bash /app/tests/cat/cat-buf.sh && \
-                   bash /app/tests/cat/cat-proc.sh"]
+CMD ["bash", "-c", "bash /app/tests/cat/cat-buf.sh /executable && \
+                   bash /app/tests/cat/cat-proc.sh /executable && \
+                   bash /app/tests/cat/cat-E.sh /executable && \
+                   bash /app/tests/cat/cat-self.sh /executable"]
 

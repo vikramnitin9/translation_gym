@@ -138,7 +138,7 @@ int main(int argc, const char **argv) {
 		return 1;
 	}
 	// Add instrumentation to the module
-	addInstrumentation(*M);
+	// addInstrumentation(*M); // Uncomment this line to add instrumentation
 
 	std::error_code EC;
 	llvm::legacy::PassManager PM;

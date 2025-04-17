@@ -8,18 +8,16 @@ class TestManager:
 
     def run_tests(self, executable: Path):
         prCyan("Running tests against the following executable: {}".format(executable))
-
-        cmd = f"docker run -it -v {executable}:/executable/toy {self.test_docker}"
+        # Get the name of the executable
+        exec_name = executable.name
+        cmd = f"docker run -it -v {executable}:/executable/{exec_name} {self.test_docker}"
+        if self.verbose:
+            prCyan(f"Running command: {cmd}")
 
         try:
             run(cmd, self.verbose)
-            if self.verbose:
-                prGreen(f"Test passed")
             return {'status': 'passed'}
         except RunException as e:
-            if self.verbose:
-                prRed(f"Test failed")
-                prLightGray(e)
             return {'status': 'failed', 'error': str(e)}
 
         return self.status
