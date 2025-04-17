@@ -49,34 +49,38 @@ fn main() {
     .status()
     .expect(&format!("Failed to make clean in {}", c_src_dir.as_str()));
 
+    if !status.success() {
+        panic!("make clean failed with exit code: {:?}", status.code());
+    }
+
     // Check bear version. If > 3, run "bear -- make". Otherwise run "bear make"
     let bear_version = Command::new("bear")
         .arg("--version")
         .output()
         .expect("Failed to get bear version");
     let bear_version = String::from_utf8_lossy(&bear_version.stdout);
-    let bear_version = bear_version.trim();
+    let bear_version = bear_version.split(' ').collect::<Vec<&str>>()[1];
     let bear_version_parts: Vec<&str> = bear_version.split('.').collect();
     let major_version: u32 = bear_version_parts[0].parse().unwrap_or(0);
     let minor_version: u32 = bear_version_parts.get(1).and_then(|s| s.parse().ok()).unwrap_or(0);
     let patch_version: u32 = bear_version_parts.get(2).and_then(|s| s.parse().ok()).unwrap_or(0);
     let bear_version = (major_version, minor_version, patch_version);
-    if bear_version >= (3, 0, 0) {
+    let status = if bear_version >= (3, 0, 0) {
         // If bear version is >= 3.0.0, run "bear -- make"
-        let status = Command::new("bear")
+        Command::new("bear")
             .arg("--")
             .arg("make")
             .current_dir(&c_src_dir)
             .status()
-            .expect(&format!("Failed to generate compile_commands in {}", c_src_dir.as_str()));
+            .expect(&format!("Failed to generate compile_commands in {}", c_src_dir.as_str()))
     } else {
         // If bear version is < 3.0.0, run "bear make"
-        let status = Command::new("bear")
+        Command::new("bear")
         .arg("make")
         .current_dir(&c_src_dir)
         .status()
-        .expect(&format!("Failed to generate compile_commands in {}", c_src_dir.as_str()));
-    }
+        .expect(&format!("Failed to generate compile_commands in {}", c_src_dir.as_str()))
+    };
     if !status.success() {
         panic!("Bear failed with exit code: {:?}", status.code());
     }
