@@ -9,6 +9,20 @@ class SourceManager:
         self.bindgen_blocklist = Path(self.code_dir, 'bindgen_blocklist.txt')
         if not self.bindgen_blocklist.exists():
             self.bindgen_blocklist.touch()
+
+        if os.path.exists('/.dockerenv'):
+            # We are inside a Docker container
+            self.docker     = True
+            client          = docker.DockerClient(base_url='unix:///var/run/docker.sock')
+            container_id    = socket.gethostname()
+            container       = client.containers.get(container_id)
+            mounts          = container.attrs['Mounts']
+            # Find the mount that maps to /app/output
+            for mount in mounts:
+                if mount['Destination'] == '/app/output':
+                    self.docker_output_dir = Path(mount['Source'])
+        else:
+            self.docker     = False
     
     def get_bin_target(self):
 
@@ -76,11 +90,17 @@ class SourceManager:
         functions_json_path = Path(self.code_dir)/'c_src'/'functions.json'
         return json.load(open(functions_json_path, 'r'))
     
-    def get_executable(self):
+    def get_executable(self, host_path=True):
         # Check if the executable exists
         executable = Path(self.code_dir, f'target/debug/{self.cargo_bin_target}')
         if not executable.exists():
             raise Exception("Executable not found. Please compile the code first.")
+        if self.docker and host_path:
+            # Assert that this path starts with /app/output
+            # Replace /app with self.docker_root in the path
+            segments = executable.parts
+            assert segments[0:3] == ('/', 'app', 'output')
+            executable = pathlib.PurePath(*(self.docker_output_dir.parts + segments[3:]))
         return executable
     
     def compile(self, timeout=60, verbose=False):

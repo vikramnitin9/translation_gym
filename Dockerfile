@@ -13,7 +13,9 @@ RUN apt install -y unzip
 RUN apt install -y bear
 RUN apt install -y curl
 
-# Install wget to fetch Miniconda
+# Install Docker CLI
+RUN apt install -y docker.io
+
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -58,6 +60,7 @@ ENV CARGO_HOME="/app/.cargo"
 ENV RUSTUP_HOME="/app/.rustup"
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/app/.cargo/bin:${PATH}"
+RUN rustup install nightly-2024-08-07-x86_64-unknown-linux-gnu
 
 # Ensure the copied files are owned by the non-root user
 COPY --chown=${USER_ID}:${GROUP_ID} requirements.txt .
@@ -74,5 +77,4 @@ RUN cd parsec && \
 
 ENV PARSEC_BUILD_DIR=/app/parsec/build
 
-# Ensure the non-root user has access to the PATH
-ENV PATH="/home/appuser/.local/bin:${PATH}"
+USER appuser

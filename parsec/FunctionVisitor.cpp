@@ -59,6 +59,7 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
         json functionData = {
                 {"name", functionName},
                 {"signature", signature},
+                {"num_args", function->getNumParams()},
                 {"filename", fileName},
                 {"startLine", startLine},
                 {"endLine", endLine},

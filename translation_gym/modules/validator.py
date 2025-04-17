@@ -54,13 +54,12 @@ class DefaultValidator(Validator):
         # If we get here, the code compiled successfully
         # Run the test suite
         executable = source_manager.get_executable()
-        test_res = test_manager.run_tests(executable, stop_on_failure=True)
-        if test_manager.passed():
+        test_res = test_manager.run_tests(executable)
+        if test_res['status'] == 'passed':
             return {"success": True,
                 "category": "",
                 "message" : ""}
         else:
-            failed_test = [res for res in test_res if res['status'] == 'failed'][0]
             return {"success": False,
                     "category": "Test Failure",
-                    "message" : failed_test['error']}
+                    "message" : test_res['error']}

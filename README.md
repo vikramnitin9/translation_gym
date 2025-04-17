@@ -8,9 +8,20 @@ First put your OpenAI API key in `models/.env`.
 ```sh
 echo 'OPENAI_API_KEY="<your_key_here>"' > translation_gym/models/.env
 ```
-The easiest way to run this tool is with Docker. If you do not already have Docker installed, follow the instructions [here](https://docs.docker.com/engine/install/). This script builds the Docker container.
+The easiest way to run this tool is with Docker. If you do not already have Docker installed, follow the instructions [here](https://docs.docker.com/engine/install/). This script builds the Docker container for the tool.
 ```sh
 bash build.sh
+```
+Each test dataset is built into a separate Docker container. If you have `docker-compose`, then you can simply run
+```sh
+cd data
+docker-compose build
+```
+If you don't have `docker-compose`, then you have to manually build each container like this:
+```sh
+docker build -f toy/tests/Dockerfile -t toy:latest .
+docker build -f coreutils/tests/cat/Dockerfile -t cat:latest .
+...
 ```
 Now you are ready to run translation.
 ```sh

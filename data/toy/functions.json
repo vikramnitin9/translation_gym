@@ -1,0 +1,46 @@
+[
+    {
+        "calledFunctions": [],
+        "endCol": 1,
+        "endLine": 14,
+        "filename": "string_functions.c",
+        "name": "concatenate",
+        "signature": "char * concatenate(const char * str1, const char * str2)",
+        "startCol": 1,
+        "startLine": 5
+    },
+    {
+        "calledFunctions": [],
+        "endCol": 1,
+        "endLine": 9,
+        "filename": "math_functions.c",
+        "name": "subtract",
+        "signature": "int subtract(int a, int b)",
+        "startCol": 1,
+        "startLine": 7
+    },
+    {
+        "calledFunctions": [
+            "add",
+            "concatenate",
+            "subtract"
+        ],
+        "endCol": 1,
+        "endLine": 11,
+        "filename": "main.c",
+        "name": "main_0",
+        "signature": "int main()",
+        "startCol": 1,
+        "startLine": 5
+    },
+    {
+        "calledFunctions": [],
+        "endCol": 1,
+        "endLine": 5,
+        "filename": "math_functions.c",
+        "name": "add",
+        "signature": "int add(int a, int b)",
+        "startCol": 1,
+        "startLine": 3
+    }
+]

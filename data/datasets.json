@@ -2,10 +2,11 @@
   "toy" : {
     "description": "A small dataset for testing purposes.",
     "code_dir": "toy",
-    "test_dir": "toy/tests",
-    "setup_script": "",
-    "test_scripts": [
-      "test.sh"
-    ]
+    "test_docker_image": "toy:latest"
+  },
+  "cat" : {
+    "description": "Coreutils cat",
+    "code_dir": "coreutils/src/cat/c",
+    "test_docker_image": "cat:latest"
   }
 }

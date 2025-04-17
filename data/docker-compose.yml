@@ -1,0 +1,66 @@
+version: '3'
+
+services:
+  toy:
+    build:
+      context: ./toy/tests
+      dockerfile: Dockerfile
+    working_dir: /app
+    image: toy:latest
+    container_name: toy
+    
+  cat:
+    build:
+      context: .
+      dockerfile: ./coreutils/tests/cat/Dockerfile
+    working_dir: /app
+    image: cat:latest
+    container_name: cat
+
+  head:
+    build:
+      context: .
+      dockerfile: ./coreutils/tests/head/Dockerfile
+    working_dir: /app
+    image: head:latest
+    container_name: head
+
+  pwd:
+    build:
+      context: .
+      dockerfile: ./coreutils/tests/pwd/Dockerfile
+    working_dir: /app
+    image: pwd:latest
+    container_name: pwd
+
+  split:
+    build:
+      context: .
+      dockerfile: ./coreutils/tests/split/Dockerfile
+    working_dir: /app
+    image: split:latest
+    container_name: split
+
+  tail:
+    build:
+      context: .
+      dockerfile: ./coreutils/tests/tail/Dockerfile
+    working_dir: /app
+    image: tail:latest
+    container_name: tail
+
+  truncate:
+    build:
+      context: .
+      dockerfile: ./coreutils/tests/truncate/Dockerfile
+    working_dir: /app
+    image: truncate:latest
+    container_name: truncate
+
+  uniq:
+    build:
+      context: .
+      dockerfile: ./coreutils/tests/uniq/Dockerfile
+    working_dir: /app
+    image: uniq:latest
+    container_name: uniq

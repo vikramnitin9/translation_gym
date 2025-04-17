@@ -3,16 +3,13 @@ SRCS := $(wildcard *.c)
 OBJS := $(SRCS:.c=.o)
 
 .PHONY: all
-all: clean cat lib.a
+all: clean cat
 
 cat: $(OBJS)
 	gcc $^ -o $@
 
 %.o: %.c
 	gcc $(CFLAGS) -c $< -o $@
-
-lib.a: $(OBJS)
-	ar rcs $@ $^
 
 .PHONY: clean
 clean:

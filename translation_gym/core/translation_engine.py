@@ -37,7 +37,6 @@ class TranslationEngine:
         prCyan("Translating code in directory: {}".format(code_dir.absolute()))
 
         # Creating new subdirectories
-        # Create a folder called `rust_bench` in the parent directory of the code dir
         output_dir = Path(self.output_dir)
         if output_dir.exists():
             prRed(f"Directory {output_dir} already exists. Please remove it before running the script.")
@@ -64,27 +63,13 @@ class TranslationEngine:
         executable = self.source_manager.get_executable()
         prGreen("Generated executable: {}".format(executable))
 
-        test_dir = Path("data")/Path(self.dataset["test_dir"])
-        if test_dir != "":
-            assert Path(test_dir).exists(), f"Code directory {test_dir} does not exist"
-        test_paths = self.dataset["test_scripts"]
-        test_paths = [Path(test_dir)/Path(t) for t in test_paths]
-        for test_path in test_paths:
-            assert Path(test_path).exists(), f"Test file {test_path} does not exist"
-        if self.dataset["setup_script"] != "":
-            setup_script = Path("data")/Path(self.dataset["setup_script"])
+        test_docker = self.dataset['test_docker_image']
+        self.test_manager = TestManager(test_docker, verbose=self.verbose)
+        test_res = self.test_manager.run_tests(executable)
+        if test_res['status'] == "passed":
+            prGreen("Tests passed")
         else:
-            setup_script = None
-        
-        self.test_manager = TestManager(test_paths, setup_script, verbose=self.verbose)
-        test_statuses = self.test_manager.run_tests(executable)
-        selected_tests = []
-        for status in test_statuses:
-            if status['status'] == "passed":
-                prGreen("Test passed: {}".format(status['test']))
-                selected_tests.append(status['test'])
-            else:
-                prRed(f"Test failed: {test_path}. This will be skipped")
+            prRed(f"Tests failed: {test_res['error']}.")
         
         return 
     
