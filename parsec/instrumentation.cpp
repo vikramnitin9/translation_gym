@@ -114,7 +114,7 @@ void addInstrumentation(Module &M, std::unordered_set<json> jsonData) {
 		Value *FmtStrBuffer = Builder.CreateAlloca(ArrayType::get(Type::getInt8Ty(Context), 512));
 		Value *FmtStrPtr = Builder.CreateBitCast(FmtStrBuffer, Type::getInt8PtrTy(Context));
 		
-		Value *InitialStr = Builder.CreateGlobalStringPtr("{ \"name\": \"" + F.getName().str() + "\", \"args\": [");
+		Value *InitialStr = Builder.CreateGlobalStringPtr("{ \"name\": \"" + F.getName().str() + "\", \"args\": {");
 		Builder.CreateCall(Strcpy, {FmtStrPtr, InitialStr});
 		// std::string jsonStr = "{ \"name\": \"" + F.getName().str() + "\", \"args\": [";
 		std::vector<Value *> PrintArgs;
@@ -125,7 +125,7 @@ void addInstrumentation(Module &M, std::unordered_set<json> jsonData) {
 			std::string ArgName;
 			std::string ArgTypeStr;
 			if (Arg.hasStructRetAttr()) {
-				ArgName = "return";
+				ArgName = "<return_val>";
 				ArgTypeStr = retType;
 			}
 			else {
@@ -141,11 +141,11 @@ void addInstrumentation(Module &M, std::unordered_set<json> jsonData) {
 			Type *ArgType = Arg.getType();
 	
 			if (ArgType->isIntegerTy()) {
-					Value *Fmt = Builder.CreateGlobalStringPtr(ArgName + " = \"%d\", ");
+					Value *Fmt = Builder.CreateGlobalStringPtr("\"" + ArgName + "\"" + " : \"%d\", ");
 					Builder.CreateCall(Strcat, {FmtStrPtr, Fmt});
 					PrintArgs.push_back(&Arg);
 			} else if (ArgType->isFloatingPointTy()) {
-					Value *Fmt = Builder.CreateGlobalStringPtr(ArgName + " = \"%f\", ");
+					Value *Fmt = Builder.CreateGlobalStringPtr("\"" + ArgName + "\"" + " : \"%f\", ");
 					Builder.CreateCall(Strcat, {FmtStrPtr, Fmt});
 					Value *DoubleVal = Builder.CreateFPExt(&Arg, Type::getDoubleTy(Context));
 					PrintArgs.push_back(DoubleVal);
@@ -157,20 +157,20 @@ void addInstrumentation(Module &M, std::unordered_set<json> jsonData) {
 						Value *IsNull = Builder.CreateICmpEQ(&Arg, ConstantPointerNull::get(cast<PointerType>(Arg.getType())));
 
 						// Build "%s" or "\"<null>\""
-						Value *RealFmt = Builder.CreateGlobalStringPtr(ArgName + " = \"%.100s\", ");
-						Value *NullFmt = Builder.CreateGlobalStringPtr(ArgName + " = \"%p\", ");
+						Value *RealFmt = Builder.CreateGlobalStringPtr("\"" + ArgName + "\"" + " : \"%.100s\", ");
+						Value *NullFmt = Builder.CreateGlobalStringPtr("\"" + ArgName + "\"" + " : \"%p\", ");
 						Value *SelectedFmt = Builder.CreateSelect(IsNull, NullFmt, RealFmt);
 
 						// Append to format string (strcat or manual copy)
 						Builder.CreateCall(Strcat, {FmtStrPtr, SelectedFmt});
 						PrintArgs.push_back(&Arg);
 					} else {
-							Value *Fmt = Builder.CreateGlobalStringPtr(ArgName + " = \"%p\", ");
+							Value *Fmt = Builder.CreateGlobalStringPtr("\"" + ArgName + "\"" + " : \"%p\", ");
 							Builder.CreateCall(Strcat, {FmtStrPtr, Fmt});
 							PrintArgs.push_back(&Arg);
 					}
 			} else {
-					Value *Fmt = Builder.CreateGlobalStringPtr(ArgName + " = \"<unsupported>\", ");
+					Value *Fmt = Builder.CreateGlobalStringPtr("\"" + ArgName + "\"" + " : \"<unsupported>\", ");
 					Builder.CreateCall(Strcat, {FmtStrPtr, Fmt});
 			}
 		}
@@ -186,7 +186,7 @@ void addInstrumentation(Module &M, std::unordered_set<json> jsonData) {
 			Builder.CreateStore(ConstantInt::get(Type::getInt8Ty(Context), 0), CommaPtr);
 		}
 
-		Builder.CreateCall(Strcat, {FmtStrPtr, Builder.CreateGlobalStringPtr("], \"return\": [")});
+		Builder.CreateCall(Strcat, {FmtStrPtr, Builder.CreateGlobalStringPtr("}, \"return\": [")});
 
 		// // Insert before return instructions
 		for (auto &BB : F) {

@@ -2076,44 +2076,6 @@
     },
     {
         "argNames": [
-            "argc",
-            "argv"
-        ],
-        "argTypes": [
-            "int",
-            "char **"
-        ],
-        "calledFunctions": [
-            "alignfree",
-            "cat",
-            "copy_cat",
-            "fdadvise",
-            "full_write",
-            "io_blksize",
-            "proper_name_lite",
-            "quotearg_n_style_colon",
-            "rpl_fcntl",
-            "set_program_name",
-            "simple_cat",
-            "usage",
-            "version_etc",
-            "write_error",
-            "xalignalloc",
-            "xalloc_die",
-            "xset_binary_mode"
-        ],
-        "endCol": 1,
-        "endLine": 813,
-        "filename": "cat.c",
-        "name": "main",
-        "num_args": 2,
-        "returnType": "int",
-        "signature": "int main(int argc, char ** argv)",
-        "startCol": 1,
-        "startLine": 535
-    },
-    {
-        "argNames": [
             "fd",
             "buf",
             "count"
@@ -2221,6 +2183,44 @@
         "signature": "_Bool c_isprint(int c)",
         "startCol": 1,
         "startLine": 271
+    },
+    {
+        "argNames": [
+            "argc",
+            "argv"
+        ],
+        "argTypes": [
+            "int",
+            "char **"
+        ],
+        "calledFunctions": [
+            "alignfree",
+            "cat",
+            "copy_cat",
+            "fdadvise",
+            "full_write",
+            "io_blksize",
+            "proper_name_lite",
+            "quotearg_n_style_colon",
+            "rpl_fcntl",
+            "set_program_name",
+            "simple_cat",
+            "usage",
+            "version_etc",
+            "write_error",
+            "xalignalloc",
+            "xalloc_die",
+            "xset_binary_mode"
+        ],
+        "endCol": 1,
+        "endLine": 813,
+        "filename": "cat.c",
+        "name": "main_0",
+        "num_args": 2,
+        "returnType": "int",
+        "signature": "int main(int argc, char ** argv)",
+        "startCol": 1,
+        "startLine": 535
     },
     {
         "argNames": [
