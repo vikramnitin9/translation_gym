@@ -2,6 +2,32 @@
 
 This is an environment for quickly implementing and benchmarking LLM-based program translation agents. As of now, we support only C to Rust translation.
 
+## Why use this tool?
+
+Implementing an LLM-based solution for full-project translation can be tricky. You can't translate the entire project at one go, so you need to break it up into individual functions. These functions have to be extracted with their dependencies and translated. Then you need to incorporate this function into the project, and test to see that it still works.
+
+Translation Gym takes care of all this effort! It gives you:
+- [x] a function body
+- [x] the functions that it calls
+- [ ] any global variables used by this function
+- [ ] definitions of any structure or enum used in this function
+- [ ] values of each argument and the returned value, from a sample execution 
+
+In exchange, you need to provide it with:
+- [x] the function translation
+- [x] "glue code" in the form of a wrapper function to interface with the source language
+
+Translation Gym will merge this into the project, compile it, run tests, and give you:
+- [x] compiler feedback
+- [x] stdout/stderr of the run
+- [ ] a runtime trace with values of each argument and the returned value
+
+You can use this feedback to repair your translation and provide it with:
+- [x] the repaired function translation
+- [x] repaired "glue code"
+
+In this manner, you can translate all the functions in the project! The entire process is highly customizable, and you can implement your own `Translator`, `Validator` and `Orchestrator` agents (or use our default implementations).
+
 ## Quickstart
 
 First put your OpenAI API key in `models/.env`.
