@@ -38,6 +38,8 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
         
         PrintingPolicy Policy(context->getLangOpts());
         std::string returnType = function->getReturnType().getAsString(Policy);
+        std::vector<std::string> argTypes;
+        std::vector<std::string> argNames;
         std::string signature = returnType + " " + function->getQualifiedNameAsString() + "(";
 
         for (unsigned i = 0; i < function->getNumParams(); ++i) {
@@ -47,6 +49,9 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
             ParmVarDecl *param = function->getParamDecl(i);
             std::string paramType = param->getType().getAsString(Policy);
             std::string paramName = param->getNameAsString();
+
+            argTypes.push_back(paramType);
+            argNames.push_back(paramName);
 
             signature += paramType;
             if (!paramName.empty()) { // Only add name if it exists
@@ -60,6 +65,9 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
                 {"name", functionName},
                 {"signature", signature},
                 {"num_args", function->getNumParams()},
+                {"argTypes", argTypes},
+                {"argNames", argNames},
+                {"returnType", returnType},
                 {"filename", fileName},
                 {"startLine", startLine},
                 {"endLine", endLine},

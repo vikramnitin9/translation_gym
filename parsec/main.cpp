@@ -36,13 +36,6 @@ using json = nlohmann::json;
 
 static llvm::cl::OptionCategory FindFunctionCategory("");
 
-bool compareFilenames(std::string filename1, std::string filename2) {
-	// Compare the filenames without the path
-	std::string baseName1 = llvm::sys::path::filename(filename1);
-	std::string baseName2 = llvm::sys::path::filename(filename2);
-	return baseName1 == baseName2;
-}
-
 int main(int argc, const char **argv) {
 	auto expectedParser = CommonOptionsParser::create(argc, argv, FindFunctionCategory, llvm::cl::ZeroOrMore, "ast-visitor <source0> [... <sourceN>] --");
 	if (!expectedParser) {
@@ -138,13 +131,13 @@ int main(int argc, const char **argv) {
 		return 1;
 	}
 	// Add instrumentation to the module
-	// addInstrumentation(*M); // Uncomment this line to add instrumentation
+	addInstrumentation(*M, jsonData); // Uncomment this line to add instrumentation
 
 	std::error_code EC;
 	llvm::legacy::PassManager PM;
 	std::string ErrorMessage;  // Use std::string for the error message
 
-	// Write the module to an .ll file
+	// // Write the module to an .ll file
 	// llvm::raw_fd_ostream IRFile("instrumented.ll", EC);
 	// M->print(IRFile, nullptr);
 

@@ -1,496 +1,534 @@
 [
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "fseeko.o",
-            "fseeko.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "fseeko.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "mbszero.o",
-            "mbszero.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "mbszero.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "quotearg.o",
-            "quotearg.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "quotearg.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "hard-locale.o",
-            "hard-locale.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "hard-locale.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "version-etc-fsf.o",
-            "version-etc-fsf.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "version-etc-fsf.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "ialloc.o",
-            "ialloc.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "ialloc.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "propername-lite.o",
-            "propername-lite.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "propername-lite.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "stdc_leading_zeros.o",
-            "stdc_leading_zeros.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "stdc_leading_zeros.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "version.o",
-            "version.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "version.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "fclose.o",
-            "fclose.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "fclose.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "closeout.o",
-            "closeout.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "closeout.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "fpurge.o",
-            "fpurge.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "fpurge.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "stdbit.o",
-            "stdbit.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "stdbit.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "safe-read.o",
-            "safe-read.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "safe-read.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "fcntl.o",
-            "fcntl.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "fcntl.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "binary-io.o",
-            "binary-io.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "binary-io.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "exitfail.o",
-            "exitfail.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "exitfail.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "safe-write.o",
-            "safe-write.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "safe-write.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "xalloc-die.o",
-            "xalloc-die.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "xalloc-die.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "version-etc.o",
-            "version-etc.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "version-etc.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "xmalloc.o",
-            "xmalloc.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "xmalloc.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "setlocale_null-unlocked.o",
-            "setlocale_null-unlocked.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "setlocale_null-unlocked.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "alignalloc.o",
-            "alignalloc.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "alignalloc.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "cat.o",
-            "cat.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "cat.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "fflush.o",
-            "fflush.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "fflush.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "close-stream.o",
-            "close-stream.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "close-stream.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "full-write.o",
-            "full-write.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "full-write.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "progname.o",
-            "progname.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "progname.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "localcharset.o",
-            "localcharset.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "localcharset.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "copy-file-range.o",
-            "copy-file-range.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "copy-file-range.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "xbinary-io.o",
-            "xbinary-io.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "xbinary-io.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "c-ctype.o",
-            "c-ctype.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "c-ctype.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "c32isprint.o",
-            "c32isprint.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "c32isprint.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "fadvise.o",
-            "fadvise.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "fadvise.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "c-strcasecmp.o",
-            "c-strcasecmp.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "c-strcasecmp.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "setlocale_null.o",
-            "setlocale_null.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "setlocale_null.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "mbrtoc32.o",
-            "mbrtoc32.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "mbrtoc32.c"
-    },
-    {
-        "arguments": [
-            "gcc",
-            "-c",
-            "-I./include",
-            "-g",
-            "-o",
-            "xalignalloc.o",
-            "xalignalloc.c"
-        ],
-        "directory": "/app/data/coreutils/src/cat/c",
-        "file": "xalignalloc.c"
-    }
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "full-write.o",
+      "full-write.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/full-write.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/full-write.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "localcharset.o",
+      "localcharset.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/localcharset.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/localcharset.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "fflush.o",
+      "fflush.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/fflush.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/fflush.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "copy-file-range.o",
+      "copy-file-range.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/copy-file-range.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/copy-file-range.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "ialloc.o",
+      "ialloc.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/ialloc.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/ialloc.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "fpurge.o",
+      "fpurge.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/fpurge.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/fpurge.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "mbszero.o",
+      "mbszero.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/mbszero.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/mbszero.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "closeout.o",
+      "closeout.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/closeout.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/closeout.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "c-ctype.o",
+      "c-ctype.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/c-ctype.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/c-ctype.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "stdbit.o",
+      "stdbit.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/stdbit.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/stdbit.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "fclose.o",
+      "fclose.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/fclose.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/fclose.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "xmalloc.o",
+      "xmalloc.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/xmalloc.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/xmalloc.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "fadvise.o",
+      "fadvise.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/fadvise.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/fadvise.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "setlocale_null-unlocked.o",
+      "setlocale_null-unlocked.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/setlocale_null-unlocked.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/setlocale_null-unlocked.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "version-etc.o",
+      "version-etc.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/version-etc.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/version-etc.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "fcntl.o",
+      "fcntl.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/fcntl.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/fcntl.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "version.o",
+      "version.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/version.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/version.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "version-etc-fsf.o",
+      "version-etc-fsf.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/version-etc-fsf.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/version-etc-fsf.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "binary-io.o",
+      "binary-io.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/binary-io.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/binary-io.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "quotearg.o",
+      "quotearg.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/quotearg.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/quotearg.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "exitfail.o",
+      "exitfail.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/exitfail.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/exitfail.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "xalloc-die.o",
+      "xalloc-die.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/xalloc-die.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/xalloc-die.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "cat.o",
+      "cat.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/cat.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/cat.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "alignalloc.o",
+      "alignalloc.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/alignalloc.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/alignalloc.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "safe-write.o",
+      "safe-write.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/safe-write.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/safe-write.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "propername-lite.o",
+      "propername-lite.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/propername-lite.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/propername-lite.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "close-stream.o",
+      "close-stream.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/close-stream.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/close-stream.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "xalignalloc.o",
+      "xalignalloc.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/xalignalloc.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/xalignalloc.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "xbinary-io.o",
+      "xbinary-io.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/xbinary-io.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/xbinary-io.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "c32isprint.o",
+      "c32isprint.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/c32isprint.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/c32isprint.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "progname.o",
+      "progname.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/progname.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/progname.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "c-strcasecmp.o",
+      "c-strcasecmp.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/c-strcasecmp.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/c-strcasecmp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "mbrtoc32.o",
+      "mbrtoc32.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/mbrtoc32.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/mbrtoc32.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "stdc_leading_zeros.o",
+      "stdc_leading_zeros.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/stdc_leading_zeros.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/stdc_leading_zeros.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "safe-read.o",
+      "safe-read.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/safe-read.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/safe-read.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "hard-locale.o",
+      "hard-locale.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/hard-locale.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/hard-locale.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "fseeko.o",
+      "fseeko.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/fseeko.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/fseeko.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-I./include",
+      "-g",
+      "-c",
+      "-o",
+      "setlocale_null.o",
+      "setlocale_null.c"
+    ],
+    "directory": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c",
+    "file": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/setlocale_null.c",
+    "output": "/proj/arise/arise/vikram.nitin/translation_gym/data/coreutils/src/cat/c/setlocale_null.o"
+  }
 ]
