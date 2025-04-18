@@ -26,7 +26,7 @@ You can use this feedback to repair your translation and provide it with:
 - [x] the repaired function translation
 - [x] repaired "glue code"
 
-In this manner, you can translate all the functions in the project! The entire process is highly customizable, and you can implement your own `Translator`, `Validator` and `Orchestrator` agents (or use our default implementations).
+In this manner, you can translate all the functions in the project! The entire process is highly customizable, and you can implement your own `Translator`, `Validator` and `Orchestrator` agents (or use our default implementations). Additionally, we also provide a suite of C projects from Coreutils out-of-the-box for benchmarking, and you can add your own datasets too.
 
 ## Quickstart
 
