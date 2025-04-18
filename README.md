@@ -30,11 +30,7 @@ In this manner, you can translate all the functions in the project! The entire p
 
 ## Quickstart
 
-First put your OpenAI API key in `models/.env`.
-```sh
-echo 'OPENAI_API_KEY="<your_key_here>"' > translation_gym/models/.env
-```
-The easiest way to run this tool is with Docker. If you do not already have Docker installed, follow the instructions [here](https://docs.docker.com/engine/install/). This script builds the Docker container for the tool.
+The easiest way to run this tool is with Docker. If you do not already have Docker installed, follow the instructions [here](https://docs.docker.com/engine/install/) and then come back to this page. To build the Docker container for our tool, run the following script:
 ```sh
 bash build.sh
 ```
@@ -48,6 +44,11 @@ If you don't have `docker-compose`, then you have to manually build each contain
 docker build -f toy/tests/Dockerfile -t toy:latest .
 docker build -f coreutils/tests/cat/Dockerfile -t cat:latest .
 ...
+```
+For LLM-based translation, we support OpenAI, Anthropic, and Google models. First put your API key in `models/.env`. For example:
+```sh
+# Use `ANTHROPIC_API_KEY`, `GOOGLE_API_KEY` or `OPENAI_API_KEY`, depending on your use case
+echo 'OPENAI_API_KEY="<your_key_here>"' > translation_gym/models/.env
 ```
 Now you are ready to run translation.
 ```sh
