@@ -22,7 +22,7 @@ Translation Gym will merge this into the project, compile it, run tests, and giv
 - [x] stdout/stderr of the run
 - [ ] a runtime trace with values of each argument and the returned value
 
-You can use this feedback to repair your translation and provide it with:
+You can use this feedback to repair your translation and provide Translation Gym with:
 - [x] the repaired function translation
 - [x] repaired "glue code"
 

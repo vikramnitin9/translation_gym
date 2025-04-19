@@ -33,8 +33,6 @@ if __name__ == '__main__':
                                num_attempts=args.num_attempts,
                                verbose=args.verbose)
     
-    import pdb; pdb.set_trace()
-
     engine.run(translator=translator,
                orchestrator=orchestrator,
                validator=validator)
