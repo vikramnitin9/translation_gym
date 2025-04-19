@@ -51,3 +51,25 @@ def run(command, verbose=False):
     
     if verbose:
         prLightGray(result.stdout.decode('utf-8', errors='ignore'))
+
+def safe_load_json(filepath):
+    with open(filepath, "rb") as f:  # Open in binary mode
+        raw_bytes = f.read()  # Read raw data
+
+    json_str = raw_bytes.decode("utf-8", errors="backslashreplace").strip()
+
+    if json_str.endswith(","):  
+        json_str = json_str[:-1]  # Remove trailing comma
+    if not json_str.startswith("["):
+        json_str = "[" + json_str
+    if not json_str.endswith("]"):
+        json_str = json_str + "]"
+
+    def sanitize(c):
+        if c == '\\':
+            return '\\\\'
+        else:
+            return c
+
+    json_clean = ''.join(sanitize(c) for c in json_str)
+    return json.loads(json_clean.strip(), strict=False)

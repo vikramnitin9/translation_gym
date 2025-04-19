@@ -23,7 +23,7 @@ class Validator:
 class DefaultValidator(Validator):
 
     def __init__(self, compile_attempts=5):
-        self.compile_attempts = 5
+        self.compile_attempts = compile_attempts
 
     def validate(self, func, translation, source_manager, test_manager):
         source_manager.insert_translation(func, translation)
@@ -53,8 +53,7 @@ class DefaultValidator(Validator):
         
         # If we get here, the code compiled successfully
         # Run the test suite
-        executable = source_manager.get_executable()
-        test_res = test_manager.run_tests(executable)
+        test_res = test_manager.run_tests(self.source_manager)
         if test_res['status'] == 'passed':
             return {"success": True,
                 "category": "",

@@ -9,21 +9,31 @@ class SourceManager:
         self.bindgen_blocklist = Path(self.code_dir, 'bindgen_blocklist.txt')
         if not self.bindgen_blocklist.exists():
             self.bindgen_blocklist.touch()
-
+        self.instrumentation_dir = Path(self.code_dir, 'instrumentation')
+        self.instrumentation_dir.mkdir(parents=True, exist_ok=True)
         if os.path.exists('/.dockerenv'):
             # We are inside a Docker container
             self.docker     = True
             client          = docker.DockerClient(base_url='unix:///var/run/docker.sock')
             container_id    = socket.gethostname()
             container       = client.containers.get(container_id)
-            mounts          = container.attrs['Mounts']
-            # Find the mount that maps to /app/output
-            for mount in mounts:
-                if mount['Destination'] == '/app/output':
-                    self.docker_output_dir = Path(mount['Source'])
+            self.mounts     = container.attrs['Mounts']
         else:
             self.docker     = False
     
+    def to_host_path(self, path):
+        if not self.docker:
+            return path
+        mount_path_len = 0
+        host_path = None
+        # Find the mount that is the longest prefix of path
+        for mount in self.mounts:
+            if path.is_relative_to(Path(mount['Destination'])):
+                if len(Path(mount['Destination']).parts) > mount_path_len:
+                    mount_path_len = len(Path(mount['Destination']).parts)
+                    host_path = Path(mount['Source'])/path.relative_to(Path(mount['Destination']))
+        return host_path
+
     def get_bin_target(self):
 
         cwd = os.getcwd()
@@ -95,13 +105,10 @@ class SourceManager:
         executable = Path(self.code_dir, f'target/debug/{self.cargo_bin_target}')
         if not executable.exists():
             raise Exception("Executable not found. Please compile the code first.")
-        if self.docker and host_path:
-            # Assert that this path starts with /app/output
-            # Replace /app with self.docker_root in the path
-            segments = executable.parts
-            assert segments[0:3] == ('/', 'app', 'output')
-            executable = pathlib.PurePath(*(self.docker_output_dir.parts + segments[3:]))
         return executable
+
+    def get_instrumentation_dir(self):
+        return self.instrumentation_dir
     
     def compile(self, timeout=60, verbose=False):
         cwd = os.getcwd()

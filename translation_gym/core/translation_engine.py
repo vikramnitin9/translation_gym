@@ -20,7 +20,6 @@ class TranslationEngine:
         self.setup() # Sets up self.source_manager
         self.num_attempts = num_attempts
         self.log_file = Path(self.output_dir, 'log.json')
-
         self.log = {'date': f"{datetime.datetime.now()}",
                     'attempts': num_attempts,
                     'model': model,
@@ -65,20 +64,19 @@ class TranslationEngine:
 
         test_docker = self.dataset['test_docker_image']
         self.test_manager = TestManager(test_docker, verbose=self.verbose)
-        test_res = self.test_manager.run_tests(executable)
+        test_res = self.test_manager.run_tests(self.source_manager)
         if test_res['status'] == "passed":
             prGreen("Tests passed")
+            self.instrumentation_results = test_res['instrumentation']
         else:
-            prRed(f"Tests failed: {test_res['error']}.")
+            raise Exception(f"Tests failed: {test_res['error']}.")
         
-        return 
-    
     def run(self,
             orchestrator: Orchestrator,
             translator: Translator,
             validator: Validator):
 
-        for func in orchestrator.function_iter(self.source_manager):
+        for func in orchestrator.function_iter(self.source_manager, self.instrumentation_results):
             prCyan("Translating function: {}".format(func['name']))
             translation = translator.translate(func, self.source_manager, self.verbose)
             result = validator.validate(func, translation, self.source_manager, self.test_manager)

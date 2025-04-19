@@ -6,7 +6,7 @@ class Orchestrator:
     Base class for orchestrators. This class is responsible for orchestrating the translation process.
     """
 
-    def function_iter(self, source_manager):
+    def function_iter(self, source_manager, instrumentation_results):
         """
         Iterate over the functions in the source code.
         :param source_manager: The source manager
@@ -17,7 +17,7 @@ class Orchestrator:
 
 class DefaultOrchestrator(Orchestrator):
 
-    def function_iter(self, source_manager):
+    def function_iter(self, source_manager, instrumentation_results):
         static_analysis_results = source_manager.get_static_analysis_results()
         # Build call graph of functions
         self.call_graph = nx.DiGraph()
@@ -47,4 +47,10 @@ class DefaultOrchestrator(Orchestrator):
             if len(funcs) == 0:
                 continue
             func = funcs[0]
+            instrumentation_logs = [log for log in instrumentation_results if log['name'] == func_name]
+            if len(instrumentation_logs) == 0:
+                # Include only covered functions
+                continue
+            func['instrumentation'] = {'args': instrumentation_logs[0]['args'],
+                                       'return': instrumentation_logs[0]['return']}
             yield func
