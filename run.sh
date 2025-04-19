@@ -2,7 +2,7 @@
 # <dataset_name> must be in data/datasets.json and <model_name> must be in translation_gym/models/__init__.py
 mkdir -p output
 
-DOCKER_SOCKET=$(docker context inspect | jq -r .[0].Endpoints.docker.Host | sed "s^unix://^^")
+DOCKER_SOCKET=$(docker context inspect | grep '"Host"' | head -n1 | sed -E 's/.*"Host": *"unix:\/\/([^"]+)".*/\1/')
 
 # Generate a random string of length 10 for the output directory
 suffix=$(openssl rand -base64 32 | tr -dc '[:alnum:]' | head -c 10)
