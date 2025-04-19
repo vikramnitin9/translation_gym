@@ -22,7 +22,9 @@ RUN apt-get clean && \
 # Add a non-root user with the same UID and GID as the host user
 ARG USER_ID
 ARG GROUP_ID
-RUN groupadd -g ${GROUP_ID} appuser && \
+RUN if ! getent group ${GROUP_ID}; then \
+    groupadd -g ${GROUP_ID} appuser; \
+    fi && \
     useradd -m -u ${USER_ID} -g appuser appuser
 
 RUN mkdir -p /opt/miniconda3 && \
