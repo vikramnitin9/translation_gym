@@ -28,11 +28,11 @@ RUN if ! getent group ${GROUP_ID}; then \
     useradd -m -u ${USER_ID} -g ${GROUP_ID} appuser
 
 RUN mkdir -p /opt/miniconda3 && \
-    chown -R ${USER_ID}:{GROUP_ID} /opt/miniconda3
+    chown -R ${USER_ID}:${GROUP_ID} /opt/miniconda3
 
 # Set the non-root user as the owner of the /app directory
 RUN mkdir -p /app && \
-    chown -R ${USER_ID}:{GROUP_ID} /app
+    chown -R ${USER_ID}:${GROUP_ID} /app
 
 # Switch to the non-root user
 USER appuser
