@@ -62,7 +62,7 @@ ENV CARGO_HOME="/app/.cargo"
 ENV RUSTUP_HOME="/app/.rustup"
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/app/.cargo/bin:${PATH}"
-RUN rustup install nightly-2024-08-07-x86_64-unknown-linux-gnu
+RUN rustup install nightly-2024-08-07
 
 # Ensure the copied files are owned by the non-root user
 COPY --chown=${USER_ID}:${GROUP_ID} requirements.txt .
