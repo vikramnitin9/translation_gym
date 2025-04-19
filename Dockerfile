@@ -25,7 +25,7 @@ ARG GROUP_ID
 RUN if ! getent group ${GROUP_ID}; then \
     groupadd -g ${GROUP_ID} appuser; \
     fi && \
-    useradd -m -u ${USER_ID} -g appuser appuser
+    useradd -m -u ${USER_ID} -g ${GROUP_ID} appuser
 
 RUN mkdir -p /opt/miniconda3 && \
     chown -R appuser:appuser /opt/miniconda3
