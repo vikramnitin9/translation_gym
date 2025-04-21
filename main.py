@@ -33,8 +33,8 @@ if __name__ == '__main__':
                                num_attempts=args.num_attempts,
                                verbose=args.verbose)
     
-    # engine.run(translator=translator,
-    #            orchestrator=orchestrator,
-    #            validator=validator)
+    engine.run(translator=translator,
+               orchestrator=orchestrator,
+               validator=validator)
  
-    # engine.print_results()
+    engine.print_results()

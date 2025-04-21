@@ -53,7 +53,7 @@ class DefaultValidator(Validator):
         
         # If we get here, the code compiled successfully
         # Run the test suite
-        test_res = test_manager.run_tests(self.source_manager)
+        test_res = test_manager.run_tests(source_manager)
         if test_res['status'] == 'passed':
             return {"success": True,
                 "category": "",
