@@ -3,7 +3,7 @@
 # Between coreutils 7.5 and 8.23 inclusive, 'tail -F ...' would
 # not output headers for or created/renamed files in certain cases.
 
-# Copyright (C) 2015-2024 Free Software Foundation, Inc.
+# Copyright (C) 2015-2025 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,8 +18,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-. "$SCRIPTPATH/../../tests/init.sh"; path_prepend_ $1
+. "${srcdir=.}/tests/init.sh"; path_prepend_ ./src; path_prepend_ /executable
+print_ver_ tail
 
 check_tail_output()
 {

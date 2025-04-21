@@ -2,7 +2,7 @@
 # Make sure that 'tail -f' returns immediately if a file doesn't exist
 # while 'tail -F' waits for it to appear.
 
-# Copyright (C) 2003-2024 Free Software Foundation, Inc.
+# Copyright (C) 2003-2025 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,8 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-. "$SCRIPTPATH/../../tests/init.sh"; path_prepend_ $1
+. "${srcdir=.}/tests/init.sh"; path_prepend_ ./src; path_prepend_ /executable
+print_ver_ tail
 
 grep '^#define HAVE_INOTIFY 1' "$CONFIG_HEADER" >/dev/null \
   && HAVE_INOTIFY=1

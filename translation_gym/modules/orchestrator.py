@@ -47,10 +47,11 @@ class DefaultOrchestrator(Orchestrator):
             if len(funcs) == 0:
                 continue
             func = funcs[0]
-            instrumentation_logs = [log for log in instrumentation_results if log['name'] == func_name]
-            if len(instrumentation_logs) == 0:
-                # Include only covered functions
-                continue
-            func['instrumentation'] = {'args': instrumentation_logs[0]['args'],
-                                       'return': instrumentation_logs[0]['return']}
+            if instrumentation_results is not None:
+                instrumentation_logs = [log for log in instrumentation_results if log['name'] == func_name]
+                if len(instrumentation_logs) == 0:
+                    # Include only covered functions
+                    continue
+                func['instrumentation'] = {'args': instrumentation_logs[0]['args'],
+                                        'return': instrumentation_logs[0]['return']}
             yield func

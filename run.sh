@@ -7,6 +7,9 @@ DOCKER_SOCKET=$(docker context inspect | grep '"Host"' | head -n1 | sed -E 's/.*
 # Generate a random string of length 10 for the output directory
 suffix=$(openssl rand -base64 32 | tr -dc '[:alnum:]' | head -c 10)
 
+# -u 0:0 is because of the rootless Docker setup.
+# UID:GID on the host is mapped to 0:0 on the container
+# See https://forums.docker.com/t/why-is-rootless-docker-still-running-as-root-inside-container/134985
 docker run -it \
     -u 0:0 \
     -v $PWD/output:/app/output \

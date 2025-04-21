@@ -41,7 +41,6 @@ class TestManager:
         cmd = f"docker run -it \
                 -v {executable_host_path}:/executable/{exec_name}\
                 -v {instrumentation_host_path}:/instrumentation \
-                -e INSTRUMENTATION_PATH=/instrumentation \
                     {self.test_docker}"
         if self.verbose:
             prCyan(f"Running command: {cmd}")
@@ -51,4 +50,5 @@ class TestManager:
             instrumentation = self.collect_instrumentation_results(source_manager)
             return {'status': 'passed', 'instrumentation': instrumentation}
         except RunException as e:
+            instrumentation = self.collect_instrumentation_results(source_manager)
             return {'status': 'failed', 'error': str(e), 'instrumentation': instrumentation}

@@ -1,7 +1,7 @@
 #!/bin/sh
 # Ensure that tail seeks to the end of a device
 
-# Copyright (C) 2017-2024 Free Software Foundation, Inc.
+# Copyright (C) 2017-2025 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,8 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-. "$SCRIPTPATH/../../tests/init.sh"; path_prepend_ $1
+. "${srcdir=.}/tests/init.sh"; path_prepend_ ./src; path_prepend_ /executable
+print_ver_ tail
 
 # need write access to local device
 # (even though we don't actually write anything)

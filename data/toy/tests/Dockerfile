@@ -19,4 +19,6 @@ ENV PATH="/executable:${PATH}"
 # Make test.sh executable
 RUN chmod +x /app/test.sh
 
+ENV INSTRUMENTATION_PATH="/instrumentation"
+
 CMD ["/bin/bash", "/app/test.sh"]

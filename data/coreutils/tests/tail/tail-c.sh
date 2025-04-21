@@ -1,7 +1,7 @@
 #!/bin/sh
 # exercise tail -c
 
-# Copyright 2014-2024 Free Software Foundation, Inc.
+# Copyright 2014-2025 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,8 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-. "$SCRIPTPATH/../../tests/init.sh"; path_prepend_ $1
+. "${srcdir=.}/tests/init.sh"; path_prepend_ ./src; path_prepend_ /executable
+print_ver_ tail
 
 # Make sure it works on funny files in /proc and /sys.
 for file in /proc/version /sys/kernel/profiling; do
@@ -42,7 +42,22 @@ compare exp out || fail=1
 
 # Any part of /dev/urandom, if it exists, should be valid for tail -c.
 if test -r /dev/urandom; then
-  timeout --verbose 1 tail -c 4096 /dev/urandom >/dev/null || fail=1
+  # Or at least it should not read it forever
+  timeout --verbose 1 tail -c 4096 /dev/urandom >/dev/null 2>err
+  case $? in
+      0) ;;
+      # Solaris 11 allows negative seek but then gives EINVAL on read
+      1) grep 'Invalid argument' err || fail=1;;
+      *)
+        case $host_triplet in
+          *linux-gnu*)
+            case "$(uname -r)" in
+              [12].*) ;;  # Older Linux versions timeout
+              *) fail=1 ;;
+            esac ;;
+          *) fail=1 ;;
+        esac ;;
+  esac
 fi
 
 Exit $fail

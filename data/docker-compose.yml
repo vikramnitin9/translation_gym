@@ -5,14 +5,31 @@ services:
     build:
       context: .
       dockerfile: ./toy/tests/Dockerfile
+      args:
+        USER_ID: "${USER_ID}"
+        GROUP_ID: "${GROUP_ID}"
     working_dir: /app
     image: toy:latest
     container_name: toy
+
+  coreutils:
+    build:
+      context: .
+      dockerfile: ./coreutils/Dockerfile
+      args:
+        USER_ID: "${USER_ID}"
+        GROUP_ID: "${GROUP_ID}"
+    working_dir: /app
+    image: coreutils:latest
+    container_name: coreutils
     
   cat:
     build:
       context: .
       dockerfile: ./coreutils/tests/cat/Dockerfile
+      args:
+        USER_ID: "${USER_ID}"
+        GROUP_ID: "${GROUP_ID}"
     working_dir: /app
     image: cat:latest
     container_name: cat
@@ -21,6 +38,9 @@ services:
     build:
       context: .
       dockerfile: ./coreutils/tests/head/Dockerfile
+      args:
+        USER_ID: "${USER_ID}"
+        GROUP_ID: "${GROUP_ID}"
     working_dir: /app
     image: head:latest
     container_name: head
@@ -29,6 +49,9 @@ services:
     build:
       context: .
       dockerfile: ./coreutils/tests/pwd/Dockerfile
+      args:
+        USER_ID: "${USER_ID}"
+        GROUP_ID: "${GROUP_ID}"
     working_dir: /app
     image: pwd:latest
     container_name: pwd
@@ -37,6 +60,9 @@ services:
     build:
       context: .
       dockerfile: ./coreutils/tests/split/Dockerfile
+      args:
+        USER_ID: "${USER_ID}"
+        GROUP_ID: "${GROUP_ID}"
     working_dir: /app
     image: split:latest
     container_name: split
@@ -45,6 +71,9 @@ services:
     build:
       context: .
       dockerfile: ./coreutils/tests/tail/Dockerfile
+      args:
+        USER_ID: "${USER_ID}"
+        GROUP_ID: "${GROUP_ID}"
     working_dir: /app
     image: tail:latest
     container_name: tail
@@ -53,6 +82,9 @@ services:
     build:
       context: .
       dockerfile: ./coreutils/tests/truncate/Dockerfile
+      args:
+        USER_ID: "${USER_ID}"
+        GROUP_ID: "${GROUP_ID}"
     working_dir: /app
     image: truncate:latest
     container_name: truncate
@@ -61,6 +93,9 @@ services:
     build:
       context: .
       dockerfile: ./coreutils/tests/uniq/Dockerfile
+      args:
+        USER_ID: "${USER_ID}"
+        GROUP_ID: "${GROUP_ID}"
     working_dir: /app
     image: uniq:latest
     container_name: uniq

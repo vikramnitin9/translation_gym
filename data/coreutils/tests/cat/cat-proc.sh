@@ -2,7 +2,7 @@
 # Ensure that cat -E produces same output as cat, modulo '$'s,
 # even when applied to a file in /proc.
 
-# Copyright (C) 2006-2024 Free Software Foundation, Inc.
+# Copyright (C) 2006-2025 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,15 +17,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-. "$SCRIPTPATH/../../tests/init.sh"; path_prepend_ $1
+. "${srcdir=.}/tests/init.sh"; path_prepend_ ./src; path_prepend_ /executable
+print_ver_ cat
 
 
 f=/proc/cpuinfo
 test -f $f \
   || skip_ "no $f"
 
-echo Using `which cat`
 
 # Yes, parts of /proc/cpuinfo might change between cat runs.
 # If that happens, consider choosing a file that's less likely to change,

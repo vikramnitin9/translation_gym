@@ -1,6 +1,6 @@
 # source this file; set up for tests
 
-# Copyright (C) 2009-2024 Free Software Foundation, Inc.
+# Copyright (C) 2009-2025 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -267,7 +267,7 @@ test -n "$EXEEXT" && test -n "$BASH_VERSION" && shopt -s expand_aliases
 # Create a temporary directory, much like mktemp -d does.
 # Written by Jim Meyering.
 #
-# Usage: mktempd_ /tmp phoey.XXXXXXXXXX
+# Usage: mktempd_ /tmp template.XXXXXXXXXX
 #
 # First, try to use the mktemp program.
 # Failing that, we'll roll our own mktemp-like function:
@@ -276,6 +276,19 @@ test -n "$EXEEXT" && test -n "$BASH_VERSION" && shopt -s expand_aliases
 #      sources and awk.
 #  - try to create the desired directory.
 #  - make only $MAX_TRIES_ attempts
+
+# mkdir on msys2 does not support the '-m' option.
+case `(uname -o) 2>/dev/null` in
+  Msys)
+    mkdir ()
+    {
+      if test " $1" = " -m"; then
+        shift; shift
+      fi
+      /bin/mkdir "$@"
+    }
+    ;;
+esac
 
 # Helper function.  Print $N pseudo-random bytes from a-zA-Z0-9.
 rand_bytes_ ()
@@ -338,13 +351,17 @@ mktempd_ ()
   esac
 
   case $template_ in
+  -*) fail_ \
+       "invalid template: $template_ (must not begin with '-')";;
   *XXXX) ;;
   *) fail_ \
        "invalid template: $template_ (must have a suffix of at least 4 X's)";;
   esac
 
-  # First, try to use mktemp.
-  d=`unset TMPDIR; { mktemp -d -t -p "$destdir_" "$template_"; } 2>/dev/null` &&
+  # First, try GNU mktemp, where -t has no option-argument.
+  # Put -t last, as GNU mktemp allows, so that the incompatible NetBSD mktemp
+  # (where -t has an option-argument) fails instead of creating a junk dir.
+  d=`unset TMPDIR; { mktemp -d -p "$destdir_" "$template_" -t; } 2>/dev/null` &&
 
   # The resulting name must be in the specified directory.
   case $d in "$destdir_slash_"*) :;; *) false;; esac &&
@@ -434,15 +451,15 @@ setup_ ()
 
   # Remove relative and non-accessible directories from PATH, including '.'
   # and Zero-length entries.
-  saved_IFS="$IFS"
-  IFS=:
+  saved_IFS="$IFS"; IFS="$PATH_SEPARATOR"
   new_PATH=
-  sep_=
   for dir in $PATH; do
+    IFS="$saved_IFS"
     case "$dir" in
-      /*) test -d "$dir/." || continue
-          new_PATH="${new_PATH}${sep_}${dir}"
-          sep_=':';;
+      [\\/]* | ?:[\\/]*)
+        test -d "$dir/." || continue
+        new_PATH="${new_PATH}${new_PATH:+$PATH_SEPARATOR}${dir}"
+        ;;
     esac
   done
   IFS="$saved_IFS"
@@ -591,9 +608,10 @@ fi
 # I.e., just doing `command ... &&fail=1` will not catch
 # a segfault in command for example.  With this helper you
 # instead check an explicit exit code like
-#   returns_ 1 command ... || fail
+#   returns_ 1 command ... || fail=1
 returns_ () {
   # Disable tracing so it doesn't interfere with stderr of the wrapped command
+  { local is_tracing=`{ :; } 2>&1`; } 2>/dev/null
   { set +x; } 2>/dev/null
 
   local exp_exit="$1"
@@ -601,7 +619,8 @@ returns_ () {
   "$@"
   test $? -eq $exp_exit && ret_=0 || ret_=1
 
-  if test "$VERBOSE" = yes && test "$gl_set_x_corrupts_stderr_" = false; then
+  # Restore tracing if it was enabled.
+  if test -n "$is_tracing"; then
     set -x
   fi
   { return $ret_; } 2>/dev/null
@@ -652,7 +671,28 @@ for diff_opt_ in -u -U3 -c '' no; do
 done
 if test "$diff_opt_" != no; then
   if test -z "$diff_out_"; then
-    compare_ () { LC_ALL=C diff $diff_opt_ "$@"; }
+    # diff on msys2 does not support the '-' argument for denoting stdin.
+    case `(uname -o) 2>/dev/null` in
+      Msys)
+        compare_ ()
+        {
+          if test " $1" = " -"; then
+            cat > '(stdin)'
+            LC_ALL=C diff $diff_opt_ '(stdin)' "$2"
+          elif test " $2" = " -"; then
+            cat > '(stdin)'
+            LC_ALL=C diff $diff_opt_ "$1" '(stdin)'
+          else
+            LC_ALL=C diff $diff_opt_ "$@"
+          fi
+        }
+        ;;
+      *)
+        compare_ ()
+        {
+          LC_ALL=C diff $diff_opt_ "$@"
+        }
+    esac
   else
     compare_ ()
     {
@@ -692,15 +732,10 @@ compare ()
 
 # -----------------------------------------------------------------------------
 
-# SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-SCRIPTPATH=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-
 # If you want to override the testdir_prefix_ function,
 # or to add more utility functions, use this file.
-test -f "$SCRIPTPATH/../init.cfg" \
-  && . "$SCRIPTPATH/../init.cfg" || echo "Could not run init.cfg at $SCRIPTPATH/../init.cfg"
-# test -f "$srcdir/init.cfg" \
-#   && . "$srcdir/init.cfg" || echo "Could not run init.cfg"
+test -f "$srcdir/init.cfg" \
+  && . "$srcdir/init.cfg"
 
 # =============================================================================
 # Set up the environment for the test to run in.

@@ -6,37 +6,37 @@
   },
   "cat" : {
     "description": "Coreutils cat",
-    "code_dir": "coreutils/src/cat/c",
+    "code_dir": "coreutils/src_sep/cat/c",
     "test_docker_image": "cat:latest"
   },
   "head" : {
     "description": "Coreutils head",
-    "code_dir": "coreutils/src/head/c",
+    "code_dir": "coreutils/src_sep/head/c",
     "test_docker_image": "head:latest"
   },
   "pwd" : {
     "description": "Coreutils pwd",
-    "code_dir": "coreutils/src/pwd/c",
+    "code_dir": "coreutils/src_sep/pwd/c",
     "test_docker_image": "pwd:latest"
   },
   "split" : {
     "description": "Coreutils split",
-    "code_dir": "coreutils/src/split/c",
+    "code_dir": "coreutils/src_sep/split/c",
     "test_docker_image": "split:latest"
   },
   "tail" : {
     "description": "Coreutils tail",
-    "code_dir": "coreutils/src/tail/c",
+    "code_dir": "coreutils/src_sep/tail/c",
     "test_docker_image": "tail:latest"
   },
   "truncate" : {
-    "description": "Coreutils cat",
-    "code_dir": "coreutils/src/cat/c",
-    "test_docker_image": "cat:latest"
+    "description": "Coreutils truncate",
+    "code_dir": "coreutils/src_sep/truncate/c",
+    "test_docker_image": "truncate:latest"
   },
   "uniq" : {
     "description": "Coreutils uniq",
-    "code_dir": "coreutils/src/uniq/c",
+    "code_dir": "coreutils/src_sep/uniq/c",
     "test_docker_image": "uniq:latest"
   }
 }

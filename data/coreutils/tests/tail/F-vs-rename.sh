@@ -3,7 +3,7 @@
 # Between coreutils 7.5 and 8.2 inclusive, 'tail -F a b' would
 # stop tracking additions to b after 'mv a b'.
 
-# Copyright (C) 2009-2024 Free Software Foundation, Inc.
+# Copyright (C) 2009-2025 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,8 +18,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-. "$SCRIPTPATH/../../tests/init.sh"; path_prepend_ $1
+. "${srcdir=.}/tests/init.sh"; path_prepend_ ./src; path_prepend_ /executable
+print_ver_ tail
 
 check_tail_output() {
   local delay="$1"
@@ -63,26 +63,26 @@ for mode in '' '---disable-inotify'; do
     { cat out; fail=1; }
   # Wait up to 12.7s for "x" to be displayed:
   file='b' data='x' retry_delay_ check_tail_output .1 7 ||
-    { echo "$0: b: unexpected delay?"; cat out; fail=1; }
+    { echo "$0: b: unexpected delay 1?"; cat out; fail=1; }
 
   echo x2 > a
   # Wait up to 12.7s for this to appear in the output:
   # "tail: '...' has appeared;  following new file"
   tail_re='has appeared' retry_delay_ check_tail_output .1 7 ||
-    { echo "$0: a: unexpected delay?"; cat out; fail=1; }
+    { echo "$0: a: unexpected delay 2?"; cat out; fail=1; }
   # Wait up to 12.7s for "x2" to be displayed:
   file='a' data='x2' retry_delay_ check_tail_output .1 7 ||
-    { echo "$0: a: unexpected delay 2?"; cat out; fail=1; }
+    { echo "$0: a: unexpected delay 3?"; cat out; fail=1; }
 
   echo y >> b
   # Wait up to 12.7s for "y" to appear in the output:
   file='b' data='y' retry_delay_ check_tail_output .1 7 ||
-    { echo "$0: b: unexpected delay 2?"; cat out; fail=1; }
+    { echo "$0: b: unexpected delay 4?"; cat out; fail=1; }
 
   echo z >> a
   # Wait up to 12.7s for "z" to appear in the output:
   file='a' data='z' retry_delay_ check_tail_output .1 7 ||
-    { echo "$0: a: unexpected delay 3?"; cat out; fail=1; }
+    { echo "$0: a: unexpected delay 5?"; cat out; fail=1; }
 
   cleanup_
 done

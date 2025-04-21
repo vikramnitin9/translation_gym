@@ -72,4 +72,8 @@ def safe_load_json(filepath):
             return c
 
     json_clean = ''.join(sanitize(c) for c in json_str)
-    return json.loads(json_clean.strip(), strict=False)
+    try:
+        data = json.loads(json_clean.strip(), strict=False)
+    except:
+        prRed(f"Failed to load JSON from {filepath}")
+        return None

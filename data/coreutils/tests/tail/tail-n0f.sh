@@ -2,7 +2,7 @@
 # Make sure that 'tail -n0 -f' and 'tail -c0 -f' sleep
 # rather than doing what amounted to a busy-wait.
 
-# Copyright (C) 2003-2024 Free Software Foundation, Inc.
+# Copyright (C) 2003-2025 Free Software Foundation, Inc.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@
 # It skips the test if your system lacks a /proc/$pid/status
 # file, or if its contents don't look right.
 
-SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-. "$SCRIPTPATH/../../tests/init.sh"; path_prepend_ $1
+. "${srcdir=.}/tests/init.sh"; path_prepend_ ./src; path_prepend_ /executable
+print_ver_ tail
 
 require_proc_pid_status_
 
