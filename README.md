@@ -1,5 +1,7 @@
 # Translation Gym
 
+https://github.com/user-attachments/assets/d421db0d-9038-4213-bd80-d0a641965e63
+
 This is an environment for quickly implementing and benchmarking LLM-based program translation agents. As of now, we support only C to Rust translation.
 
 ## Why use this tool?
