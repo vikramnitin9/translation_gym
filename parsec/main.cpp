@@ -100,11 +100,15 @@ int main(int argc, const char **argv) {
 		}
 		const llvm::Function *constFunctionPtr = &F;
 		// Store all the functions that are called by the current function
-		std::set<std::string> calledFunctions = {};
+		std::set<std::string> seenFunctions;
+		json calledFunctions = json::array();
 		for (auto &I : *CG[constFunctionPtr]) {
 			if (I.second && I.second->getFunction()) {
 				if (!I.second->getFunction()->isDeclaration()) {
-					calledFunctions.insert(I.second->getFunction()->getName().str());
+					std::string funcName = I.second->getFunction()->getName().str();
+					if (seenFunctions.insert(funcName).second) {
+						calledFunctions.push_back({{"name", funcName}});
+					}
 				}
 			}
 		}

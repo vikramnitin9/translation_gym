@@ -63,19 +63,25 @@ ENV RUSTUP_HOME="/app/.rustup"
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/app/.cargo/bin:${PATH}"
 RUN rustup install nightly-2024-08-07
+RUN rustup default nightly-2024-08-07
+RUN rustup component add llvm-tools rustc-dev
 
-# Ensure the copied files are owned by the non-root user
 COPY --chown=${USER_ID}:${GROUP_ID} requirements.txt .
-COPY --chown=${USER_ID}:${GROUP_ID} parsec/ parsec/
-COPY --chown=${USER_ID}:${GROUP_ID} rust_wrapper rust_wrapper/
-
 RUN pip install -r requirements.txt
-RUN cd parsec && \
+
+COPY --chown=${USER_ID}:${GROUP_ID} parsec/ parsec/
+RUN cd /app/parsec && \
     rm -rf build && \
     mkdir build && \
     cd build && \
     cmake .. && \
     make -j 4
+
+COPY --chown=${USER_ID}:${GROUP_ID} parserust/ parserust/
+RUN cd /app/parserust && \
+    cargo install --debug --locked --path . --force
+
+COPY --chown=${USER_ID}:${GROUP_ID} rust_wrapper rust_wrapper/
 
 ENV PARSEC_BUILD_DIR=/app/parsec/build
 

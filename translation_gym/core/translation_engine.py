@@ -24,6 +24,7 @@ class TranslationEngine:
                     'attempts': num_attempts,
                     'model': model,
                     'results': []}
+        self.translated = {}
 
         with open(self.log_file, 'w') as f:
             f.write(json.dumps(self.log, indent=4))
@@ -78,6 +79,21 @@ class TranslationEngine:
 
         for func in orchestrator.function_iter(self.source_manager, self.instrumentation_results):
             prCyan("Translating function: {}".format(func['name']))
+
+            # This is the part where we collect info about the called functions.
+            rust_static_analysis = self.source_manager.get_rust_static_analysis_results()
+            for i, called_func in enumerate(func['calledFunctions']):
+                translated_rust_fns = [f for f in rust_static_analysis if f['name'] == (called_func['name'] + "_rust")]
+                if len(translated_rust_fns) != 0:
+                    assert len(translated_rust_fns) == 1
+                    func['calledFunctions'][i]['signature'] = translated_rust_fns[0]['signature']
+                    func['calledFunctions'][i]['translated'] = True
+                else:
+                    matching_rust_fn = [f for f in rust_static_analysis if f['name'] == called_func['name']]
+                    assert len(matching_rust_fn) == 1
+                    func['calledFunctions'][i]['signature'] = matching_rust_fn[0]['signature']
+                    func['calledFunctions'][i]['translated'] = False
+                    
             translation = translator.translate(func, self.source_manager, self.verbose)
             result = validator.validate(func, translation, self.source_manager, self.test_manager)
 
@@ -96,6 +112,10 @@ class TranslationEngine:
                         break
                     translation = translator.repair(result, self.source_manager, self.verbose)
                     result = validator.validate(func, translation, self.source_manager, self.test_manager)
+            
+            if result['success']:
+                prGreen("Translation succeeded")
+                self.translated[func['name']] = translation['func']
             
             self.log['results'].append({'function': func['name'],
                                    'results': "Success" if result['success'] else result['category'],

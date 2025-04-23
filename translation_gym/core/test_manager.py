@@ -20,13 +20,13 @@ class TestManager:
         if not executable:
             prRed("No executable found. Please compile the code first.")
             return {'status': 'failed', 'error': 'No executable found'}
-        executable_host_path = source_manager.to_host_path(executable)
+        executable_host_path = to_host_path(executable)
         if not executable_host_path:
             prRed("Executable is not in a mounted directory.")
             return {'status': 'failed', 'error': 'Excutable is not in a mounted directory.'}
 
         instrumentation_dir = source_manager.get_instrumentation_dir()
-        instrumentation_host_path = source_manager.to_host_path(instrumentation_dir)
+        instrumentation_host_path = to_host_path(instrumentation_dir)
         if not instrumentation_host_path:
             prRed("Instrumentation directory is not in a mounted directory.")
         

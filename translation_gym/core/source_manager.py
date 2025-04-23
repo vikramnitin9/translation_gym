@@ -11,28 +11,6 @@ class SourceManager:
             self.bindgen_blocklist.touch()
         self.instrumentation_dir = Path(self.code_dir, 'instrumentation')
         self.instrumentation_dir.mkdir(parents=True, exist_ok=True)
-        if os.path.exists('/.dockerenv'):
-            # We are inside a Docker container
-            self.docker     = True
-            client          = docker.DockerClient(base_url='unix:///var/run/docker.sock')
-            container_id    = socket.gethostname()
-            container       = client.containers.get(container_id)
-            self.mounts     = container.attrs['Mounts']
-        else:
-            self.docker     = False
-    
-    def to_host_path(self, path):
-        if not self.docker:
-            return path
-        mount_path_len = 0
-        host_path = None
-        # Find the mount that is the longest prefix of path
-        for mount in self.mounts:
-            if path.is_relative_to(Path(mount['Destination'])):
-                if len(Path(mount['Destination']).parts) > mount_path_len:
-                    mount_path_len = len(Path(mount['Destination']).parts)
-                    host_path = Path(mount['Source'])/path.relative_to(Path(mount['Destination']))
-        return host_path
 
     def get_bin_target(self):
 
@@ -96,15 +74,39 @@ class SourceManager:
             f.writelines(lines)
         self.cargo_bin_target = target
     
-    def get_static_analysis_results(self):
+    def get_c_static_analysis_results(self):
         functions_json_path = Path(self.code_dir)/'c_src'/'functions.json'
         return json.load(open(functions_json_path, 'r'))
+
+    def get_rust_static_analysis_results(self):
+        functions_json_path = Path(self.code_dir)/'functions.json'
+        return json.load(open(functions_json_path, 'r'))
     
-    def get_executable(self, host_path=True):
+    def get_executable(self):
+        # The executable is created by `cargo parse`, 
+        # which creates it in the target/<host>/debug directory
+        command = "rustc -vV | grep '^host:' | awk '{ print $2 }'"
+        try:
+            result = subprocess.run(
+                command,
+                shell=True,
+                timeout=20,
+                stderr=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+            )
+            if result.returncode != 0:
+                exec_output = result.stderr.decode('utf-8', errors='ignore')
+                if exec_output.strip() == '':
+                    exec_output = result.stdout.decode('utf-8', errors='ignore')
+                raise RunException(exec_output)
+        except subprocess.TimeoutExpired:
+            raise RunException("Timeout")
+        
+        host = result.stdout.decode('utf-8', errors='ignore').strip()
         # Check if the executable exists
-        executable = Path(self.code_dir, f'target/debug/{self.cargo_bin_target}')
+        executable = Path(self.code_dir, f'target/{host}/debug/{self.cargo_bin_target}')
         if not executable.exists():
-            raise Exception("Executable not found. Please compile the code first.")
+            raise Exception(f"Executable not found at {executable}. Please compile the code first.")
         return executable
 
     def get_instrumentation_dir(self):
@@ -112,7 +114,7 @@ class SourceManager:
     
     def compile(self, timeout=60, verbose=False):
         cwd = os.getcwd()
-        cmd = 'cd {} && RUSTFLAGS="-Awarnings" cargo build'.format(self.code_dir)
+        cmd = 'cd {} && RUSTFLAGS="-Awarnings" cargo parse'.format(self.code_dir)
 
         try:
             result = subprocess.run(

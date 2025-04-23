@@ -55,11 +55,25 @@ class DefaultTranslator(Translator):
 
     def construct_prompt_for_func(self, func):
 
+        if len(func['calledFunctions']) == 0:
+            calledFunctionDesc = ""
+        else:
+            calledFunctionDesc = "This function calls the following functions:\n"
+        for i, called_func in enumerate(func['calledFunctions']):
+            if called_func['translated']:
+                calledFunctionDesc += f"{i+1}. {called_func['name']}. This has a Rust reimplementation, with this signature:\n"
+                calledFunctionDesc += f"```rust\n{called_func['signature']}\n```\n"
+            else:
+                calledFunctionDesc += f"{i+1}. {called_func['name']}. This has a Rust binding to the C code, with this signature:\n"
+                calledFunctionDesc += f"```rust\n{called_func['signature']}\n```\n"
+                calledFunctionDesc += "Note that you will need to use the `unsafe` keyword to call this function.\n"
+
         prompt = f'''Translate the following C function to idiomatic Rust:
 ```c
 {func['body']}
 ```
-As far as possible, use only safe Rust. Avoid raw pointers and unsafe function calls.
+{calledFunctionDesc}
+As far as possible, avoid raw pointers and unsafe function calls, and use only safe Rust.
 You can assume that all the structures and global variables already have definitions in Rust, and you do not need to redefine them.
 Do not use any dummy code like "// Full implementation goes here", etc. All the code you write will be substituted directly into the codebase without a human reviewing it. So it should be functional and complete.
 Feel free to change the function signature and modify the function body as needed.
@@ -98,6 +112,9 @@ pub extern "C" fn {func['name']} ...
 
         self.conversation = [{'role': 'system', 'content': 'You are an intelligent code assistant'},
                             {'role': 'user', 'content': translation_prompt.strip()}]
+
+        if verbose:
+            prLightGray(translation_prompt)
 
         while True:
             try:

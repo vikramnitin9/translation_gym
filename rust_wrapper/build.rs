@@ -6,7 +6,7 @@ use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
-use glob::glob;
+// use glob::glob;
 
 use bindgen::callbacks::{ParseCallbacks, ItemInfo, ItemKind};
 
@@ -42,20 +42,20 @@ fn main() {
     let new_path = format!("{}:{}", parsec_build_dir.display(), env::var("PATH").unwrap_or_default());
     env::set_var("PATH", new_path);
 
-    // First run bear to generate compile_commands.json
-    let status = Command::new("make")
-    .arg("clean")
-    .current_dir(&c_src_dir)
-    .status()
-    .expect(&format!("Failed to make clean in {}", c_src_dir.as_str()));
-
-    if !status.success() {
-        panic!("make clean failed with exit code: {:?}", status.code());
-    }
-
     // Check if compile_commands.json exists
     let compile_commands_path = PathBuf::from(format!("{}/compile_commands.json", c_src_dir));
     if !compile_commands_path.exists() {
+        // First run make clean
+        let status = Command::new("make")
+        .arg("clean")
+        .current_dir(&c_src_dir)
+        .status()
+        .expect(&format!("Failed to make clean in {}", c_src_dir.as_str()));
+
+        if !status.success() {
+            panic!("make clean failed with exit code: {:?}", status.code());
+        }
+
         // Check bear version. If > 3, run "bear -- make". Otherwise run "bear make"
         let bear_version = Command::new("bear")
             .arg("--version")

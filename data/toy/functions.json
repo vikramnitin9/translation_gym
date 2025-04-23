@@ -1,46 +1,86 @@
 [
     {
+        "argNames": [
+            "str1",
+            "str2"
+        ],
+        "argTypes": [
+            "const char *",
+            "const char *"
+        ],
         "calledFunctions": [],
         "endCol": 1,
         "endLine": 14,
         "filename": "string_functions.c",
         "name": "concatenate",
+        "num_args": 2,
+        "returnType": "char *",
         "signature": "char * concatenate(const char * str1, const char * str2)",
         "startCol": 1,
         "startLine": 5
     },
     {
+        "argNames": [
+            "a",
+            "b"
+        ],
+        "argTypes": [
+            "int",
+            "int"
+        ],
         "calledFunctions": [],
         "endCol": 1,
         "endLine": 9,
         "filename": "math_functions.c",
         "name": "subtract",
+        "num_args": 2,
+        "returnType": "int",
         "signature": "int subtract(int a, int b)",
         "startCol": 1,
         "startLine": 7
     },
     {
-        "calledFunctions": [
-            "add",
-            "concatenate",
-            "subtract"
+        "argNames": [
+            "a",
+            "b"
         ],
-        "endCol": 1,
-        "endLine": 11,
-        "filename": "main.c",
-        "name": "main_0",
-        "signature": "int main()",
-        "startCol": 1,
-        "startLine": 5
-    },
-    {
+        "argTypes": [
+            "int",
+            "int"
+        ],
         "calledFunctions": [],
         "endCol": 1,
         "endLine": 5,
         "filename": "math_functions.c",
         "name": "add",
+        "num_args": 2,
+        "returnType": "int",
         "signature": "int add(int a, int b)",
         "startCol": 1,
         "startLine": 3
+    },
+    {
+        "argNames": [],
+        "argTypes": [],
+        "calledFunctions": [
+            {
+                "name": "add"
+            },
+            {
+                "name": "subtract"
+            },
+            {
+                "name": "concatenate"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 11,
+        "filename": "main.c",
+        "name": "main_0",
+        "num_args": 0,
+        "returnType": "int",
+        "signature": "int main()",
+        "startCol": 1,
+        "startLine": 5
     }
 ]

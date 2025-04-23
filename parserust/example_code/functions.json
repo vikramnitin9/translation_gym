@@ -1,0 +1,75 @@
+[
+  {
+    "func_defid": "DefId(0:24 ~ example_code[807b]::main)",
+    "span": "src/main.rs:5:1: 9:2 (#0)",
+    "calls": [],
+    "globals": [],
+    "imports": [
+      {
+        "span": "src/main.rs:3:18: 3:19 (#0)",
+        "source": "S"
+      },
+      {
+        "span": "src/main.rs:3:1: 3:24 (#0)",
+        "source": "use fun_method::{S, T};"
+      },
+      {
+        "span": "src/main.rs:3:21: 3:22 (#0)",
+        "source": "T"
+      }
+    ]
+  },
+  {
+    "func_defid": "DefId(0:9 ~ example_code[807b]::fun_method::{impl#0}::met)",
+    "span": "src/fun_method.rs:8:5: 10:6 (#0)",
+    "calls": [
+      {
+        "caller": "DefId(0:24 ~ example_code[807b]::main)",
+        "span": "src/main.rs:7:5: 7:13 (#0)",
+        "source": "s.met();"
+      }
+    ],
+    "globals": [],
+    "imports": []
+  },
+  {
+    "func_defid": "DefId(0:5 ~ example_code[807b]::fun_method::T::bla)",
+    "span": "src/fun_method.rs:2:5: 2:29 (#0)",
+    "calls": [
+      {
+        "caller": "DefId(0:16 ~ example_code[807b]::fun_method::_virt)",
+        "span": "src/fun_method.rs:28:5: 28:14 (#0)",
+        "source": "ob.bla();"
+      }
+    ],
+    "globals": [],
+    "imports": []
+  },
+  {
+    "func_defid": "DefId(0:16 ~ example_code[807b]::fun_method::_virt)",
+    "span": "src/fun_method.rs:27:1: 29:2 (#0)",
+    "calls": [],
+    "globals": [],
+    "imports": []
+  },
+  {
+    "func_defid": "DefId(0:11 ~ example_code[807b]::fun_method::{impl#1}::bla)",
+    "span": "src/fun_method.rs:14:5: 16:6 (#0)",
+    "calls": [
+      {
+        "caller": "DefId(0:24 ~ example_code[807b]::main)",
+        "span": "src/main.rs:8:5: 8:13 (#0)",
+        "source": "s.bla();"
+      }
+    ],
+    "globals": [],
+    "imports": []
+  },
+  {
+    "func_defid": "DefId(0:15 ~ example_code[807b]::fun_method::{impl#2}::bla)",
+    "span": "src/fun_method.rs:22:6: 24:6 (#0)",
+    "calls": [],
+    "globals": [],
+    "imports": []
+  }
+]

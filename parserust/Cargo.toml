@@ -1,0 +1,24 @@
+[package]
+name = "parse"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cargo_metadata = "0.11"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0.56", features = ["preserve_order"] }
+rustc_version = "0.2.3"
+wait-timeout = "0.2"
+which = "<=4.0"
+smallvec = "1.13.2"
+petgraph = "0.6.5"
+itertools = "0.13.0"
+regex = "1.10.6"
+
+[[bin]]
+name = "parse"
+
+[[bin]]
+name = "cargo-parse"

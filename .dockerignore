@@ -1,5 +1,7 @@
-__pycache__
-target
-build
+__pycache__/
+target/
+build/
 instrumented.json
-output
+output/
+compile_commands.json
+debug/

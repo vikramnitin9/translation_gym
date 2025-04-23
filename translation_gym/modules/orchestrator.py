@@ -18,16 +18,16 @@ class Orchestrator:
 class DefaultOrchestrator(Orchestrator):
 
     def function_iter(self, source_manager, instrumentation_results):
-        static_analysis_results = source_manager.get_static_analysis_results()
+        c_static_analysis_results = source_manager.get_c_static_analysis_results()
         # Build call graph of functions
         self.call_graph = nx.DiGraph()
-        for func in static_analysis_results:
+        for func in c_static_analysis_results:
             if 'calledFunctions' not in func:
                 # These are functions which were in the AST but not in the LLVM IR
                 continue
             self.call_graph.add_node('"{}"'.format(func['name']))
             for called_func in func['calledFunctions']:
-                self.call_graph.add_edge('"{}"'.format(func['name']), '"{}"'.format(called_func))
+                self.call_graph.add_edge('"{}"'.format(func['name']), '"{}"'.format(called_func['name']))
 
         # We only want to translate functions that are reachable from main
         reachable_nodes = nx.descendants(self.call_graph, '"main_0"') | {'"main_0"'}
@@ -43,7 +43,7 @@ class DefaultOrchestrator(Orchestrator):
         func_ordering = [f.strip('"') for f in func_ordering]
 
         for func_name in func_ordering:
-            funcs = [f for f in static_analysis_results if f['name'] == func_name]
+            funcs = [f for f in c_static_analysis_results if f['name'] == func_name]
             if len(funcs) == 0:
                 continue
             func = funcs[0]

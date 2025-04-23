@@ -7,7 +7,9 @@
             "const char *"
         ],
         "calledFunctions": [
-            "xmemdup"
+            {
+                "name": "xmemdup"
+            }
         ],
         "endCol": 1,
         "endLine": 340,
@@ -26,20 +28,22 @@
         ],
         "argTypes": [
             "const void *",
-            "idx_t"
+            "size_t"
         ],
         "calledFunctions": [
-            "ximalloc"
+            {
+                "name": "xmalloc"
+            }
         ],
         "endCol": 1,
-        "endLine": 321,
+        "endLine": 315,
         "filename": "xmalloc.c",
-        "name": "ximemdup",
+        "name": "xmemdup",
         "num_args": 2,
         "returnType": "void *",
-        "signature": "void * ximemdup(const void * p, idx_t s)",
+        "signature": "void * xmemdup(const void * p, size_t s)",
         "startCol": 1,
-        "startLine": 317
+        "startLine": 311
     },
     {
         "argNames": [
@@ -51,8 +55,12 @@
             "idx_t"
         ],
         "calledFunctions": [
-            "check_nonnull",
-            "icalloc"
+            {
+                "name": "icalloc"
+            },
+            {
+                "name": "check_nonnull"
+            }
         ],
         "endCol": 1,
         "endLine": 305,
@@ -66,6 +74,107 @@
     },
     {
         "argNames": [
+            "s"
+        ],
+        "argTypes": [
+            "idx_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "xicalloc"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 290,
+        "filename": "xmalloc.c",
+        "name": "xizalloc",
+        "num_args": 1,
+        "returnType": "void *",
+        "signature": "void * xizalloc(idx_t s)",
+        "startCol": 1,
+        "startLine": 286
+    },
+    {
+        "argNames": [
+            "n",
+            "s"
+        ],
+        "argTypes": [
+            "size_t",
+            "size_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "check_nonnull"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 299,
+        "filename": "xmalloc.c",
+        "name": "xcalloc",
+        "num_args": 2,
+        "returnType": "void *",
+        "signature": "void * xcalloc(size_t n, size_t s)",
+        "startCol": 1,
+        "startLine": 295
+    },
+    {
+        "argNames": [
+            "s"
+        ],
+        "argTypes": [
+            "size_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "xcalloc"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 284,
+        "filename": "xmalloc.c",
+        "name": "xzalloc",
+        "num_args": 1,
+        "returnType": "void *",
+        "signature": "void * xzalloc(size_t s)",
+        "startCol": 1,
+        "startLine": 280
+    },
+    {
+        "argNames": [
+            "pa",
+            "pn",
+            "n_incr_min",
+            "n_max",
+            "s"
+        ],
+        "argTypes": [
+            "void *",
+            "idx_t *",
+            "idx_t",
+            "ptrdiff_t",
+            "idx_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "xalloc_die"
+            },
+            {
+                "name": "xrealloc"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 274,
+        "filename": "xmalloc.c",
+        "name": "xpalloc",
+        "num_args": 5,
+        "returnType": "void *",
+        "signature": "void * xpalloc(void * pa, idx_t * pn, idx_t n_incr_min, ptrdiff_t n_max, idx_t s)",
+        "startCol": 1,
+        "startLine": 224
+    },
+    {
+        "argNames": [
             "p",
             "pn",
             "s"
@@ -76,8 +185,12 @@
             "size_t"
         ],
         "calledFunctions": [
-            "xalloc_die",
-            "xreallocarray"
+            {
+                "name": "xalloc_die"
+            },
+            {
+                "name": "xreallocarray"
+            }
         ],
         "endCol": 1,
         "endLine": 206,
@@ -99,7 +212,9 @@
             "idx_t"
         ],
         "calledFunctions": [
-            "xireallocarray"
+            {
+                "name": "xireallocarray"
+            }
         ],
         "endCol": 1,
         "endLine": 109,
@@ -121,7 +236,9 @@
             "size_t"
         ],
         "calledFunctions": [
-            "xreallocarray"
+            {
+                "name": "xreallocarray"
+            }
         ],
         "endCol": 1,
         "endLine": 103,
@@ -135,32 +252,27 @@
     },
     {
         "argNames": [
-            "pa",
-            "pn",
-            "n_incr_min",
-            "n_max",
-            "s"
+            "p",
+            "ps"
         ],
         "argTypes": [
             "void *",
-            "idx_t *",
-            "idx_t",
-            "ptrdiff_t",
-            "idx_t"
+            "size_t *"
         ],
         "calledFunctions": [
-            "xalloc_die",
-            "xrealloc"
+            {
+                "name": "x2nrealloc"
+            }
         ],
         "endCol": 1,
-        "endLine": 274,
+        "endLine": 121,
         "filename": "xmalloc.c",
-        "name": "xpalloc",
-        "num_args": 5,
+        "name": "x2realloc",
+        "num_args": 2,
         "returnType": "void *",
-        "signature": "void * xpalloc(void * pa, idx_t * pn, idx_t n_incr_min, ptrdiff_t n_max, idx_t s)",
+        "signature": "void * x2realloc(void * p, size_t * ps)",
         "startCol": 1,
-        "startLine": 224
+        "startLine": 117
     },
     {
         "argNames": [
@@ -174,8 +286,12 @@
             "idx_t"
         ],
         "calledFunctions": [
-            "check_nonnull",
-            "ireallocarray"
+            {
+                "name": "ireallocarray"
+            },
+            {
+                "name": "check_nonnull"
+            }
         ],
         "endCol": 1,
         "endLine": 94,
@@ -194,10 +310,39 @@
         ],
         "argTypes": [
             "void *",
+            "idx_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "irealloc"
+            },
+            {
+                "name": "check_nonnull"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 76,
+        "filename": "xmalloc.c",
+        "name": "xirealloc",
+        "num_args": 2,
+        "returnType": "void *",
+        "signature": "void * xirealloc(void * p, idx_t s)",
+        "startCol": 1,
+        "startLine": 72
+    },
+    {
+        "argNames": [
+            "p",
+            "s"
+        ],
+        "argTypes": [
+            "void *",
             "size_t"
         ],
         "calledFunctions": [
-            "xalloc_die"
+            {
+                "name": "xalloc_die"
+            }
         ],
         "endCol": 1,
         "endLine": 70,
@@ -217,7 +362,9 @@
             "void *"
         ],
         "calledFunctions": [
-            "xalloc_die"
+            {
+                "name": "xalloc_die"
+            }
         ],
         "endCol": 1,
         "endLine": 38,
@@ -231,26 +378,6 @@
     },
     {
         "argNames": [
-            "s"
-        ],
-        "argTypes": [
-            "size_t"
-        ],
-        "calledFunctions": [
-            "check_nonnull"
-        ],
-        "endCol": 1,
-        "endLine": 46,
-        "filename": "xmalloc.c",
-        "name": "xmalloc",
-        "num_args": 1,
-        "returnType": "void *",
-        "signature": "void * xmalloc(size_t s)",
-        "startCol": 1,
-        "startLine": 42
-    },
-    {
-        "argNames": [
             "p",
             "n",
             "s"
@@ -261,54 +388,46 @@
             "size_t"
         ],
         "calledFunctions": [
-            "xalloc_die"
+            {
+                "name": "xreallocarray"
+            }
         ],
         "endCol": 1,
-        "endLine": 88,
-        "filename": "xmalloc.c",
-        "name": "xreallocarray",
+        "endLine": 150,
+        "filename": "./include/xalloc.h",
+        "name": "xnrealloc",
         "num_args": 3,
         "returnType": "void *",
-        "signature": "void * xreallocarray(void * p, size_t n, size_t s)",
+        "signature": "void * xnrealloc(void * p, size_t n, size_t s)",
         "startCol": 1,
-        "startLine": 81
-    },
-    {
-        "argNames": [],
-        "argTypes": [],
-        "calledFunctions": [],
-        "endCol": 1,
-        "endLine": 41,
-        "filename": "xalloc-die.c",
-        "name": "xalloc_die",
-        "num_args": 0,
-        "returnType": "void",
-        "signature": "void xalloc_die()",
-        "startCol": 1,
-        "startLine": 31
+        "startLine": 146
     },
     {
         "argNames": [
-            "alignment",
-            "size"
+            "fd",
+            "mode"
         ],
         "argTypes": [
-            "idx_t",
-            "idx_t"
+            "int",
+            "int"
         ],
         "calledFunctions": [
-            "alignalloc",
-            "xalloc_die"
+            {
+                "name": "set_binary_mode"
+            },
+            {
+                "name": "xset_binary_mode_error"
+            }
         ],
         "endCol": 1,
-        "endLine": 33,
-        "filename": "xalignalloc.c",
-        "name": "xalignalloc",
+        "endLine": 51,
+        "filename": "./include/xbinary-io.h",
+        "name": "xset_binary_mode",
         "num_args": 2,
-        "returnType": "void *",
-        "signature": "void * xalignalloc(idx_t alignment, idx_t size)",
+        "returnType": "void",
+        "signature": "void xset_binary_mode(int fd, int mode)",
         "startCol": 1,
-        "startLine": 26
+        "startLine": 46
     },
     {
         "argNames": [
@@ -324,7 +443,9 @@
             "const char *"
         ],
         "calledFunctions": [
-            "version_etc_va"
+            {
+                "name": "version_etc_va"
+            }
         ],
         "endCol": 1,
         "endLine": 239,
@@ -349,40 +470,70 @@
             "const char *",
             "const char *",
             "const char *",
-            "const char *const *"
+            "struct __va_list_tag *"
         ],
         "calledFunctions": [
-            "version_etc_arn"
+            {
+                "name": "version_etc_arn"
+            }
         ],
         "endCol": 1,
-        "endLine": 192,
+        "endLine": 213,
         "filename": "version-etc.c",
-        "name": "version_etc_ar",
+        "name": "version_etc_va",
         "num_args": 5,
         "returnType": "void",
-        "signature": "void version_etc_ar(FILE * stream, const char * command_name, const char * package, const char * version, const char *const * authors)",
+        "signature": "void version_etc_va(FILE * stream, const char * command_name, const char * package, const char * version, struct __va_list_tag * authors)",
         "startCol": 1,
-        "startLine": 182
+        "startLine": 198
     },
     {
         "argNames": [
             "n"
         ],
         "argTypes": [
-            "unsigned long long"
+            "size_t"
         ],
         "calledFunctions": [
-            "__gl_stdbit_clzll"
+            {
+                "name": "xmalloc"
+            }
         ],
         "endCol": 1,
-        "endLine": 422,
-        "filename": "./include/stdbit.h",
-        "name": "stdc_leading_zeros_ull",
+        "endLine": 58,
+        "filename": "xmalloc.c",
+        "name": "xcharalloc",
         "num_args": 1,
-        "returnType": "unsigned int",
-        "signature": "unsigned int stdc_leading_zeros_ull(unsigned long long n)",
+        "returnType": "char *",
+        "signature": "char * xcharalloc(size_t n)",
         "startCol": 1,
-        "startLine": 418
+        "startLine": 54
+    },
+    {
+        "argNames": [
+            "p",
+            "n",
+            "s"
+        ],
+        "argTypes": [
+            "void *",
+            "size_t",
+            "size_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "xalloc_die"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 88,
+        "filename": "xmalloc.c",
+        "name": "xreallocarray",
+        "num_args": 3,
+        "returnType": "void *",
+        "signature": "void * xreallocarray(void * p, size_t n, size_t s)",
+        "startCol": 1,
+        "startLine": 81
     },
     {
         "argNames": [
@@ -392,7 +543,9 @@
             "unsigned long"
         ],
         "calledFunctions": [
-            "__gl_stdbit_clzl"
+            {
+                "name": "__gl_stdbit_clzl"
+            }
         ],
         "endCol": 1,
         "endLine": 416,
@@ -409,10 +562,34 @@
             "n"
         ],
         "argTypes": [
+            "unsigned long long"
+        ],
+        "calledFunctions": [
+            {
+                "name": "__gl_stdbit_clzll"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 422,
+        "filename": "./include/stdbit.h",
+        "name": "stdc_leading_zeros_ull",
+        "num_args": 1,
+        "returnType": "unsigned int",
+        "signature": "unsigned int stdc_leading_zeros_ull(unsigned long long n)",
+        "startCol": 1,
+        "startLine": 418
+    },
+    {
+        "argNames": [
+            "n"
+        ],
+        "argTypes": [
             "unsigned short"
         ],
         "calledFunctions": [
-            "stdc_leading_zeros_ui"
+            {
+                "name": "stdc_leading_zeros_ui"
+            }
         ],
         "endCol": 1,
         "endLine": 410,
@@ -432,7 +609,9 @@
             "unsigned char"
         ],
         "calledFunctions": [
-            "stdc_leading_zeros_ui"
+            {
+                "name": "stdc_leading_zeros_ui"
+            }
         ],
         "endCol": 1,
         "endLine": 404,
@@ -518,6 +697,28 @@
     },
     {
         "argNames": [
+            "category"
+        ],
+        "argTypes": [
+            "int"
+        ],
+        "calledFunctions": [
+            {
+                "name": "setlocale_null_unlocked"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 299,
+        "filename": "setlocale_null.c",
+        "name": "setlocale_null",
+        "num_args": 1,
+        "returnType": "const char *",
+        "signature": "const char * setlocale_null(int category)",
+        "startCol": 1,
+        "startLine": 188
+    },
+    {
+        "argNames": [
             "category",
             "buf",
             "bufsize"
@@ -528,7 +729,9 @@
             "size_t"
         ],
         "calledFunctions": [
-            "setlocale_null_r_unlocked"
+            {
+                "name": "setlocale_null_r_unlocked"
+            }
         ],
         "endCol": 1,
         "endLine": 186,
@@ -552,7 +755,9 @@
             "size_t"
         ],
         "calledFunctions": [
-            "setlocale_null_unlocked"
+            {
+                "name": "setlocale_null_unlocked"
+            }
         ],
         "endCol": 1,
         "endLine": 149,
@@ -563,29 +768,6 @@
         "signature": "int setlocale_null_r_unlocked(int category, char * buf, size_t bufsize)",
         "startCol": 1,
         "startLine": 65
-    },
-    {
-        "argNames": [
-            "p",
-            "s"
-        ],
-        "argTypes": [
-            "void *",
-            "idx_t"
-        ],
-        "calledFunctions": [
-            "check_nonnull",
-            "irealloc"
-        ],
-        "endCol": 1,
-        "endLine": 76,
-        "filename": "xmalloc.c",
-        "name": "xirealloc",
-        "num_args": 2,
-        "returnType": "void *",
-        "signature": "void * xirealloc(void * p, idx_t s)",
-        "startCol": 1,
-        "startLine": 72
     },
     {
         "argNames": [
@@ -612,26 +794,54 @@
     {
         "argNames": [
             "n",
+            "arg"
+        ],
+        "argTypes": [
+            "int",
+            "const char *"
+        ],
+        "calledFunctions": [
+            {
+                "name": "quote_n_mem"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 1071,
+        "filename": "quotearg.c",
+        "name": "quote_n",
+        "num_args": 2,
+        "returnType": "const char *",
+        "signature": "const char * quote_n(int n, const char * arg)",
+        "startCol": 1,
+        "startLine": 1067
+    },
+    {
+        "argNames": [
+            "left_quote",
+            "right_quote",
             "arg",
             "argsize"
         ],
         "argTypes": [
-            "int",
+            "const char *",
+            "const char *",
             "const char *",
             "size_t"
         ],
         "calledFunctions": [
-            "quotearg_n_options"
+            {
+                "name": "quotearg_n_custom_mem"
+            }
         ],
         "endCol": 1,
-        "endLine": 1059,
+        "endLine": 1043,
         "filename": "quotearg.c",
-        "name": "quote_n_mem",
-        "num_args": 3,
-        "returnType": "const char *",
-        "signature": "const char * quote_n_mem(int n, const char * arg, size_t argsize)",
+        "name": "quotearg_custom_mem",
+        "num_args": 4,
+        "returnType": "char *",
+        "signature": "char * quotearg_custom_mem(const char * left_quote, const char * right_quote, const char * arg, size_t argsize)",
         "startCol": 1,
-        "startLine": 1055
+        "startLine": 1037
     },
     {
         "argNames": [
@@ -649,8 +859,12 @@
             "size_t"
         ],
         "calledFunctions": [
-            "quotearg_n_options",
-            "set_custom_quoting"
+            {
+                "name": "set_custom_quoting"
+            },
+            {
+                "name": "quotearg_n_options"
+            }
         ],
         "endCol": 1,
         "endLine": 1028,
@@ -676,7 +890,9 @@
             "const char *"
         ],
         "calledFunctions": [
-            "quotearg_n_custom_mem"
+            {
+                "name": "quotearg_n_custom_mem"
+            }
         ],
         "endCol": 1,
         "endLine": 1018,
@@ -690,75 +906,6 @@
     },
     {
         "argNames": [
-            "p",
-            "ps"
-        ],
-        "argTypes": [
-            "void *",
-            "size_t *"
-        ],
-        "calledFunctions": [
-            "x2nrealloc"
-        ],
-        "endCol": 1,
-        "endLine": 121,
-        "filename": "xmalloc.c",
-        "name": "x2realloc",
-        "num_args": 2,
-        "returnType": "void *",
-        "signature": "void * x2realloc(void * p, size_t * ps)",
-        "startCol": 1,
-        "startLine": 117
-    },
-    {
-        "argNames": [
-            "arg",
-            "ch"
-        ],
-        "argTypes": [
-            "const char *",
-            "char"
-        ],
-        "calledFunctions": [
-            "quotearg_char_mem"
-        ],
-        "endCol": 1,
-        "endLine": 989,
-        "filename": "quotearg.c",
-        "name": "quotearg_char",
-        "num_args": 2,
-        "returnType": "char *",
-        "signature": "char * quotearg_char(const char * arg, char ch)",
-        "startCol": 1,
-        "startLine": 985
-    },
-    {
-        "argNames": [
-            "arg",
-            "argsize",
-            "ch"
-        ],
-        "argTypes": [
-            "const char *",
-            "size_t",
-            "char"
-        ],
-        "calledFunctions": [
-            "quotearg_n_options",
-            "set_char_quoting"
-        ],
-        "endCol": 1,
-        "endLine": 983,
-        "filename": "quotearg.c",
-        "name": "quotearg_char_mem",
-        "num_args": 3,
-        "returnType": "char *",
-        "signature": "char * quotearg_char_mem(const char * arg, size_t argsize, char ch)",
-        "startCol": 1,
-        "startLine": 976
-    },
-    {
-        "argNames": [
             "n",
             "s",
             "arg"
@@ -769,42 +916,107 @@
             "const char *"
         ],
         "calledFunctions": [
-            "quotearg_n_options",
-            "quoting_options_from_style"
+            {
+                "name": "quoting_options_from_style"
+            },
+            {
+                "name": "set_char_quoting"
+            },
+            {
+                "name": "quotearg_n_options"
+            }
         ],
         "endCol": 1,
-        "endLine": 954,
+        "endLine": 1010,
         "filename": "quotearg.c",
-        "name": "quotearg_n_style",
+        "name": "quotearg_n_style_colon",
         "num_args": 3,
         "returnType": "char *",
-        "signature": "char * quotearg_n_style(int n, enum quoting_style s, const char * arg)",
+        "signature": "char * quotearg_n_style_colon(int n, enum quoting_style s, const char * arg)",
         "startCol": 1,
-        "startLine": 949
+        "startLine": 1003
+    },
+    {
+        "argNames": [
+            "arg",
+            "argsize"
+        ],
+        "argTypes": [
+            "const char *",
+            "size_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "quotearg_char_mem"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 1001,
+        "filename": "quotearg.c",
+        "name": "quotearg_colon_mem",
+        "num_args": 2,
+        "returnType": "char *",
+        "signature": "char * quotearg_colon_mem(const char * arg, size_t argsize)",
+        "startCol": 1,
+        "startLine": 997
     },
     {
         "argNames": [
             "n",
             "arg",
-            "argsize"
+            "argsize",
+            "options"
         ],
         "argTypes": [
             "int",
             "const char *",
-            "size_t"
+            "size_t",
+            "const struct quoting_options *"
         ],
         "calledFunctions": [
-            "quotearg_n_options"
+            {
+                "name": "xpalloc"
+            },
+            {
+                "name": "quotearg_buffer_restyled"
+            },
+            {
+                "name": "xcharalloc"
+            }
         ],
         "endCol": 1,
-        "endLine": 935,
+        "endLine": 923,
         "filename": "quotearg.c",
-        "name": "quotearg_n_mem",
-        "num_args": 3,
+        "name": "quotearg_n_options",
+        "num_args": 4,
         "returnType": "char *",
-        "signature": "char * quotearg_n_mem(int n, const char * arg, size_t argsize)",
+        "signature": "char * quotearg_n_options(int n, const char * arg, size_t argsize, const struct quoting_options * options)",
         "startCol": 1,
-        "startLine": 931
+        "startLine": 872
+    },
+    {
+        "argNames": [
+            "n",
+            "arg"
+        ],
+        "argTypes": [
+            "int",
+            "const char *"
+        ],
+        "calledFunctions": [
+            {
+                "name": "quotearg_n_options"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 929,
+        "filename": "quotearg.c",
+        "name": "quotearg_n",
+        "num_args": 2,
+        "returnType": "char *",
+        "signature": "char * quotearg_n(int n, const char * arg)",
+        "startCol": 1,
+        "startLine": 925
     },
     {
         "argNames": [],
@@ -824,28 +1036,27 @@
         "argNames": [
             "arg",
             "argsize",
-            "size",
             "o"
         ],
         "argTypes": [
             "const char *",
             "size_t",
-            "size_t *",
             "const struct quoting_options *"
         ],
         "calledFunctions": [
-            "quotearg_buffer_restyled",
-            "xcharalloc"
+            {
+                "name": "quotearg_alloc_mem"
+            }
         ],
         "endCol": 1,
-        "endLine": 826,
+        "endLine": 798,
         "filename": "quotearg.c",
-        "name": "quotearg_alloc_mem",
-        "num_args": 4,
+        "name": "quotearg_alloc",
+        "num_args": 3,
         "returnType": "char *",
-        "signature": "char * quotearg_alloc_mem(const char * arg, size_t argsize, size_t * size, const struct quoting_options * o)",
+        "signature": "char * quotearg_alloc(const char * arg, size_t argsize, const struct quoting_options * o)",
         "startCol": 1,
-        "startLine": 806
+        "startLine": 793
     },
     {
         "argNames": [
@@ -857,8 +1068,12 @@
             "enum quoting_style"
         ],
         "calledFunctions": [
-            "c_strcasecmp",
-            "locale_charset"
+            {
+                "name": "locale_charset"
+            },
+            {
+                "name": "c_strcasecmp"
+            }
         ],
         "endCol": 1,
         "endLine": 232,
@@ -871,26 +1086,68 @@
         "startLine": 198
     },
     {
+        "argNames": [],
+        "argTypes": [],
+        "calledFunctions": [],
+        "endCol": 1,
+        "endLine": 41,
+        "filename": "xalloc-die.c",
+        "name": "xalloc_die",
+        "num_args": 0,
+        "returnType": "void",
+        "signature": "void xalloc_die()",
+        "startCol": 1,
+        "startLine": 31
+    },
+    {
         "argNames": [
-            "o",
+            "buffer",
+            "buffersize",
+            "arg",
+            "argsize",
+            "quoting_style",
+            "flags",
+            "quote_these_too",
             "left_quote",
             "right_quote"
         ],
         "argTypes": [
-            "struct quoting_options *",
+            "char *",
+            "size_t",
+            "const char *",
+            "size_t",
+            "enum quoting_style",
+            "int",
+            "const unsigned int *",
             "const char *",
             "const char *"
         ],
-        "calledFunctions": [],
+        "calledFunctions": [
+            {
+                "name": "gettext_quote"
+            },
+            {
+                "name": "mbszero"
+            },
+            {
+                "name": "rpl_mbrtoc32"
+            },
+            {
+                "name": "c32isprint"
+            },
+            {
+                "name": "quotearg_buffer_restyled"
+            }
+        ],
         "endCol": 1,
-        "endLine": 181,
+        "endLine": 768,
         "filename": "quotearg.c",
-        "name": "set_custom_quoting",
-        "num_args": 3,
-        "returnType": "void",
-        "signature": "void set_custom_quoting(struct quoting_options * o, const char * left_quote, const char * right_quote)",
+        "name": "quotearg_buffer_restyled",
+        "num_args": 9,
+        "returnType": "size_t",
+        "signature": "size_t quotearg_buffer_restyled(char * buffer, size_t buffersize, const char * arg, size_t argsize, enum quoting_style quoting_style, int flags, const unsigned int * quote_these_too, const char * left_quote, const char * right_quote)",
         "startCol": 1,
-        "startLine": 170
+        "startLine": 247
     },
     {
         "argNames": [
@@ -913,48 +1170,6 @@
         "signature": "int set_char_quoting(struct quoting_options * o, char c, int i)",
         "startCol": 1,
         "startLine": 143
-    },
-    {
-        "argNames": [
-            "arg"
-        ],
-        "argTypes": [
-            "const char *"
-        ],
-        "calledFunctions": [
-            "quotearg_char"
-        ],
-        "endCol": 1,
-        "endLine": 995,
-        "filename": "quotearg.c",
-        "name": "quotearg_colon",
-        "num_args": 1,
-        "returnType": "char *",
-        "signature": "char * quotearg_colon(const char * arg)",
-        "startCol": 1,
-        "startLine": 991
-    },
-    {
-        "argNames": [
-            "n",
-            "arg"
-        ],
-        "argTypes": [
-            "int",
-            "const char *"
-        ],
-        "calledFunctions": [
-            "quotearg_n_options"
-        ],
-        "endCol": 1,
-        "endLine": 929,
-        "filename": "quotearg.c",
-        "name": "quotearg_n",
-        "num_args": 2,
-        "returnType": "char *",
-        "signature": "char * quotearg_n(int n, const char * arg)",
-        "startCol": 1,
-        "startLine": 925
     },
     {
         "argNames": [
@@ -981,28 +1196,12 @@
             "o"
         ],
         "argTypes": [
-            "const struct quoting_options *"
-        ],
-        "calledFunctions": [],
-        "endCol": 1,
-        "endLine": 128,
-        "filename": "quotearg.c",
-        "name": "get_quoting_style",
-        "num_args": 1,
-        "returnType": "enum quoting_style",
-        "signature": "enum quoting_style get_quoting_style(const struct quoting_options * o)",
-        "startCol": 1,
-        "startLine": 124
-    },
-    {
-        "argNames": [
-            "o"
-        ],
-        "argTypes": [
             "struct quoting_options *"
         ],
         "calledFunctions": [
-            "xmemdup"
+            {
+                "name": "xmemdup"
+            }
         ],
         "endCol": 1,
         "endLine": 121,
@@ -1016,23 +1215,30 @@
     },
     {
         "argNames": [
-            "category"
+            "alignment",
+            "size"
         ],
         "argTypes": [
-            "int"
+            "idx_t",
+            "idx_t"
         ],
         "calledFunctions": [
-            "setlocale_null_unlocked"
+            {
+                "name": "alignalloc"
+            },
+            {
+                "name": "xalloc_die"
+            }
         ],
         "endCol": 1,
-        "endLine": 299,
-        "filename": "setlocale_null.c",
-        "name": "setlocale_null",
-        "num_args": 1,
-        "returnType": "const char *",
-        "signature": "const char * setlocale_null(int category)",
+        "endLine": 33,
+        "filename": "xalignalloc.c",
+        "name": "xalignalloc",
+        "num_args": 2,
+        "returnType": "void *",
+        "signature": "void * xalignalloc(idx_t alignment, idx_t size)",
         "startCol": 1,
-        "startLine": 188
+        "startLine": 26
     },
     {
         "argNames": [
@@ -1044,8 +1250,12 @@
             "const char *"
         ],
         "calledFunctions": [
-            "c_strcasecmp",
-            "locale_charset"
+            {
+                "name": "locale_charset"
+            },
+            {
+                "name": "c_strcasecmp"
+            }
         ],
         "endCol": 1,
         "endLine": 36,
@@ -1056,6 +1266,35 @@
         "signature": "const char * proper_name_lite(const char * name_ascii, const char * name_utf8)",
         "startCol": 1,
         "startLine": 29
+    },
+    {
+        "argNames": [
+            "arg",
+            "argsize",
+            "ch"
+        ],
+        "argTypes": [
+            "const char *",
+            "size_t",
+            "char"
+        ],
+        "calledFunctions": [
+            {
+                "name": "set_char_quoting"
+            },
+            {
+                "name": "quotearg_n_options"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 983,
+        "filename": "quotearg.c",
+        "name": "quotearg_char_mem",
+        "num_args": 3,
+        "returnType": "char *",
+        "signature": "char * quotearg_char_mem(const char * arg, size_t argsize, char ch)",
+        "startCol": 1,
+        "startLine": 976
     },
     {
         "argNames": [
@@ -1071,8 +1310,12 @@
             "mbstate_t *"
         ],
         "calledFunctions": [
-            "hard_locale",
-            "mbszero"
+            {
+                "name": "mbszero"
+            },
+            {
+                "name": "hard_locale"
+            }
         ],
         "endCol": 1,
         "endLine": 286,
@@ -1086,95 +1329,27 @@
     },
     {
         "argNames": [
-            "p",
             "n",
             "s"
         ],
         "argTypes": [
-            "void *",
             "idx_t",
             "idx_t"
         ],
         "calledFunctions": [
-            "_gl_alloc_nomem"
+            {
+                "name": "_gl_alloc_nomem"
+            }
         ],
         "endCol": 1,
-        "endLine": 132,
+        "endLine": 107,
         "filename": "./include/ialloc.h",
-        "name": "ireallocarray",
-        "num_args": 3,
-        "returnType": "void *",
-        "signature": "void * ireallocarray(void * p, idx_t n, idx_t s)",
-        "startCol": 1,
-        "startLine": 112
-    },
-    {
-        "argNames": [
-            "n",
-            "s",
-            "arg"
-        ],
-        "argTypes": [
-            "int",
-            "enum quoting_style",
-            "const char *"
-        ],
-        "calledFunctions": [
-            "quotearg_n_options",
-            "quoting_options_from_style",
-            "set_char_quoting"
-        ],
-        "endCol": 1,
-        "endLine": 1010,
-        "filename": "quotearg.c",
-        "name": "quotearg_n_style_colon",
-        "num_args": 3,
-        "returnType": "char *",
-        "signature": "char * quotearg_n_style_colon(int n, enum quoting_style s, const char * arg)",
-        "startCol": 1,
-        "startLine": 1003
-    },
-    {
-        "argNames": [
-            "p",
-            "s"
-        ],
-        "argTypes": [
-            "void *",
-            "idx_t"
-        ],
-        "calledFunctions": [
-            "_gl_alloc_nomem"
-        ],
-        "endCol": 1,
-        "endLine": 84,
-        "filename": "./include/ialloc.h",
-        "name": "irealloc",
+        "name": "icalloc",
         "num_args": 2,
         "returnType": "void *",
-        "signature": "void * irealloc(void * p, idx_t s)",
+        "signature": "void * icalloc(idx_t n, idx_t s)",
         "startCol": 1,
-        "startLine": 66
-    },
-    {
-        "argNames": [
-            "s"
-        ],
-        "argTypes": [
-            "idx_t"
-        ],
-        "calledFunctions": [
-            "_gl_alloc_nomem"
-        ],
-        "endCol": 1,
-        "endLine": 61,
-        "filename": "./include/ialloc.h",
-        "name": "imalloc",
-        "num_args": 1,
-        "returnType": "void *",
-        "signature": "void * imalloc(idx_t s)",
-        "startCol": 1,
-        "startLine": 55
+        "startLine": 89
     },
     {
         "argNames": [
@@ -1184,7 +1359,9 @@
             "int"
         ],
         "calledFunctions": [
-            "setlocale_null_r"
+            {
+                "name": "setlocale_null_r"
+            }
         ],
         "endCol": 1,
         "endLine": 47,
@@ -1198,28 +1375,6 @@
     },
     {
         "argNames": [
-            "n",
-            "s"
-        ],
-        "argTypes": [
-            "size_t",
-            "size_t"
-        ],
-        "calledFunctions": [
-            "check_nonnull"
-        ],
-        "endCol": 1,
-        "endLine": 299,
-        "filename": "xmalloc.c",
-        "name": "xcalloc",
-        "num_args": 2,
-        "returnType": "void *",
-        "signature": "void * xcalloc(size_t n, size_t s)",
-        "startCol": 1,
-        "startLine": 295
-    },
-    {
-        "argNames": [
             "fd",
             "buf",
             "count"
@@ -1230,7 +1385,9 @@
             "size_t"
         ],
         "calledFunctions": [
-            "safe_write"
+            {
+                "name": "safe_write"
+            }
         ],
         "endCol": 1,
         "endLine": 79,
@@ -1241,33 +1398,6 @@
         "signature": "size_t full_write(int fd, const void * buf, size_t count)",
         "startCol": 1,
         "startLine": 57
-    },
-    {
-        "argNames": [
-            "n",
-            "s",
-            "arg",
-            "argsize"
-        ],
-        "argTypes": [
-            "int",
-            "enum quoting_style",
-            "const char *",
-            "size_t"
-        ],
-        "calledFunctions": [
-            "quotearg_n_options",
-            "quoting_options_from_style"
-        ],
-        "endCol": 1,
-        "endLine": 962,
-        "filename": "quotearg.c",
-        "name": "quotearg_n_style_mem",
-        "num_args": 4,
-        "returnType": "char *",
-        "signature": "char * quotearg_n_style_mem(int n, enum quoting_style s, const char * arg, size_t argsize)",
-        "startCol": 1,
-        "startLine": 956
     },
     {
         "argNames": [
@@ -1293,6 +1423,83 @@
     },
     {
         "argNames": [
+            "n"
+        ],
+        "argTypes": [
+            "unsigned int"
+        ],
+        "calledFunctions": [
+            {
+                "name": "__gl_stdbit_clz"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 398,
+        "filename": "./include/stdbit.h",
+        "name": "stdc_leading_zeros_ui",
+        "num_args": 1,
+        "returnType": "unsigned int",
+        "signature": "unsigned int stdc_leading_zeros_ui(unsigned int n)",
+        "startCol": 1,
+        "startLine": 394
+    },
+    {
+        "argNames": [
+            "s",
+            "arg"
+        ],
+        "argTypes": [
+            "enum quoting_style",
+            "const char *"
+        ],
+        "calledFunctions": [
+            {
+                "name": "quotearg_n_style"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 968,
+        "filename": "quotearg.c",
+        "name": "quotearg_style",
+        "num_args": 2,
+        "returnType": "char *",
+        "signature": "char * quotearg_style(enum quoting_style s, const char * arg)",
+        "startCol": 1,
+        "startLine": 964
+    },
+    {
+        "argNames": [
+            "n",
+            "s",
+            "arg",
+            "argsize"
+        ],
+        "argTypes": [
+            "int",
+            "enum quoting_style",
+            "const char *",
+            "size_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "quoting_options_from_style"
+            },
+            {
+                "name": "quotearg_n_options"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 962,
+        "filename": "quotearg.c",
+        "name": "quotearg_n_style_mem",
+        "num_args": 4,
+        "returnType": "char *",
+        "signature": "char * quotearg_n_style_mem(int n, enum quoting_style s, const char * arg, size_t argsize)",
+        "startCol": 1,
+        "startLine": 956
+    },
+    {
+        "argNames": [
             "fp"
         ],
         "argTypes": [
@@ -1311,13 +1518,37 @@
     },
     {
         "argNames": [
+            "arg"
+        ],
+        "argTypes": [
+            "const char *"
+        ],
+        "calledFunctions": [
+            {
+                "name": "quotearg_char"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 995,
+        "filename": "quotearg.c",
+        "name": "quotearg_colon",
+        "num_args": 1,
+        "returnType": "char *",
+        "signature": "char * quotearg_colon(const char * arg)",
+        "startCol": 1,
+        "startLine": 991
+    },
+    {
+        "argNames": [
             "fp"
         ],
         "argTypes": [
             "FILE *"
         ],
         "calledFunctions": [
-            "rpl_fseeko"
+            {
+                "name": "rpl_fseeko"
+            }
         ],
         "endCol": 1,
         "endLine": 44,
@@ -1331,13 +1562,33 @@
     },
     {
         "argNames": [
+            "o"
+        ],
+        "argTypes": [
+            "const struct quoting_options *"
+        ],
+        "calledFunctions": [],
+        "endCol": 1,
+        "endLine": 128,
+        "filename": "quotearg.c",
+        "name": "get_quoting_style",
+        "num_args": 1,
+        "returnType": "enum quoting_style",
+        "signature": "enum quoting_style get_quoting_style(const struct quoting_options * o)",
+        "startCol": 1,
+        "startLine": 124
+    },
+    {
+        "argNames": [
             "stream"
         ],
         "argTypes": [
             "FILE *"
         ],
         "calledFunctions": [
-            "clear_ungetc_buffer_preserving_position"
+            {
+                "name": "clear_ungetc_buffer_preserving_position"
+            }
         ],
         "endCol": 1,
         "endLine": 233,
@@ -1351,6 +1602,35 @@
     },
     {
         "argNames": [
+            "n",
+            "s",
+            "arg"
+        ],
+        "argTypes": [
+            "int",
+            "enum quoting_style",
+            "const char *"
+        ],
+        "calledFunctions": [
+            {
+                "name": "quoting_options_from_style"
+            },
+            {
+                "name": "quotearg_n_options"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 954,
+        "filename": "quotearg.c",
+        "name": "quotearg_n_style",
+        "num_args": 3,
+        "returnType": "char *",
+        "signature": "char * quotearg_n_style(int n, enum quoting_style s, const char * arg)",
+        "startCol": 1,
+        "startLine": 949
+    },
+    {
+        "argNames": [
             "fd",
             "target"
         ],
@@ -1359,7 +1639,9 @@
             "int"
         ],
         "calledFunctions": [
-            "rpl_fcntl_DUPFD"
+            {
+                "name": "rpl_fcntl_DUPFD"
+            }
         ],
         "endCol": 1,
         "endLine": 544,
@@ -1372,63 +1654,77 @@
         "startLine": 487
     },
     {
-        "argNames": [],
-        "argTypes": [],
-        "calledFunctions": [
-            "close_stream",
-            "quotearg_colon"
-        ],
-        "endCol": 1,
-        "endLine": 135,
-        "filename": "closeout.c",
-        "name": "close_stdout",
-        "num_args": 0,
-        "returnType": "void",
-        "signature": "void close_stdout()",
-        "startCol": 1,
-        "startLine": 115
-    },
-    {
         "argNames": [
-            "stream"
+            "fd",
+            "action"
         ],
         "argTypes": [
-            "FILE *"
+            "int",
+            "int"
         ],
         "calledFunctions": [
-            "rpl_fclose"
+            {
+                "name": "rpl_fcntl_DUPFD"
+            },
+            {
+                "name": "rpl_fcntl_DUPFD_CLOEXEC"
+            }
         ],
         "endCol": 1,
-        "endLine": 77,
-        "filename": "close-stream.c",
-        "name": "close_stream",
-        "num_args": 1,
-        "returnType": "int",
-        "signature": "int close_stream(FILE * stream)",
-        "startCol": 1,
-        "startLine": 54
-    },
-    {
-        "argNames": [
-            "p",
-            "s"
-        ],
-        "argTypes": [
-            "const void *",
-            "idx_t"
-        ],
-        "calledFunctions": [
-            "ximalloc"
-        ],
-        "endCol": 1,
-        "endLine": 332,
-        "filename": "xmalloc.c",
-        "name": "ximemdup0",
+        "endLine": 444,
+        "filename": "fcntl.c",
+        "name": "rpl_fcntl",
         "num_args": 2,
-        "returnType": "char *",
-        "signature": "char * ximemdup0(const void * p, idx_t s)",
+        "returnType": "int",
+        "signature": "int rpl_fcntl(int fd, int action)",
         "startCol": 1,
-        "startLine": 326
+        "startLine": 201
+    },
+    {
+        "argNames": [
+            "o",
+            "left_quote",
+            "right_quote"
+        ],
+        "argTypes": [
+            "struct quoting_options *",
+            "const char *",
+            "const char *"
+        ],
+        "calledFunctions": [],
+        "endCol": 1,
+        "endLine": 181,
+        "filename": "quotearg.c",
+        "name": "set_custom_quoting",
+        "num_args": 3,
+        "returnType": "void",
+        "signature": "void set_custom_quoting(struct quoting_options * o, const char * left_quote, const char * right_quote)",
+        "startCol": 1,
+        "startLine": 170
+    },
+    {
+        "argNames": [
+            "fp",
+            "advice"
+        ],
+        "argTypes": [
+            "FILE *",
+            "fadvice_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "fdadvise"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 37,
+        "filename": "fadvise.c",
+        "name": "fadvise",
+        "num_args": 2,
+        "returnType": "void",
+        "signature": "void fadvise(FILE * fp, fadvice_t advice)",
+        "startCol": 1,
+        "startLine": 32
     },
     {
         "argNames": [
@@ -1462,39 +1758,22 @@
         "argNames": [],
         "argTypes": [],
         "calledFunctions": [
-            "fpurge"
+            {
+                "name": "close_stream"
+            },
+            {
+                "name": "quotearg_colon"
+            }
         ],
         "endCol": 1,
-        "endLine": 774,
-        "filename": "./include/system.h",
-        "name": "write_error",
+        "endLine": 135,
+        "filename": "closeout.c",
+        "name": "close_stdout",
         "num_args": 0,
         "returnType": "void",
-        "signature": "void write_error()",
+        "signature": "void close_stdout()",
         "startCol": 1,
-        "startLine": 766
-    },
-    {
-        "argNames": [
-            "s",
-            "arg"
-        ],
-        "argTypes": [
-            "enum quoting_style",
-            "const char *"
-        ],
-        "calledFunctions": [
-            "quotearg_n_style"
-        ],
-        "endCol": 1,
-        "endLine": 968,
-        "filename": "quotearg.c",
-        "name": "quotearg_style",
-        "num_args": 2,
-        "returnType": "char *",
-        "signature": "char * quotearg_style(enum quoting_style s, const char * arg)",
-        "startCol": 1,
-        "startLine": 964
+        "startLine": 115
     },
     {
         "argNames": [],
@@ -1530,6 +1809,75 @@
     },
     {
         "argNames": [
+            "outbuf",
+            "bpout"
+        ],
+        "argTypes": [
+            "char *",
+            "char **"
+        ],
+        "calledFunctions": [
+            {
+                "name": "full_write"
+            },
+            {
+                "name": "write_error"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 197,
+        "filename": "cat.c",
+        "name": "write_pending",
+        "num_args": 2,
+        "returnType": "void",
+        "signature": "void write_pending(char * outbuf, char ** bpout)",
+        "startCol": 1,
+        "startLine": 187
+    },
+    {
+        "argNames": [],
+        "argTypes": [],
+        "calledFunctions": [
+            {
+                "name": "fpurge"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 774,
+        "filename": "./include/system.h",
+        "name": "write_error",
+        "num_args": 0,
+        "returnType": "void",
+        "signature": "void write_error()",
+        "startCol": 1,
+        "startLine": 766
+    },
+    {
+        "argNames": [
+            "arg",
+            "ch"
+        ],
+        "argTypes": [
+            "const char *",
+            "char"
+        ],
+        "calledFunctions": [
+            {
+                "name": "quotearg_char_mem"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 989,
+        "filename": "quotearg.c",
+        "name": "quotearg_char",
+        "num_args": 2,
+        "returnType": "char *",
+        "signature": "char * quotearg_char(const char * arg, char ch)",
+        "startCol": 1,
+        "startLine": 985
+    },
+    {
+        "argNames": [
             "inbuf",
             "insize",
             "outbuf",
@@ -1554,13 +1902,27 @@
             "_Bool"
         ],
         "calledFunctions": [
-            "full_write",
-            "next_line_num",
-            "quotearg_n_style_colon",
-            "quotearg_style",
-            "safe_read",
-            "write_error",
-            "write_pending"
+            {
+                "name": "full_write"
+            },
+            {
+                "name": "write_error"
+            },
+            {
+                "name": "quotearg_style"
+            },
+            {
+                "name": "write_pending"
+            },
+            {
+                "name": "safe_read"
+            },
+            {
+                "name": "quotearg_n_style_colon"
+            },
+            {
+                "name": "next_line_num"
+            }
         ],
         "endCol": 1,
         "endLine": 497,
@@ -1574,82 +1936,15 @@
     },
     {
         "argNames": [
-            "n"
-        ],
-        "argTypes": [
-            "unsigned int"
-        ],
-        "calledFunctions": [
-            "__gl_stdbit_clz"
-        ],
-        "endCol": 1,
-        "endLine": 398,
-        "filename": "./include/stdbit.h",
-        "name": "stdc_leading_zeros_ui",
-        "num_args": 1,
-        "returnType": "unsigned int",
-        "signature": "unsigned int stdc_leading_zeros_ui(unsigned int n)",
-        "startCol": 1,
-        "startLine": 394
-    },
-    {
-        "argNames": [
-            "buf",
-            "bufsize"
-        ],
-        "argTypes": [
-            "char *",
-            "idx_t"
-        ],
-        "calledFunctions": [
-            "full_write",
-            "quotearg_n_style_colon",
-            "safe_read",
-            "write_error"
-        ],
-        "endCol": 1,
-        "endLine": 181,
-        "filename": "cat.c",
-        "name": "simple_cat",
-        "num_args": 2,
-        "returnType": "_Bool",
-        "signature": "_Bool simple_cat(char * buf, idx_t bufsize)",
-        "startCol": 1,
-        "startLine": 155
-    },
-    {
-        "argNames": [
-            "s",
-            "arg",
-            "argsize"
-        ],
-        "argTypes": [
-            "enum quoting_style",
-            "const char *",
-            "size_t"
-        ],
-        "calledFunctions": [
-            "quotearg_n_style_mem"
-        ],
-        "endCol": 1,
-        "endLine": 974,
-        "filename": "quotearg.c",
-        "name": "quotearg_style_mem",
-        "num_args": 3,
-        "returnType": "char *",
-        "signature": "char * quotearg_style_mem(enum quoting_style s, const char * arg, size_t argsize)",
-        "startCol": 1,
-        "startLine": 970
-    },
-    {
-        "argNames": [
             "st"
         ],
         "argTypes": [
             "const struct stat *"
         ],
         "calledFunctions": [
-            "stdc_leading_zeros_ull"
+            {
+                "name": "stdc_leading_zeros_ull"
+            }
         ],
         "endCol": 1,
         "endLine": 110,
@@ -1713,28 +2008,6 @@
     },
     {
         "argNames": [
-            "s1",
-            "s2"
-        ],
-        "argTypes": [
-            "const char *",
-            "const char *"
-        ],
-        "calledFunctions": [
-            "c_tolower"
-        ],
-        "endCol": 1,
-        "endLine": 56,
-        "filename": "c-strcasecmp.c",
-        "name": "c_strcasecmp",
-        "num_args": 2,
-        "returnType": "int",
-        "signature": "int c_strcasecmp(const char * s1, const char * s2)",
-        "startCol": 1,
-        "startLine": 26
-    },
-    {
-        "argNames": [
             "c"
         ],
         "argTypes": [
@@ -1753,26 +2026,6 @@
     },
     {
         "argNames": [
-            "s"
-        ],
-        "argTypes": [
-            "idx_t"
-        ],
-        "calledFunctions": [
-            "xicalloc"
-        ],
-        "endCol": 1,
-        "endLine": 290,
-        "filename": "xmalloc.c",
-        "name": "xizalloc",
-        "num_args": 1,
-        "returnType": "void *",
-        "signature": "void * xizalloc(idx_t s)",
-        "startCol": 1,
-        "startLine": 286
-    },
-    {
-        "argNames": [
             "c"
         ],
         "argTypes": [
@@ -1788,28 +2041,6 @@
         "signature": "_Bool c_isxdigit(int c)",
         "startCol": 1,
         "startLine": 323
-    },
-    {
-        "argNames": [
-            "n",
-            "s"
-        ],
-        "argTypes": [
-            "idx_t",
-            "idx_t"
-        ],
-        "calledFunctions": [
-            "_gl_alloc_nomem"
-        ],
-        "endCol": 1,
-        "endLine": 107,
-        "filename": "./include/ialloc.h",
-        "name": "icalloc",
-        "num_args": 2,
-        "returnType": "void *",
-        "signature": "void * icalloc(idx_t n, idx_t s)",
-        "startCol": 1,
-        "startLine": 89
     },
     {
         "argNames": [
@@ -1884,30 +2115,6 @@
         "startLine": 244
     },
     {
-        "argNames": [
-            "left_quote",
-            "right_quote",
-            "arg"
-        ],
-        "argTypes": [
-            "const char *",
-            "const char *",
-            "const char *"
-        ],
-        "calledFunctions": [
-            "quotearg_n_custom"
-        ],
-        "endCol": 1,
-        "endLine": 1035,
-        "filename": "quotearg.c",
-        "name": "quotearg_custom",
-        "num_args": 3,
-        "returnType": "char *",
-        "signature": "char * quotearg_custom(const char * left_quote, const char * right_quote, const char * arg)",
-        "startCol": 1,
-        "startLine": 1030
-    },
-    {
         "argNames": [],
         "argTypes": [],
         "calledFunctions": [],
@@ -1977,6 +2184,28 @@
     },
     {
         "argNames": [
+            "s"
+        ],
+        "argTypes": [
+            "size_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "check_nonnull"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 46,
+        "filename": "xmalloc.c",
+        "name": "xmalloc",
+        "num_args": 1,
+        "returnType": "void *",
+        "signature": "void * xmalloc(size_t s)",
+        "startCol": 1,
+        "startLine": 42
+    },
+    {
+        "argNames": [
             "ignore"
         ],
         "argTypes": [
@@ -1992,6 +2221,36 @@
         "signature": "void close_stdout_set_ignore_EPIPE(_Bool ignore)",
         "startCol": 1,
         "startLine": 86
+    },
+    {
+        "argNames": [
+            "stream",
+            "command_name",
+            "package",
+            "version",
+            "authors"
+        ],
+        "argTypes": [
+            "FILE *",
+            "const char *",
+            "const char *",
+            "const char *",
+            "const char *const *"
+        ],
+        "calledFunctions": [
+            {
+                "name": "version_etc_arn"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 192,
+        "filename": "version-etc.c",
+        "name": "version_etc_ar",
+        "num_args": 5,
+        "returnType": "void",
+        "signature": "void version_etc_ar(FILE * stream, const char * command_name, const char * package, const char * version, const char *const * authors)",
+        "startCol": 1,
+        "startLine": 182
     },
     {
         "argNames": [
@@ -2013,66 +2272,99 @@
     },
     {
         "argNames": [
-            "fd",
-            "mode"
+            "argc",
+            "argv"
         ],
         "argTypes": [
             "int",
-            "int"
+            "char **"
         ],
         "calledFunctions": [
-            "set_binary_mode",
-            "xset_binary_mode_error"
+            {
+                "name": "set_program_name"
+            },
+            {
+                "name": "usage"
+            },
+            {
+                "name": "proper_name_lite"
+            },
+            {
+                "name": "version_etc"
+            },
+            {
+                "name": "io_blksize"
+            },
+            {
+                "name": "xset_binary_mode"
+            },
+            {
+                "name": "quotearg_n_style_colon"
+            },
+            {
+                "name": "fdadvise"
+            },
+            {
+                "name": "rpl_fcntl"
+            },
+            {
+                "name": "copy_cat"
+            },
+            {
+                "name": "xalignalloc"
+            },
+            {
+                "name": "simple_cat"
+            },
+            {
+                "name": "xalloc_die"
+            },
+            {
+                "name": "cat"
+            },
+            {
+                "name": "alignfree"
+            },
+            {
+                "name": "full_write"
+            },
+            {
+                "name": "write_error"
+            }
         ],
         "endCol": 1,
-        "endLine": 51,
-        "filename": "./include/xbinary-io.h",
-        "name": "xset_binary_mode",
+        "endLine": 813,
+        "filename": "cat.c",
+        "name": "main_0",
         "num_args": 2,
-        "returnType": "void",
-        "signature": "void xset_binary_mode(int fd, int mode)",
-        "startCol": 1,
-        "startLine": 46
-    },
-    {
-        "argNames": [
-            "fp"
-        ],
-        "argTypes": [
-            "FILE *"
-        ],
-        "calledFunctions": [
-            "rpl_fflush"
-        ],
-        "endCol": 1,
-        "endLine": 112,
-        "filename": "fclose.c",
-        "name": "rpl_fclose",
-        "num_args": 1,
         "returnType": "int",
-        "signature": "int rpl_fclose(FILE * fp)",
+        "signature": "int main(int argc, char ** argv)",
         "startCol": 1,
-        "startLine": 57
+        "startLine": 535
     },
     {
         "argNames": [
-            "arg"
+            "p",
+            "s"
         ],
         "argTypes": [
-            "const char *"
+            "void *",
+            "idx_t"
         ],
         "calledFunctions": [
-            "quote_n"
+            {
+                "name": "_gl_alloc_nomem"
+            }
         ],
         "endCol": 1,
-        "endLine": 1077,
-        "filename": "quotearg.c",
-        "name": "quote",
-        "num_args": 1,
-        "returnType": "const char *",
-        "signature": "const char * quote(const char * arg)",
+        "endLine": 84,
+        "filename": "./include/ialloc.h",
+        "name": "irealloc",
+        "num_args": 2,
+        "returnType": "void *",
+        "signature": "void * irealloc(void * p, idx_t s)",
         "startCol": 1,
-        "startLine": 1073
+        "startLine": 66
     },
     {
         "argNames": [
@@ -2095,6 +2387,56 @@
         "signature": "size_t safe_read(int fd, void * buf, size_t count)",
         "startCol": 1,
         "startLine": 55
+    },
+    {
+        "argNames": [
+            "arg",
+            "argsize"
+        ],
+        "argTypes": [
+            "const char *",
+            "size_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "quote_n_mem"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 1065,
+        "filename": "quotearg.c",
+        "name": "quote_mem",
+        "num_args": 2,
+        "returnType": "const char *",
+        "signature": "const char * quote_mem(const char * arg, size_t argsize)",
+        "startCol": 1,
+        "startLine": 1061
+    },
+    {
+        "argNames": [
+            "p",
+            "n",
+            "s"
+        ],
+        "argTypes": [
+            "void *",
+            "idx_t",
+            "idx_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "_gl_alloc_nomem"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 132,
+        "filename": "./include/ialloc.h",
+        "name": "ireallocarray",
+        "num_args": 3,
+        "returnType": "void *",
+        "signature": "void * ireallocarray(void * p, idx_t n, idx_t s)",
+        "startCol": 1,
+        "startLine": 112
     },
     {
         "argNames": [
@@ -2133,6 +2475,30 @@
         "startLine": 137
     },
     {
+        "argNames": [
+            "p",
+            "s"
+        ],
+        "argTypes": [
+            "const void *",
+            "idx_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "ximalloc"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 332,
+        "filename": "xmalloc.c",
+        "name": "ximemdup0",
+        "num_args": 2,
+        "returnType": "char *",
+        "signature": "char * ximemdup0(const void * p, idx_t s)",
+        "startCol": 1,
+        "startLine": 326
+    },
+    {
         "argNames": [],
         "argTypes": [],
         "calledFunctions": [],
@@ -2148,23 +2514,107 @@
     },
     {
         "argNames": [
-            "s"
+            "arg",
+            "argsize"
         ],
         "argTypes": [
+            "const char *",
             "size_t"
         ],
         "calledFunctions": [
-            "xcalloc"
+            {
+                "name": "quotearg_n_mem"
+            }
         ],
         "endCol": 1,
-        "endLine": 284,
-        "filename": "xmalloc.c",
-        "name": "xzalloc",
-        "num_args": 1,
-        "returnType": "void *",
-        "signature": "void * xzalloc(size_t s)",
+        "endLine": 947,
+        "filename": "quotearg.c",
+        "name": "quotearg_mem",
+        "num_args": 2,
+        "returnType": "char *",
+        "signature": "char * quotearg_mem(const char * arg, size_t argsize)",
         "startCol": 1,
-        "startLine": 280
+        "startLine": 943
+    },
+    {
+        "argNames": [],
+        "argTypes": [],
+        "calledFunctions": [
+            {
+                "name": "rpl_copy_file_range"
+            },
+            {
+                "name": "is_ENOTSUP"
+            },
+            {
+                "name": "quotearg_n_style_colon"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 532,
+        "filename": "cat.c",
+        "name": "copy_cat",
+        "num_args": 0,
+        "returnType": "int",
+        "signature": "int copy_cat()",
+        "startCol": 1,
+        "startLine": 503
+    },
+    {
+        "argNames": [
+            "s",
+            "arg",
+            "argsize"
+        ],
+        "argTypes": [
+            "enum quoting_style",
+            "const char *",
+            "size_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "quotearg_n_style_mem"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 974,
+        "filename": "quotearg.c",
+        "name": "quotearg_style_mem",
+        "num_args": 3,
+        "returnType": "char *",
+        "signature": "char * quotearg_style_mem(enum quoting_style s, const char * arg, size_t argsize)",
+        "startCol": 1,
+        "startLine": 970
+    },
+    {
+        "argNames": [
+            "buffer",
+            "buffersize",
+            "arg",
+            "argsize",
+            "o"
+        ],
+        "argTypes": [
+            "char *",
+            "size_t",
+            "const char *",
+            "size_t",
+            "const struct quoting_options *"
+        ],
+        "calledFunctions": [
+            {
+                "name": "quotearg_buffer_restyled"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 791,
+        "filename": "quotearg.c",
+        "name": "quotearg_buffer",
+        "num_args": 5,
+        "returnType": "size_t",
+        "signature": "size_t quotearg_buffer(char * buffer, size_t buffersize, const char * arg, size_t argsize, const struct quoting_options * o)",
+        "startCol": 1,
+        "startLine": 779
     },
     {
         "argNames": [
@@ -2186,63 +2636,84 @@
     },
     {
         "argNames": [
-            "argc",
-            "argv"
-        ],
-        "argTypes": [
-            "int",
-            "char **"
-        ],
-        "calledFunctions": [
-            "alignfree",
-            "cat",
-            "copy_cat",
-            "fdadvise",
-            "full_write",
-            "io_blksize",
-            "proper_name_lite",
-            "quotearg_n_style_colon",
-            "rpl_fcntl",
-            "set_program_name",
-            "simple_cat",
-            "usage",
-            "version_etc",
-            "write_error",
-            "xalignalloc",
-            "xalloc_die",
-            "xset_binary_mode"
-        ],
-        "endCol": 1,
-        "endLine": 813,
-        "filename": "cat.c",
-        "name": "main_0",
-        "num_args": 2,
-        "returnType": "int",
-        "signature": "int main(int argc, char ** argv)",
-        "startCol": 1,
-        "startLine": 535
-    },
-    {
-        "argNames": [
+            "n",
             "arg",
             "argsize"
         ],
         "argTypes": [
+            "int",
             "const char *",
             "size_t"
         ],
         "calledFunctions": [
-            "quote_n_mem"
+            {
+                "name": "quotearg_n_options"
+            }
         ],
         "endCol": 1,
-        "endLine": 1065,
+        "endLine": 935,
         "filename": "quotearg.c",
-        "name": "quote_mem",
-        "num_args": 2,
-        "returnType": "const char *",
-        "signature": "const char * quote_mem(const char * arg, size_t argsize)",
+        "name": "quotearg_n_mem",
+        "num_args": 3,
+        "returnType": "char *",
+        "signature": "char * quotearg_n_mem(int n, const char * arg, size_t argsize)",
         "startCol": 1,
-        "startLine": 1061
+        "startLine": 931
+    },
+    {
+        "argNames": [
+            "buf",
+            "bufsize"
+        ],
+        "argTypes": [
+            "char *",
+            "idx_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "safe_read"
+            },
+            {
+                "name": "quotearg_n_style_colon"
+            },
+            {
+                "name": "full_write"
+            },
+            {
+                "name": "write_error"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 181,
+        "filename": "cat.c",
+        "name": "simple_cat",
+        "num_args": 2,
+        "returnType": "_Bool",
+        "signature": "_Bool simple_cat(char * buf, idx_t bufsize)",
+        "startCol": 1,
+        "startLine": 155
+    },
+    {
+        "argNames": [
+            "s"
+        ],
+        "argTypes": [
+            "idx_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "_gl_alloc_nomem"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 61,
+        "filename": "./include/ialloc.h",
+        "name": "imalloc",
+        "num_args": 1,
+        "returnType": "void *",
+        "signature": "void * imalloc(idx_t s)",
+        "startCol": 1,
+        "startLine": 55
     },
     {
         "argNames": [
@@ -2286,25 +2757,34 @@
     },
     {
         "argNames": [
-            "n",
-            "arg"
+            "arg",
+            "argsize",
+            "size",
+            "o"
         ],
         "argTypes": [
-            "int",
-            "const char *"
+            "const char *",
+            "size_t",
+            "size_t *",
+            "const struct quoting_options *"
         ],
         "calledFunctions": [
-            "quote_n_mem"
+            {
+                "name": "quotearg_buffer_restyled"
+            },
+            {
+                "name": "xcharalloc"
+            }
         ],
         "endCol": 1,
-        "endLine": 1071,
+        "endLine": 826,
         "filename": "quotearg.c",
-        "name": "quote_n",
-        "num_args": 2,
-        "returnType": "const char *",
-        "signature": "const char * quote_n(int n, const char * arg)",
+        "name": "quotearg_alloc_mem",
+        "num_args": 4,
+        "returnType": "char *",
+        "signature": "char * quotearg_alloc_mem(const char * arg, size_t argsize, size_t * size, const struct quoting_options * o)",
         "startCol": 1,
-        "startLine": 1067
+        "startLine": 806
     },
     {
         "argNames": [
@@ -2359,27 +2839,6 @@
         "signature": "int chmodat(int fd, const char * file, mode_t mode)",
         "startCol": 1,
         "startLine": 88
-    },
-    {
-        "argNames": [
-            "s"
-        ],
-        "argTypes": [
-            "idx_t"
-        ],
-        "calledFunctions": [
-            "check_nonnull",
-            "imalloc"
-        ],
-        "endCol": 1,
-        "endLine": 52,
-        "filename": "xmalloc.c",
-        "name": "ximalloc",
-        "num_args": 1,
-        "returnType": "void *",
-        "signature": "void * ximalloc(idx_t s)",
-        "startCol": 1,
-        "startLine": 48
     },
     {
         "argNames": [
@@ -2438,50 +2897,6 @@
     },
     {
         "argNames": [
-            "outbuf",
-            "bpout"
-        ],
-        "argTypes": [
-            "char *",
-            "char **"
-        ],
-        "calledFunctions": [
-            "full_write",
-            "write_error"
-        ],
-        "endCol": 1,
-        "endLine": 197,
-        "filename": "cat.c",
-        "name": "write_pending",
-        "num_args": 2,
-        "returnType": "void",
-        "signature": "void write_pending(char * outbuf, char ** bpout)",
-        "startCol": 1,
-        "startLine": 187
-    },
-    {
-        "argNames": [
-            "status"
-        ],
-        "argTypes": [
-            "int"
-        ],
-        "calledFunctions": [
-            "emit_ancillary_info",
-            "emit_stdin_note"
-        ],
-        "endCol": 1,
-        "endLine": 127,
-        "filename": "cat.c",
-        "name": "usage",
-        "num_args": 1,
-        "returnType": "void",
-        "signature": "void usage(int status)",
-        "startCol": 1,
-        "startLine": 83
-    },
-    {
-        "argNames": [
             "domain",
             "msg_ctxt_id",
             "msgid",
@@ -2519,6 +2934,31 @@
         "signature": "_Bool dot_or_dotdot(const char * file_name)",
         "startCol": 1,
         "startLine": 260
+    },
+    {
+        "argNames": [
+            "s"
+        ],
+        "argTypes": [
+            "idx_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "imalloc"
+            },
+            {
+                "name": "check_nonnull"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 52,
+        "filename": "xmalloc.c",
+        "name": "ximalloc",
+        "num_args": 1,
+        "returnType": "void *",
+        "signature": "void * ximalloc(idx_t s)",
+        "startCol": 1,
+        "startLine": 48
     },
     {
         "argNames": [
@@ -2580,6 +3020,28 @@
         "signature": "void initialize_exit_failure(int status)",
         "startCol": 1,
         "startLine": 97
+    },
+    {
+        "argNames": [
+            "arg"
+        ],
+        "argTypes": [
+            "const char *"
+        ],
+        "calledFunctions": [
+            {
+                "name": "quotearg_n"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 941,
+        "filename": "quotearg.c",
+        "name": "quotearg",
+        "num_args": 1,
+        "returnType": "char *",
+        "signature": "char * quotearg(const char * arg)",
+        "startCol": 1,
+        "startLine": 937
     },
     {
         "argNames": [],
@@ -2672,48 +3134,28 @@
     },
     {
         "argNames": [
-            "p",
-            "s"
+            "status"
         ],
         "argTypes": [
-            "const void *",
-            "size_t"
-        ],
-        "calledFunctions": [
-            "xmalloc"
-        ],
-        "endCol": 1,
-        "endLine": 315,
-        "filename": "xmalloc.c",
-        "name": "xmemdup",
-        "num_args": 2,
-        "returnType": "void *",
-        "signature": "void * xmemdup(const void * p, size_t s)",
-        "startCol": 1,
-        "startLine": 311
-    },
-    {
-        "argNames": [
-            "fd",
-            "action"
-        ],
-        "argTypes": [
-            "int",
             "int"
         ],
         "calledFunctions": [
-            "rpl_fcntl_DUPFD",
-            "rpl_fcntl_DUPFD_CLOEXEC"
+            {
+                "name": "emit_stdin_note"
+            },
+            {
+                "name": "emit_ancillary_info"
+            }
         ],
         "endCol": 1,
-        "endLine": 444,
-        "filename": "fcntl.c",
-        "name": "rpl_fcntl",
-        "num_args": 2,
-        "returnType": "int",
-        "signature": "int rpl_fcntl(int fd, int action)",
+        "endLine": 127,
+        "filename": "cat.c",
+        "name": "usage",
+        "num_args": 1,
+        "returnType": "void",
+        "signature": "void usage(int status)",
         "startCol": 1,
-        "startLine": 201
+        "startLine": 83
     },
     {
         "argNames": [
@@ -2737,6 +3179,32 @@
         "signature": "const char * dcpgettext_expr(const char * domain, const char * msgctxt, const char * msgid, int category)",
         "startCol": 1,
         "startLine": 211
+    },
+    {
+        "argNames": [
+            "n",
+            "arg",
+            "argsize"
+        ],
+        "argTypes": [
+            "int",
+            "const char *",
+            "size_t"
+        ],
+        "calledFunctions": [
+            {
+                "name": "quotearg_n_options"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 1059,
+        "filename": "quotearg.c",
+        "name": "quote_n_mem",
+        "num_args": 3,
+        "returnType": "const char *",
+        "signature": "const char * quote_n_mem(int n, const char * arg, size_t argsize)",
+        "startCol": 1,
+        "startLine": 1055
     },
     {
         "argNames": [],
@@ -2770,49 +3238,27 @@
     },
     {
         "argNames": [
-            "left_quote",
-            "right_quote",
-            "arg",
-            "argsize"
+            "p",
+            "s"
         ],
         "argTypes": [
-            "const char *",
-            "const char *",
-            "const char *",
-            "size_t"
+            "const void *",
+            "idx_t"
         ],
         "calledFunctions": [
-            "quotearg_n_custom_mem"
+            {
+                "name": "ximalloc"
+            }
         ],
         "endCol": 1,
-        "endLine": 1043,
-        "filename": "quotearg.c",
-        "name": "quotearg_custom_mem",
-        "num_args": 4,
-        "returnType": "char *",
-        "signature": "char * quotearg_custom_mem(const char * left_quote, const char * right_quote, const char * arg, size_t argsize)",
+        "endLine": 321,
+        "filename": "xmalloc.c",
+        "name": "ximemdup",
+        "num_args": 2,
+        "returnType": "void *",
+        "signature": "void * ximemdup(const void * p, idx_t s)",
         "startCol": 1,
-        "startLine": 1037
-    },
-    {
-        "argNames": [
-            "arg"
-        ],
-        "argTypes": [
-            "const char *"
-        ],
-        "calledFunctions": [
-            "quotearg_n"
-        ],
-        "endCol": 1,
-        "endLine": 941,
-        "filename": "quotearg.c",
-        "name": "quotearg",
-        "num_args": 1,
-        "returnType": "char *",
-        "signature": "char * quotearg(const char * arg)",
-        "startCol": 1,
-        "startLine": 937
+        "startLine": 317
     },
     {
         "argNames": [
@@ -2830,34 +3276,6 @@
         "signature": "unsigned int stdc_bit_width_uc(unsigned char n)",
         "startCol": 1,
         "startLine": 924
-    },
-    {
-        "argNames": [
-            "stream",
-            "command_name",
-            "package",
-            "version",
-            "authors"
-        ],
-        "argTypes": [
-            "FILE *",
-            "const char *",
-            "const char *",
-            "const char *",
-            "struct __va_list_tag *"
-        ],
-        "calledFunctions": [
-            "version_etc_arn"
-        ],
-        "endCol": 1,
-        "endLine": 213,
-        "filename": "version-etc.c",
-        "name": "version_etc_va",
-        "num_args": 5,
-        "returnType": "void",
-        "signature": "void version_etc_va(FILE * stream, const char * command_name, const char * package, const char * version, struct __va_list_tag * authors)",
-        "startCol": 1,
-        "startLine": 198
     },
     {
         "argNames": [
@@ -2904,24 +3322,6 @@
         "signature": "const char * npgettext_aux(const char * domain, const char * msg_ctxt_id, const char * msgid, const char * msgid_plural, unsigned long n, int category)",
         "startCol": 1,
         "startLine": 161
-    },
-    {
-        "argNames": [],
-        "argTypes": [],
-        "calledFunctions": [
-            "is_ENOTSUP",
-            "quotearg_n_style_colon",
-            "rpl_copy_file_range"
-        ],
-        "endCol": 1,
-        "endLine": 532,
-        "filename": "cat.c",
-        "name": "copy_cat",
-        "num_args": 0,
-        "returnType": "int",
-        "signature": "int copy_cat()",
-        "startCol": 1,
-        "startLine": 503
     },
     {
         "argNames": [
@@ -3025,6 +3425,30 @@
     },
     {
         "argNames": [
+            "s1",
+            "s2"
+        ],
+        "argTypes": [
+            "const char *",
+            "const char *"
+        ],
+        "calledFunctions": [
+            {
+                "name": "c_tolower"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 56,
+        "filename": "c-strcasecmp.c",
+        "name": "c_strcasecmp",
+        "num_args": 2,
+        "returnType": "int",
+        "signature": "int c_strcasecmp(const char * s1, const char * s2)",
+        "startCol": 1,
+        "startLine": 26
+    },
+    {
+        "argNames": [
             "a"
         ],
         "argTypes": [
@@ -3106,30 +3530,6 @@
         "signature": "unsigned char to_uchar(char ch)",
         "startCol": 1,
         "startLine": 158
-    },
-    {
-        "argNames": [
-            "p",
-            "n",
-            "s"
-        ],
-        "argTypes": [
-            "void *",
-            "size_t",
-            "size_t"
-        ],
-        "calledFunctions": [
-            "xreallocarray"
-        ],
-        "endCol": 1,
-        "endLine": 150,
-        "filename": "./include/xalloc.h",
-        "name": "xnrealloc",
-        "num_args": 3,
-        "returnType": "void *",
-        "signature": "void * xnrealloc(void * p, size_t n, size_t s)",
-        "startCol": 1,
-        "startLine": 146
     },
     {
         "argNames": [
@@ -3222,50 +3622,6 @@
     },
     {
         "argNames": [
-            "arg",
-            "argsize"
-        ],
-        "argTypes": [
-            "const char *",
-            "size_t"
-        ],
-        "calledFunctions": [
-            "quotearg_n_mem"
-        ],
-        "endCol": 1,
-        "endLine": 947,
-        "filename": "quotearg.c",
-        "name": "quotearg_mem",
-        "num_args": 2,
-        "returnType": "char *",
-        "signature": "char * quotearg_mem(const char * arg, size_t argsize)",
-        "startCol": 1,
-        "startLine": 943
-    },
-    {
-        "argNames": [
-            "fd",
-            "mode"
-        ],
-        "argTypes": [
-            "int",
-            "int"
-        ],
-        "calledFunctions": [
-            "__gl_setmode"
-        ],
-        "endCol": 1,
-        "endLine": 76,
-        "filename": "./include/binary-io.h",
-        "name": "set_binary_mode",
-        "num_args": 2,
-        "returnType": "int",
-        "signature": "int set_binary_mode(int fd, int mode)",
-        "startCol": 1,
-        "startLine": 72
-    },
-    {
-        "argNames": [
             "n"
         ],
         "argTypes": [
@@ -3301,6 +3657,32 @@
     },
     {
         "argNames": [
+            "left_quote",
+            "right_quote",
+            "arg"
+        ],
+        "argTypes": [
+            "const char *",
+            "const char *",
+            "const char *"
+        ],
+        "calledFunctions": [
+            {
+                "name": "quotearg_n_custom"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 1035,
+        "filename": "quotearg.c",
+        "name": "quotearg_custom",
+        "num_args": 3,
+        "returnType": "char *",
+        "signature": "char * quotearg_custom(const char * left_quote, const char * right_quote, const char * arg)",
+        "startCol": 1,
+        "startLine": 1030
+    },
+    {
+        "argNames": [
             "sb"
         ],
         "argTypes": [
@@ -3318,34 +3700,6 @@
     },
     {
         "argNames": [
-            "buffer",
-            "buffersize",
-            "arg",
-            "argsize",
-            "o"
-        ],
-        "argTypes": [
-            "char *",
-            "size_t",
-            "const char *",
-            "size_t",
-            "const struct quoting_options *"
-        ],
-        "calledFunctions": [
-            "quotearg_buffer_restyled"
-        ],
-        "endCol": 1,
-        "endLine": 791,
-        "filename": "quotearg.c",
-        "name": "quotearg_buffer",
-        "num_args": 5,
-        "returnType": "size_t",
-        "signature": "size_t quotearg_buffer(char * buffer, size_t buffersize, const char * arg, size_t argsize, const struct quoting_options * o)",
-        "startCol": 1,
-        "startLine": 779
-    },
-    {
-        "argNames": [
             "n"
         ],
         "argTypes": [
@@ -3360,28 +3714,6 @@
         "signature": "unsigned long select_plural(uintmax_t n)",
         "startCol": 1,
         "startLine": 177
-    },
-    {
-        "argNames": [
-            "arg",
-            "argsize"
-        ],
-        "argTypes": [
-            "const char *",
-            "size_t"
-        ],
-        "calledFunctions": [
-            "quotearg_char_mem"
-        ],
-        "endCol": 1,
-        "endLine": 1001,
-        "filename": "quotearg.c",
-        "name": "quotearg_colon_mem",
-        "num_args": 2,
-        "returnType": "char *",
-        "signature": "char * quotearg_colon_mem(const char * arg, size_t argsize)",
-        "startCol": 1,
-        "startLine": 997
     },
     {
         "argNames": [
@@ -3454,27 +3786,27 @@
     },
     {
         "argNames": [
-            "arg",
-            "argsize",
-            "o"
+            "fd",
+            "mode"
         ],
         "argTypes": [
-            "const char *",
-            "size_t",
-            "const struct quoting_options *"
+            "int",
+            "int"
         ],
         "calledFunctions": [
-            "quotearg_alloc_mem"
+            {
+                "name": "__gl_setmode"
+            }
         ],
         "endCol": 1,
-        "endLine": 798,
-        "filename": "quotearg.c",
-        "name": "quotearg_alloc",
-        "num_args": 3,
-        "returnType": "char *",
-        "signature": "char * quotearg_alloc(const char * arg, size_t argsize, const struct quoting_options * o)",
+        "endLine": 76,
+        "filename": "./include/binary-io.h",
+        "name": "set_binary_mode",
+        "num_args": 2,
+        "returnType": "int",
+        "signature": "int set_binary_mode(int fd, int mode)",
         "startCol": 1,
-        "startLine": 793
+        "startLine": 72
     },
     {
         "argNames": [
@@ -3506,34 +3838,6 @@
     },
     {
         "argNames": [
-            "n",
-            "arg",
-            "argsize",
-            "options"
-        ],
-        "argTypes": [
-            "int",
-            "const char *",
-            "size_t",
-            "const struct quoting_options *"
-        ],
-        "calledFunctions": [
-            "quotearg_buffer_restyled",
-            "xcharalloc",
-            "xpalloc"
-        ],
-        "endCol": 1,
-        "endLine": 923,
-        "filename": "quotearg.c",
-        "name": "quotearg_n_options",
-        "num_args": 4,
-        "returnType": "char *",
-        "signature": "char * quotearg_n_options(int n, const char * arg, size_t argsize, const struct quoting_options * options)",
-        "startCol": 1,
-        "startLine": 872
-    },
-    {
-        "argNames": [
             "c"
         ],
         "argTypes": [
@@ -3552,43 +3856,25 @@
     },
     {
         "argNames": [
-            "buffer",
-            "buffersize",
-            "arg",
-            "argsize",
-            "quoting_style",
-            "flags",
-            "quote_these_too",
-            "left_quote",
-            "right_quote"
+            "fp"
         ],
         "argTypes": [
-            "char *",
-            "size_t",
-            "const char *",
-            "size_t",
-            "enum quoting_style",
-            "int",
-            "const unsigned int *",
-            "const char *",
-            "const char *"
+            "FILE *"
         ],
         "calledFunctions": [
-            "c32isprint",
-            "gettext_quote",
-            "mbszero",
-            "quotearg_buffer_restyled",
-            "rpl_mbrtoc32"
+            {
+                "name": "rpl_fflush"
+            }
         ],
         "endCol": 1,
-        "endLine": 768,
-        "filename": "quotearg.c",
-        "name": "quotearg_buffer_restyled",
-        "num_args": 9,
-        "returnType": "size_t",
-        "signature": "size_t quotearg_buffer_restyled(char * buffer, size_t buffersize, const char * arg, size_t argsize, enum quoting_style quoting_style, int flags, const unsigned int * quote_these_too, const char * left_quote, const char * right_quote)",
+        "endLine": 112,
+        "filename": "fclose.c",
+        "name": "rpl_fclose",
+        "num_args": 1,
+        "returnType": "int",
+        "signature": "int rpl_fclose(FILE * fp)",
         "startCol": 1,
-        "startLine": 247
+        "startLine": 57
     },
     {
         "argNames": [
@@ -3629,25 +3915,25 @@
     },
     {
         "argNames": [
-            "fp",
-            "advice"
+            "stream"
         ],
         "argTypes": [
-            "FILE *",
-            "fadvice_t"
+            "FILE *"
         ],
         "calledFunctions": [
-            "fdadvise"
+            {
+                "name": "rpl_fclose"
+            }
         ],
         "endCol": 1,
-        "endLine": 37,
-        "filename": "fadvise.c",
-        "name": "fadvise",
-        "num_args": 2,
-        "returnType": "void",
-        "signature": "void fadvise(FILE * fp, fadvice_t advice)",
+        "endLine": 77,
+        "filename": "close-stream.c",
+        "name": "close_stream",
+        "num_args": 1,
+        "returnType": "int",
+        "signature": "int close_stream(FILE * stream)",
         "startCol": 1,
-        "startLine": 32
+        "startLine": 54
     },
     {
         "argNames": [
@@ -3666,26 +3952,6 @@
         "signature": "_Bool c_isdigit(int c)",
         "startCol": 1,
         "startLine": 232
-    },
-    {
-        "argNames": [
-            "n"
-        ],
-        "argTypes": [
-            "size_t"
-        ],
-        "calledFunctions": [
-            "xmalloc"
-        ],
-        "endCol": 1,
-        "endLine": 58,
-        "filename": "xmalloc.c",
-        "name": "xcharalloc",
-        "num_args": 1,
-        "returnType": "char *",
-        "signature": "char * xcharalloc(size_t n)",
-        "startCol": 1,
-        "startLine": 54
     },
     {
         "argNames": [
@@ -3724,6 +3990,28 @@
         "signature": "int c_tolower(int c)",
         "startCol": 1,
         "startLine": 336
+    },
+    {
+        "argNames": [
+            "arg"
+        ],
+        "argTypes": [
+            "const char *"
+        ],
+        "calledFunctions": [
+            {
+                "name": "quote_n"
+            }
+        ],
+        "endCol": 1,
+        "endLine": 1077,
+        "filename": "quotearg.c",
+        "name": "quote",
+        "num_args": 1,
+        "returnType": "const char *",
+        "signature": "const char * quote(const char * arg)",
+        "startCol": 1,
+        "startLine": 1073
     },
     {
         "argNames": [
