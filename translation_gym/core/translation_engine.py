@@ -30,6 +30,12 @@ class TranslationEngine:
         with open(self.log_file, 'w') as f:
             f.write(json.dumps(self.log, indent=4))
 
+    def get_source_manager(self):
+        return self.source_manager
+
+    def get_target_manager(self):
+        return self.target_manager
+
     def setup(self):
 
         code_dir = Path("data")/Path(self.dataset["code_dir"])
