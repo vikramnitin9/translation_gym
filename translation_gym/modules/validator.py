@@ -52,13 +52,11 @@ class DefaultValidator(Validator):
                     "category": "Compile Error",
                     "message" : error_message}
         
-        src_build_path = source_manager.get_build_path()
-
         compile_success = False
         error_message = ''    
         for _ in range(self.compile_attempts):
             try:
-                target_manager.compile(src_build_path)
+                target_manager.compile()
                 compile_success = True
                 break
             except CompileException as e:

@@ -2,6 +2,9 @@ from translation_gym.helpers import *
 
 class TargetManager:
 
+    def __init__(self, code_dir, src_build_path):
+        raise NotImplementedError("TargetManager is an abstract class and cannot be instantiated directly.")
+
     def get_static_analysis_results(self):
         raise NotImplementedError("get_static_analysis_results() not implemented")
     
@@ -32,8 +35,9 @@ class TargetManager:
 
 class RustManager(TargetManager):
 
-    def __init__(self, code_dir):
+    def __init__(self, code_dir, src_build_path):
         self.code_dir = code_dir
+        self.src_build_path = src_build_path
         self.instrumentation_dir = Path(self.code_dir, 'instrumentation')
         self.instrumentation_dir.mkdir(parents=True, exist_ok=True)
 
@@ -103,9 +107,9 @@ class RustManager(TargetManager):
     def get_instrumentation_dir(self):
         return self.instrumentation_dir
     
-    def compile(self, src_build_path, timeout=60, verbose=False):
+    def compile(self, timeout=60, verbose=False):
         cwd = os.getcwd()
-        cmd = 'cd {} && RUSTFLAGS="-Awarnings" C_BUILD_PATH="{}" cargo parse'.format(self.code_dir, src_build_path)
+        cmd = 'cd {} && RUSTFLAGS="-Awarnings" C_BUILD_PATH="{}" cargo parse'.format(self.code_dir, self.src_build_path)
 
         try:
             result = subprocess.run(

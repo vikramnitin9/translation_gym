@@ -49,7 +49,6 @@ class TranslationEngine:
         code_dir = output_dir
         prCyan("Copied over the code to {}".format(code_dir.absolute()))
         self.source_manager = CManager(code_dir/'c_src')
-        self.target_manager = RustManager(code_dir)
         
         # First compile the source code
         try:
@@ -62,13 +61,15 @@ class TranslationEngine:
             raise CompileException(e)
 
         src_build_path = self.source_manager.get_build_path()
+
+        self.target_manager = RustManager(code_dir, src_build_path)
         target = self.source_manager.get_bin_target()
         self.target_manager.setup()
         self.target_manager.set_target_name(target)
 
         # Then compile the target language wrapper and link it with the compiled source
         try:
-            self.target_manager.compile(src_build_path, timeout=120) # Increase time for first compile
+            self.target_manager.compile(timeout=120) # Increase time for first compile
             prGreen("Compilation succeeded")
         except CompileException as e:
             prRed("Compilation failed")
