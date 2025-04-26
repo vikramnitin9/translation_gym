@@ -4,7 +4,7 @@ class Validator:
     """
     Base class for validators. This class is responsible for validating the translated code.
     """
-    def validate(self, func, translation, source_manager, test_manager):
+    def validate(self, func, translation, source_manager, target_manager, test_manager):
         """
         Validate the translated code.
 
@@ -25,13 +25,14 @@ class DefaultValidator(Validator):
     def __init__(self, compile_attempts=5):
         self.compile_attempts = compile_attempts
 
-    def validate(self, func, translation, source_manager, test_manager):
-        source_manager.insert_translation(func, translation)
+    def validate(self, func, translation, source_manager, target_manager, test_manager):
+        source_manager.comment_out(func)
+        target_manager.insert_translation(func['name'], translation)
 
         compile_success = False
         error_message = ''
         # Try 5 times to compile, in case there is a timeout or mysterious linker error
-        for _ in range(5):
+        for _ in range(self.compile_attempts):
             try:
                 source_manager.compile()
                 compile_success = True
@@ -51,9 +52,33 @@ class DefaultValidator(Validator):
                     "category": "Compile Error",
                     "message" : error_message}
         
+        src_build_path = source_manager.get_build_path()
+
+        compile_success = False
+        error_message = ''    
+        for _ in range(self.compile_attempts):
+            try:
+                target_manager.compile(src_build_path)
+                compile_success = True
+                break
+            except CompileException as e:
+                error_message = str(e)
+                if "Timeout" in str(e):
+                    prRed("Timeout. Trying again.")
+                    continue
+                elif "rust-lld: error:" in str(e):
+                    prRed("Linker error. Cleaning up and trying again.")
+                    target_manager.cleanup()
+                    continue
+
+        if not compile_success:
+            return {"success": False,
+                    "category": "Compile Error",
+                    "message" : error_message}
+        
         # If we get here, the code compiled successfully
         # Run the test suite
-        test_res = test_manager.run_tests(source_manager)
+        test_res = test_manager.run_tests(target_manager)
         if test_res['status'] == 'passed':
             return {"success": True,
                 "category": "",

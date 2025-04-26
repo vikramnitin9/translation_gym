@@ -1,5 +1,5 @@
 from translation_gym.helpers import *
-from translation_gym.core.source_manager import SourceManager
+from translation_gym.core.target_manager import TargetManager
 
 class TestManager:
 
@@ -7,16 +7,16 @@ class TestManager:
         self.test_docker    = test_docker
         self.verbose        = verbose
     
-    def collect_instrumentation_results(self, source_manager: SourceManager):
-        instrumentation_dir = source_manager.get_instrumentation_dir()
+    def collect_instrumentation_results(self, target_manager: TargetManager):
+        instrumentation_dir = target_manager.get_instrumentation_dir()
         # Check if the instrumentation.json file exists
         instrumentation_json = instrumentation_dir/"instrumented.json"
         if not instrumentation_json.exists():
             return None
         return safe_load_json(instrumentation_json)
     
-    def run_tests(self, source_manager: SourceManager):
-        executable = source_manager.get_executable()
+    def run_tests(self, target_manager: TargetManager):
+        executable = target_manager.get_executable()
         if not executable:
             prRed("No executable found. Please compile the code first.")
             return {'status': 'failed', 'error': 'No executable found'}
@@ -25,7 +25,7 @@ class TestManager:
             prRed("Executable is not in a mounted directory.")
             return {'status': 'failed', 'error': 'Excutable is not in a mounted directory.'}
 
-        instrumentation_dir = source_manager.get_instrumentation_dir()
+        instrumentation_dir = target_manager.get_instrumentation_dir()
         instrumentation_host_path = to_host_path(instrumentation_dir)
         if not instrumentation_host_path:
             prRed("Instrumentation directory is not in a mounted directory.")
@@ -47,8 +47,8 @@ class TestManager:
 
         try:
             run(cmd, self.verbose)
-            instrumentation = self.collect_instrumentation_results(source_manager)
+            instrumentation = self.collect_instrumentation_results(target_manager)
             return {'status': 'passed', 'instrumentation': instrumentation}
         except RunException as e:
-            instrumentation = self.collect_instrumentation_results(source_manager)
+            instrumentation = self.collect_instrumentation_results(target_manager)
             return {'status': 'failed', 'error': str(e), 'instrumentation': instrumentation}

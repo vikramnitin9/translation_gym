@@ -1,5 +1,6 @@
 from translation_gym.helpers import *
-from translation_gym.core.source_manager import SourceManager
+from translation_gym.core.source_manager import CManager
+from translation_gym.core.target_manager import RustManager
 from translation_gym.core.test_manager import TestManager
 from translation_gym.modules.orchestrator import Orchestrator
 from translation_gym.modules.translator import Translator
@@ -17,7 +18,7 @@ class TranslationEngine:
         self.dataset = dataset
         self.verbose = verbose
         self.output_dir = Path(output_dir)
-        self.setup() # Sets up self.source_manager
+        self.setup() # Sets up source_manager and target_manager
         self.num_attempts = num_attempts
         self.log_file = Path(self.output_dir, 'log.json')
         self.log = {'date': f"{datetime.datetime.now()}",
@@ -41,16 +42,16 @@ class TranslationEngine:
         if output_dir.exists():
             prRed(f"Directory {output_dir} already exists. Please remove it before running the script.")
             raise FileExistsError(f"Directory {output_dir} already exists. Please remove it before running the script.")
-            
-        shutil.copytree('rust_wrapper', output_dir)
+        
+        output_dir.mkdir(parents=True, exist_ok=True)
         shutil.copytree(code_dir, output_dir/'c_src')
 
         code_dir = output_dir
         prCyan("Copied over the code to {}".format(code_dir.absolute()))
-        self.source_manager = SourceManager(code_dir)
-        target = self.source_manager.get_bin_target()
-        self.source_manager.set_cargo_bin_target(target)
-
+        self.source_manager = CManager(code_dir/'c_src')
+        self.target_manager = RustManager(code_dir)
+        
+        # First compile the source code
         try:
             self.source_manager.compile(timeout=120) # Increase time for first compile
             prGreen("Compilation succeeded")
@@ -59,13 +60,28 @@ class TranslationEngine:
             if self.verbose:
                 prLightGray(e)
             raise CompileException(e)
+
+        src_build_path = self.source_manager.get_build_path()
+        target = self.source_manager.get_bin_target()
+        self.target_manager.setup()
+        self.target_manager.set_target_name(target)
+
+        # Then compile the target language wrapper and link it with the compiled source
+        try:
+            self.target_manager.compile(src_build_path, timeout=120) # Increase time for first compile
+            prGreen("Compilation succeeded")
+        except CompileException as e:
+            prRed("Compilation failed")
+            if self.verbose:
+                prLightGray(e)
+            raise CompileException(e)
         
-        executable = self.source_manager.get_executable()
+        executable = self.target_manager.get_executable()
         prGreen("Generated executable: {}".format(executable))
 
         test_docker = self.dataset['test_docker_image']
         self.test_manager = TestManager(test_docker, verbose=self.verbose)
-        test_res = self.test_manager.run_tests(self.source_manager)
+        test_res = self.test_manager.run_tests(self.target_manager)
         if test_res['status'] == "passed":
             prGreen("Tests passed")
             self.instrumentation_results = test_res['instrumentation']
@@ -81,7 +97,7 @@ class TranslationEngine:
             prCyan("Translating function: {}".format(func['name']))
 
             # This is the part where we collect info about the called functions.
-            rust_static_analysis = self.source_manager.get_rust_static_analysis_results()
+            rust_static_analysis = self.target_manager.get_static_analysis_results()
             for i, called_func in enumerate(func['calledFunctions']):
                 translated_rust_fns = [f for f in rust_static_analysis if f['name'] == (called_func['name'] + "_rust")]
                 if len(translated_rust_fns) != 0:
@@ -95,7 +111,7 @@ class TranslationEngine:
                     func['calledFunctions'][i]['translated'] = False
                     
             translation = translator.translate(func, self.source_manager, self.verbose)
-            result = validator.validate(func, translation, self.source_manager, self.test_manager)
+            result = validator.validate(func, translation, self.source_manager, self.target_manager, self.test_manager)
 
             for i in range(self.num_attempts):
                 prCyan(f"Attempt {i+1}/{self.num_attempts}")
@@ -108,10 +124,11 @@ class TranslationEngine:
                     if self.verbose:
                         prLightGray(result['message'])
                     self.source_manager.reset_func(func)
+                    self.target_manager.reset_func(func)
                     if i == self.num_attempts - 1:
                         break
                     translation = translator.repair(result, self.source_manager, self.verbose)
-                    result = validator.validate(func, translation, self.source_manager, self.test_manager)
+                    result = validator.validate(func, translation, self.source_manager, self.target_manager, self.test_manager)
             
             if result['success']:
                 prGreen("Translation succeeded")

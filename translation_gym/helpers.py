@@ -51,6 +51,8 @@ def run(command, verbose=False):
     
     if verbose:
         prLightGray(result.stdout.decode('utf-8', errors='ignore'))
+        
+    return result.stdout.decode('utf-8', errors='ignore')
 
 def safe_load_json(filepath):
     with open(filepath, "rb") as f:  # Open in binary mode

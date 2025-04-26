@@ -18,4 +18,4 @@ docker run -it \
     -v $PWD/data:/app/data \
     -v $DOCKER_SOCKET:/var/run/docker.sock \
     translation_gym:latest \
-    /bin/bash -c "python main.py --dataset $1 --model $2 --output_dir /app/output/$1_$suffix --verbose"
+    /bin/bash -c "python main.py --dataset $1 --model $2 --output_dir /app/output/$1_$suffix"

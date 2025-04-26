@@ -32,65 +32,10 @@ impl ParseCallbacks for Renamer {
 
 fn main() {
     let cargo_manifest_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
-    let c_src_dir = format!("{}/c_src", cargo_manifest_dir);
-    
-    // Read "PARSEC_BUILD_DIR" from the environment
-    let parsec_build_dir = env::var("PARSEC_BUILD_DIR").expect("PARSEC_BUILD_DIR not set");
-    // Convert PARSEC_BUILD_DIR to absolute path if it's relative
-    let parsec_build_dir = fs::canonicalize(Path::new(&cargo_manifest_dir).join(&parsec_build_dir))
-                                .expect("Failed to resolve absolute path for PARSEC_BUILD_DIR");
-    let new_path = format!("{}:{}", parsec_build_dir.display(), env::var("PATH").unwrap_or_default());
-    env::set_var("PATH", new_path);
+    let c_build_path = env::var("C_BUILD_PATH").expect("C_BUILD_PATH not set");
 
-    // Check if compile_commands.json exists
-    let compile_commands_path = PathBuf::from(format!("{}/compile_commands.json", c_src_dir));
-    if !compile_commands_path.exists() {
-        // First run make clean
-        let status = Command::new("make")
-        .arg("clean")
-        .current_dir(&c_src_dir)
-        .status()
-        .expect(&format!("Failed to make clean in {}", c_src_dir.as_str()));
-
-        if !status.success() {
-            panic!("make clean failed with exit code: {:?}", status.code());
-        }
-
-        // Check bear version. If > 3, run "bear -- make". Otherwise run "bear make"
-        let bear_version = Command::new("bear")
-            .arg("--version")
-            .output()
-            .expect("Failed to get bear version");
-        let bear_version = String::from_utf8_lossy(&bear_version.stdout);
-        let bear_version = bear_version.split(' ').collect::<Vec<&str>>()[1];
-        let bear_version_parts: Vec<&str> = bear_version.split('.').collect();
-        let major_version: u32 = bear_version_parts[0].parse().unwrap_or(0);
-        let minor_version: u32 = bear_version_parts.get(1).and_then(|s| s.parse().ok()).unwrap_or(0);
-        let patch_version: u32 = bear_version_parts.get(2).and_then(|s| s.parse().ok()).unwrap_or(0);
-        let bear_version = (major_version, minor_version, patch_version);
-        let status = if bear_version >= (3, 0, 0) {
-            // If bear version is >= 3.0.0, run "bear -- make"
-            Command::new("bear")
-                .arg("--")
-                .arg("make")
-                .current_dir(&c_src_dir)
-                .status()
-                .expect(&format!("Failed to generate compile_commands in {}", c_src_dir.as_str()))
-        } else {
-            // If bear version is < 3.0.0, run "bear make"
-            Command::new("bear")
-            .arg("make")
-            .current_dir(&c_src_dir)
-            .status()
-            .expect(&format!("Failed to generate compile_commands in {}", c_src_dir.as_str()))
-        };
-        if !status.success() {
-            panic!("Bear failed with exit code: {:?}", status.code());
-        }
-    }
-
-    // Go through c_src/compile_commands.json, get the list of files
-    let compile_commands_path = PathBuf::from("c_src/compile_commands.json");
+    // Go through {c_build_path}/compile_commands.json, get the list of files
+    let compile_commands_path = PathBuf::from(format!("{}/compile_commands.json", c_build_path));
     let compile_commands = std::fs::read_to_string(compile_commands_path)
         .expect("Unable to read compile_commands.json");
     let compile_commands: serde_json::Value = serde_json::from_str(&compile_commands)
@@ -113,7 +58,7 @@ fn main() {
     }).collect::<Vec<_>>();
 
     // // Expand "*.c" files in the src directory
-    // let c_files: Vec<String> = glob(&format!("{}/*.c", c_src_dir))
+    // let c_files: Vec<String> = glob(&format!("{}/*.c", c_build_path))
     //     .expect("Failed to read glob pattern")
     //     .filter_map(Result::ok) // Filter out errors
     //     .map(|path| path.display().to_string()) // Convert to string
@@ -123,22 +68,11 @@ fn main() {
         panic!("No .c files found in compile_commands.json");
     }
 
-    // Run parsec to generate libfoo.a
-    let status = Command::new("parsec")
-        .current_dir(&c_src_dir)
-        .args(&source_paths)
-        .status()
-        .expect("Failed to run parsec");
-    
-    if !status.success() {
-        panic!("Parsec failed with exit code: {:?}", status.code());
-    }
-
     let mut main_file: Option<String> = None;
     let mut main_num_args: i32 = 0;
 
-    // Read c_src_dir/functions.json to find the function main_0
-    let functions_path = Path::new(&c_src_dir).join("functions.json");
+    // Read c_build_path/functions.json to find the function main_0
+    let functions_path = Path::new(&c_build_path).join("functions.json");
     let functions = std::fs::read_to_string(functions_path)
         .expect("Unable to read functions.json");
     let functions: serde_json::Value = serde_json::from_str(&functions)
@@ -152,14 +86,14 @@ fn main() {
             main_file = if Path::new(main_file_name).is_absolute() {
                 Some(PathBuf::from(main_file_name).to_str().unwrap().to_string())
             } else {
-                Some(Path::new(&c_src_dir).join(main_file_name).to_str().unwrap().to_string())
+                Some(Path::new(&c_build_path).join(main_file_name).to_str().unwrap().to_string())
             };
             main_num_args = function.get("num_args").expect("Expected a num_args").as_i64().expect("Expected an integer") as i32;
         }
     }
 
     // Tell cargo to tell rustc to link the library.
-    println!("cargo::rustc-link-search=native=c_src");
+    println!("cargo::rustc-link-search=native={}", c_build_path);
     println!("cargo:rustc-link-lib=static=foo");
 
     // The bindgen::Builder is the main entry point

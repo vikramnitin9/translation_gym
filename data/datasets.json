@@ -2,41 +2,49 @@
   "toy" : {
     "description": "A small dataset for testing purposes.",
     "code_dir": "toy",
-    "test_docker_image": "toy:latest"
+    "test_docker_image": "toy:latest",
+    "language": "c"
   },
   "cat" : {
     "description": "Coreutils cat",
     "code_dir": "coreutils/src_sep/cat/c",
-    "test_docker_image": "cat:latest"
+    "test_docker_image": "cat:latest",
+    "language": "c"
   },
   "head" : {
     "description": "Coreutils head",
     "code_dir": "coreutils/src_sep/head/c",
-    "test_docker_image": "head:latest"
+    "test_docker_image": "head:latest",
+    "language": "c"
   },
   "pwd" : {
     "description": "Coreutils pwd",
     "code_dir": "coreutils/src_sep/pwd/c",
-    "test_docker_image": "pwd:latest"
+    "test_docker_image": "pwd:latest",
+    "language": "c"
   },
   "split" : {
     "description": "Coreutils split",
     "code_dir": "coreutils/src_sep/split/c",
-    "test_docker_image": "split:latest"
+    "test_docker_image": "split:latest",
+    "language": "c"
   },
   "tail" : {
     "description": "Coreutils tail",
     "code_dir": "coreutils/src_sep/tail/c",
-    "test_docker_image": "tail:latest"
+    "test_docker_image": "tail:latest",
+    "language": "c"
   },
   "truncate" : {
     "description": "Coreutils truncate",
     "code_dir": "coreutils/src_sep/truncate/c",
-    "test_docker_image": "truncate:latest"
+    "test_docker_image": "truncate:latest",
+    "language": "c"
   },
   "uniq" : {
     "description": "Coreutils uniq",
     "code_dir": "coreutils/src_sep/uniq/c",
-    "test_docker_image": "uniq:latest"
+    "test_docker_image": "uniq:latest",
+    "language": "c"
   }
 }
