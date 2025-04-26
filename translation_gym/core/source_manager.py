@@ -2,6 +2,9 @@ from translation_gym.helpers import *
 
 class SourceManager:
 
+    def __init__(self, code_dir):
+        raise NotImplementedError("SourceManager is an abstract class and cannot be instantiated directly.")
+
     def get_static_analysis_results(self):
         raise NotImplementedError("get_static_analysis_results() not implemented")
     
