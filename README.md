@@ -32,20 +32,16 @@ In this manner, you can translate all the functions in the project! The entire p
 
 ## Quickstart
 
-The easiest way to run this tool is with Docker. If you do not already have Docker installed, follow the instructions [here](https://docs.docker.com/engine/install/) and then come back to this page. To build the Docker container for our tool, run the following script:
+The easiest way to run this tool is with Docker and docker-compose. If you do not already have Docker installed, follow the instructions [here for Docker](https://docs.docker.com/engine/install/), and [here for docker-compose](https://docs.docker.com/compose/install/). To build the Docker container for our tool, run the following script:
 ```sh
 bash build.sh
 ```
-Each test dataset is built into a separate Docker container. If you have `docker-compose`, then you can simply run
+Each test dataset is built into a separate Docker container. Run the following commands to build all datasets:
 ```sh
 cd data
-docker-compose build
-```
-If you don't have `docker-compose`, then you have to manually build each container like this:
-```sh
-docker build -f toy/tests/Dockerfile -t toy:latest .
-docker build -f coreutils/tests/cat/Dockerfile -t cat:latest .
-...
+export USER_ID=$(id -u)
+export GROUP_ID=$(id -g)
+docker-compose build coreutils && docker-compose build
 ```
 For LLM-based translation, we support OpenAI, Anthropic, and Google models. First put your API key in `models/.env`. For example:
 ```sh
