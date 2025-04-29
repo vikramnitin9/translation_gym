@@ -58,7 +58,7 @@ def safe_load_json(filepath):
     with open(filepath, "rb") as f:  # Open in binary mode
         raw_bytes = f.read()  # Read raw data
 
-    json_str = raw_bytes.decode("utf-8", errors="backslashreplace").strip()
+    json_str = raw_bytes.decode("latin-1", errors="backslashreplace").strip()
 
     if json_str.endswith(","):  
         json_str = json_str[:-1]  # Remove trailing comma
@@ -67,18 +67,11 @@ def safe_load_json(filepath):
     if not json_str.endswith("]"):
         json_str = json_str + "]"
 
-    def sanitize(c):
-        if c == '\\':
-            return '\\\\'
-        else:
-            return c
-
-    json_clean = ''.join(sanitize(c) for c in json_str)
     try:
-        data = json.loads(json_clean.strip(), strict=False)
+        data = json.loads(json_str.strip(), strict=False)
         return data
     except:
-        prRed(f"Failed to load JSON from {filepath}")
+        print(f"Failed to load JSON from {filepath}")
         return None
 
 def to_host_path(path):

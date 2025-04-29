@@ -3,6 +3,42 @@
 using namespace llvm;
 using json = nlohmann::json;
 
+const char* cpp_source = R"CPP(
+void json_escape(const char *str, char* escaped_str_buf) {
+    if (!str) {
+		// Write "<null>"
+		escaped_str_buf[0] = '<'; escaped_str_buf[1] = 'n'; escaped_str_buf[2] = 'u';
+		escaped_str_buf[3] = 'l'; escaped_str_buf[4] = 'l'; escaped_str_buf[5] = '>';
+		escaped_str_buf[6] = '\0'; // Null-terminate the string
+		return;
+    }
+	char *ptr = escaped_str_buf;
+	// Iterate through the original string and escape characters
+	// Limit to first 100 characters of string
+	for (int i = 0; i < 100 && str[i] != '\0'; i++) {
+	    unsigned char c = str[i];
+	    switch (c) {
+	        case '\"': *ptr++ = '\\'; *ptr++ = '\"'; break;
+	        case '\\': *ptr++ = '\\'; *ptr++ = '\\'; break;
+	        case '\n': *ptr++ = '\\'; *ptr++ = 'n'; break;
+	        case '\r': *ptr++ = '\\'; *ptr++ = 'r'; break;
+	        case '\t': *ptr++ = '\\'; *ptr++ = 't'; break;
+	        default:
+	            if (c < 0x20) { // control characters
+	                *ptr++ = '\\';
+	                *ptr++ = 'u';
+	                *ptr++ = '0';
+	                *ptr++ = '0';
+	                *ptr++ = (c >> 4) + '0';
+	                *ptr++ = (c & 0x0F) + '0';
+	            } else {
+	                *ptr++ = c;
+	            }
+	    }
+	}
+	*ptr = '\0'; // Null-terminate the string
+})CPP";
+
 bool compareFilenames(std::string filename1, std::string filename2) {
 	std::string baseName1 = llvm::sys::path::filename(filename1);
 	std::string baseName2 = llvm::sys::path::filename(filename2);
@@ -55,10 +91,19 @@ void addInstrumentation(Module &M, std::unordered_set<json> jsonData) {
 		"strlen", llvm::FunctionType::get(llvm::Type::getInt64Ty(Context),
     								{llvm::Type::getInt8PtrTy(Context)}, false));
 
+	// Declare the json_escape function
+	FunctionCallee JsonEscape = M.getOrInsertFunction(
+		"json_escape", FunctionType::get(Type::getVoidTy(Context),
+										{Type::getInt8PtrTy(Context),
+										Type::getInt8PtrTy(Context)}, false));
+
 	// Iterate over all functions in the module
 	for (Function &F : M) {
 		// Skip functions that are not defined in the module
 		if (F.isDeclaration()) continue;
+
+		// If we instrument the json_escape function, it will cause infinite recursion
+		if (F.getName() == "json_escape") continue;
 
 		llvm::DISubprogram *SubProg = F.getSubprogram();
 		if (!SubProg){
@@ -116,7 +161,6 @@ void addInstrumentation(Module &M, std::unordered_set<json> jsonData) {
 		
 		Value *InitialStr = Builder.CreateGlobalStringPtr("{ \"name\": \"" + F.getName().str() + "\", \"args\": {");
 		Builder.CreateCall(Strcpy, {FmtStrPtr, InitialStr});
-		// std::string jsonStr = "{ \"name\": \"" + F.getName().str() + "\", \"args\": [";
 		std::vector<Value *> PrintArgs;
 
 		int i = 0;
@@ -158,14 +202,15 @@ void addInstrumentation(Module &M, std::unordered_set<json> jsonData) {
 						// char* arg — check if null
 						Value *IsNull = Builder.CreateICmpEQ(&Arg, ConstantPointerNull::get(cast<PointerType>(Arg.getType())));
 
-						// Build "%s" or "\"<null>\""
-						Value *RealFmt = Builder.CreateGlobalStringPtr("\"" + ArgName + "\"" + " : \"%.100s\", ");
-						Value *NullFmt = Builder.CreateGlobalStringPtr("\"" + ArgName + "\"" + " : \"%p\", ");
-						Value *SelectedFmt = Builder.CreateSelect(IsNull, NullFmt, RealFmt);
+						Value *RealFmt = Builder.CreateGlobalStringPtr("\"" + ArgName + "\"" + " : \"%s\", ");
+						Builder.CreateCall(Strcat, {FmtStrPtr, RealFmt});
 
-						// Append to format string (strcat or manual copy)
-						Builder.CreateCall(Strcat, {FmtStrPtr, SelectedFmt});
-						PrintArgs.push_back(&Arg);
+						// Allocate space for the escaped string
+						Value *EscapedStrBuffer = Builder.CreateAlloca(ArrayType::get(Type::getInt8Ty(Context), 512));
+						Value *EscapedStrPtr = Builder.CreateBitCast(EscapedStrBuffer, Type::getInt8PtrTy(Context));
+
+						Builder.CreateCall(JsonEscape, {&Arg, EscapedStrPtr});
+						PrintArgs.push_back(EscapedStrPtr);
 					} else {
 							Value *Fmt = Builder.CreateGlobalStringPtr("\"" + ArgName + "\"" + " : \"%p\", ");
 							Builder.CreateCall(Strcat, {FmtStrPtr, Fmt});
@@ -212,14 +257,15 @@ void addInstrumentation(Module &M, std::unordered_set<json> jsonData) {
 							// char* arg — check if null
 							Value *IsNull = Builder.CreateICmpEQ(RetVal, ConstantPointerNull::get(cast<PointerType>(F.getReturnType())));
 	
-							// Build "%s" or "\"<null>\""
-							Value *RealFmt = Builder.CreateGlobalStringPtr("\"%.100s\"");
-							Value *NullFmt = Builder.CreateGlobalStringPtr("\"%p\"");
-							Value *SelectedFmt = Builder.CreateSelect(IsNull, NullFmt, RealFmt);
-	
-							// Append to format string (strcat or manual copy)
-							Builder.CreateCall(Strcat, {FmtStrPtr, SelectedFmt});
-							PrintArgs.push_back(RetVal);
+							Value *RealFmt = Builder.CreateGlobalStringPtr("\"%s\"");
+							Builder.CreateCall(Strcat, {FmtStrPtr, RealFmt});
+
+							// Allocate space for the escaped string
+							Value *EscapedStrBuffer = Builder.CreateAlloca(ArrayType::get(Type::getInt8Ty(Context), 512));
+							Value *EscapedStrPtr = Builder.CreateBitCast(EscapedStrBuffer, Type::getInt8PtrTy(Context));
+
+							Builder.CreateCall(JsonEscape, {RetVal, EscapedStrPtr});
+							PrintArgs.push_back(EscapedStrPtr);
 						} else {
 								Value *Fmt = Builder.CreateGlobalStringPtr("\"%p\"");
 								Builder.CreateCall(Strcat, {FmtStrPtr, Fmt});

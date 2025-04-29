@@ -7,6 +7,7 @@
 #include "llvm/Passes/PassPlugin.h"
 #include "llvm/Support/VirtualFileSystem.h"
 #include "llvm/Support/ToolOutputFile.h"
+#include "llvm/Support/MemoryBuffer.h"
 #include "llvm/Bitcode/BitcodeWriter.h"
 
 #include "llvm/Target/TargetMachine.h"
@@ -37,34 +38,34 @@ using json = nlohmann::json;
 static llvm::cl::OptionCategory FindFunctionCategory("");
 
 int main(int argc, const char **argv) {
-	auto expectedParser = CommonOptionsParser::create(argc, argv, FindFunctionCategory, llvm::cl::ZeroOrMore, "ast-visitor <source0> [... <sourceN>] --");
+	auto expectedParser = CommonOptionsParser::create(argc, argv, FindFunctionCategory, llvm::cl::ZeroOrMore, "parsec <source0> [... <sourceN>] --");
 	if (!expectedParser) {
 		llvm::errs() << expectedParser.takeError();
 		return 1;
 	}
 	
-	// // Create a virtual file system
-	// IntrusiveRefCntPtr<llvm::vfs::InMemoryFileSystem> memFS(new llvm::vfs::InMemoryFileSystem);
-	// memFS->addFile("instrumentation.cpp", 0, MemoryBuffer::getMemBuffer(cpp_source));
+	// Create a virtual file system
+	IntrusiveRefCntPtr<llvm::vfs::InMemoryFileSystem> memFS(new llvm::vfs::InMemoryFileSystem);
+	memFS->addFile("instrumentation_helpers.c", 0, llvm::MemoryBuffer::getMemBuffer(cpp_source));
 
-	// // Add the virtual file to the tool’s processing list
-	// CommonOptionsParser& optionsParser = expectedParser.get();
-	// std::vector<std::string> allSources = optionsParser.getSourcePathList();
-	// allSources.push_back("instrumentation.cpp");  // Include the virtual source file
-
-	// // Create a VFS-aware FileManager
-	// IntrusiveRefCntPtr<FileManager> fileManager = new FileManager(FileSystemOptions(), memFS);
-	// ClangTool tool(optionsParser.getCompilations(),
-	// 			allSources,
-	// 			std::make_shared<PCHContainerOperations>(),
-	// 			llvm::vfs::getRealFileSystem(),
-	// 			fileManager);
-
-	// tool.mapVirtualFile("instrumentation.cpp", cpp_source);
-
+	// Add the virtual file to the tool’s processing list
 	CommonOptionsParser& optionsParser = expectedParser.get();
+	std::vector<std::string> allSources = optionsParser.getSourcePathList();
+	allSources.push_back("instrumentation_helpers.c");  // Include the virtual source file
+
+	// Create a VFS-aware FileManager
+	IntrusiveRefCntPtr<FileManager> fileManager = new FileManager(FileSystemOptions(), memFS);
 	ClangTool tool(optionsParser.getCompilations(),
-				   optionsParser.getSourcePathList());
+				allSources,
+				std::make_shared<PCHContainerOperations>(),
+				llvm::vfs::getRealFileSystem(),
+				fileManager);
+
+	tool.mapVirtualFile("instrumentation_helpers.c", cpp_source);
+
+	// CommonOptionsParser& optionsParser = expectedParser.get();
+	// ClangTool tool(optionsParser.getCompilations(),
+	// 			   optionsParser.getSourcePathList());
 	ToolActionWrapper actionWrapper(new FunctionVisitAction());
 	tool.run(&actionWrapper);
 	
@@ -82,7 +83,14 @@ int main(int argc, const char **argv) {
 		}
 		std::cout << "Renamed function: main -> main_0\n";
 	}
-
+	// Delete all entries with entry["filename"] containing "instrumentation_helpers.c"
+	for (auto it = jsonData.begin(); it != jsonData.end();) {
+		if (it->contains("filename") && it->at("filename").get<std::string>().find("instrumentation_helpers.c") != std::string::npos) {
+			it = jsonData.erase(it);
+		} else {
+			++it;
+		}
+	}
 	// Run a CallGraphAnalysis pass on M
 	llvm::PassBuilder PB;
 	llvm::ModuleAnalysisManager MAM;
@@ -97,6 +105,11 @@ int main(int argc, const char **argv) {
 		llvm::DISubprogram *SubProg = F.getSubprogram();
 		if (!SubProg){
 			continue; // Skip functions without debug info
+		}
+		// Check if the filename contains "instrumentation_helpers.c"
+		std::string filename = SubProg->getFilename();
+		if (filename.find("instrumentation_helpers.c") != std::string::npos) {
+			continue; // These are instrumentation helper functions added by us
 		}
 		const llvm::Function *constFunctionPtr = &F;
 		// Store all the functions that are called by the current function

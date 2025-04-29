@@ -18,4 +18,6 @@ using json = nlohmann::json;
 bool compareFilenames(std::string filename1, std::string filename2);
 void addInstrumentation(llvm::Module &M, std::unordered_set<json> jsonData);
 
+extern const char* cpp_source;
+
 #endif // INSTRUMENTATION_H
