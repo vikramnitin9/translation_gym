@@ -43,7 +43,7 @@ class TestManager:
                 -v {instrumentation_host_path}:/instrumentation \
                     {self.test_docker}"
         try:
-            run(cmd, self.verbose)
+            run(cmd, verbose=self.verbose)
             instrumentation = self.collect_instrumentation_results(target_manager)
             return {'status': 'passed', 'instrumentation': instrumentation}
         except RunException as e:
