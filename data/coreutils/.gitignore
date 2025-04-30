@@ -215,7 +215,7 @@
 /tests/test-suite.log
 /tight-scope.mk
 ID
-Makefile
+./Makefile
 Makefile.in
 TAGS
 THANKS

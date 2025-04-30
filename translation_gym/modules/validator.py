@@ -28,8 +28,8 @@ class DefaultValidator(Validator):
         self.compile_attempts = compile_attempts
 
     def validate(self, func, translation, source_manager, target_manager, test_manager, verbose=False):
-        source_manager.comment_out(func)
-        target_manager.insert_translation(func['name'], translation)
+        source_manager.remove_func(func)
+        target_manager.insert_translation(func, translation)
 
         compile_success = False
         error_message = ''

@@ -4,9 +4,18 @@ class TargetManager:
 
     def __init__(self, code_dir, src_build_path):
         raise NotImplementedError("TargetManager is an abstract class and cannot be instantiated directly.")
+    
+    def get_code_dir(self):
+        raise NotImplementedError("get_code_dir() not implemented")
 
     def get_static_analysis_results(self):
         raise NotImplementedError("get_static_analysis_results() not implemented")
+
+    def get_func_by_name(self, func_name):
+        raise NotImplementedError("get_func_by_name() not implemented")
+    
+    def replace_func(self, func, new_body):
+        raise NotImplementedError("replace_func() not implemented")
     
     def reset_func(self, func):
         raise NotImplementedError("reset_func() not implemented")
@@ -33,7 +42,7 @@ class TargetManager:
         raise NotImplementedError("insert_translation() not implemented")
     
 
-class RustManager(TargetManager):
+class RustTargetManager(TargetManager):
 
     def __init__(self, code_dir, src_build_path):
         self.code_dir = code_dir
@@ -42,6 +51,9 @@ class RustManager(TargetManager):
         self.instrumentation_dir.mkdir(parents=True, exist_ok=True)
         self.last_compile_time = 0
         self.static_analysis_results = None
+
+    def get_code_dir(self):
+        return self.code_dir
 
     def setup(self):
         shutil.copytree('resources/rust_wrapper', self.code_dir, dirs_exist_ok=True)
@@ -86,6 +98,34 @@ class RustManager(TargetManager):
             functions_json_path = Path(self.code_dir)/'functions.json'
             self.static_analysis_results = json.load(open(functions_json_path, 'r'))
         return self.static_analysis_results
+    
+    def get_func_by_name(self, func_name):
+        functions = self.get_static_analysis_results()
+        for func in functions:
+            if func['name'] == func_name:
+                return func
+        return None
+    
+    def replace_func(self, func, new_body):
+
+        fpath = Path(os.path.join(self.code_dir, func['filename']))
+        start_line = func['startLine']
+        start_col = func['startCol']
+        end_line = func['endLine']
+        end_col = func['endCol']
+
+        with open(fpath, 'r') as f:
+            lines = f.readlines()
+
+        old_lines = lines.copy()
+        before = lines[:start_line-1] + [lines[start_line-1][:start_col-1]]
+        after = [lines[end_line-1][end_col:]] + lines[end_line:]
+        new_contents = ''.join(before + [new_body] + after)
+
+        with open(fpath, 'w') as f:
+            f.write(new_contents)
+        with open(fpath.with_suffix('.old'), 'w') as f:
+            f.write(''.join(old_lines))
 
     def get_executable(self):
         # The executable is created by `cargo parse`, 
@@ -113,12 +153,12 @@ class RustManager(TargetManager):
         finally:
             os.chdir(cwd)
 
-    def insert_translation(self, func_name, translation):
+    def insert_translation(self, func, translation):
 
         # Add the function to the bindgen blocklist
         shutil.copy(self.bindgen_blocklist, self.bindgen_blocklist.with_suffix('.old'))
         with open(self.bindgen_blocklist, 'a') as f:
-            f.write(f"{func_name}\n")
+            f.write(f"{func['name']}\n")
 
         function_trans = translation['func']
         wrapper = translation['wrapper']

@@ -1,6 +1,6 @@
 from translation_gym.helpers import *
-from translation_gym.core.source_manager import CManager
-from translation_gym.core.target_manager import RustManager
+from translation_gym.core.source_manager import CSourceManager
+from translation_gym.core.target_manager import RustTargetManager
 from translation_gym.core.test_manager import TestManager
 from translation_gym.modules.orchestrator import Orchestrator
 from translation_gym.modules.translator import Translator
@@ -36,6 +36,9 @@ class TranslationEngine:
     def get_target_manager(self):
         return self.target_manager
 
+    def get_test_manager(self):
+        return self.test_manager
+
     def setup(self):
 
         code_dir = Path("data")/Path(self.dataset["code_dir"])
@@ -54,7 +57,7 @@ class TranslationEngine:
 
         code_dir = output_dir
         prCyan("Copied over the code to {}".format(code_dir.absolute()))
-        self.source_manager = CManager(code_dir/'c_src')
+        self.source_manager = CSourceManager(code_dir/'c_src')
         
         # First compile the source code
         try:
@@ -68,7 +71,7 @@ class TranslationEngine:
 
         src_build_path = self.source_manager.get_build_path()
 
-        self.target_manager = RustManager(code_dir, src_build_path)
+        self.target_manager = RustTargetManager(code_dir, src_build_path)
         target = self.source_manager.get_bin_target()
         self.target_manager.setup()
         self.target_manager.set_target_name(target)

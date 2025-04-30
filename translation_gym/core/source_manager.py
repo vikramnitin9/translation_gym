@@ -4,9 +4,18 @@ class SourceManager:
 
     def __init__(self, code_dir):
         raise NotImplementedError("SourceManager is an abstract class and cannot be instantiated directly.")
+    
+    def get_code_dir(self):
+        raise NotImplementedError("get_code_dir() not implemented")
 
     def get_static_analysis_results(self):
         raise NotImplementedError("get_static_analysis_results() not implemented")
+    
+    def get_func_by_name(self, func_name):
+        raise NotImplementedError("get_func_by_name() not implemented")
+
+    def replace_func(self, func, new_body):
+        raise NotImplementedError("replace_func() not implemented")
     
     def reset_func(self, func):
         raise NotImplementedError("reset_func() not implemented")
@@ -23,19 +32,19 @@ class SourceManager:
     def extract_body(self, func):
         raise NotImplementedError("extract_body() not implemented")
 
-    def insert_translation(self, func, translation):
-        raise NotImplementedError("insert_translation() not implemented")
-
-    def comment_out(self, func):
-        raise NotImplementedError("comment_out() not implemented")
+    def remove_func(self, func):
+        raise NotImplementedError("remove_func() not implemented")
 
 
-class CManager(SourceManager):
+class CSourceManager(SourceManager):
 
     def __init__(self, code_dir):
-        self.code_dir = code_dir
+        self.code_dir = Path(code_dir)
         self.last_compile_time = 0
         self.static_analysis_results = None
+
+    def get_code_dir(self):
+        return self.code_dir
     
     def get_bin_target(self):
 
@@ -132,6 +141,13 @@ class CManager(SourceManager):
             functions_json_path = Path(self.code_dir)/'functions.json'
             self.static_analysis_results = json.load(open(functions_json_path, 'r'))
         return self.static_analysis_results
+    
+    def get_func_by_name(self, func_name):
+        functions = self.get_static_analysis_results()
+        for func in functions:
+            if func['name'] == func_name:
+                return func
+        return None
 
     def get_instrumentation_dir(self):
         return self.instrumentation_dir
@@ -151,8 +167,29 @@ class CManager(SourceManager):
             body += lines[i]
         body += lines[end_line-1][:end_col]
         return body
+    
+    def replace_func(self, func, new_body):
 
-    def comment_out(self, func):
+        fpath = Path(os.path.join(self.code_dir, func['filename']))
+        start_line = func['startLine']
+        start_col = func['startCol']
+        end_line = func['endLine']
+        end_col = func['endCol']
+
+        with open(fpath, 'r') as f:
+            lines = f.readlines()
+
+        old_lines = lines.copy()
+        before = lines[:start_line-1] + [lines[start_line-1][:start_col-1]]
+        after = [lines[end_line-1][end_col:]] + lines[end_line:]
+        new_contents = ''.join(before + [new_body] + after)
+
+        with open(fpath, 'w') as f:
+            f.write(new_contents)
+        with open(fpath.with_suffix('.old'), 'w') as f:
+            f.write(''.join(old_lines))
+
+    def remove_func(self, func):
 
         fpath = Path(os.path.join(self.code_dir, func['filename']))
         start_line = func['startLine']
