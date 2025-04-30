@@ -1,7 +1,7 @@
 FROM coreutils:latest
 
 RUN ["rm", "-f", "/app/src/tail"]
-RUN ["sudo", "rm", "-f", "/user/bin/tail"]
+RUN ["sudo", "rm", "-f", "/usr/bin/tail"]
 
 # Failing:
 # /app/tests/tail/follow-name.sh

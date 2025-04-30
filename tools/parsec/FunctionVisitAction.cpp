@@ -26,8 +26,6 @@ void FunctionVisitAction::EndSourceFileAction() {
     std::unordered_set<json> fileData = myConsumer.getData();
     // Append the updated data to this->data
     for (const auto &entry : fileData) {
-        // Get "filename" from the entry json object
-        std::string filename = entry["filename"];
         this->data.insert(entry);
     }
     // Get the generated module and add it to the list

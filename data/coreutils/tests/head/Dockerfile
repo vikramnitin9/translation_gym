@@ -1,7 +1,7 @@
 FROM coreutils:latest
 
 RUN ["rm", "-f", "/app/src/head"]
-RUN ["sudo", "rm", "-f", "/user/bin/head"]
+RUN ["sudo", "rm", "-f", "/usr/bin/head"]
 
 # Failing - tests/head/head-c.sh
 

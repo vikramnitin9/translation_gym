@@ -1,7 +1,7 @@
 FROM coreutils:latest
 
 RUN ["rm", "-f", "/app/src/uniq"]
-RUN ["sudo", "rm", "-f", "/user/bin/uniq"]
+RUN ["sudo", "rm", "-f", "/usr/bin/uniq"]
 
 CMD ["bash", "-c", "make TESTS=\"tests/uniq/uniq-collate.sh \
                             tests/uniq/uniq-perf.sh \

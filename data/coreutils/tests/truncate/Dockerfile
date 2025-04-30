@@ -1,7 +1,7 @@
 FROM coreutils:latest
 
 RUN ["rm", "-f", "/app/src/truncate"]
-RUN ["sudo", "rm", "-f", "/user/bin/truncate"]
+RUN ["sudo", "rm", "-f", "/usr/bin/truncate"]
 
 CMD ["bash", "-c", "make TESTS=\"tests/truncate/truncate-no-create-missing.sh \
       tests/truncate/truncate-relative.sh \

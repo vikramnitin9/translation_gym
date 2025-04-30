@@ -1,7 +1,7 @@
 FROM coreutils:latest
 
 RUN ["rm", "-f", "/app/src/split"]
-RUN ["sudo", "rm", "-f", "/user/bin/split"]
+RUN ["sudo", "rm", "-f", "/usr/bin/split"]
 
 # Failing - /app/tests/split/r-chunk.sh
 

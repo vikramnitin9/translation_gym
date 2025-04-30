@@ -1,7 +1,7 @@
 FROM coreutils:latest
 
 RUN ["rm", "-f", "/app/src/pwd"]
-RUN ["sudo", "rm", "-f", "/user/bin/pwd"]
+RUN ["sudo", "rm", "-f", "/usr/bin/pwd"]
 
 CMD ["bash", "-c", "make TESTS=\"tests/pwd/pwd-long.sh \
                                 tests/pwd/pwd-option.sh\" \
