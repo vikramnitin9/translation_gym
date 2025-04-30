@@ -11,6 +11,7 @@ import textwrap
 import docker
 import socket
 import pathlib
+import time
 
 def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
 def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
@@ -25,23 +26,24 @@ class CompileException(Exception):
 class RunException(Exception):
     pass
 
-def run(command, verbose=False):
+def run(command, timeout=120, verbose=False):
 
+    if verbose:
+        prCyan(f"Running command: {command}")
     try:
         result = subprocess.run(
             command,
             shell=True,
-            timeout=120,
+            timeout=timeout,
             stderr=subprocess.PIPE,
             stdout=subprocess.PIPE,
         )
         if result.returncode != 0:
-            exec_output = result.stderr.decode('utf-8', errors='ignore')
-            if exec_output.strip() == '':
-                exec_output = result.stdout.decode('utf-8', errors='ignore')
+            stderr = result.stderr.decode('utf-8', errors='ignore') if result.stderr else ''
+            stdout = result.stdout.decode('utf-8', errors='ignore') if result.stdout else ''
             if verbose:
-                prLightGray(exec_output)
-            raise RunException(exec_output)
+                prLightGray(f"STDOUT:\n{stdout}\nSTDERR:\n{stderr}")
+            raise RunException(f"STDOUT:\n{stdout}\nSTDERR:\n{stderr}")
     except subprocess.TimeoutExpired:
         raise RunException("Timeout")
     except subprocess.CalledProcessError as e:
@@ -93,3 +95,29 @@ def to_host_path(path):
                 mount_path_len = len(Path(mount['Destination']).parts)
                 host_path = Path(mount['Source'])/path.relative_to(Path(mount['Destination']))
     return host_path
+
+
+def get_last_modified_time(folder_path, filter_ext=None):
+    """
+    Returns the last modified time of a folder, considering all files and subfolders.
+
+    Args:
+    folder_path: The path to the folder.
+
+    Returns:
+    A float representing the last modified timestamp (seconds since epoch), or None if the folder does not exist.
+    """
+    if not os.path.exists(folder_path):
+        return None
+
+    max_mtime = 0
+    for root, _, files in os.walk(folder_path):
+        max_mtime = max(max_mtime, os.path.getmtime(root))
+        for file in files:
+            # Filter files based on the provided extension
+            if filter_ext and not file.endswith(filter_ext):
+                continue
+            file_path = os.path.join(root, file)
+            max_mtime = max(max_mtime, os.path.getmtime(file_path))
+        
+    return max_mtime

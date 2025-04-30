@@ -34,6 +34,8 @@ class CManager(SourceManager):
 
     def __init__(self, code_dir):
         self.code_dir = code_dir
+        self.last_compile_time = 0
+        self.static_analysis_results = None
     
     def get_bin_target(self):
 
@@ -109,7 +111,8 @@ class CManager(SourceManager):
         if parsec_build_dir is None:
             raise CompileException("Error: $PARSEC_BUILD_DIR not set.")
         try:
-            run('cd {} && {}/parsec *.c'.format(self.code_dir, parsec_build_dir), verbose=verbose)
+            run('cd {} && {}/parsec *.c'.format(self.code_dir, parsec_build_dir), timeout=timeout, verbose=verbose)
+            self.last_compile_time = time.time()
         except RunException as e:
             raise CompileException(e)
         finally:
@@ -119,8 +122,16 @@ class CManager(SourceManager):
         return Path(self.code_dir)
     
     def get_static_analysis_results(self):
-        functions_json_path = Path(self.code_dir)/'functions.json'
-        return json.load(open(functions_json_path, 'r'))
+        last_modified_time = get_last_modified_time(self.code_dir, ".c")
+        if last_modified_time > self.last_compile_time:
+            prCyan("Code has changed, re-compiling.")
+            self.compile()
+            functions_json_path = Path(self.code_dir)/'functions.json'
+            self.static_analysis_results = json.load(open(functions_json_path, 'r'))
+        elif self.static_analysis_results is None:
+            functions_json_path = Path(self.code_dir)/'functions.json'
+            self.static_analysis_results = json.load(open(functions_json_path, 'r'))
+        return self.static_analysis_results
 
     def get_instrumentation_dir(self):
         return self.instrumentation_dir

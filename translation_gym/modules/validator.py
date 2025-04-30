@@ -4,14 +4,16 @@ class Validator:
     """
     Base class for validators. This class is responsible for validating the translated code.
     """
-    def validate(self, func, translation, source_manager, target_manager, test_manager):
+    def validate(self, func, translation, source_manager, target_manager, test_manager, verbose):
         """
         Validate the translated code.
 
         :param func: The original function
         :param translation: The translated function
         :param source_manager: The source manager
+        :param target_manager: The target manager
         :param test_manager: The test manager
+        :param verbose: Whether to print verbose output
         :return: A dictionary with the validation result
                 {"success": True/False,
                  "category": "Compile Error" or "Test Failure",
@@ -25,7 +27,7 @@ class DefaultValidator(Validator):
     def __init__(self, compile_attempts=5):
         self.compile_attempts = compile_attempts
 
-    def validate(self, func, translation, source_manager, target_manager, test_manager):
+    def validate(self, func, translation, source_manager, target_manager, test_manager, verbose=False):
         source_manager.comment_out(func)
         target_manager.insert_translation(func['name'], translation)
 
@@ -34,7 +36,7 @@ class DefaultValidator(Validator):
         # Try 5 times to compile, in case there is a timeout or mysterious linker error
         for _ in range(self.compile_attempts):
             try:
-                source_manager.compile()
+                source_manager.compile(verbose=verbose)
                 compile_success = True
                 break
             except CompileException as e:
@@ -56,7 +58,7 @@ class DefaultValidator(Validator):
         error_message = ''    
         for _ in range(self.compile_attempts):
             try:
-                target_manager.compile()
+                target_manager.compile(verbose=verbose)
                 compile_success = True
                 break
             except CompileException as e:

@@ -118,7 +118,7 @@ class TranslationEngine:
                     func['calledFunctions'][i]['translated'] = False
                     
             translation = translator.translate(func, self.source_manager, self.verbose)
-            result = validator.validate(func, translation, self.source_manager, self.target_manager, self.test_manager)
+            result = validator.validate(func, translation, self.source_manager, self.target_manager, self.test_manager, self.verbose)
 
             for i in range(self.num_attempts):
                 prCyan(f"Attempt {i+1}/{self.num_attempts}")
@@ -129,6 +129,7 @@ class TranslationEngine:
                 else:
                     prRed("Translation failed")
                     if self.verbose:
+                        prLightGray(result['category'])
                         prLightGray(result['message'])
                     self.source_manager.reset_func(func)
                     self.target_manager.reset_func(func)

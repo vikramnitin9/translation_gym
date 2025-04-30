@@ -40,6 +40,8 @@ class RustManager(TargetManager):
         self.src_build_path = src_build_path
         self.instrumentation_dir = Path(self.code_dir, 'instrumentation')
         self.instrumentation_dir.mkdir(parents=True, exist_ok=True)
+        self.last_compile_time = 0
+        self.static_analysis_results = None
 
     def setup(self):
         shutil.copytree('resources/rust_wrapper', self.code_dir, dirs_exist_ok=True)
@@ -74,30 +76,23 @@ class RustManager(TargetManager):
         self.cargo_bin_target = target
 
     def get_static_analysis_results(self):
-        functions_json_path = Path(self.code_dir)/'functions.json'
-        return json.load(open(functions_json_path, 'r'))
-    
+        last_modified_time = get_last_modified_time(self.code_dir, ".rs")
+        if last_modified_time > self.last_compile_time:
+            prCyan("Code has changed, re-compiling.")
+            self.compile()
+            functions_json_path = Path(self.code_dir)/'functions.json'
+            self.static_analysis_results = json.load(open(functions_json_path, 'r'))
+        elif self.static_analysis_results is None:
+            functions_json_path = Path(self.code_dir)/'functions.json'
+            self.static_analysis_results = json.load(open(functions_json_path, 'r'))
+        return self.static_analysis_results
+
     def get_executable(self):
         # The executable is created by `cargo parse`, 
         # which creates it in the target/<host>/debug directory
         command = "rustc -vV | grep '^host:' | awk '{ print $2 }'"
-        try:
-            result = subprocess.run(
-                command,
-                shell=True,
-                timeout=20,
-                stderr=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-            )
-            if result.returncode != 0:
-                exec_output = result.stderr.decode('utf-8', errors='ignore')
-                if exec_output.strip() == '':
-                    exec_output = result.stdout.decode('utf-8', errors='ignore')
-                raise RunException(exec_output)
-        except subprocess.TimeoutExpired:
-            raise RunException("Timeout")
-        
-        host = result.stdout.decode('utf-8', errors='ignore').strip()
+        result = run(command, timeout=20, verbose=False)
+        host = result.strip()
         # Check if the executable exists
         executable = Path(self.code_dir, f'target/{host}/debug/{self.cargo_bin_target}')
         if not executable.exists():
@@ -110,25 +105,11 @@ class RustManager(TargetManager):
     def compile(self, timeout=60, verbose=False):
         cwd = os.getcwd()
         cmd = 'cd {} && RUSTFLAGS="-Awarnings" C_BUILD_PATH="{}" cargo parse'.format(self.code_dir, self.src_build_path)
-
         try:
-            result = subprocess.run(
-                        cmd,
-                        shell=True,
-                        timeout=timeout,
-                        stderr=subprocess.STDOUT if verbose else subprocess.PIPE,
-                        stdout=None if verbose else subprocess.PIPE,
-                    )
-            if result.returncode != 0:
-                if not verbose:
-                    compiler_output = result.stdout.decode('utf-8', errors='ignore')
-                else:
-                    compiler_output = result.stderr.decode('utf-8', errors='ignore')
-                raise CompileException(compiler_output)
-
-        except (subprocess.TimeoutExpired, TimeoutError):
-            raise CompileException("Timeout")
-
+            run(cmd, timeout=timeout, verbose=verbose)
+            self.last_compile_time = time.time()
+        except RunException as e:
+            raise CompileException(e)
         finally:
             os.chdir(cwd)
 

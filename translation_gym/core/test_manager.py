@@ -42,9 +42,6 @@ class TestManager:
                 -v {executable_host_path}:/executable/{exec_name}\
                 -v {instrumentation_host_path}:/instrumentation \
                     {self.test_docker}"
-        if self.verbose:
-            prCyan(f"Running command: {cmd}")
-
         try:
             run(cmd, self.verbose)
             instrumentation = self.collect_instrumentation_results(target_manager)
