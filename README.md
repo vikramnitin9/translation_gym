@@ -36,7 +36,7 @@ The easiest way to run this tool is with Docker and docker-compose. If you do no
 ```sh
 bash build.sh
 ```
-Each test dataset is built into a separate Docker container. Run the following commands to build all datasets (this should take about 5 minutes in total):
+Each test dataset is built into a separate Docker container. Run the following commands to build all datasets (this should take about 10 minutes in total):
 ```sh
 cd data
 export USER_ID=$(id -u)
