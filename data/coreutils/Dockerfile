@@ -33,15 +33,17 @@ RUN apt install -y sudo
 RUN echo "${USER_ID} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN echo "appuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-# Create necessary directories
-RUN mkdir -p /app && chown -R ${USER_ID}:${GROUP_ID} /app
-RUN mkdir -p /app/instrumentation && chown -R ${USER_ID}:${GROUP_ID} /app/instrumentation
-RUN mkdir -p /executable && chown -R ${USER_ID}:${GROUP_ID} /executable
+RUN ["git", "clone", "https://git.savannah.gnu.org/git/coreutils.git", "/app"]
 
 WORKDIR /app
 
-# Copy common test files from tests directory
-COPY --chown=${USER_ID}:${GROUP_ID} coreutils/ /app
+COPY --chown=${USER_ID}:${GROUP_ID} coreutils/patch_tests.sh /app
+RUN ["bash", "patch_tests.sh", "/app/tests"]
+
+# Create necessary directories
+RUN chown -R ${USER_ID}:${GROUP_ID} /app
+RUN mkdir -p /app/instrumentation && chown -R ${USER_ID}:${GROUP_ID} /app/instrumentation
+RUN mkdir -p /executable && chown -R ${USER_ID}:${GROUP_ID} /executable
 
 USER appuser
 

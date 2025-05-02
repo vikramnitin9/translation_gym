@@ -26,7 +26,7 @@ services:
   cat:
     build:
       context: .
-      dockerfile: ./coreutils/tests/cat/Dockerfile
+      dockerfile: coreutils/Dockerfile.cat
       args:
         USER_ID: "${USER_ID}"
         GROUP_ID: "${GROUP_ID}"
@@ -37,7 +37,7 @@ services:
   head:
     build:
       context: .
-      dockerfile: ./coreutils/tests/head/Dockerfile
+      dockerfile: coreutils/Dockerfile.head
       args:
         USER_ID: "${USER_ID}"
         GROUP_ID: "${GROUP_ID}"
@@ -48,7 +48,7 @@ services:
   pwd:
     build:
       context: .
-      dockerfile: ./coreutils/tests/pwd/Dockerfile
+      dockerfile: coreutils/Dockerfile.pwd
       args:
         USER_ID: "${USER_ID}"
         GROUP_ID: "${GROUP_ID}"
@@ -59,7 +59,7 @@ services:
   split:
     build:
       context: .
-      dockerfile: ./coreutils/tests/split/Dockerfile
+      dockerfile: coreutils/Dockerfile.split
       args:
         USER_ID: "${USER_ID}"
         GROUP_ID: "${GROUP_ID}"
@@ -70,7 +70,7 @@ services:
   tail:
     build:
       context: .
-      dockerfile: ./coreutils/tests/tail/Dockerfile
+      dockerfile: coreutils/Dockerfile.tail
       args:
         USER_ID: "${USER_ID}"
         GROUP_ID: "${GROUP_ID}"
@@ -81,7 +81,7 @@ services:
   truncate:
     build:
       context: .
-      dockerfile: ./coreutils/tests/truncate/Dockerfile
+      dockerfile: coreutils/Dockerfile.truncate
       args:
         USER_ID: "${USER_ID}"
         GROUP_ID: "${GROUP_ID}"
@@ -92,7 +92,7 @@ services:
   uniq:
     build:
       context: .
-      dockerfile: ./coreutils/tests/uniq/Dockerfile
+      dockerfile: coreutils/Dockerfile.uniq
       args:
         USER_ID: "${USER_ID}"
         GROUP_ID: "${GROUP_ID}"
