@@ -1,0 +1,3 @@
+[submodule "data/coreutils/gnulib"]
+	path = data/coreutils/gnulib
+	url = git://git.savannah.gnu.org/gnulib.git
