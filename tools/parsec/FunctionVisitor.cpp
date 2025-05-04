@@ -40,7 +40,9 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
         std::string returnType = function->getReturnType().getAsString(Policy);
         std::vector<std::string> argTypes;
         std::vector<std::string> argNames;
-        std::string signature = returnType + " " + function->getQualifiedNameAsString() + "(";
+        std::string static_str = function->isStatic() ? "static " : "";
+        std::string inline_str = function->isInlineSpecified() ? "inline " : "";
+        std::string signature = static_str + inline_str + returnType + " " + function->getQualifiedNameAsString() + "(";
 
         for (unsigned i = 0; i < function->getNumParams(); ++i) {
             if (i > 0) {

@@ -253,7 +253,9 @@ void addInstrumentation(Module &M, std::unordered_set<json> jsonData) {
 					} else if (F.getReturnType()->isPointerTy()) {
 						Type *ElemType = F.getReturnType()->getPointerElementType();
 						
-						if (ElemType->isIntegerTy(8) && retType == "char *") { // char* (i8*)
+						if (ElemType->isIntegerTy(8) &&
+								// LLVM uses i8* for void* also, so we need this extra check
+								(retType == "char *" || retType == "const char *" || retType == "unsigned char *")) {
 							// char* arg — check if null
 							Value *IsNull = Builder.CreateICmpEQ(RetVal, ConstantPointerNull::get(cast<PointerType>(F.getReturnType())));
 	
