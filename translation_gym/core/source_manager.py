@@ -2,7 +2,7 @@ from translation_gym.helpers import *
 
 class SourceManager:
 
-    def __init__(self, code_dir):
+    def __init__(self, code_dir, logger):
         raise NotImplementedError("SourceManager is an abstract class and cannot be instantiated directly.")
     
     def get_code_dir(self):
@@ -38,10 +38,11 @@ class SourceManager:
 
 class CSourceManager(SourceManager):
 
-    def __init__(self, code_dir):
+    def __init__(self, code_dir, logger):
         self.code_dir = Path(code_dir)
         self.last_compile_time = 0
         self.static_analysis_results = None
+        self.logger = logger
 
     def get_code_dir(self):
         return self.code_dir
@@ -87,11 +88,11 @@ class CSourceManager(SourceManager):
             raise NotImplementedError(f"Multiple executable targets ({','.join(targets)}) are not supported.")
         else:
             target = targets[0]
-            prGreen(f"Found executable target: {target}")
+            self.logger.log_success(f"Found executable target: {target}")
         os.chdir(cwd)
         return target
 
-    def compile(self, timeout=60, verbose=False):
+    def compile(self, timeout=60):
         cwd = os.getcwd()
         os.chdir(self.code_dir)
         compile_commands_json = Path(self.code_dir)/'compile_commands.json'
@@ -99,7 +100,7 @@ class CSourceManager(SourceManager):
         if not compile_commands_json.exists():
             # Get the output of bear --version
             try:
-                bear_version = run("bear --version", verbose=verbose)
+                bear_version = run("bear --version", logger=self.logger)
             except RunException as e:
                 raise CompileException(e)
             version = bear_version.split()[1]
@@ -109,7 +110,7 @@ class CSourceManager(SourceManager):
             else:
                 cmd = "make clean && bear make"
             try:
-                run(cmd, verbose=verbose)
+                run(cmd, logger=self.logger)
             except RunException as e:
                 raise CompileException(e)
         # Check if the compile_commands.json file exists
@@ -120,7 +121,7 @@ class CSourceManager(SourceManager):
         if parsec_build_dir is None:
             raise CompileException("Error: $PARSEC_BUILD_DIR not set.")
         try:
-            run('cd {} && {}/parsec *.c'.format(self.code_dir, parsec_build_dir), timeout=timeout, verbose=verbose)
+            run('cd {} && {}/parsec *.c'.format(self.code_dir, parsec_build_dir), timeout=timeout, logger=self.logger)
             self.last_compile_time = time.time()
         except RunException as e:
             raise CompileException(e)
@@ -133,7 +134,7 @@ class CSourceManager(SourceManager):
     def get_static_analysis_results(self):
         last_modified_time = get_last_modified_time(self.code_dir, ".c")
         if last_modified_time > self.last_compile_time:
-            prCyan("Code has changed, re-compiling.")
+            self.logger.log_status("Code has changed, re-compiling.")
             self.compile()
             functions_json_path = Path(self.code_dir)/'functions.json'
             self.static_analysis_results = json.load(open(functions_json_path, 'r'))
@@ -219,7 +220,7 @@ class CSourceManager(SourceManager):
             f.write(''.join(old_lines))
     
     def reset_func(self, func):
-        prCyan("Resetting changes.")
+        self.logger.log_status("Resetting changes.")
         # Replace the ".c" file with the ".old" file if it exists
         file = Path(self.code_dir, func['filename'])
         if file.with_suffix('.old').exists():
@@ -250,5 +251,5 @@ class CSourceManager(SourceManager):
             try:
                 run(cmd)
             except RunException as e:
-                prRed(f"Failed to fully cleanup {self.code_dir}")
+                self.logger.log_failure(f"Failed to fully cleanup {self.code_dir}")
         os.chdir(cwd)

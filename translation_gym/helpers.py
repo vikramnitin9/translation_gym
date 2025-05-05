@@ -26,10 +26,59 @@ class CompileException(Exception):
 class RunException(Exception):
     pass
 
-def run(command, timeout=120, verbose=False):
+class Logger:
 
-    if verbose:
-        prCyan(f"Running command: {command}")
+    def __init__(self, output_dir, args, verbose=False):
+        self.output_dir = Path(output_dir)
+        self.args = args
+        self.verbose = verbose
+        if not self.output_dir.exists():
+            self.output_dir.mkdir(parents=True, exist_ok=True)
+        self.output_file = Path(self.output_dir)/'output.txt'
+        if self.output_file.exists():
+            self.output_file.unlink()
+        self.output_file.touch()
+        self.log_file = Path(self.output_dir, 'log.json')
+        self.log = {'date': f"{datetime.datetime.now()}",
+                    'args': vars(args),
+                    'results': []}
+        with open(self.log_file, 'w') as f:
+            f.write(json.dumps(self.log, indent=4))
+    
+    def log_result(self, result):
+        self.log['results'].append(result)
+        with open(self.log_file, 'w') as f:
+            f.write(json.dumps(self.log, indent=4))
+    
+    def get_results(self):
+        return self.log['results']
+    
+    def log_status(self, output):
+        prCyan(output)
+        with open(self.output_file, 'a') as f:
+            f.write(f"{output}\n")
+    
+    def log_failure(self, output):
+        prRed(output)
+        with open(self.output_file, 'a') as f:
+            f.write(f"{output}\n")
+    
+    def log_success(self, output):
+        prGreen(output)
+        with open(self.output_file, 'a') as f:
+            f.write(f"{output}\n")
+    
+    def log_output(self, output):
+        if self.verbose:
+            prLightGray(output)
+        with open(self.output_file, 'a') as f:
+            f.write(f"{output}\n")
+    
+
+def run(command, timeout=120, logger=None):
+
+    if logger:
+        logger.log_status(f"Running command: {command}")
     try:
         result = subprocess.run(
             command,
@@ -41,8 +90,8 @@ def run(command, timeout=120, verbose=False):
         if result.returncode != 0:
             stderr = result.stderr.decode('utf-8', errors='ignore') if result.stderr else ''
             stdout = result.stdout.decode('utf-8', errors='ignore') if result.stdout else ''
-            if verbose:
-                prLightGray(f"STDOUT:\n{stdout}\nSTDERR:\n{stderr}")
+            if logger:
+                logger.log_output(f"STDOUT:\n{stdout}\nSTDERR:\n{stderr}")
             raise RunException(f"STDOUT:\n{stdout}\nSTDERR:\n{stderr}")
     except subprocess.TimeoutExpired:
         raise RunException("Timeout")
@@ -51,8 +100,8 @@ def run(command, timeout=120, verbose=False):
     except Exception as e:
         raise RunException(str(e))
     
-    if verbose:
-        prLightGray(result.stdout.decode('utf-8', errors='ignore'))
+    if logger:
+        logger.log_output(result.stdout.decode('utf-8', errors='ignore'))
         
     return result.stdout.decode('utf-8', errors='ignore')
 

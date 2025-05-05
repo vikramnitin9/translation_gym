@@ -7,11 +7,7 @@ class Translator:
     Base class for translators. This class is responsible for translating the code.
     """
 
-    def __init__(self, model):
-        self.model = get_model_from_name(model)
-        self.conversation = []
-
-    def translate(self, func, source_manager, verbose=False):
+    def translate(self, func, source_manager):
         """
         Translate the given function to Rust.
         :param func: The function to translate
@@ -21,7 +17,6 @@ class Translator:
              'calledFunctions': ['func1', 'func2', ...]
             }
         :param source_manager: The source manager
-        :param verbose: Whether to print verbose output
         :return: A dictionary with the translated function
                 {"func": "translated function",
                  "wrapper": "wrapper function",
@@ -29,7 +24,7 @@ class Translator:
         """
         raise NotImplementedError("Subclasses must implement this method")
     
-    def repair(self, result, source_manager, verbose=False):
+    def repair(self, result, source_manager):
         """
         Repair the given function.
         :param result: The result of the translation
@@ -38,7 +33,6 @@ class Translator:
              "message": "Error message"
             }
         :param source_manager: The source manager
-        :param verbose: Whether to print verbose output
         :return: A dictionary with the repaired function
                 {"func": "repaired function body",
                  "wrapper": "repaired wrapper function",
@@ -49,8 +43,9 @@ class Translator:
 
 class DefaultTranslator(Translator):
 
-    def __init__(self, model):
+    def __init__(self, model, logger):
         self.model = get_model_from_name(model)
+        self.logger = logger
         self.conversation = []
 
     def construct_prompt_for_func(self, func):
@@ -103,7 +98,7 @@ pub extern "C" fn {func['name']} ...
 '''
         return prompt
     
-    def translate(self, func, source_manager, verbose=False):
+    def translate(self, func, source_manager):
 
         body = source_manager.extract_body(func)
         func['body'] = body
@@ -113,17 +108,15 @@ pub extern "C" fn {func['name']} ...
         self.conversation = [{'role': 'system', 'content': 'You are an intelligent code assistant'},
                             {'role': 'user', 'content': translation_prompt.strip()}]
 
-        if verbose:
-            prLightGray(translation_prompt)
+        self.logger.log_output(translation_prompt)
 
         while True:
             try:
-                prCyan("Calling LLM for translation")
+                self.logger.log_status("Calling LLM for translation")
                 response = self.model.gen(self.conversation, top_k=1, temperature=0)[0]
                 self.conversation.append({'role': 'assistant', 'content': response})
-                prGreen("LLM response received")
-                if verbose:
-                    prLightGray(response)
+                self.logger.log_success("LLM response received")
+                self.logger.log_output(response)
                 # Parse the response and extract the text between either
                 # <FUNC>...</FUNC>, <IMPORT>...</IMPORT> or <WRAPPER>...</WRAPPER> tags
                 if '<IMPORTS>\n' in response:
@@ -132,10 +125,10 @@ pub extern "C" fn {func['name']} ...
                     imports = ''
                 
                 if '<FUNC>\n' not in response:
-                    prRed("Response does not contain <FUNC> tag. Trying again.")
+                    self.logger.log_failure("Response does not contain <FUNC> tag. Trying again.")
                     continue
                 if '<WRAPPER>\n' not in response:
-                    prRed("Response does not contain <WRAPPER> tag. Trying again.")
+                    self.logger.log_failure("Response does not contain <WRAPPER> tag. Trying again.")
                     continue
                 function_trans = response.split('<FUNC>\n')[1].split('</FUNC>')[0]
                 wrapper = response.split('<WRAPPER>\n')[1].split('</WRAPPER>')[0]
@@ -146,9 +139,7 @@ pub extern "C" fn {func['name']} ...
                 wrapper = wrapper.replace('```rust', '').replace('```', '').strip()
                 break
             except ModelException as e:
-                prCyan("Model exception")
-                prCyan(e)
-                prCyan("Trying again")
+                self.logger.log_status(f"Model exception\n{e}\nTrying again")
                 continue
 
         return {
@@ -157,7 +148,7 @@ pub extern "C" fn {func['name']} ...
             'imports': imports,
         }
     
-    def repair(self, result, source_manager, verbose=False):
+    def repair(self, result, source_manager):
 
         assert len(self.conversation) > 0, "Repair called before translation"
 
@@ -178,12 +169,11 @@ pub extern "C" fn {func['name']} ...
 
         while True:
             try:
-                prCyan("Calling LLM for repair")
+                self.logger.log_status("Calling LLM for repair")
                 response = self.model.gen(self.conversation, top_k=1, temperature=0)[0]
                 self.conversation.append({'role': 'assistant', 'content': response})
-                prGreen("LLM response received")
-                if verbose:
-                    prLightGray(response)
+                self.logger.log_success("LLM response received")
+                self.logger.log_output(response)
                 # Parse the response and extract the text between either
                 # <FUNC>...</FUNC>, <IMPORT>...</IMPORT> or <WRAPPER>...</WRAPPER> tags
                 if '<IMPORTS>\n' in response:
@@ -192,10 +182,10 @@ pub extern "C" fn {func['name']} ...
                     imports = ''
                 
                 if '<FUNC>\n' not in response:
-                    prRed("Response does not contain <FUNC> tag. Trying again.")
+                    self.logger.log_failure("Response does not contain <FUNC> tag. Trying again.")
                     continue
                 if '<WRAPPER>\n' not in response:
-                    prRed("Response does not contain <WRAPPER> tag. Trying again.")
+                    self.logger.log_failure("Response does not contain <WRAPPER> tag. Trying again.")
                     continue
                 function_trans = response.split('<FUNC>\n')[1].split('</FUNC>')[0]
                 wrapper = response.split('<WRAPPER>\n')[1].split('</WRAPPER>')[0]
@@ -206,9 +196,9 @@ pub extern "C" fn {func['name']} ...
                 wrapper = wrapper.replace('```rust', '').replace('```', '').strip()
                 break
             except ModelException as e:
-                prCyan("Model exception")
-                prCyan(e)
-                prCyan("Trying again")
+                self.logger.log_status("Model exception")
+                self.logger.log_status(e)
+                self.logger.log_status("Trying again")
                 continue
 
         return {

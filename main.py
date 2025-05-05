@@ -23,18 +23,20 @@ if __name__ == '__main__':
     dataset = datasets[args.dataset]
     assert 'code_dir' in dataset, f"Code directory not specified for dataset {args.dataset}"
 
-    orchestrator = DefaultOrchestrator()
-    translator = DefaultTranslator(args.model)
-    validator = DefaultValidator(compile_attempts=5) # In case compilation times out, how many times to retry
+    if Path(args.output_dir).exists():
+        raise FileExistsError(f"Directory {args.output_dir} already exists. Please remove it before running the script.")
+
+    logger = Logger(args.output_dir, args, verbose=args.verbose)
+
+    orchestrator = DefaultOrchestrator(logger)
+    translator = DefaultTranslator(args.model, logger)
+    validator = DefaultValidator(compile_attempts=5, logger=logger) # In case compilation times out, how many times to retry
 
     engine = TranslationEngine(dataset=dataset,
                                output_dir=args.output_dir,
-                               model=args.model,
                                num_attempts=args.num_attempts,
-                               verbose=args.verbose)
+                               logger=logger)
 
-    import pdb; pdb.set_trace()
-    
     engine.run(translator=translator,
                orchestrator=orchestrator,
                validator=validator)

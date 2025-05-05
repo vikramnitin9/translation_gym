@@ -17,6 +17,9 @@ class Orchestrator:
 
 class DefaultOrchestrator(Orchestrator):
 
+    def __init__(self, logger):
+        self.logger = logger
+
     def function_iter(self, source_manager, instrumentation_results=None):
         static_analysis_results = source_manager.get_static_analysis_results()
         # Build call graph of functions

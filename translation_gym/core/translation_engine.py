@@ -11,24 +11,15 @@ class TranslationEngine:
     def __init__(self,
                 dataset: dict,
                 output_dir: str,
-                model: str,
-                num_attempts: int=5,
-                verbose: bool=False):
+                num_attempts: int,
+                logger: Logger):
         
         self.dataset = dataset
-        self.verbose = verbose
+        self.logger = logger
         self.output_dir = Path(output_dir)
         self.setup() # Sets up source_manager and target_manager
         self.num_attempts = num_attempts
-        self.log_file = Path(self.output_dir, 'log.json')
-        self.log = {'date': f"{datetime.datetime.now()}",
-                    'attempts': num_attempts,
-                    'model': model,
-                    'results': []}
         self.translated = {}
-
-        with open(self.log_file, 'w') as f:
-            f.write(json.dumps(self.log, indent=4))
 
     def get_source_manager(self):
         return self.source_manager
@@ -44,34 +35,28 @@ class TranslationEngine:
         code_dir = Path("data")/Path(self.dataset["code_dir"])
         assert Path(code_dir).exists(), f"Code directory {code_dir} does not exist"
 
-        prCyan("Translating code in directory: {}".format(code_dir.absolute()))
+        self.logger.log_status("Translating code in directory: {}".format(code_dir.absolute()))
 
         # Creating new subdirectories
-        output_dir = Path(self.output_dir)
-        if output_dir.exists():
-            prRed(f"Directory {output_dir} already exists. Please remove it before running the script.")
-            raise FileExistsError(f"Directory {output_dir} already exists. Please remove it before running the script.")
-        
-        output_dir.mkdir(parents=True, exist_ok=True)
-        shutil.copytree(code_dir, output_dir/'c_src')
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(code_dir, self.output_dir/'c_src')
 
-        code_dir = output_dir
-        prCyan("Copied over the code to {}".format(code_dir.absolute()))
-        self.source_manager = CSourceManager(code_dir/'c_src')
+        code_dir = self.output_dir
+        self.logger.log_status("Copied over the code to {}".format(code_dir.absolute()))
+        self.source_manager = CSourceManager(code_dir/'c_src', logger=self.logger)
         
         # First compile the source code
         try:
             self.source_manager.compile(timeout=120) # Increase time for first compile
-            prGreen("Compilation succeeded")
+            self.logger.log_success("Compilation succeeded")
         except CompileException as e:
-            prRed("Compilation failed")
-            if self.verbose:
-                prLightGray(e)
+            self.logger.log_failure("Compilation failed")
+            self.logger.log_output(e)
             raise CompileException(e)
 
         src_build_path = self.source_manager.get_build_path()
 
-        self.target_manager = RustTargetManager(code_dir, src_build_path)
+        self.target_manager = RustTargetManager(code_dir, src_build_path, logger=self.logger)
         target = self.source_manager.get_bin_target()
         self.target_manager.setup()
         self.target_manager.set_target_name(target)
@@ -79,21 +64,20 @@ class TranslationEngine:
         # Then compile the target language wrapper and link it with the compiled source
         try:
             self.target_manager.compile(timeout=120) # Increase time for first compile
-            prGreen("Compilation succeeded")
+            self.logger.log_success("Compilation succeeded")
         except CompileException as e:
-            prRed("Compilation failed")
-            if self.verbose:
-                prLightGray(e)
+            self.logger.log_failure("Compilation failed")
+            self.logger.log_output(e)
             raise CompileException(e)
         
         executable = self.target_manager.get_executable()
-        prGreen("Generated executable: {}".format(executable))
+        self.logger.log_success("Generated executable: {}".format(executable))
 
         test_docker = self.dataset['test_docker_image']
-        self.test_manager = TestManager(test_docker, verbose=self.verbose)
+        self.test_manager = TestManager(test_docker, logger=self.logger)
         test_res = self.test_manager.run_tests(self.target_manager)
         if test_res['status'] == "passed":
-            prGreen("Tests passed")
+            self.logger.log_success("Tests passed")
             self.instrumentation_results = test_res['instrumentation']
         else:
             raise Exception(f"Tests failed: {test_res['error']}.")
@@ -104,7 +88,7 @@ class TranslationEngine:
             validator: Validator):
 
         for func in orchestrator.function_iter(self.source_manager, self.instrumentation_results):
-            prCyan("Translating function: {}".format(func['name']))
+            self.logger.log_status("Translating function: {}".format(func['name']))
 
             # This is the part where we collect info about the called functions.
             rust_static_analysis = self.target_manager.get_static_analysis_results()
@@ -120,45 +104,43 @@ class TranslationEngine:
                     func['calledFunctions'][i]['signature'] = matching_rust_fn[0]['signature']
                     func['calledFunctions'][i]['translated'] = False
                     
-            translation = translator.translate(func, self.source_manager, self.verbose)
-            result = validator.validate(func, translation, self.source_manager, self.target_manager, self.test_manager, self.verbose)
+            translation = translator.translate(func, self.source_manager)
+            result = validator.validate(func, translation, self.source_manager, self.target_manager, self.test_manager)
 
             for i in range(self.num_attempts):
-                prCyan(f"Attempt {i+1}/{self.num_attempts}")
+                self.logger.log_status(f"Attempt {i+1}/{self.num_attempts}")
 
                 if result['success']:
-                    prGreen("Translation succeeded")
+                    self.logger.log_success("Translation succeeded")
                     break
                 else:
-                    prRed("Translation failed")
-                    if self.verbose:
-                        prLightGray(result['category'])
-                        prLightGray(result['message'])
+                    self.logger.log_failure("Translation failed")
+                    self.logger.log_output(result['category'])
+                    self.logger.log_output(result['message'])
                     self.source_manager.reset_func(func)
                     self.target_manager.reset_func(func)
                     if i == self.num_attempts - 1:
                         break
-                    translation = translator.repair(result, self.source_manager, self.verbose)
+                    translation = translator.repair(result, self.source_manager)
                     result = validator.validate(func, translation, self.source_manager, self.target_manager, self.test_manager)
             
             if result['success']:
-                prGreen("Translation succeeded")
+                self.logger.log_success("Translation succeeded")
                 self.translated[func['name']] = translation['func']
             
-            self.log['results'].append({'function': func['name'],
+            self.logger.log_result({'function': func['name'],
                                    'results': "Success" if result['success'] else result['category'],
                                    'attempts': i+1})
-            with open(self.log_file, 'w') as f:
-                f.write(json.dumps(self.log, indent=4))
     
     def print_results(self):
         # Draw an ascii table with the results
         import prettytable
         table = prettytable.PrettyTable()
         table.field_names = ["Function", "Result", "Attempts"]
-        for result in self.log['results']:
+        results = self.logger.get_results()
+        for result in results:
             table.add_row([result['function'], result['results'], result['attempts']])
         table.add_divider()
-        table.add_row(['Overall', "{}/{}".format(len([r for r in self.log['results'] if r['results'] == "Success"]), len(self.log['results'])), ''])
+        table.add_row(['Overall', "{}/{}".format(len([r for r in results if r['results'] == "Success"]), len(results)), ''])
         print(table)
         return

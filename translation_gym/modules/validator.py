@@ -4,7 +4,7 @@ class Validator:
     """
     Base class for validators. This class is responsible for validating the translated code.
     """
-    def validate(self, func, translation, source_manager, target_manager, test_manager, verbose):
+    def validate(self, func, translation, source_manager, target_manager, test_manager):
         """
         Validate the translated code.
 
@@ -13,7 +13,6 @@ class Validator:
         :param source_manager: The source manager
         :param target_manager: The target manager
         :param test_manager: The test manager
-        :param verbose: Whether to print verbose output
         :return: A dictionary with the validation result
                 {"success": True/False,
                  "category": "Compile Error" or "Test Failure",
@@ -24,10 +23,11 @@ class Validator:
     
 class DefaultValidator(Validator):
 
-    def __init__(self, compile_attempts=5):
+    def __init__(self, compile_attempts, logger):
         self.compile_attempts = compile_attempts
+        self.logger = logger
 
-    def validate(self, func, translation, source_manager, target_manager, test_manager, verbose=False):
+    def validate(self, func, translation, source_manager, target_manager, test_manager):
         source_manager.remove_func(func)
         target_manager.insert_translation(func, translation)
 
@@ -36,16 +36,16 @@ class DefaultValidator(Validator):
         # Try 5 times to compile, in case there is a timeout or mysterious linker error
         for _ in range(self.compile_attempts):
             try:
-                source_manager.compile(verbose=verbose)
+                source_manager.compile()
                 compile_success = True
                 break
             except CompileException as e:
                 error_message = str(e)
                 if "Timeout" in str(e):
-                    prRed("Timeout. Trying again.")
+                    self.logger.log_failure("Timeout. Trying again.")
                     continue
                 elif "rust-lld: error:" in str(e):
-                    prRed("Linker error. Cleaning up and trying again.")
+                    self.logger.log_failure("Linker error. Cleaning up and trying again.")
                     source_manager.cleanup()
                     continue
 
@@ -58,16 +58,16 @@ class DefaultValidator(Validator):
         error_message = ''    
         for _ in range(self.compile_attempts):
             try:
-                target_manager.compile(verbose=verbose)
+                target_manager.compile()
                 compile_success = True
                 break
             except CompileException as e:
                 error_message = str(e)
                 if "Timeout" in str(e):
-                    prRed("Timeout. Trying again.")
+                    self.logger.log_failure("Timeout. Trying again.")
                     continue
                 elif "rust-lld: error:" in str(e):
-                    prRed("Linker error. Cleaning up and trying again.")
+                    self.logger.log_failure("Linker error. Cleaning up and trying again.")
                     target_manager.cleanup()
                     continue
 

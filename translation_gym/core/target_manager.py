@@ -2,7 +2,7 @@ from translation_gym.helpers import *
 
 class TargetManager:
 
-    def __init__(self, code_dir, src_build_path):
+    def __init__(self, code_dir, src_build_path, logger):
         raise NotImplementedError("TargetManager is an abstract class and cannot be instantiated directly.")
     
     def get_code_dir(self):
@@ -35,7 +35,7 @@ class TargetManager:
     def get_executable(self):
         raise NotImplementedError("get_executable() not implemented")
     
-    def compile(self, timeout, verbose):
+    def compile(self, timeout):
         raise NotImplementedError("compile() not implemented")
     
     def insert_translation(self, translation):
@@ -44,13 +44,14 @@ class TargetManager:
 
 class RustTargetManager(TargetManager):
 
-    def __init__(self, code_dir, src_build_path):
+    def __init__(self, code_dir, src_build_path, logger):
         self.code_dir = code_dir
         self.src_build_path = src_build_path
         self.instrumentation_dir = Path(self.code_dir, 'instrumentation')
         self.instrumentation_dir.mkdir(parents=True, exist_ok=True)
         self.last_compile_time = 0
         self.static_analysis_results = None
+        self.logger = logger
 
     def get_code_dir(self):
         return self.code_dir
@@ -90,7 +91,7 @@ class RustTargetManager(TargetManager):
     def get_static_analysis_results(self):
         last_modified_time = get_last_modified_time(self.code_dir, ".rs")
         if last_modified_time > self.last_compile_time:
-            prCyan("Code has changed, re-compiling.")
+            self.logger.log_status("Code has changed, re-compiling.")
             self.compile()
             functions_json_path = Path(self.code_dir)/'functions.json'
             self.static_analysis_results = json.load(open(functions_json_path, 'r'))
@@ -131,7 +132,7 @@ class RustTargetManager(TargetManager):
         # The executable is created by `cargo parse`, 
         # which creates it in the target/<host>/debug directory
         command = "rustc -vV | grep '^host:' | awk '{ print $2 }'"
-        result = run(command, timeout=20, verbose=False)
+        result = run(command, timeout=20, logger=self.logger)
         host = result.strip()
         # Check if the executable exists
         executable = Path(self.code_dir, f'target/{host}/debug/{self.cargo_bin_target}')
@@ -142,11 +143,11 @@ class RustTargetManager(TargetManager):
     def get_instrumentation_dir(self):
         return self.instrumentation_dir
     
-    def compile(self, timeout=60, verbose=False):
+    def compile(self, timeout=60):
         cwd = os.getcwd()
         cmd = 'cd {} && RUSTFLAGS="-Awarnings" C_BUILD_PATH="{}" cargo parse'.format(self.code_dir, self.src_build_path)
         try:
-            run(cmd, timeout=timeout, verbose=verbose)
+            run(cmd, timeout=timeout, logger=self.logger)
             self.last_compile_time = time.time()
         except RunException as e:
             raise CompileException(e)
@@ -199,13 +200,13 @@ class RustTargetManager(TargetManager):
         try:
             run(f'cd {self.code_dir} && rustfmt --config imports_granularity=Crate src/main.rs')
         except:
-            prRed("Rustfmt failed. There may be a syntax error in the generated code.")
+            self.logger.log_failure("Rustfmt failed. There may be a syntax error in the generated code.")
 
         with open(main_rs.with_suffix('.old'), 'w') as f:
             f.write(old_contents)
 
     def reset_func(self, func):
-        prCyan("Resetting changes.")
+        self.logger.log_status("Resetting changes.")
         # Replace the ".rs" files with the ".old" files if they exist
         original_rust_file = Path(self.code_dir, 'src/main.rs')
         for file in [original_rust_file, self.bindgen_blocklist]:
@@ -237,5 +238,5 @@ class RustTargetManager(TargetManager):
             try:
                 run(cmd)
             except RunException as e:
-                prRed(f"Failed to fully cleanup {self.code_dir}")
+                self.logger.log_failure(f"Failed to fully cleanup {self.code_dir}")
         os.chdir(cwd)
