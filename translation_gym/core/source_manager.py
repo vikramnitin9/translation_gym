@@ -92,7 +92,7 @@ class CSourceManager(SourceManager):
         os.chdir(cwd)
         return target
 
-    def compile(self, timeout=60):
+    def compile(self, instrument=False, timeout=60):
         cwd = os.getcwd()
         os.chdir(self.code_dir)
         compile_commands_json = Path(self.code_dir)/'compile_commands.json'
@@ -121,7 +121,8 @@ class CSourceManager(SourceManager):
         if parsec_build_dir is None:
             raise CompileException("Error: $PARSEC_BUILD_DIR not set.")
         try:
-            run('cd {} && {}/parsec *.c'.format(self.code_dir, parsec_build_dir), timeout=timeout, logger=self.logger)
+            instr = "true" if instrument else "false"
+            run(f'cd {self.code_dir} && {parsec_build_dir}/parsec --rename-main=true --add-instr={instr} *.c', timeout=timeout, logger=self.logger)
             self.last_compile_time = time.time()
         except RunException as e:
             raise CompileException(e)

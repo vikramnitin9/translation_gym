@@ -35,10 +35,25 @@ using namespace clang::tooling;
 using namespace clang::driver;
 using json = nlohmann::json;
 
-static llvm::cl::OptionCategory FindFunctionCategory("");
+static llvm::cl::OptionCategory MyCategory("");
+
+// Custom command line options
+static llvm::cl::opt<bool> renameMain(
+    "rename-main",
+    llvm::cl::desc("Rename main as main_0"),
+    llvm::cl::value_desc("bool"),
+    llvm::cl::cat(MyCategory),
+    llvm::cl::init(true));
+
+static llvm::cl::opt<bool> addInstr(
+	"add-instr",
+	llvm::cl::desc("Add instrumentation to the module"),
+	llvm::cl::value_desc("bool"),
+	llvm::cl::cat(MyCategory),
+	llvm::cl::init(false));
 
 int main(int argc, const char **argv) {
-	auto expectedParser = CommonOptionsParser::create(argc, argv, FindFunctionCategory, llvm::cl::ZeroOrMore, "parsec <source0> [... <sourceN>] --");
+	auto expectedParser = CommonOptionsParser::create(argc, argv, MyCategory, llvm::cl::ZeroOrMore, "parsec <source0> [... <sourceN>]");
 	if (!expectedParser) {
 		llvm::errs() << expectedParser.takeError();
 		return 1;
@@ -64,7 +79,7 @@ int main(int argc, const char **argv) {
 	tool.mapVirtualFile("instrumentation_helpers.c", cpp_source);
 
 	VisitorConfig config = {
-		.renameMainFunction = true,
+		.renameMainFunction = renameMain,
 		.excludedFunctions = {
 			"json_escape"
 		},
@@ -81,7 +96,7 @@ int main(int argc, const char **argv) {
 
 	// Rename main as main_0 to avoid clash with main in Rust
 	llvm::Function *MainFunc = M.get()->getFunction("main");
-	if (MainFunc) {
+	if (MainFunc && renameMain) {
 		MainFunc->setName("main_0");
 		if (llvm::DISubprogram *SP = MainFunc->getSubprogram()) {
 			llvm::LLVMContext &Ctx = M.get()->getContext();
@@ -141,8 +156,11 @@ int main(int argc, const char **argv) {
 		std::cerr << "Unable to open file analysis.json\n";
 		return 1;
 	}
-	// Add instrumentation to the module
-	addInstrumentation(*M, jsonData); // Uncomment this line to add instrumentation
+	
+	if (addInstr) {
+		std::cout << "Adding instrumentation to the module\n";
+		addInstrumentation(*M, jsonData);
+	}
 
 	std::error_code EC;
 	llvm::legacy::PassManager PM;
