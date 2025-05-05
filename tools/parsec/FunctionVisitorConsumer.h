@@ -8,6 +8,7 @@
 #include <unordered_set>
 
 #include "FunctionVisitor.h"
+#include "helpers.h"
 
 using namespace clang;
 using json = nlohmann::json;
@@ -16,12 +17,13 @@ class FunctionVisitorConsumer : public ASTConsumer {
     public:
         explicit FunctionVisitorConsumer(ASTContext *context,
                                          CompilerInstance &compiler,
-                                         std::unique_ptr<ASTConsumer> defaultConsumer)
-                : visitor(context, compiler), defaultConsumer(std::move(defaultConsumer)) {}
+                                         std::unique_ptr<ASTConsumer> defaultConsumer,
+                                         VisitorConfig config = {false, {}})
+                : visitor(context, compiler, config), defaultConsumer(std::move(defaultConsumer)) {}
     
         void HandleTranslationUnit(ASTContext &context);
 
-        std::unordered_set<json> getData() {
+        json getData() {
             return data;
         }
     
@@ -49,7 +51,7 @@ class FunctionVisitorConsumer : public ASTConsumer {
     private:
         FunctionVisitor visitor;
         std::unique_ptr<ASTConsumer> defaultConsumer;
-        std::unordered_set<json> data;
+        json data;
 };
 
 #endif // FUNCTIONVISITORCONSUMER_H

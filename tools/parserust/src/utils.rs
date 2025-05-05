@@ -10,7 +10,6 @@ pub fn get_parent_span(hir_id: &HirId, tcx: &TyCtxt) -> Option<Span> {
     // Given a node corresponding to an Expr,
     // follow the chain up until you reach a Stmt or a Block
     // and return the span of that node.
-
     for parent_node in tcx.hir().parent_iter(*hir_id) {
         match parent_node {
             (_, rustc_hir::Node::Stmt(stmt)) => return Some(stmt.span),

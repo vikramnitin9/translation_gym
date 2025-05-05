@@ -22,13 +22,13 @@
 
 #include <iostream>
 #include <fstream>
-#include <unordered_set>
 
 #include "FunctionVisitor.h"
 #include "FunctionVisitorConsumer.h"
 #include "FunctionVisitAction.h"
 #include "ToolActionWrapper.h"
 #include "instrumentation.h"
+#include "helpers.h"
 
 using namespace clang;
 using namespace clang::tooling;
@@ -63,15 +63,21 @@ int main(int argc, const char **argv) {
 
 	tool.mapVirtualFile("instrumentation_helpers.c", cpp_source);
 
-	// CommonOptionsParser& optionsParser = expectedParser.get();
-	// ClangTool tool(optionsParser.getCompilations(),
-	// 			   optionsParser.getSourcePathList());
-	ToolActionWrapper actionWrapper(new FunctionVisitAction());
+	VisitorConfig config = {
+		.renameMainFunction = true,
+		.excludedFunctions = {
+			"json_escape"
+		},
+		.excludedFiles = {
+			"instrumentation_helpers.c"
+		}
+	};
+	ToolActionWrapper actionWrapper(new FunctionVisitAction(config));
 	tool.run(&actionWrapper);
 	
 	FunctionVisitAction *action = static_cast<FunctionVisitAction*>(actionWrapper.getAction());
 	std::unique_ptr<llvm::Module> M = action->getModule();
-	std::unordered_set<json> jsonData = action->getData();
+	json jsonData = action->getData();
 
 	// Rename main as main_0 to avoid clash with main in Rust
 	llvm::Function *MainFunc = M.get()->getFunction("main");
@@ -82,14 +88,6 @@ int main(int argc, const char **argv) {
 			SP->replaceOperandWith(2, llvm::MDString::get(Ctx, "main_0"));
 		}
 		std::cout << "Renamed function: main -> main_0\n";
-	}
-	// Delete all entries with entry["filename"] containing "instrumentation_helpers.c"
-	for (auto it = jsonData.begin(); it != jsonData.end();) {
-		if (it->contains("filename") && it->at("filename").get<std::string>().find("instrumentation_helpers.c") != std::string::npos) {
-			it = jsonData.erase(it);
-		} else {
-			++it;
-		}
 	}
 	// Run a CallGraphAnalysis pass on M
 	llvm::PassBuilder PB;
@@ -125,26 +123,22 @@ int main(int argc, const char **argv) {
 				}
 			}
 		}
-		for (auto &entry : jsonData) {
+		for (auto &entry : jsonData["functions"]) {
 			if (entry["name"] == F.getName() &&
 				compareFilenames(entry["filename"], SubProg->getFilename())) {
-				auto mutableEntry = entry;
-				mutableEntry["calledFunctions"] = calledFunctions;
-				// Update the entry in the set
-				jsonData.erase(entry);
-				jsonData.insert(mutableEntry);
+				entry["calledFunctions"] = calledFunctions;
 				break;
 			}
 		}
 	}
-	// Write this jsonData to a file functions.json
-	std::ofstream outFile("functions.json");
+	// Write this jsonData to a file analysis.json
+	std::ofstream outFile("analysis.json");
 	if (outFile.is_open()) {
 		outFile << std::setw(4) << jsonData << std::endl;
 		outFile.close();
-		std::cout << "Data written to functions.json\n";
+		std::cout << "Data written to analysis.json\n";
 	} else {
-		std::cerr << "Unable to open file functions.json\n";
+		std::cerr << "Unable to open file analysis.json\n";
 		return 1;
 	}
 	// Add instrumentation to the module

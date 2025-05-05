@@ -10,13 +10,11 @@
 #include "llvm/IR/DebugInfoMetadata.h"
 #include "llvm/Support/Path.h"
 
-#include <unordered_set>
-
 #include "nlohmann/json.hpp"
 using json = nlohmann::json;
 
 bool compareFilenames(std::string filename1, std::string filename2);
-void addInstrumentation(llvm::Module &M, std::unordered_set<json> jsonData);
+void addInstrumentation(llvm::Module &M, json jsonData);
 
 extern const char* cpp_source;
 

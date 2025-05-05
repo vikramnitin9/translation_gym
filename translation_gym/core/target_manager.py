@@ -93,11 +93,11 @@ class RustTargetManager(TargetManager):
         if last_modified_time > self.last_compile_time:
             self.logger.log_status("Code has changed, re-compiling.")
             self.compile()
-            functions_json_path = Path(self.code_dir)/'functions.json'
-            self.static_analysis_results = json.load(open(functions_json_path, 'r'))
+            analysis_json_path = Path(self.code_dir)/'analysis.json'
+            self.static_analysis_results = json.load(open(analysis_json_path, 'r'))
         elif self.static_analysis_results is None:
-            functions_json_path = Path(self.code_dir)/'functions.json'
-            self.static_analysis_results = json.load(open(functions_json_path, 'r'))
+            analysis_json_path = Path(self.code_dir)/'analysis.json'
+            self.static_analysis_results = json.load(open(analysis_json_path, 'r'))
         return self.static_analysis_results
     
     def get_func_by_name(self, func_name):

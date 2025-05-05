@@ -1,6 +1,7 @@
 __pycache__/
 target/
 build/
+tools/parserust/target/
 instrumented.json
 output/
 compile_commands.json

@@ -7,11 +7,17 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
     
     std::string functionName = function->getNameInfo().getName().getAsString();
 
-    if (functionName == "main") {
+    if (config.renameMainFunction && functionName == "main") {
         // Here we are assuming that `main` is not called by any other functions
 		// If it is, then we need to make this modification while generating the CFG
 		// instead of patching it here.
         functionName = "main_0"; // Rename main to main_0
+    }
+    // Check if functionName is in config.excludedFunctions
+    if (std::find(config.excludedFunctions.begin(),
+                config.excludedFunctions.end(),
+                functionName) != config.excludedFunctions.end()) {
+        return true; // Skip this function
     }
 
     SourceLocation startLocation = function->getBeginLoc();
@@ -35,6 +41,12 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
 
         // Get file name
         std::string fileName = SM.getFilename(startLocation).str();
+        // Check if fileName is in config.excludedFiles
+        if (std::find(config.excludedFiles.begin(),
+                config.excludedFiles.end(),
+                fileName) != config.excludedFiles.end()) {
+            return true; // Skip this file
+        }
         
         PrintingPolicy Policy(context->getLangOpts());
         std::string returnType = function->getReturnType().getAsString(Policy);
@@ -76,7 +88,7 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
                 {"startCol", startCol},
                 {"endCol", endCol}
         };
-        this->data.insert(functionData);
+        this->data["functions"].push_back(functionData);
     }
     return true;
 }

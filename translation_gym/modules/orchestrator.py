@@ -24,7 +24,7 @@ class DefaultOrchestrator(Orchestrator):
         static_analysis_results = source_manager.get_static_analysis_results()
         # Build call graph of functions
         self.call_graph = nx.DiGraph()
-        for func in static_analysis_results:
+        for func in static_analysis_results['functions']:
             if 'calledFunctions' not in func:
                 # These are functions which were in the AST but not in the LLVM IR
                 continue
@@ -46,7 +46,7 @@ class DefaultOrchestrator(Orchestrator):
         func_ordering = [f.strip('"') for f in func_ordering]
 
         for func_name in func_ordering:
-            funcs = [f for f in static_analysis_results if f['name'] == func_name]
+            funcs = [f for f in static_analysis_results['functions'] if f['name'] == func_name]
             if len(funcs) == 0:
                 continue
             func = funcs[0]

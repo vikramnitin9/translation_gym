@@ -8,24 +8,32 @@
 
 #include "nlohmann/json.hpp"
 #include <unordered_set>
+#include "helpers.h"
 
 using namespace clang;
 using json = nlohmann::json;
 
 class FunctionVisitor : public RecursiveASTVisitor<FunctionVisitor> {
     public:
-        explicit FunctionVisitor(ASTContext *_context, CompilerInstance &_compiler)
-        : context(_context), compiler(_compiler) {}
+        explicit FunctionVisitor(ASTContext *_context, CompilerInstance &_compiler, VisitorConfig config = {false, {}})
+            : context(_context), compiler(_compiler), config(config) {
+
+            data = {
+                {"files", json::array()},
+                {"functions", json::array()}
+            };
+        }
 
         bool VisitFunctionDecl(FunctionDecl *function);
 
-        std::unordered_set<json> getData() {
+        json getData() {
             return data;
         }
 
     private:
+        VisitorConfig config;
         ASTContext *context;
         CompilerInstance &compiler;
-        std::unordered_set<json> data;
+        json data;
 };
 #endif // FUNCTION_VISITOR_H

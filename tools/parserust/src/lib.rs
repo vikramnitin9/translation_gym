@@ -19,6 +19,7 @@ extern crate smallvec;
 extern crate itertools;
 extern crate regex;
 
+use std::collections::{HashMap, HashSet};
 use rustc_middle::ty::TyCtxt;
 use serde_json::json;
 
@@ -35,7 +36,7 @@ pub struct ParseConfig {
 impl Default for ParseConfig {
     fn default() -> Self {
         ParseConfig {
-            output_file: "functions.json".to_string(),
+            output_file: "analysis.json".to_string(),
         }
     }
 }
@@ -69,7 +70,27 @@ pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
     let mut visitor = visitor::CallgraphVisitor::new(&tcx);
     tcx.hir().visit_all_item_likes_in_crate(&mut visitor);
 
-    let mut json_output: Vec<serde_json::Value> = vec![];
+    let mut files_json: Vec<serde_json::Value> = vec![];
+    let mut funcs_json: Vec<serde_json::Value> = vec![];
+
+    for file in visitor.files.iter() {
+        let fname = file.to_str().unwrap_or("<unknown>").to_string();
+        let mut file_imports = HashSet::<serde_json::Value>::new();
+        for import in visitor.imports.iter() {
+            let ((import_fname, _, _), (_, _, _)) = span_to_data(tcx, &import);
+            if import_fname == fname {
+                file_imports.insert(json!({
+                    "span": format!("{:?}", import),
+                    "source": span_to_string(tcx, &import)
+                }));
+            }
+        }
+        let file_imports_vec: Vec<serde_json::Value> = file_imports.into_iter().collect();
+        files_json.push(json!({
+            "filename": fname,
+            "imports": file_imports_vec,
+        }));
+    }
 
     for (func_defid, _) in visitor.functions.iter() {
 
@@ -86,21 +107,9 @@ pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
             "endCol": end_col,
             "calls": [],
             "globals": [],
-            "imports": [],
             "foreign": func_info.foreign,
         });
 
-        // Get all the imports in the same file as the function definition
-        let imports = get_imports_from_same_file(&func_info.span, &visitor.imports, &tcx);
-        if imports.len() > 0 {
-            for import in imports {
-                let import_json = json!({
-                    "span": format!("{:?}", import),
-                    "source": span_to_string(tcx, &import)
-                });
-                this_func_json["imports"].as_array_mut().unwrap().push(import_json);
-            }
-        }
         // Get all the calls to this function
         for call in visitor.static_calls.iter().chain(visitor.dynamic_calls.iter()) {
             if call.callee == *func_defid {
@@ -126,9 +135,12 @@ pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
                 }
             }
         }
-        json_output.push(this_func_json);
+        funcs_json.push(this_func_json);
     }
-    
+    let json_output = json!({
+        "files": files_json,
+        "functions": funcs_json,
+    });
     // Write the json to a file
     let stringified_json = serde_json::to_string_pretty(&json_output).unwrap();
     std::fs::write(config.clone().output_file, stringified_json).unwrap();

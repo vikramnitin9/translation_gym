@@ -71,13 +71,16 @@ fn main() {
     let mut main_file: Option<String> = None;
     let mut main_num_args: i32 = 0;
 
-    // Read c_build_path/functions.json to find the function main_0
-    let functions_path = Path::new(&c_build_path).join("functions.json");
-    let functions = std::fs::read_to_string(functions_path)
-        .expect("Unable to read functions.json");
-    let functions: serde_json::Value = serde_json::from_str(&functions)
-        .expect("Unable to parse functions.json");
-    let functions = functions.as_array().expect("Expected an array");
+    // Read c_build_path/analysis.json to find the function main_0
+    let analysis_path = Path::new(&c_build_path).join("analysis.json");
+    let analysis = std::fs::read_to_string(analysis_path)
+        .expect("Unable to read analysis.json");
+    let analysis: serde_json::Value = serde_json::from_str(&analysis)
+        .expect("Unable to parse analysis.json");
+    let functions = analysis.get("functions")
+                            .expect("'functions' not found in json")
+                            .as_array()
+                            .expect("Expected 'functions' to be an array");
     for function in functions {
         let function = function.as_object().expect("Expected an object");
         let name = function.get("name").expect("Expected a name").as_str().expect("Expected a string");

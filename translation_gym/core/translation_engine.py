@@ -95,13 +95,13 @@ class TranslationEngine:
             self.source_manager.compile()
             rust_static_analysis = self.target_manager.get_static_analysis_results()
             for i, called_func in enumerate(func['calledFunctions']):
-                translated_rust_fns = [f for f in rust_static_analysis if f['name'] == (called_func['name'] + "_rust")]
+                translated_rust_fns = [f for f in rust_static_analysis['functions'] if f['name'] == (called_func['name'] + "_rust")]
                 if len(translated_rust_fns) != 0:
                     assert len(translated_rust_fns) == 1
                     func['calledFunctions'][i]['signature'] = translated_rust_fns[0]['signature']
                     func['calledFunctions'][i]['translated'] = True
                 else:
-                    matching_rust_fn = [f for f in rust_static_analysis if f['name'] == called_func['name']]
+                    matching_rust_fn = [f for f in rust_static_analysis['functions'] if f['name'] == called_func['name']]
                     if len(matching_rust_fn) == 0:
                         # This can happen if bindgen fails to find this function for some reason.
                         self.logger.log_failure(f"Function {called_func['name']} not found in bindgen headers")

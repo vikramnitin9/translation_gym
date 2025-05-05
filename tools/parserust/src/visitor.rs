@@ -6,6 +6,9 @@ use std::collections::{HashMap, HashSet};
 use rustc_hir::intravisit;
 use rustc_middle::hir::nested_filter;
 use rustc_span::Span;
+use std::path::PathBuf;
+
+use crate::utils::*;
 
 macro_rules! skip_generated_code {
     ($span: expr) => {
@@ -64,6 +67,8 @@ pub struct CallgraphVisitor<'tcx> {
     pub dynamic_calls: HashSet<Call>,
 
     pub imports: HashSet<Span>,
+    // all source files in the crate
+    pub files: HashSet<PathBuf>,
 
     // tracks the current function we're in during AST walk
     cur_fn: Option<DefId>,
@@ -80,6 +85,7 @@ impl<'tcx> CallgraphVisitor<'tcx> {
             static_calls: HashSet::new(),
             dynamic_calls: HashSet::new(),
             imports: HashSet::new(),
+            files: HashSet::new(),
             cur_fn: None,
         }
     }
@@ -201,6 +207,19 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
     fn visit_item(&mut self, item: &'tcx rustc_hir::Item) {
         skip_generated_code!(item.span);
 
+        let local_path = match self.tcx.sess.source_map().span_to_filename(item.span) {
+            rustc_span::FileName::Real(filename) => {
+                match filename {
+                    rustc_span::RealFileName::LocalPath(path) => Some(path),
+                    rustc_span::RealFileName::Remapped{local_path: Some(local_path), ..} => Some(local_path),
+                    _ => None,
+                }
+            },
+            _ => None,
+        };
+        if let Some(path) = local_path {
+            self.files.insert(path);
+        }
         let hir_id = item.hir_id();
         if let rustc_hir::ItemKind::Fn(fn_sig, _, _) = item.kind {
             let def_id = hir_id.owner.to_def_id();
@@ -209,7 +228,13 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
             return;
         }
         if let rustc_hir::ItemKind::Use(..) = item.kind {
-            self.imports.insert(item.span);
+            // Imports include both the "use" statement as well as the
+            // individual items imported. We want just the "use" statement.
+            let parent_span = match get_parent_span(&item.hir_id(), &self.tcx) {
+                Some(span) => span,
+                None => item.span, // This might already be the use statement
+            };
+            self.imports.insert(parent_span);
             return;
         }
         // traverse

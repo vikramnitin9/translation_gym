@@ -45,7 +45,7 @@ bool compareFilenames(std::string filename1, std::string filename2) {
 	return baseName1 == baseName2;
 }
 
-void addInstrumentation(Module &M, std::unordered_set<json> jsonData) {
+void addInstrumentation(Module &M, json jsonData) {
 	// Add instrumentation code to the module
 	LLVMContext &Context = M.getContext();
 	IRBuilder<> Builder(Context);
@@ -113,7 +113,7 @@ void addInstrumentation(Module &M, std::unordered_set<json> jsonData) {
 		std::vector<std::string> argNames = {};
 		std::string retType = "";
 		bool found = false;
-		for (auto &entry : jsonData) {
+		for (auto &entry : jsonData["functions"]) {
 			if (entry["name"] == F.getName() &&
 					compareFilenames(entry["filename"], SubProg->getFilename())) {
 				argTypes = entry["argTypes"];

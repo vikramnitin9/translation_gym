@@ -9,22 +9,31 @@
 #include "llvm/Linker/Linker.h"
 
 #include "nlohmann/json.hpp"
-#include <unordered_set>
 #include <iostream>
 
 #include "FunctionVisitorConsumer.h"
+#include "helpers.h"
 
 using namespace clang;
 using json = nlohmann::json;
 
 class FunctionVisitAction : public EmitLLVMOnlyAction {
     public:
+        FunctionVisitAction(VisitorConfig config = {false, {}})
+            : EmitLLVMOnlyAction(), config(config) {
+                
+            data = {
+                {"files", json::array()},
+                {"functions", json::array()}
+            };
+        }
+            
         std::unique_ptr<ASTConsumer>
         CreateASTConsumer(CompilerInstance &compiler, llvm::StringRef inFile);
     
         void EndSourceFileAction() override;
     
-        std::unordered_set<json> getData() {
+        json getData() {
             return data;
         }
         std::unique_ptr<llvm::Module> getModule() {
@@ -32,7 +41,8 @@ class FunctionVisitAction : public EmitLLVMOnlyAction {
         }
     
     private:
-        std::unordered_set<json> data;
+        VisitorConfig config;
+        json data;
         std::unique_ptr<llvm::Module> mod;
         llvm::Linker* linker = nullptr;
 };
