@@ -70,6 +70,7 @@ class DefaultValidator(Validator):
                     self.logger.log_failure("Linker error. Cleaning up and trying again.")
                     target_manager.cleanup()
                     continue
+                break # Unless it's a timeout or linker error, we don't want to retry
 
         if not compile_success:
             return {"success": False,

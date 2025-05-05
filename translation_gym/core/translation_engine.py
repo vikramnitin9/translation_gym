@@ -91,6 +91,8 @@ class TranslationEngine:
             self.logger.log_status("Translating function: {}".format(func['name']))
 
             # This is the part where we collect info about the called functions.
+            # We first need to compile the source to get the most up-to-date static library
+            self.source_manager.compile()
             rust_static_analysis = self.target_manager.get_static_analysis_results()
             for i, called_func in enumerate(func['calledFunctions']):
                 translated_rust_fns = [f for f in rust_static_analysis if f['name'] == (called_func['name'] + "_rust")]
@@ -100,6 +102,12 @@ class TranslationEngine:
                     func['calledFunctions'][i]['translated'] = True
                 else:
                     matching_rust_fn = [f for f in rust_static_analysis if f['name'] == called_func['name']]
+                    if len(matching_rust_fn) == 0:
+                        # This can happen if bindgen fails to find this function for some reason.
+                        self.logger.log_failure(f"Function {called_func['name']} not found in bindgen headers")
+                        func['calledFunctions'][i]['signature'] = None
+                        func['calledFunctions'][i]['translated'] = False
+                        continue
                     assert len(matching_rust_fn) == 1
                     func['calledFunctions'][i]['signature'] = matching_rust_fn[0]['signature']
                     func['calledFunctions'][i]['translated'] = False

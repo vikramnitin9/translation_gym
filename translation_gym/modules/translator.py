@@ -58,10 +58,12 @@ class DefaultTranslator(Translator):
             if called_func['translated']:
                 calledFunctionDesc += f"{i+1}. {called_func['name']}. This has a Rust reimplementation, with this signature:\n"
                 calledFunctionDesc += f"```rust\n{called_func['signature']}\n```\n"
-            else:
+            elif called_func['signature'] is not None:
                 calledFunctionDesc += f"{i+1}. {called_func['name']}. This has a Rust binding to the C code, with this signature:\n"
                 calledFunctionDesc += f"```rust\n{called_func['signature']}\n```\n"
                 calledFunctionDesc += "Note that you will need to use the `unsafe` keyword to call this function.\n"
+            else:
+                calledFunctionDesc += f"{i+1}. {called_func['name']}. This function is not accessible to you, so you need to use a substitute.\n"
 
         prompt = f'''Translate the following C function to idiomatic Rust:
 ```c
@@ -156,7 +158,9 @@ pub extern "C" fn {func['name']} ...
             prompt = ("The translation generated the following compile error:\n"
                     f"{result['message']}\n"
                     f"Please re-generate the translation of the function, wrapper function, and imports. "
-                    f"Remember to follow the same format with <IMPORTS></IMPORTS>, <FUNC></FUNC>, and <WRAPPER></WRAPPER> tags.")
+                    f"Remember to follow the same format with <IMPORTS></IMPORTS>, <FUNC></FUNC>, and <WRAPPER></WRAPPER> tags.\n"
+                    f"If the error is related to the imports, remember that there are existing imports in the codebase. "
+                    f"So you should not repeat them in the <IMPORTS>...</IMPORTS> section.")
         elif result['category'] == "Test Failure":
             prompt = ("The translation failed tests. This was the command output:\n"
                     f"{result['message']}\n"
@@ -206,6 +210,3 @@ pub extern "C" fn {func['name']} ...
             'wrapper': wrapper,
             'imports': imports,
         }
-
-
-
