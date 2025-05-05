@@ -38,8 +38,11 @@ class TargetManager:
     def compile(self, timeout):
         raise NotImplementedError("compile() not implemented")
     
-    def insert_translation(self, translation):
+    def insert_translation(self, func, translation):
         raise NotImplementedError("insert_translation() not implemented")
+    
+    def get_insertion_file(self, func):
+        raise NotImplementedError("get_insertion_file() not implemented")
     
 
 class RustTargetManager(TargetManager):
@@ -165,9 +168,9 @@ class RustTargetManager(TargetManager):
         wrapper = translation['wrapper']
         imports = translation['imports'] if 'imports' in translation else ''
 
-        # Read the contents of the main.rs file
-        main_rs = Path(self.code_dir, 'src/main.rs')
-        contents = main_rs.read_text()
+        insertion_file = self.get_insertion_file(func)
+        # Read the contents of the insertion file
+        contents = insertion_file.read_text()
         old_contents = contents
         lines = contents.split('\n')
 
@@ -195,15 +198,21 @@ class RustTargetManager(TargetManager):
         # Insert the function_trans and wrapper at the bottom
         new_contents += '\n' + function_trans + '\n' + wrapper
 
-        main_rs.write_text(new_contents)
+        insertion_file.write_text(new_contents)
         # De-duplicate imports
         try:
             run(f'cd {self.code_dir} && rustfmt --config imports_granularity=Crate src/main.rs')
         except:
             self.logger.log_failure("Rustfmt failed. There may be a syntax error in the generated code.")
 
-        with open(main_rs.with_suffix('.old'), 'w') as f:
+        with open(insertion_file.with_suffix('.old'), 'w') as f:
             f.write(old_contents)
+
+    def get_insertion_file(self, func):
+        # Get the file where the function will be inserted
+        # Right now, this is always src/main.rs
+        # But in the future, we may want a more modular approach
+        return Path(self.code_dir, 'src/main.rs')
 
     def reset_func(self, func):
         self.logger.log_status("Resetting changes.")

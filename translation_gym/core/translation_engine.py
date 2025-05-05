@@ -111,7 +111,25 @@ class TranslationEngine:
                     assert len(matching_rust_fn) == 1
                     func['calledFunctions'][i]['signature'] = matching_rust_fn[0]['signature']
                     func['calledFunctions'][i]['translated'] = False
-                    
+
+            def compare_fnames(a, b, base_dir):
+                a, b, base_dir = Path(a), Path(b), Path(base_dir)
+                if a.is_absolute():
+                    a = a.relative_to(base_dir)
+                if b.is_absolute():
+                    b = b.relative_to(base_dir)
+                return a == b
+            
+            insertion_file = self.target_manager.get_insertion_file(func)
+            code_dir = self.target_manager.get_code_dir()
+            file_candidates = [file for file in rust_static_analysis['files'] if compare_fnames(file['filename'], insertion_file, code_dir)]
+            if len(file_candidates) == 1:
+                # imports includes both the "use" statement as well as the individual modules
+                # We want just the "use" statement
+                func['imports'] = [imp['source'] for imp in file_candidates[0]['imports']]
+            else:
+                func['imports'] = []
+
             translation = translator.translate(func, self.source_manager)
             result = validator.validate(func, translation, self.source_manager, self.target_manager, self.test_manager)
 

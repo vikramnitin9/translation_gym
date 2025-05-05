@@ -78,10 +78,11 @@ pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
         let mut file_imports = HashSet::<serde_json::Value>::new();
         for import in visitor.imports.iter() {
             let ((import_fname, _, _), (_, _, _)) = span_to_data(tcx, &import);
-            if import_fname == fname {
+            let source = span_to_string(tcx, &import);
+            if (import_fname == fname) && source.contains("use ") {
                 file_imports.insert(json!({
                     "span": format!("{:?}", import),
-                    "source": span_to_string(tcx, &import)
+                    "source": source,
                 }));
             }
         }

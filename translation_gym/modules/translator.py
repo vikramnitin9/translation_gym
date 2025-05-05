@@ -64,6 +64,12 @@ class DefaultTranslator(Translator):
                 calledFunctionDesc += "Note that you will need to use the `unsafe` keyword to call this function.\n"
             else:
                 calledFunctionDesc += f"{i+1}. {called_func['name']}. This function is not accessible to you, so you need to use a substitute.\n"
+        
+        if len(func['imports']) == 0:
+            importDesc = ""
+        else:
+            importDesc = f"The Rust file where this function will be inserted already has the following imports:\n{'\n'.join(func['imports'])}\n"
+            importDesc += "Do not repeat them in the <IMPORTS>...</IMPORTS> section, otherwise this will lead to duplicate imports.\n"
 
         prompt = f'''Translate the following C function to idiomatic Rust:
 ```c
@@ -75,6 +81,7 @@ You can assume that all the structures and global variables already have definit
 Do not use any dummy code like "// Full implementation goes here", etc. All the code you write will be substituted directly into the codebase without a human reviewing it. So it should be functional and complete.
 Feel free to change the function signature and modify the function body as needed.
 If you need imports, you can add them in the <IMPORTS>...</IMPORTS> section. Do not provide them along with the function body.
+{importDesc}
 
 Also provide a wrapper function that calls this function.
 The wrapper function should have the *same* arguments and return type as the C function, except with C types replaced with their corresponding libc crate types.

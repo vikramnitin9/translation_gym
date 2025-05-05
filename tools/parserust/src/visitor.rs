@@ -228,13 +228,7 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
             return;
         }
         if let rustc_hir::ItemKind::Use(..) = item.kind {
-            // Imports include both the "use" statement as well as the
-            // individual items imported. We want just the "use" statement.
-            let parent_span = match get_parent_span(&item.hir_id(), &self.tcx) {
-                Some(span) => span,
-                None => item.span, // This might already be the use statement
-            };
-            self.imports.insert(parent_span);
+            self.imports.insert(item.span);
             return;
         }
         // traverse
