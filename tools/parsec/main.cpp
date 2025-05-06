@@ -130,12 +130,12 @@ int main(int argc, const char **argv) {
 		json calledFunctions = json::array();
 		for (auto &I : *CG[constFunctionPtr]) {
 			if (I.second && I.second->getFunction()) {
-				if (!I.second->getFunction()->isDeclaration()) {
+				// if (!I.second->getFunction()->isDeclaration()) {
 					std::string funcName = I.second->getFunction()->getName().str();
 					if (seenFunctions.insert(funcName).second) {
 						calledFunctions.push_back({{"name", funcName}});
 					}
-				}
+				// }
 			}
 		}
 		for (auto &entry : jsonData["functions"]) {
@@ -172,7 +172,7 @@ int main(int argc, const char **argv) {
 
     std::string TargetTriple = llvm::sys::getDefaultTargetTriple();
 
-    llvm::raw_fd_ostream ObjFile("instrumented.o", EC, llvm::sys::fs::OF_None);
+    llvm::raw_fd_ostream ObjFile("foo.o", EC, llvm::sys::fs::OF_None);
 
     // Initialize all target-related information
     llvm::InitializeAllTargetInfos();           // Initialize all target infos
@@ -201,17 +201,17 @@ int main(int argc, const char **argv) {
 
     PM.run(*M);
     ObjFile.close();
-	// std::cout << "Instrumented object file written to instrumented.o\n";
+	// std::cout << "Instrumented object file written to foo.o\n";
 
 	 // Invoke `ar` to create a static library
-	 int result = std::system("ar rcs libfoo.a instrumented.o");
+	 int result = std::system("ar rcs libfoo.a foo.o");
 	 if (result != 0) {
 		 llvm::errs() << "Failed to create static library\n";
 		 return 1;
 	 }
 	 std::cout << "Static library created: libfoo.a\n";
 	 // Clean up the object file
-	 EC = llvm::sys::fs::remove("instrumented.o", false);
+	 EC = llvm::sys::fs::remove("foo.o", false);
 	 if (EC) {
 		 llvm::errs() << "Failed to remove object file: " << EC.message() << "\n";
 		 return 1;

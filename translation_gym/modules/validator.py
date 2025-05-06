@@ -36,6 +36,7 @@ class DefaultValidator(Validator):
         # Try 5 times to compile, in case there is a timeout or mysterious linker error
         for _ in range(self.compile_attempts):
             try:
+                source_manager.cleanup()
                 source_manager.compile()
                 compile_success = True
                 break
@@ -68,7 +69,9 @@ class DefaultValidator(Validator):
                     continue
                 elif "rust-lld: error:" in str(e):
                     self.logger.log_failure("Linker error. Cleaning up and trying again.")
+                    source_manager.cleanup()
                     target_manager.cleanup()
+                    source_manager.compile()
                     continue
                 break # Unless it's a timeout or linker error, we don't want to retry
 

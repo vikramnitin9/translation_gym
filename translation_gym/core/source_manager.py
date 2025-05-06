@@ -133,15 +133,11 @@ class CSourceManager(SourceManager):
         return Path(self.code_dir)
     
     def get_static_analysis_results(self):
-        last_modified_time = get_last_modified_time(self.code_dir, ".c")
-        if last_modified_time > self.last_compile_time:
-            self.logger.log_status("Code has changed, re-compiling.")
-            self.compile()
-            analysis_json_path = Path(self.code_dir)/'analysis.json'
-            self.static_analysis_results = json.load(open(analysis_json_path, 'r'))
-        elif self.static_analysis_results is None:
-            analysis_json_path = Path(self.code_dir)/'analysis.json'
-            self.static_analysis_results = json.load(open(analysis_json_path, 'r'))
+        # Just re-run compilation. It's possible to figure it out from the last compile time
+        # but it is not reliable
+        self.compile()
+        analysis_json_path = Path(self.code_dir)/'analysis.json'
+        self.static_analysis_results = json.load(open(analysis_json_path, 'r'))
         return self.static_analysis_results
     
     def get_func_by_name(self, func_name):
@@ -231,7 +227,7 @@ class CSourceManager(SourceManager):
     def cleanup(self):
         cwd = os.getcwd()
         os.chdir(self.code_dir)
-        cmd = 'make clean && rm -f compile_commands.json && rm -f libfoo.a'
+        cmd = 'make clean && rm -f libfoo.a'
         try:
             run(cmd)
         except RunException as e:

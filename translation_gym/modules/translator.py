@@ -59,16 +59,16 @@ class DefaultTranslator(Translator):
                 calledFunctionDesc += f"{i+1}. {called_func['name']}. This has a Rust reimplementation, with this signature:\n"
                 calledFunctionDesc += f"```rust\n{called_func['signature']}\n```\n"
             elif called_func['signature'] is not None:
-                calledFunctionDesc += f"{i+1}. {called_func['name']}. This has a Rust binding to the C code, with this signature:\n"
+                calledFunctionDesc += f"{i+1}. {called_func['name']}. This has a Rust FFI binding to a C implementation, with this signature:\n"
                 calledFunctionDesc += f"```rust\n{called_func['signature']}\n```\n"
-                calledFunctionDesc += "Note that you will need to use the `unsafe` keyword to call this function.\n"
+                calledFunctionDesc += "Note that you will need to use the `unsafe` keyword to call this function. If you can come up with a native safe Rust alternative for this function, you should use that instead.\n"
             else:
                 calledFunctionDesc += f"{i+1}. {called_func['name']}. This function is not accessible to you, so you need to use a substitute.\n"
         
         if len(func['imports']) == 0:
             importDesc = ""
         else:
-            importDesc = f"The Rust file where this function will be inserted already has the following imports:\n{'\n'.join(func['imports'])}\n"
+            importDesc = f"The Rust file where this function will be inserted already has the following imports:\n```rust\n{'\n'.join(func['imports'])}\n```\n"
             importDesc += "Do not repeat them in the <IMPORTS>...</IMPORTS> section, otherwise this will lead to duplicate imports.\n"
 
         prompt = f'''Translate the following C function to idiomatic Rust:
@@ -165,9 +165,7 @@ pub extern "C" fn {func['name']} ...
             prompt = ("The translation generated the following compile error:\n"
                     f"{result['message']}\n"
                     f"Please re-generate the translation of the function, wrapper function, and imports. "
-                    f"Remember to follow the same format with <IMPORTS></IMPORTS>, <FUNC></FUNC>, and <WRAPPER></WRAPPER> tags.\n"
-                    f"If the error is related to the imports, remember that there are existing imports in the codebase. "
-                    f"So you should not repeat them in the <IMPORTS>...</IMPORTS> section.")
+                    f"Remember to follow the same format with <IMPORTS></IMPORTS>, <FUNC></FUNC>, and <WRAPPER></WRAPPER> tags.\n")
         elif result['category'] == "Test Failure":
             prompt = ("The translation failed tests. This was the command output:\n"
                     f"{result['message']}\n"
