@@ -1,4 +1,5 @@
 #include "FunctionVisitor.h"
+#include <clang/AST/Decl.h>
 
 using namespace clang;
 using json = nlohmann::json;
@@ -90,5 +91,91 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
         };
         this->data["functions"].push_back(functionData);
     }
+    return true;
+}
+
+
+
+bool FunctionVisitor::VisitRecordDecl(RecordDecl *record) {
+
+    llvm::errs() << "Visiting RecordDecl: " << record->getNameAsString() << "\n";
+
+    if (!record->isStruct() || !record->isThisDeclarationADefinition()) {
+        return true;
+    }
+
+    SourceManager &SM = context->getSourceManager();
+    SourceLocation startLocation = SM.getFileLoc(record->getBeginLoc());
+    FullSourceLoc startLoc = context->getFullLoc(startLocation);
+    FullSourceLoc endLoc = context->getFullLoc(record->getEndLoc());
+
+    if (!startLoc.isValid() || !endLoc.isValid() || SM.isInSystemHeader(startLoc)) {
+        return true;
+    }
+
+    std::string fileName = SM.getFilename(startLocation).str();
+    if (std::find(config.excludedFiles.begin(), config.excludedFiles.end(), fileName) != config.excludedFiles.end()) {
+        return true;
+    }
+
+    int startLine = startLoc.getSpellingLineNumber();
+    int endLine = endLoc.getSpellingLineNumber();
+    int startCol = startLoc.getSpellingColumnNumber();
+    int endCol = endLoc.getSpellingColumnNumber();
+
+    json structData = {
+        {"name", record->getNameAsString()},
+        {"filename", fileName},
+        {"startLine", startLine},
+        {"endLine", endLine},
+        {"startCol", startCol},
+        {"endCol", endCol}
+    };
+    this->data["structures"].push_back(structData);
+    return true;
+}
+
+
+
+bool FunctionVisitor::VisitVarDecl(VarDecl *var) {
+
+
+    llvm::errs() << "Visiting VarDecl: " << var->getNameAsString() << "\n";
+
+    if (!var->hasGlobalStorage() || !var->isFileVarDecl()) {
+        return true;
+    }
+
+    SourceManager &SM = context->getSourceManager();
+    SourceLocation startLocation = SM.getFileLoc(var->getBeginLoc());
+    FullSourceLoc startLoc = context->getFullLoc(startLocation);
+    FullSourceLoc endLoc = context->getFullLoc(var->getEndLoc());
+
+    if (!startLoc.isValid() || !endLoc.isValid() || SM.isInSystemHeader(startLoc)) {
+        return true;
+    }
+
+    std::string fileName = SM.getFilename(startLocation).str();
+    if (std::find(config.excludedFiles.begin(), config.excludedFiles.end(), fileName) != config.excludedFiles.end()) {
+        return true;
+    }
+
+    int startLine = startLoc.getSpellingLineNumber();
+    int endLine = endLoc.getSpellingLineNumber();
+    int startCol = startLoc.getSpellingColumnNumber();
+    int endCol = endLoc.getSpellingColumnNumber();
+
+    PrintingPolicy Policy(context->getLangOpts());
+
+    json globalData = {
+        {"name", var->getNameAsString()},
+        {"type", var->getType().getAsString(Policy)},
+        {"filename", fileName},
+        {"startLine", startLine},
+        {"endLine", endLine},
+        {"startCol", startCol},
+        {"endCol", endCol}
+    };
+    this->data["globals"].push_back(globalData);
     return true;
 }

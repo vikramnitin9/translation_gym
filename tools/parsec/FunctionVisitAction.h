@@ -24,7 +24,9 @@ class FunctionVisitAction : public EmitLLVMOnlyAction {
                 
             data = {
                 {"files", json::array()},
-                {"functions", json::array()}
+                {"functions", json::array()},
+                {"structures", json::array()},
+                {"globals",    json::array()}
             };
         }
             

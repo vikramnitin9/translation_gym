@@ -20,11 +20,16 @@ class FunctionVisitor : public RecursiveASTVisitor<FunctionVisitor> {
 
             data = {
                 {"files", json::array()},
-                {"functions", json::array()}
+                {"functions", json::array()},
+                {"structures", json::array()},
+                {"globals", json::array()}
             };
         }
 
         bool VisitFunctionDecl(FunctionDecl *function);
+        bool VisitRecordDecl(RecordDecl *record);
+        bool VisitVarDecl(VarDecl *var);
+
 
         json getData() {
             return data;

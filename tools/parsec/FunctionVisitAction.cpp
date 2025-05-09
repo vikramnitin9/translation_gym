@@ -41,6 +41,26 @@ void FunctionVisitAction::EndSourceFileAction() {
         }
         this->data["files"].push_back(entry);
     }
+
+    // Merge structures
+    for (const auto &entry : subData["structures"]) {
+        if (std::find_if(data["structures"].begin(), data["structures"].end(),
+        [&entry](const json &e){ return e["name"] == entry["name"]; })
+        == data["structures"].end()) {
+      data["structures"].push_back(entry);
+      }
+    }
+
+    // Merge globals
+   for (const auto &entry : subData["globals"]) {
+    if (std::find_if(data["globals"].begin(), data["globals"].end(),
+        [&entry](const json &e){ return e["name"] == entry["name"]; })
+        == data["globals"].end()) {
+      data["globals"].push_back(entry);
+    }
+    }
+
+
     // Get the generated module and add it to the list
     std::unique_ptr<llvm::Module> M = this->takeModule();
     if (!M) {
