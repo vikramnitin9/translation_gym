@@ -1,10 +1,23 @@
 #include "FunctionVisitor.h"
-#include <clang/AST/Decl.h>
+
 
 using namespace clang;
 using json = nlohmann::json;
 
 bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
+
+
+     // only definitions have bodies
+    if (!function->hasBody() || !function->isThisDeclarationADefinition())
+        return true;
+
+    // Clear last-function’s deps
+    currentCalls.clear();
+    currentGlobals.clear();
+    currentStructs.clear();
+
+    // Traverse the function body to collect calls, globals, structs
+    RecursiveASTVisitor<FunctionVisitor>::TraverseStmt(function->getBody());
     
     std::string functionName = function->getNameInfo().getName().getAsString();
 
@@ -89,6 +102,38 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
                 {"startCol", startCol},
                 {"endCol", endCol}
         };
+
+
+    {
+    json arr = json::array();
+    for (auto &n : currentCalls) {
+        json obj;
+        obj["name"] = n;
+        arr.push_back(std::move(obj));
+    }
+    functionData["calledFunctions"] = std::move(arr);
+    }
+
+    {
+    json arr = json::array();
+    for (auto &n : currentGlobals) {
+        json obj;
+        obj["name"] = n;
+        arr.push_back(std::move(obj));
+    }
+    functionData["globals"] = std::move(arr);
+   }
+
+   {
+    json arr = json::array();
+    for (auto &n : currentStructs) {
+        json obj;
+        obj["name"] = n;
+        arr.push_back(std::move(obj));
+    }
+    functionData["structs"] = std::move(arr);
+   }
+
         this->data["functions"].push_back(functionData);
     }
     return true;
@@ -177,5 +222,33 @@ bool FunctionVisitor::VisitVarDecl(VarDecl *var) {
         {"endCol", endCol}
     };
     this->data["globals"].push_back(globalData);
+    return true;
+}
+
+
+
+
+// Record every referenced global VarDecl
+bool FunctionVisitor::VisitDeclRefExpr(DeclRefExpr *expr) {
+    if (auto *vd = llvm::dyn_cast<VarDecl>(expr->getDecl())) {
+        if (vd->hasGlobalStorage() && vd->isFileVarDecl())
+            currentGlobals.insert(vd->getNameAsString());
+    }
+    return true;
+}
+
+// Record every struct name mentioned in a type
+bool FunctionVisitor::VisitTypeLoc(TypeLoc typeLoc) {
+    if (auto *rt = typeLoc.getType()->getAs<RecordType>()) {
+        RecordDecl *rd = rt->getDecl();
+        if (rd->isStruct() && rd->isThisDeclarationADefinition())
+            currentStructs.insert(rd->getNameAsString());
+    }
+    return true;
+}
+
+bool FunctionVisitor::VisitCallExpr(CallExpr *call) {
+    if (auto *fd = call->getDirectCallee())
+        currentCalls.insert(fd->getNameInfo().getName().getAsString());
     return true;
 }

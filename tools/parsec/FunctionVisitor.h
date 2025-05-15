@@ -29,6 +29,9 @@ class FunctionVisitor : public RecursiveASTVisitor<FunctionVisitor> {
         bool VisitFunctionDecl(FunctionDecl *function);
         bool VisitRecordDecl(RecordDecl *record);
         bool VisitVarDecl(VarDecl *var);
+        bool VisitDeclRefExpr(DeclRefExpr  *expr);
+        bool VisitTypeLoc    (TypeLoc        typeLoc);
+        bool VisitCallExpr    (CallExpr     *call);
 
 
         json getData() {
@@ -39,6 +42,9 @@ class FunctionVisitor : public RecursiveASTVisitor<FunctionVisitor> {
         VisitorConfig config;
         ASTContext *context;
         CompilerInstance &compiler;
+        std::unordered_set<std::string> currentCalls;
+        std::unordered_set<std::string> currentGlobals;
+        std::unordered_set<std::string> currentStructs;
         json data;
 };
 #endif // FUNCTION_VISITOR_H
