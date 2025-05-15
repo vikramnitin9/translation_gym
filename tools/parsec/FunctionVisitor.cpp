@@ -12,7 +12,6 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
         return true;
 
     // Clear last-function’s deps
-    currentCalls.clear();
     currentGlobals.clear();
     currentStructs.clear();
 
@@ -103,16 +102,6 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
                 {"endCol", endCol}
         };
 
-
-    {
-    json arr = json::array();
-    for (auto &n : currentCalls) {
-        json obj;
-        obj["name"] = n;
-        arr.push_back(std::move(obj));
-    }
-    functionData["calledFunctions"] = std::move(arr);
-    }
 
     {
     json arr = json::array();
@@ -247,8 +236,3 @@ bool FunctionVisitor::VisitTypeLoc(TypeLoc typeLoc) {
     return true;
 }
 
-bool FunctionVisitor::VisitCallExpr(CallExpr *call) {
-    if (auto *fd = call->getDirectCallee())
-        currentCalls.insert(fd->getNameInfo().getName().getAsString());
-    return true;
-}
