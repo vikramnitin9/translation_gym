@@ -5,6 +5,7 @@
 #include "clang/AST/RecursiveASTVisitor.h"
 #include "clang/Frontend/CompilerInstance.h"
 #include "clang/AST/PrettyPrinter.h"
+#include "clang/Lex/Lexer.h"
 
 #include "nlohmann/json.hpp"
 #include <unordered_set>

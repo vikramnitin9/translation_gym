@@ -2,6 +2,7 @@
 #include "clang/Tooling/Tooling.h"
 
 #include "llvm/IR/DebugInfoMetadata.h"
+#include "llvm/IR/GlobalValue.h"
 #include "llvm/Analysis/CallGraph.h"
 #include "llvm/Passes/PassBuilder.h"
 #include "llvm/Passes/PassPlugin.h"
@@ -146,6 +147,15 @@ int main(int argc, const char **argv) {
 			}
 		}
 	}
+
+	// This part is necessary for Rust to be able to link against static functions
+	for (llvm::Function &F : M->functions()) {
+		if (F.getName() == "write_error") {
+			F.setLinkage(llvm::GlobalValue::ExternalLinkage);
+			F.setVisibility(llvm::GlobalValue::DefaultVisibility);
+		}
+	}
+
 	// Write this jsonData to a file analysis.json
 	std::ofstream outFile("analysis.json");
 	if (outFile.is_open()) {

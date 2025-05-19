@@ -103,7 +103,7 @@ fn main() {
     // to bindgen, and lets you build up options for
     // the resulting bindings.
     let mut bindings = bindgen::Builder::default()
-        .wrap_static_fns(true)
+        .wrap_static_fns(false) // Rust linker won't find static functions because they don't have external linkage
         .generate_inline_functions(true)
         .parse_callbacks(Box::new(Renamer)); // Need to rename main as main_0
 

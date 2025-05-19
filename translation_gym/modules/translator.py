@@ -76,7 +76,7 @@ class DefaultTranslator(Translator):
 {func['body']}
 ```
 {calledFunctionDesc}
-As far as possible, avoid raw pointers and unsafe function calls, and use only safe Rust.
+As far as possible, avoid raw pointers and unsafe function calls, and use only safe Rust. Also avoid libc types and use Rust native types instead.
 You can assume that all the structures and global variables already have definitions in Rust, and you do not need to redefine them.
 Do not use any dummy code like "// Full implementation goes here", etc. All the code you write will be substituted directly into the codebase without a human reviewing it. So it should be functional and complete.
 Feel free to change the function signature and modify the function body as needed.
@@ -119,7 +119,8 @@ pub extern "C" fn {func['name']} ...
 
         self.logger.log_output(translation_prompt)
 
-        while True:
+        success = False
+        for _ in range(5):
             try:
                 self.logger.log_status("Calling LLM for translation")
                 response = self.model.gen(self.conversation, top_k=1, temperature=0)[0]
@@ -146,11 +147,15 @@ pub extern "C" fn {func['name']} ...
                 imports = imports.replace('```rust', '').replace('```', '').strip()
                 function_trans = function_trans.replace('```rust', '').replace('```', '').strip()
                 wrapper = wrapper.replace('```rust', '').replace('```', '').strip()
+                success = True
                 break
             except ModelException as e:
                 self.logger.log_status(f"Model exception\n{e}\nTrying again")
                 continue
 
+        if not success:
+            return None
+        
         return {
             'func': function_trans,
             'wrapper': wrapper,

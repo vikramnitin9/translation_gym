@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
     orchestrator = DefaultOrchestrator(logger)
     translator = DefaultTranslator(args.model, logger)
-    validator = DefaultValidator(compile_attempts=5, logger=logger) # In case compilation times out, how many times to retry
+    validator = DefaultValidator(compile_attempts=2, logger=logger) # In case compilation times out, how many times to retry
 
     engine = TranslationEngine(dataset=dataset,
                                output_dir=args.output_dir,

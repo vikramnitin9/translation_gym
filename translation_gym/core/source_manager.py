@@ -188,6 +188,30 @@ class CSourceManager(SourceManager):
             f.write(''.join(old_lines))
 
     def remove_func(self, func):
+        fpath = Path(os.path.join(self.code_dir, func['filename']))
+        start_line = func['startLine']
+        start_col = func['startCol']
+        end_line = func['endLine']
+        end_col = func['endCol']
+
+        with open(fpath, 'r') as f:
+            lines = f.readlines()
+
+        old_lines = lines.copy()
+        new_lines = lines[:start_line-1]
+
+        # We need to keep the function declaration visible to other functions that may call it
+        new_lines.append(lines[start_line-1][:start_col-1] + '\n')
+        new_lines.append(func['signature'] + ';\n')
+        new_lines.append(lines[end_line-1][end_col:] + '\n')
+        new_lines += lines[end_line:]
+
+        with open(fpath, 'w') as f:
+            f.write(''.join(new_lines))
+        with open(fpath.with_suffix('.old'), 'w') as f:
+            f.write(''.join(old_lines))
+
+    def comment_out(self, func):
 
         fpath = Path(os.path.join(self.code_dir, func['filename']))
         start_line = func['startLine']

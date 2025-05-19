@@ -58,3 +58,5 @@ class DefaultOrchestrator(Orchestrator):
                 func['instrumentation'] = {'args': instrumentation_logs[0]['args'],
                                         'return': instrumentation_logs[0]['return']}
             yield func
+            # We have to re-run static analysis to get the most up-to-date results
+            static_analysis_results = source_manager.get_static_analysis_results()

@@ -26,7 +26,7 @@ bool ToolActionWrapper::runInvocation(
     CGOpts.setDebugInfo(codegenoptions::FullDebugInfo);
     CGOpts.RelocationModel = llvm::Reloc::PIC_;
     CGOpts.OptimizationLevel = 0;
-    
+
     // Create the compiler's actual diagnostics engine.
     Compiler.createDiagnostics(DiagConsumer, /*ShouldOwnClient=*/false);
     if (!Compiler.hasDiagnostics())

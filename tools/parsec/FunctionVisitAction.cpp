@@ -45,15 +45,18 @@ void FunctionVisitAction::EndSourceFileAction() {
     std::unique_ptr<llvm::Module> M = this->takeModule();
     if (!M) {
         std::cerr << "Failed to generate module\n";
-        return;
+        exit(1); // We don't want to fail silently
+        // return;
     }
     if (linker == nullptr) {
         this->mod = std::move(M);
         linker = new llvm::Linker(*(this->mod));
     } else {
+        // linkInModule uses a weird convention where 1 indicates failure, 0 indicates success
         if (linker->linkInModule(std::move(M))) {
             std::cerr << "Error linking module\n";
-            return;
+            exit(1); // We don't want to fail silently
+            // return;
         }
     }
 }

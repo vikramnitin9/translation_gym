@@ -131,6 +131,15 @@ class TranslationEngine:
                 func['imports'] = []
 
             translation = translator.translate(func, self.source_manager)
+            
+            if translation is None:
+                self.logger.log_failure("Translation failed")
+                self.logger.log_output("No translation generated")
+                self.logger.log_result({'function': func['name'],
+                                        'results': "No translation generated",
+                                        'attempts': 0})
+                continue
+
             result = validator.validate(func, translation, self.source_manager, self.target_manager, self.test_manager)
 
             for i in range(self.num_attempts):
