@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "string_functions.h"
+#include "common.h"
 
 char* concatenate(const char* str1, const char* str2) {
     size_t len1 = strlen(str1);
