@@ -150,21 +150,24 @@ class CSourceManager(SourceManager):
     def get_instrumentation_dir(self):
         return self.instrumentation_dir
     
-    def extract_body(self, func):
-        fpath = Path(os.path.join(self.code_dir, func['filename']))
-        start_line = func['startLine']
-        start_col = func['startCol']
-        end_line = func['endLine']
-        end_col = func['endCol']
+    def extract_source(self, unit):
+        if not Path(unit['filename']).is_absolute():
+            fpath = Path(os.path.join(self.code_dir, unit['filename']))
+        else:
+            fpath = Path(unit['filename'])
+        start_line = unit['startLine']
+        start_col = unit['startCol']
+        end_line = unit['endLine']
+        end_col = unit['endCol']
 
         with open(fpath, 'r') as f:
             lines = f.readlines()
         
-        body = lines[start_line-1][start_col-1:]
+        source = lines[start_line-1][start_col-1:]
         for i in range(start_line, end_line-1):
-            body += lines[i]
-        body += lines[end_line-1][:end_col]
-        return body
+            source += lines[i]
+        source += lines[end_line-1][:end_col]
+        return source
     
     def replace_func(self, func, new_body):
 
@@ -188,6 +191,8 @@ class CSourceManager(SourceManager):
             f.write(''.join(old_lines))
 
     def remove_func(self, func):
+        assert func['type'] == 'functions'
+        
         fpath = Path(os.path.join(self.code_dir, func['filename']))
         start_line = func['startLine']
         start_col = func['startCol']

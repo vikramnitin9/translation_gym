@@ -6,11 +6,11 @@ class Orchestrator:
     Base class for orchestrators. This class is responsible for orchestrating the translation process.
     """
 
-    def function_iter(self, source_manager, instrumentation_results):
+    def unit_iter(self, source_manager, instrumentation_results):
         """
-        Iterate over the functions in the source code.
+        Iterate over the translation units in the source code.
         :param source_manager: The source manager
-        :return: An iterator over the functions
+        :return: An iterator over the translation units
         """
         raise NotImplementedError("Subclasses must implement this method")
 
@@ -20,63 +20,58 @@ class DefaultOrchestrator(Orchestrator):
     def __init__(self, logger):
         self.logger = logger
 
-    def function_iter(self, source_manager, instrumentation_results=None):
+    def unit_iter(self, source_manager, instrumentation_results=None):
         static_analysis_results = source_manager.get_static_analysis_results()
-        # Build call graph of functions
-        self.dep_graph = nx.DiGraph()
+        dep_graph = nx.DiGraph()
 
         for func in static_analysis_results['functions']:
-            qname = '"{}"'.format(func['name'])
-            self.dep_graph.add_node(qname)
+            qname = func['name']
+            dep_graph.add_node(qname, type='functions')
 
-            # 1) calls → function
-            for callee in func.get('calledFunctions', []):
-                qcallee = '"{}"'.format(callee['name'])
-                self.dep_graph.add_node(qcallee)
-                self.dep_graph.add_edge(qname, qcallee)
+            # 1) function → callees
+            for callee in func['calledFunctions']:
+                qcallee = callee['name']
+                dep_graph.add_node(qcallee, type='functions')
+                dep_graph.add_edge(qname, qcallee)
 
-            # 2) globals → function
-            for glob in func.get('globals', []):
-                qglob = '"{}"'.format(glob['name'])
-                self.dep_graph.add_node(qglob)
-                self.dep_graph.add_edge(qname, qglob)
+            # # 2) function → globals 
+            # for glob in func['globals']:
+            #     qglob = glob['name']
+            #     dep_graph.add_node(qglob, type='global')
+            #     dep_graph.add_edge(qname, qglob)
 
-             # 3) structs → function
-            for st in func.get('structs', []):
-                qstruct = '"{}"'.format(st['name'])
-                self.dep_graph.add_node(qstruct)
-                self.dep_graph.add_edge(qname, qstruct)
+             # 3) function → structs
+            for st in func['structs']:
+                qstruct = st['name']
+                dep_graph.add_node(qstruct, type='structs')
+                dep_graph.add_edge(qname, qstruct)
 
-            
         # We only want to translate functions that are reachable from main
-        reachable_q = nx.descendants(self.dep_graph, '"main_0"') | {'"main_0"'}
-        subgraph   = self.dep_graph.subgraph(reachable_q)
-
-
+        reachable_q = nx.descendants(dep_graph, 'main_0') | {'main_0'}
+        subgraph   = dep_graph.subgraph(reachable_q)
 
         components = nx.weakly_connected_components(subgraph)
         assert len(list(components)) == 1
 
         try:
-            func_ordering = list(reversed(list(nx.topological_sort(subgraph))))
+            unit_ordering = list(reversed(list(nx.topological_sort(subgraph))))
         except nx.NetworkXUnfeasible:
-            func_ordering = list(nx.dfs_postorder_nodes(subgraph, source='"main_0"'))
-        
-        func_ordering = [f.strip('"') for f in func_ordering]
+            unit_ordering = list(nx.dfs_postorder_nodes(subgraph, source='main_0'))
 
-
-        for func_name in func_ordering:
-            funcs = [f for f in static_analysis_results['functions'] if f['name'] == func_name]
-            if len(funcs) == 0:
+        for unit_name in unit_ordering:
+            unit_type = subgraph.nodes[unit_name]['type']
+            result = [res for res in static_analysis_results[unit_type] if res['name'] == unit_name]
+            if len(result) == 0:
                 continue
-            func = funcs[0]
-            if instrumentation_results is not None:
-                instrumentation_logs = [log for log in instrumentation_results if log['name'] == func_name]
+            result = result[0]
+            if (unit_type == "functions") and (instrumentation_results is not None):
+                instrumentation_logs = [log for log in instrumentation_results if log['name'] == unit_name]
                 if len(instrumentation_logs) == 0:
                     # Include only covered functions
                     continue
-                func['instrumentation'] = {'args': instrumentation_logs[0]['args'],
-                                        'return': instrumentation_logs[0]['return']}
-            yield func
+                result['instrumentation'] = {'args': instrumentation_logs[0]['args'],
+                                            'return': instrumentation_logs[0]['return']}
+            result['type'] = unit_type
+            yield result
             # We have to re-run static analysis to get the most up-to-date results
             static_analysis_results = source_manager.get_static_analysis_results()

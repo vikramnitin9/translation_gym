@@ -72,6 +72,8 @@ pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
 
     let mut files_json: Vec<serde_json::Value> = vec![];
     let mut funcs_json: Vec<serde_json::Value> = vec![];
+    let mut globals_json: Vec<serde_json::Value> = vec![];
+    let mut structs_json: Vec<serde_json::Value> = vec![];
 
     for file in visitor.files.iter() {
         let fname = file.to_str().unwrap_or("<unknown>").to_string();
@@ -108,6 +110,7 @@ pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
             "endCol": end_col,
             "calls": [],
             "globals": [],
+            "structs": [],
             "foreign": func_info.foreign,
         });
 
@@ -124,23 +127,48 @@ pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
             }
         }
         // Get globals corresponding to this function
-        if let Some(globals) = visitor.globals.get(func_defid) {
-            if globals.len() > 0 {
-                for global in globals {
-                    let global_span = global;
-                    let global_json = json!({
-                        "span": format!("{:?}", global_span),
-                        "source": span_to_string(tcx, &global_span)
-                    });
-                    this_func_json["globals"].as_array_mut().unwrap().push(global_json);
-                }
-            }
+        for (global_def_id, global_span) in func_info.globals.iter() {
+            let global_json = json!({
+                "name": tcx.item_name(*global_def_id).to_string(),
+                "span": format!("{:?}", global_span),
+                "source": span_to_string(tcx, &global_span)
+            });
+            this_func_json["globals"].as_array_mut().unwrap().push(global_json);
         }
         funcs_json.push(this_func_json);
     }
+
+    for (global_defid, global_span) in visitor.globals.iter() {
+        let ((fname, start_line, start_col), (_, end_line, end_col)) = span_to_data(tcx, &global_span);
+        let global_json = json!({
+            "name": tcx.item_name(*global_defid).to_string(),
+            "filename": fname,
+            "startLine": start_line,
+            "startCol": start_col,
+            "endLine": end_line,
+            "endCol": end_col,
+        });
+        globals_json.push(global_json);
+    }
+
+    for (struct_defid, struct_span) in visitor.structs.iter() {
+        let ((fname, start_line, start_col), (_, end_line, end_col)) = span_to_data(tcx, &struct_span);
+        let struct_json = json!({
+            "name": tcx.item_name(*struct_defid).to_string(),
+            "filename": fname,
+            "startLine": start_line,
+            "startCol": start_col,
+            "endLine": end_line,
+            "endCol": end_col,
+        });
+        structs_json.push(struct_json);
+    }
+    
     let json_output = json!({
         "files": files_json,
         "functions": funcs_json,
+        "globals": globals_json,
+        "structs": structs_json,
     });
     // Write the json to a file
     let stringified_json = serde_json::to_string_pretty(&json_output).unwrap();

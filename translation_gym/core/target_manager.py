@@ -152,19 +152,29 @@ class RustTargetManager(TargetManager):
             raise CompileException(e)
         finally:
             os.chdir(cwd)
+    
+    def extract_source(self, unit):
+        if not Path(unit['filename']).is_absolute():
+            fpath = Path(os.path.join(self.code_dir, unit['filename']))
+        else:
+            fpath = Path(unit['filename'])
+        start_line = unit['startLine']
+        start_col = unit['startCol']
+        end_line = unit['endLine']
+        end_col = unit['endCol']
 
-    def insert_translation(self, func, translation):
+        with open(fpath, 'r') as f:
+            lines = f.readlines()
+        
+        source = lines[start_line-1][start_col-1:]
+        for i in range(start_line, end_line-1):
+            source += lines[i]
+        source += lines[end_line-1][:end_col]
+        return source
 
-        # Add the function to the bindgen blocklist
-        shutil.copy(self.bindgen_blocklist, self.bindgen_blocklist.with_suffix('.old'))
-        with open(self.bindgen_blocklist, 'a') as f:
-            f.write(f"{func['name']}\n")
+    def insert_imports(self, unit, imports):
 
-        function_trans = translation['func']
-        wrapper = translation['wrapper']
-        imports = translation['imports'] if 'imports' in translation else ''
-
-        insertion_file = self.get_insertion_file(func)
+        insertion_file = self.get_insertion_file(unit)
         # Read the contents of the insertion file
         contents = insertion_file.read_text()
         old_contents = contents
@@ -191,15 +201,30 @@ class RustTargetManager(TargetManager):
         lines.insert(i, imports)
         new_contents = '\n'.join(lines)
 
-        # Insert the function_trans and wrapper at the bottom
-        new_contents += '\n' + function_trans + '\n' + wrapper
-
         insertion_file.write_text(new_contents)
         # De-duplicate imports
         try:
             run(f'cd {self.code_dir} && rustfmt --config imports_granularity=Crate src/main.rs')
         except:
             self.logger.log_failure("Rustfmt failed. There may be a syntax error in the generated code.")
+
+        with open(insertion_file.with_suffix('.old'), 'w') as f:
+            f.write(old_contents)
+
+    def insert_translation(self, unit, translation):
+
+        # Add the function to the bindgen blocklist
+        shutil.copy(self.bindgen_blocklist, self.bindgen_blocklist.with_suffix('.old'))
+        with open(self.bindgen_blocklist, 'a') as f:
+            f.write(f"{unit['name']}\n")
+
+        insertion_file = self.get_insertion_file(unit)
+        # Read the contents of the insertion file
+        contents = insertion_file.read_text()
+        old_contents = contents
+
+        # Insert the function_trans and wrapper at the bottom
+        insertion_file.write_text(contents + '\n' + translation)
 
         with open(insertion_file.with_suffix('.old'), 'w') as f:
             f.write(old_contents)

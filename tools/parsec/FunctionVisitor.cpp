@@ -113,8 +113,6 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
                 {"startCol", startCol},
                 {"endCol", endCol}
         };
-
-
     {
     json arr = json::array();
     for (auto &n : currentGlobals) {
@@ -123,7 +121,7 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
         arr.push_back(std::move(obj));
     }
     functionData["globals"] = std::move(arr);
-   }
+    }
 
    {
     json arr = json::array();
@@ -139,8 +137,6 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
     }
     return true;
 }
-
-
 
 bool FunctionVisitor::VisitRecordDecl(RecordDecl *record) {
 
@@ -177,11 +173,9 @@ bool FunctionVisitor::VisitRecordDecl(RecordDecl *record) {
         {"startCol", startCol},
         {"endCol", endCol}
     };
-    this->data["structures"].push_back(structData);
+    this->data["structs"].push_back(structData);
     return true;
 }
-
-
 
 bool FunctionVisitor::VisitVarDecl(VarDecl *var) {
 
@@ -225,9 +219,6 @@ bool FunctionVisitor::VisitVarDecl(VarDecl *var) {
     this->data["globals"].push_back(globalData);
     return true;
 }
-
-
-
 
 // Record every referenced global VarDecl
 bool FunctionVisitor::VisitDeclRefExpr(DeclRefExpr *expr) {

@@ -4,7 +4,7 @@ class Validator:
     """
     Base class for validators. This class is responsible for validating the translated code.
     """
-    def validate(self, func, translation, source_manager, target_manager, test_manager):
+    def validate(self, unit, translation, source_manager, target_manager, test_manager):
         """
         Validate the translated code.
 
@@ -27,9 +27,15 @@ class DefaultValidator(Validator):
         self.compile_attempts = compile_attempts
         self.logger = logger
 
-    def validate(self, func, translation, source_manager, target_manager, test_manager):
-        source_manager.remove_func(func)
-        target_manager.insert_translation(func, translation)
+    def validate(self, unit, translation, source_manager, target_manager, test_manager):
+        if unit['type'] == 'functions':
+            source_manager.remove_func(unit)
+            target_manager.insert_translation(unit, translation['func'])
+            target_manager.insert_translation(unit, translation['wrapper'])
+            target_manager.insert_imports(unit, translation['imports'])
+        elif unit['type'] == 'structs':
+            target_manager.insert_translation(unit, translation['struct'])
+            target_manager.insert_imports(unit, translation['imports'])
 
         compile_success = False
         error_message = ''
@@ -56,7 +62,7 @@ class DefaultValidator(Validator):
                     "message" : error_message}
         
         compile_success = False
-        error_message = ''    
+        error_message = ''
         for _ in range(self.compile_attempts):
             try:
                 target_manager.compile()

@@ -46,6 +46,8 @@ pub struct FnInfo {
     pub span: Span,
     pub sig_span: Span,
     pub foreign: bool,
+    pub globals: HashMap<DefId, Span>,
+    pub structs: HashMap<DefId, Span>,
 }
 
 pub struct CallgraphVisitor<'tcx> {
@@ -55,7 +57,9 @@ pub struct CallgraphVisitor<'tcx> {
     // free functions
     pub functions: HashMap<DefId, FnInfo>,
     // global variables
-    pub globals: HashMap<DefId, HashSet<Span>>,
+    pub globals: HashMap<DefId, Span>,
+    // structs
+    pub structs: HashMap<DefId, Span>,
     // trait method declarations without default implementation
     pub method_decls: HashSet<DefId>,
     // map decls to impls
@@ -80,6 +84,7 @@ impl<'tcx> CallgraphVisitor<'tcx> {
             tcx: *tcx,
             functions: HashMap::new(),
             globals: HashMap::new(),
+            structs: HashMap::new(),
             method_decls: HashSet::new(),
             method_impls: HashMap::new(),
             static_calls: HashSet::new(),
@@ -182,8 +187,11 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
                                         // If the definition is outside the current function
                                         if let Some(cur_fn_def_id) = self.cur_fn {
                                             if !self.tcx.is_descendant_of(def_id, cur_fn_def_id) {
+                                                self.globals.insert(def_id, *span);
                                                 // Add it to the globals for this function
-                                                self.globals.entry(cur_fn_def_id).or_default().insert(*span);
+                                                if let Some(func) = self.functions.get_mut(&cur_fn_def_id) {
+                                                    func.globals.insert(def_id, *span);
+                                                }        
                                             }
                                         }
                                     },
@@ -191,11 +199,6 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
                             }
                         }
                     }
-                }
-            },
-            rustc_hir::ExprKind::Type(_, ty) => {
-                if let Some(cur_fn_def_id) = self.cur_fn {
-                    self.globals.entry(cur_fn_def_id).or_default().insert(ty.span);
                 }
             },
             _ => {}
@@ -221,15 +224,38 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
             self.files.insert(path);
         }
         let hir_id = item.hir_id();
-        if let rustc_hir::ItemKind::Fn(fn_sig, _, _) = item.kind {
-            let def_id = hir_id.owner.to_def_id();
-            self.functions.insert(def_id, FnInfo{span: item.span, sig_span: fn_sig.span, foreign: false});
-            push_walk_pop!(self, def_id, intravisit::walk_item(self, item));
-            return;
-        }
-        if let rustc_hir::ItemKind::Use(..) = item.kind {
-            self.imports.insert(item.span);
-            return;
+        match item.kind {
+            rustc_hir::ItemKind::Fn(fn_sig, _, _) => {
+                let def_id = hir_id.owner.to_def_id();
+                self.functions.insert(def_id, FnInfo{span: item.span, sig_span: fn_sig.span, foreign: false, globals: HashMap::new(), structs: HashMap::new()});
+                push_walk_pop!(self, def_id, intravisit::walk_item(self, item));
+                return;
+            },
+            rustc_hir::ItemKind::Use(..) => {
+                self.imports.insert(item.span);
+                return;
+            },
+            rustc_hir::ItemKind::Static(..) => {
+                // static variables
+                let def_id = hir_id.owner.to_def_id();
+                self.globals.insert(def_id, item.span);
+            },
+            rustc_hir::ItemKind::Const(..) => {
+                // const variables
+                let def_id = hir_id.owner.to_def_id();
+                self.globals.insert(def_id, item.span);
+            },
+            rustc_hir::ItemKind::Struct(..) => {
+                // structs
+                let def_id = hir_id.owner.to_def_id();
+                self.structs.insert(def_id, item.span);
+            },
+            rustc_hir::ItemKind::Enum(..) => {
+                // enums
+                let def_id = hir_id.owner.to_def_id();
+                self.structs.insert(def_id, item.span);
+            },
+            _ => {}
         }
         // traverse
         intravisit::walk_item(self, item)
@@ -250,7 +276,7 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
             rustc_hir::TraitItemKind::Fn(fn_sig, rustc_hir::TraitFn::Provided(_)) => {
                 // a method decl and def
                 self.method_decls.insert(def_id);
-                self.functions.insert(def_id, FnInfo{span: ti.span, sig_span: fn_sig.span, foreign: false});
+                self.functions.insert(def_id, FnInfo{span: ti.span, sig_span: fn_sig.span, foreign: false, globals: HashMap::new(), structs: HashMap::new()});
                 self.method_impls.entry(def_id).or_default().push(def_id);
 
                 push_walk_pop!(self, def_id, intravisit::walk_trait_item(self, ti));
@@ -271,7 +297,7 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
         let def_id = hir_id.owner.to_def_id();
 
         if let rustc_hir::ImplItemKind::Fn(fn_sig, _) = ii.kind {
-            self.functions.insert(def_id, FnInfo{span: ii.span, sig_span: fn_sig.span, foreign: false});
+            self.functions.insert(def_id, FnInfo{span: ii.span, sig_span: fn_sig.span, foreign: false, globals: HashMap::new(), structs: HashMap::new()});
 
             // store link to decl
             let mut decl_id = None;
@@ -317,7 +343,7 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
 
         if let rustc_hir::ForeignItemKind::Fn(..) = fi.kind {
             // The signature is the same as the function because there is no body
-            self.functions.insert(def_id, FnInfo{span: fi.span, sig_span: fi.span, foreign: true});
+            self.functions.insert(def_id, FnInfo{span: fi.span, sig_span: fi.span, foreign: true, globals: HashMap::new(), structs: HashMap::new()});
             push_walk_pop!(self, def_id, intravisit::walk_foreign_item(self, fi));
             return;
         }

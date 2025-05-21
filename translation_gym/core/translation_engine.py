@@ -19,7 +19,6 @@ class TranslationEngine:
         self.output_dir = Path(output_dir)
         self.setup() # Sets up source_manager and target_manager
         self.num_attempts = num_attempts
-        self.translated = {}
 
     def get_source_manager(self):
         return self.source_manager
@@ -81,66 +80,26 @@ class TranslationEngine:
             self.instrumentation_results = test_res['instrumentation']
         else:
             raise Exception(f"Tests failed: {test_res['error']}.")
-        
+
     def run(self,
             orchestrator: Orchestrator,
             translator: Translator,
             validator: Validator):
 
-        for func in orchestrator.function_iter(self.source_manager, self.instrumentation_results):
-            self.logger.log_status("Translating function: {}".format(func['name']))
+        for unit in orchestrator.unit_iter(self.source_manager, self.instrumentation_results):
+            self.logger.log_status("Translating unit: {}".format(unit['name']))
 
-            # This is the part where we collect info about the called functions.
-            # We first need to compile the source to get the most up-to-date static library
-            self.source_manager.compile()
-            rust_static_analysis = self.target_manager.get_static_analysis_results()
-            for i, called_func in enumerate(func['calledFunctions']):
-                translated_rust_fns = [f for f in rust_static_analysis['functions'] if f['name'] == (called_func['name'] + "_rust")]
-                if len(translated_rust_fns) != 0:
-                    assert len(translated_rust_fns) == 1
-                    func['calledFunctions'][i]['signature'] = translated_rust_fns[0]['signature']
-                    func['calledFunctions'][i]['translated'] = True
-                else:
-                    matching_rust_fn = [f for f in rust_static_analysis['functions'] if f['name'] == called_func['name']]
-                    if len(matching_rust_fn) == 0:
-                        # This can happen if bindgen fails to find this function for some reason.
-                        self.logger.log_failure(f"Function {called_func['name']} not found in bindgen headers")
-                        func['calledFunctions'][i]['signature'] = None
-                        func['calledFunctions'][i]['translated'] = False
-                        continue
-                    assert len(matching_rust_fn) == 1
-                    func['calledFunctions'][i]['signature'] = matching_rust_fn[0]['signature']
-                    func['calledFunctions'][i]['translated'] = False
-
-            def compare_fnames(a, b, base_dir):
-                a, b, base_dir = Path(a), Path(b), Path(base_dir)
-                if a.is_absolute():
-                    a = a.relative_to(base_dir)
-                if b.is_absolute():
-                    b = b.relative_to(base_dir)
-                return a == b
-            
-            insertion_file = self.target_manager.get_insertion_file(func)
-            code_dir = self.target_manager.get_code_dir()
-            file_candidates = [file for file in rust_static_analysis['files'] if compare_fnames(file['filename'], insertion_file, code_dir)]
-            if len(file_candidates) == 1:
-                # imports includes both the "use" statement as well as the individual modules
-                # We want just the "use" statement
-                func['imports'] = [imp['source'] for imp in file_candidates[0]['imports']]
-            else:
-                func['imports'] = []
-
-            translation = translator.translate(func, self.source_manager)
+            translation = translator.translate(unit, self.source_manager, self.target_manager)
             
             if translation is None:
                 self.logger.log_failure("Translation failed")
                 self.logger.log_output("No translation generated")
-                self.logger.log_result({'function': func['name'],
+                self.logger.log_result({'unit': unit['name'],
                                         'results': "No translation generated",
                                         'attempts': 0})
                 continue
 
-            result = validator.validate(func, translation, self.source_manager, self.target_manager, self.test_manager)
+            result = validator.validate(unit, translation, self.source_manager, self.target_manager, self.test_manager)
 
             for i in range(self.num_attempts):
                 self.logger.log_status(f"Attempt {i+1}/{self.num_attempts}")
@@ -152,18 +111,17 @@ class TranslationEngine:
                     self.logger.log_failure("Translation failed")
                     self.logger.log_output(result['category'])
                     self.logger.log_output(result['message'])
-                    self.source_manager.reset_func(func)
-                    self.target_manager.reset_func(func)
+                    self.source_manager.reset_func(unit)
+                    self.target_manager.reset_func(unit)
                     if i == self.num_attempts - 1:
                         break
-                    translation = translator.repair(result, self.source_manager)
-                    result = validator.validate(func, translation, self.source_manager, self.target_manager, self.test_manager)
+                    translation = translator.repair(result, self.source_manager, self.target_manager)
+                    result = validator.validate(unit, translation, self.source_manager, self.target_manager, self.test_manager)
             
             if result['success']:
                 self.logger.log_success("Translation succeeded")
-                self.translated[func['name']] = translation['func']
-            
-            self.logger.log_result({'function': func['name'],
+
+            self.logger.log_result({'unit': unit['name'],
                                    'results': "Success" if result['success'] else result['category'],
                                    'attempts': i+1})
     
@@ -171,10 +129,10 @@ class TranslationEngine:
         # Draw an ascii table with the results
         import prettytable
         table = prettytable.PrettyTable()
-        table.field_names = ["Function", "Result", "Attempts"]
+        table.field_names = ["Unit", "Result", "Attempts"]
         results = self.logger.get_results()
         for result in results:
-            table.add_row([result['function'], result['results'], result['attempts']])
+            table.add_row([result['unit'], result['results'], result['attempts']])
         table.add_divider()
         table.add_row(['Overall', "{}/{}".format(len([r for r in results if r['results'] == "Success"]), len(results)), ''])
         print(table)

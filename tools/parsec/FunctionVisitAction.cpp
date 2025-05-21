@@ -43,11 +43,11 @@ void FunctionVisitAction::EndSourceFileAction() {
     }
 
     // Merge structures
-    for (const auto &entry : subData["structures"]) {
-        if (std::find_if(data["structures"].begin(), data["structures"].end(),
+    for (const auto &entry : subData["structs"]) {
+        if (std::find_if(data["structs"].begin(), data["structs"].end(),
         [&entry](const json &e){ return e["name"] == entry["name"]; })
-        == data["structures"].end()) {
-      data["structures"].push_back(entry);
+        == data["structs"].end()) {
+      data["structs"].push_back(entry);
       }
     }
 

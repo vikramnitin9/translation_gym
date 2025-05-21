@@ -1,5 +1,6 @@
 from translation_gym.models import get_model_from_name, ModelException
 from translation_gym.helpers import *
+from translation_gym.prompts import *
 
 class Translator:
 
@@ -7,7 +8,7 @@ class Translator:
     Base class for translators. This class is responsible for translating the code.
     """
 
-    def translate(self, func, source_manager):
+    def translate(self, func, source_manager, target_manager):
         """
         Translate the given function to Rust.
         :param func: The function to translate
@@ -24,7 +25,7 @@ class Translator:
         """
         raise NotImplementedError("Subclasses must implement this method")
     
-    def repair(self, result, source_manager):
+    def repair(self, result, source_manager, target_manager):
         """
         Repair the given function.
         :param result: The result of the translation
@@ -47,79 +48,77 @@ class DefaultTranslator(Translator):
         self.model = get_model_from_name(model)
         self.logger = logger
         self.conversation = []
-
-    def construct_prompt_for_func(self, func):
-
-        if len(func['calledFunctions']) == 0:
-            calledFunctionDesc = ""
-        else:
-            calledFunctionDesc = "This function calls the following functions:\n"
-        for i, called_func in enumerate(func['calledFunctions']):
-            if called_func['translated']:
-                calledFunctionDesc += f"{i+1}. {called_func['name']}. This has a Rust reimplementation, with this signature:\n"
-                calledFunctionDesc += f"```rust\n{called_func['signature']}\n```\n"
-            elif called_func['signature'] is not None:
-                calledFunctionDesc += f"{i+1}. {called_func['name']}. This has a Rust FFI binding to a C implementation, with this signature:\n"
-                calledFunctionDesc += f"```rust\n{called_func['signature']}\n```\n"
-                calledFunctionDesc += "Note that you will need to use the `unsafe` keyword to call this function. If you can come up with a native safe Rust alternative for this function, you should use that instead.\n"
-            else:
-                calledFunctionDesc += f"{i+1}. {called_func['name']}. This function is not accessible to you, so you need to use a substitute.\n"
-        
-        if len(func['imports']) == 0:
-            importDesc = ""
-        else:
-            importDesc = f"The Rust file where this function will be inserted already has the following imports:\n```rust\n{'\n'.join(func['imports'])}\n```\n"
-            importDesc += "Do not repeat them in the <IMPORTS>...</IMPORTS> section, otherwise this will lead to duplicate imports.\n"
-
-        prompt = f'''Translate the following C function to idiomatic Rust:
-```c
-{func['body']}
-```
-{calledFunctionDesc}
-As far as possible, avoid raw pointers and unsafe function calls, and use only safe Rust. Also avoid libc types and use Rust native types instead.
-You can assume that all the structures and global variables already have definitions in Rust, and you do not need to redefine them.
-Do not use any dummy code like "// Full implementation goes here", etc. All the code you write will be substituted directly into the codebase without a human reviewing it. So it should be functional and complete.
-Feel free to change the function signature and modify the function body as needed.
-If you need imports, you can add them in the <IMPORTS>...</IMPORTS> section. Do not provide them along with the function body.
-{importDesc}
-
-Also provide a wrapper function that calls this function.
-The wrapper function should have the *same* arguments and return type as the C function, except with C types replaced with their corresponding libc crate types.
-For example, replace `int` with `libc::c_int`, `char*` with `*mut libc::c_char`, etc.
-Also remember to use `#[no_mangle]` and `pub extern "C" fn ...` for the wrapper function.
-
-The name of the Rust function should be `{func['name']}_rust` and the wrapper function should be `{func['name']}`.
-
-Follow this format:
-
-<IMPORTS>
-Any imports you need for {func['name']}_rust and {func['name']}
-</IMPORTS>
-
-<FUNC>
-fn {func['name']}_rust ...
-</FUNC>
-
-<WRAPPER>
-#[no_mangle]
-pub extern "C" fn {func['name']} ...
-</WRAPPER>
-'''
-        return prompt
+        self.unit = None
     
-    def translate(self, func, source_manager):
+    def attach_dependencies(self, unit, source_manager, target_manager):
+        # We first need to compile the source to get the most up-to-date static library
+        source_manager.compile()
+        # Then we get the Rust static analysis results
+        rust_static_analysis = target_manager.get_static_analysis_results()
 
-        body = source_manager.extract_body(func)
-        func['body'] = body
+        source = source_manager.extract_source(unit)
+        unit['source'] = source
 
-        translation_prompt = self.construct_prompt_for_func(func)
+        # Now we need to get the imports that are already in the Rust file
+        insertion_file = target_manager.get_insertion_file(unit)
+        code_dir = target_manager.get_code_dir()
+        file_candidates = [file for file in rust_static_analysis['files'] if compare_fnames(file['filename'], insertion_file, code_dir)]
+        if len(file_candidates) == 1:
+            unit['imports'] = [imp['source'] for imp in file_candidates[0]['imports']]
+        else:
+            unit['imports'] = []
+
+        if unit['type'] != 'functions':
+            return
+        # This is the part where we collect info about the called functions.
+        for i, called_func in enumerate(unit['calledFunctions']):
+            translated_rust_fns = [f for f in rust_static_analysis['functions'] if f['name'] == (called_func['name'] + "_rust")]
+            if len(translated_rust_fns) != 0:
+                assert len(translated_rust_fns) == 1
+                unit['calledFunctions'][i]['translated'] = translated_rust_fns[0]['signature']
+
+            rust_ffi_bindings = [f for f in rust_static_analysis['functions'] if f['name'] == called_func['name']]
+            if len(rust_ffi_bindings) != 0:
+                assert len(rust_ffi_bindings) == 1
+                unit['calledFunctions'][i]['binding'] = rust_ffi_bindings[0]['signature']
+
+        # Now we get information about the globals and structs
+        for i, struct in enumerate(unit['structs']):
+            translated_rust_structs = [s for s in rust_static_analysis['structs'] if s['name'] == (struct['name'] + "_rust")]
+            if len(translated_rust_structs) != 0:
+                assert len(translated_rust_structs) == 1
+                source = target_manager.extract_source(translated_rust_structs[0])
+                unit['structs'][i]['translated'] = source
+            
+            rust_ffi_bindings = [s for s in rust_static_analysis['structs'] if s['name'] == struct['name']]
+            if len(rust_ffi_bindings) != 0:
+                assert len(rust_ffi_bindings) == 1
+                source = target_manager.extract_source(rust_ffi_bindings[0])
+                unit['structs'][i]['binding'] = source
+        
+        for i, glob in enumerate(unit['globals']):
+            rust_ffi_bindings = [g for g in rust_static_analysis['globals'] if g['name'] == glob['name']]
+            if len(rust_ffi_bindings) != 0: 
+                assert len(rust_ffi_bindings) == 1
+                source = target_manager.extract_source(rust_ffi_bindings[0])
+                unit['globals'][i]['binding'] = source
+    
+    def translate(self, unit, source_manager, target_manager):
+
+        self.attach_dependencies(unit, source_manager, target_manager)
+        if unit['type'] == 'functions':
+            translation_prompt = construct_prompt_for_func(unit)
+        elif unit['type'] == 'structs':
+            translation_prompt = construct_prompt_for_struct(unit)
+        else:
+            raise NotImplementedError("Translation not implemented for this unit type")
 
         self.conversation = [{'role': 'system', 'content': 'You are an intelligent code assistant'},
                             {'role': 'user', 'content': translation_prompt.strip()}]
+        self.unit = unit
 
         self.logger.log_output(translation_prompt)
 
-        success = False
         for _ in range(5):
             try:
                 self.logger.log_status("Calling LLM for translation")
@@ -133,49 +132,59 @@ pub extern "C" fn {func['name']} ...
                     imports = response.split('<IMPORTS>\n')[1].split('</IMPORTS>')[0]
                 else:
                     imports = ''
-                
-                if '<FUNC>\n' not in response:
-                    self.logger.log_failure("Response does not contain <FUNC> tag. Trying again.")
-                    continue
-                if '<WRAPPER>\n' not in response:
-                    self.logger.log_failure("Response does not contain <WRAPPER> tag. Trying again.")
-                    continue
-                function_trans = response.split('<FUNC>\n')[1].split('</FUNC>')[0]
-                wrapper = response.split('<WRAPPER>\n')[1].split('</WRAPPER>')[0]
-
-                # Remove any ```rust and ``` tags from imports, function_trans and wrapper
                 imports = imports.replace('```rust', '').replace('```', '').strip()
-                function_trans = function_trans.replace('```rust', '').replace('```', '').strip()
-                wrapper = wrapper.replace('```rust', '').replace('```', '').strip()
-                success = True
+
+                if unit['type'] == 'functions':
+                    if '<FUNC>\n' not in response:
+                        self.logger.log_failure("Response does not contain <FUNC> tag. Trying again.")
+                        continue
+                    if '<WRAPPER>\n' not in response:
+                        self.logger.log_failure("Response does not contain <WRAPPER> tag. Trying again.")
+                        continue
+                    function_trans = response.split('<FUNC>\n')[1].split('</FUNC>')[0]
+                    wrapper = response.split('<WRAPPER>\n')[1].split('</WRAPPER>')[0]
+
+                    # Remove any ```rust and ``` tags from function_trans and wrapper
+                    function_trans = function_trans.replace('```rust', '').replace('```', '').strip()
+                    wrapper = wrapper.replace('```rust', '').replace('```', '').strip()
+                    return {
+                        'func': function_trans,
+                        'wrapper': wrapper,
+                        'imports': imports,
+                    }
+                
+                elif unit['type'] == 'structs':
+                    if '<STRUCT>\n' not in response:
+                        self.logger.log_failure("Response does not contain <STRUCT> tag. Trying again.")
+                        continue
+                    struct_trans = response.split('<STRUCT>\n')[1].split('</STRUCT>')[0]
+                    # Remove any ```rust and ``` tags
+                    struct_trans = struct_trans.replace('```rust', '').replace('```', '').strip()
+                    return {
+                        'struct': struct_trans,
+                        'imports': imports,
+                    }
                 break
             except ModelException as e:
                 self.logger.log_status(f"Model exception\n{e}\nTrying again")
                 continue
 
-        if not success:
-            return None
-        
-        return {
-            'func': function_trans,
-            'wrapper': wrapper,
-            'imports': imports,
-        }
+        return None
     
-    def repair(self, result, source_manager):
+    def repair(self, result, source_manager, target_manager):
 
         assert len(self.conversation) > 0, "Repair called before translation"
 
         if result['category'] == "Compile Error":
             prompt = ("The translation generated the following compile error:\n"
                     f"{result['message']}\n"
-                    f"Please re-generate the translation of the function, wrapper function, and imports. "
-                    f"Remember to follow the same format with <IMPORTS></IMPORTS>, <FUNC></FUNC>, and <WRAPPER></WRAPPER> tags.\n")
+                    f"Please re-generate the translation.\n"
+                    f"Remember to follow the same format with the appropriate tags <...> </...>.\n")
         elif result['category'] == "Test Failure":
             prompt = ("The translation failed tests. This was the command output:\n"
                     f"{result['message']}\n"
-                    f"Please re-generate the translation of the function, wrapper function, and imports. "
-                    f"Remember to follow the same format with <IMPORTS></IMPORTS>, <FUNC></FUNC>, and <WRAPPER></WRAPPER> tags.")
+                    f"Please re-generate the translation.\n"
+                    f"Remember to follow the same format with the appropriate tags <...> </...>.")
         else:
             raise NotImplementedError("Repair not implemented for this error type")
         
@@ -194,20 +203,36 @@ pub extern "C" fn {func['name']} ...
                     imports = response.split('<IMPORTS>\n')[1].split('</IMPORTS>')[0]
                 else:
                     imports = ''
-                
-                if '<FUNC>\n' not in response:
-                    self.logger.log_failure("Response does not contain <FUNC> tag. Trying again.")
-                    continue
-                if '<WRAPPER>\n' not in response:
-                    self.logger.log_failure("Response does not contain <WRAPPER> tag. Trying again.")
-                    continue
-                function_trans = response.split('<FUNC>\n')[1].split('</FUNC>')[0]
-                wrapper = response.split('<WRAPPER>\n')[1].split('</WRAPPER>')[0]
-
-                # Remove any ```rust and ``` tags from imports, function_trans and wrapper
                 imports = imports.replace('```rust', '').replace('```', '').strip()
-                function_trans = function_trans.replace('```rust', '').replace('```', '').strip()
-                wrapper = wrapper.replace('```rust', '').replace('```', '').strip()
+                
+                if self.unit['type'] == 'functions':
+                    if '<FUNC>\n' not in response:
+                        self.logger.log_failure("Response does not contain <FUNC> tag. Trying again.")
+                        continue
+                    if '<WRAPPER>\n' not in response:
+                        self.logger.log_failure("Response does not contain <WRAPPER> tag. Trying again.")
+                        continue
+                    function_trans = response.split('<FUNC>\n')[1].split('</FUNC>')[0]
+                    wrapper = response.split('<WRAPPER>\n')[1].split('</WRAPPER>')[0]
+                    # Remove any ```rust and ``` tags from imports, function_trans and wrapper
+                    function_trans = function_trans.replace('```rust', '').replace('```', '').strip()
+                    wrapper = wrapper.replace('```rust', '').replace('```', '').strip()
+                    return {
+                        'func': function_trans,
+                        'wrapper': wrapper,
+                        'imports': imports,
+                    }
+                elif self.unit['type'] == 'structs':
+                    if '<STRUCT>\n' not in response:
+                        self.logger.log_failure("Response does not contain <STRUCT> tag. Trying again.")
+                        continue
+                    struct_trans = response.split('<STRUCT>\n')[1].split('</STRUCT>')[0]
+                    # Remove any ```rust and ``` tags from struct_trans
+                    struct_trans = struct_trans.replace('```rust', '').replace('```', '').strip()
+                    return {
+                        'struct': struct_trans,
+                        'imports': imports,
+                    }
                 break
             except ModelException as e:
                 self.logger.log_status("Model exception")
@@ -215,8 +240,5 @@ pub extern "C" fn {func['name']} ...
                 self.logger.log_status("Trying again")
                 continue
 
-        return {
-            'func': function_trans,
-            'wrapper': wrapper,
-            'imports': imports,
-        }
+        return None
+    

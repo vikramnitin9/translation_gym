@@ -170,3 +170,11 @@ def get_last_modified_time(folder_path, filter_ext=None):
             max_mtime = max(max_mtime, os.path.getmtime(file_path))
         
     return max_mtime
+
+def compare_fnames(a, b, base_dir):
+    a, b, base_dir = Path(a), Path(b), Path(base_dir)
+    if a.is_absolute():
+        a = a.relative_to(base_dir)
+    if b.is_absolute():
+        b = b.relative_to(base_dir)
+    return a == b
