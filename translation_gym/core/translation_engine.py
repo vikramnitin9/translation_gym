@@ -44,6 +44,11 @@ class TranslationEngine:
         code_dir = self.output_dir
         self.logger.log_status("Copied over the code to {}".format(code_dir.absolute()))
         self.source_manager = CSourceManager(code_dir/'c_src', logger=self.logger)
+
+
+        # Rewrite any static globals to extern + definition
+        self.logger.log_status("Rewriting static globals to extern declarations…")
+        self.source_manager.fix_globals()
         
         # First compile the source code
         try:
