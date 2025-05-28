@@ -99,7 +99,7 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
                 {"startLine", startLine},
                 {"endLine", endLine},
                 {"startCol", startCol},
-                {"endCol", endCol}
+                {"endCol", endCol},
         };
 
 
@@ -208,7 +208,8 @@ bool FunctionVisitor::VisitVarDecl(VarDecl *var) {
         {"startLine", startLine},
         {"endLine", endLine},
         {"startCol", startCol},
-        {"endCol", endCol}
+        {"endCol", endCol},
+        {"isStatic", var->getStorageClass() == SC_Static}
     };
     this->data["globals"].push_back(globalData);
     return true;

@@ -130,55 +130,36 @@ class CSourceManager(SourceManager):
             os.chdir(cwd)
 
     def fix_globals(self):
-        """
-        Rewrite file‐scope `static TYPE name = init;` into:
-           extern TYPE name;
-           TYPE name = init;
-        for each .c under self.code_dir, reverting any file whose
-        single‐file compile fails.
-        """
-        static_def = re.compile(
-            r'^(?P<indent>\s*)'            # leading whitespace
-            r'static\s+'                   # the 'static' keyword
-            r'(?P<type>[\w\s\*]+?)\s+'     # the C type (e.g. 'int' or 'struct Point')
-            r'(?P<name>\w+)\s*=\s*'        # the variable name, then '='
-            r'(?P<init>[^;]+?)\s*;'        # the initializer (up to the semicolon)
-            , re.MULTILINE
-        )
-
-        for path in self.code_dir.rglob("*.c"):
+        analysis = self.get_static_analysis_results()  
+  
+        by_file = {}
+        for gv in analysis['globals']:
+            fname = gv['filename']
+            by_file.setdefault(fname, []).append(gv)
+        for relpath, globals_list in by_file.items():
+            path = self.code_dir / relpath
             orig = path.read_text()
-            modified = orig
-            matches = list(static_def.finditer(orig))
-            if not matches:
-                continue
-
-   
-            for m in reversed(matches):
-                indent = m.group("indent")
-                ctype  = m.group("type").strip()
-                name   = m.group("name")
-                init   = m.group("init").strip()
-
-                extern_decl = f"{indent}extern {ctype} {name};\n"
-                definition  = f"{indent}{ctype} {name} = {init};"
-
-                start, end = m.span()
-                modified = modified[:start] + extern_decl + definition + modified[end:]
-
-            path.write_text(modified)
-            self.logger.log_status(f"[fix_globals] try compile {path}")
-            res = subprocess.run(
-                ["gcc", "-c", str(path)],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE
-            )
+            new = orig.splitlines(keepends=True)
+            backups = []
             
-            if res.returncode != 0:
-                self.logger.log_status(f"[fix_globals] FAIL compile, reverting {path}")
+            for gv in globals_list:
+                if gv.get('isStatic', False) or True:
+                    ln = gv['startLine'] - 1
+                    line = new[ln]
+                    new[ln] = line.replace('static ', '', 1)
+                    decl = f"{gv['type']} {gv['name']}"
+                    new.insert(ln, f"extern {decl};\n")
+                    backups.append(ln)
+            
+            path.write_text(''.join(new))
+            self.logger.log_status(f"[fix_globals] recompiling whole project…")
+            try:
+                self.compile(instrument=False, timeout=60)
+            except CompileException:
+                self.logger.log_status(f"[fix_globals] REVERT {path}")
                 path.write_text(orig)
             else:
-                self.logger.log_status(f"[fix_globals] OK {path}")
+                self.logger.log_success(f"[fix_globals] OK {path}")
     
     def get_build_path(self):
         return Path(self.code_dir)
