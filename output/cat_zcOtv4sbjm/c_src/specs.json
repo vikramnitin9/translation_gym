@@ -1,0 +1,504 @@
+[
+    {
+        "function": "set_program_name",
+        "signature": "void set_program_name(const char * argv0)",
+        "precondition": "argv0 is a non-NULL, null-terminated string representing the program's name or path, as passed to the program's main function via argv[0].\n",
+        "postcondition": "If argv0 contains a \"/.libs/\" prefix followed by \"lt-\", the prefix and \"lt-\" are stripped, and the resulting string is stored in the global variables `program_name` and, if defined, `program_invocation_name` and `program_invocation_short_name`. Otherwise, argv0 is directly stored in `program_name`, and, if defined, `program_invocation_name`. The global variables are updated to reflect the modified or unmodified argv0. If argv0 is NULL, the program aborts with an error message.\n",
+        "consistent": true,
+        "arguments": {
+            "argv0": "cat"
+        },
+        "return": [],
+        "docstring": "Set program_name, based on argv[0].\nargv0 must be a string allocated with indefinite extent, and must not be\nmodified after this call."
+    },
+    {
+        "function": "locale_charset",
+        "signature": "const char * locale_charset()",
+        "precondition": "The program must be in a valid state where the locale environment variables (`LC_ALL`, `LC_CTYPE`, `LANG`) and system-specific APIs (e.g., `nl_langinfo`, `GetACP`, `DosQueryCp`) are accessible and functional. The global alias and locale tables (if defined) must be sorted for binary search. The function assumes that the system's locale configuration is correctly set up and that memory for static buffers is properly allocated and initialized.\n",
+        "postcondition": "The function returns a pointer to a string representing the canonical name of the character encoding (codeset) for the current locale. If the codeset cannot be determined, it returns \"ASCII\" or an empty string, depending on the platform and locale settings. The returned string is either a static buffer or a constant string and is safe for concurrent access. The function ensures that the codeset name is resolved against alias tables (if defined) and adheres to platform-specific conventions.\n",
+        "consistent": true,
+        "arguments": {},
+        "return": [
+            "ANSI_X3.4-1968"
+        ],
+        "docstring": null
+    },
+    {
+        "function": "c_tolower",
+        "signature": "inline int c_tolower(int c)",
+        "precondition": "The input `c` is an integer representing a character in the implementation-defined character set.\n",
+        "postcondition": "If `c` corresponds to an uppercase letter ('A' to 'Z'), the function returns the corresponding lowercase letter ('a' to 'z'). Otherwise, the function returns `c` unchanged.\n",
+        "consistent": true,
+        "arguments": {
+            "c": "65"
+        },
+        "return": [
+            "97"
+        ],
+        "docstring": null
+    },
+    {
+        "function": "c_strcasecmp",
+        "signature": "int c_strcasecmp(const char * s1, const char * s2)",
+        "precondition": "s1 and s2 are valid null-terminated strings (i.e., they are non-NULL pointers to memory regions that contain sequences of characters terminated by a null character '\\0').\n",
+        "postcondition": "The function returns an integer value:\n- If s1 and s2 are equal ignoring case, the return value is 0.\n- If s1 is lexicographically less than s2 ignoring case, the return value is negative.\n- If s1 is lexicographically greater than s2 ignoring case, the return value is positive.\nThe comparison is case-insensitive and performed based on the lowercase equivalents of the characters in s1 and s2. The function does not modify the input strings or any global state.\n",
+        "consistent": true,
+        "arguments": {
+            "s1": "ANSI_X3.4-1968",
+            "s2": "UTF-8"
+        },
+        "return": [
+            "-20"
+        ],
+        "docstring": null
+    },
+    {
+        "function": "proper_name_lite",
+        "signature": "const char * proper_name_lite(const char * name_ascii, const char * name_utf8)",
+        "precondition": "The input `name_ascii` is a valid null-terminated ASCII string, and `name_utf8` is a valid null-terminated UTF-8 string. The global function `gettext` is defined and returns a valid null-terminated string. The global function `locale_charset` is defined and returns a valid null-terminated string representing the current locale's character encoding. The global function `c_strcasecmp` is defined and performs a case-insensitive string comparison.\n",
+        "postcondition": "The function returns:\n1. If `gettext(name_ascii)` does not return the same pointer as `name_ascii`, the function returns the result of `gettext(name_ascii)`.\n2. Otherwise, if the result of `c_strcasecmp(locale_charset(), \"UTF-8\")` is 0 (indicating the locale's character encoding is UTF-8), the function returns `name_utf8`.\n3. Otherwise, the function returns `name_ascii`.\n",
+        "consistent": true,
+        "arguments": {
+            "name_ascii": "Torbjorn Granlund",
+            "name_utf8": "Torbj\u00c3\u00b6rn Granlund"
+        },
+        "return": [
+            "Torbjorn Granlund"
+        ],
+        "docstring": "Return the localization of the name spelled NAME_ASCII in ASCII,\nand NAME_UTF8 in UTF-8."
+    },
+    {
+        "function": "version_etc_arn",
+        "signature": "void version_etc_arn(FILE * stream, const char * command_name, const char * package, const char * version, const char *const * authors, size_t n_authors)",
+        "precondition": "1. `stream` must be a valid, open file stream for writing.\n2. `command_name`, `package`, and `version` must be valid null-terminated strings (or `command_name` may be `NULL`).\n3. `authors` must be a valid pointer to an array of `n_authors` null-terminated strings if `n_authors > 0`.\n4. `n_authors` must not exceed the maximum size of the `authors` array.\n5. Global variables `PACKAGE_PACKAGER`, `PACKAGE_PACKAGER_VERSION`, `COPYRIGHT_YEAR`, and `version_etc_copyright` (if used) must be properly defined and valid.\n",
+        "postcondition": "1. Writes version and package information to `stream`, including:\n   - If `command_name` is non-NULL, writes \"`command_name (package) version`\".\n   - Otherwise, writes \"`package version`\".\n2. If `PACKAGE_PACKAGER` is defined, writes \"Packaged by PACKAGE_PACKAGER\" (and optionally `PACKAGE_PACKAGER_VERSION` if defined).\n3. Writes copyright information using `version_etc_copyright` and `COPYRIGHT_YEAR`.\n4. Writes GPL license information, including the URL \"https://gnu.org/licenses/gpl.html\".\n5. Writes authorship information to `stream`:\n   - If `n_authors` is 0, no authorship information is written.\n   - If `n_authors` is 1 to 9, writes the names of the authors with appropriate formatting.\n   - If `n_authors` is 10 or more, writes the first 9 authors followed by \"and others\".\n6. Ensures all output is written to `stream` in the specified format, with appropriate line breaks.\n",
+        "consistent": true,
+        "arguments": {
+            "stream": "0x7f9d52e2b6a0",
+            "command_name": "cat",
+            "package": "GNU coreutils",
+            "version": "9.5.42-bbc97",
+            "authors": "0x7ffdfc231c80",
+            "n_authors": "2"
+        },
+        "return": [],
+        "docstring": "Display the --version information the standard way.\n\nAuthor names are given in the array AUTHORS. N_AUTHORS is the\nnumber of elements in the array."
+    },
+    {
+        "function": "version_etc_va",
+        "signature": "void version_etc_va(FILE * stream, const char * command_name, const char * package, const char * version, struct __va_list_tag * authors)",
+        "precondition": "- `stream` is a valid, writable `FILE *` pointer.\n- `command_name`, `package`, and `version` are valid, null-terminated strings.\n- `authors` is a valid `va_list` that contains a sequence of null-terminated strings, terminated by a `NULL` pointer.\n",
+        "postcondition": "- The function extracts up to 10 author strings from `authors` into a local array `authtab`, stopping early if a `NULL` pointer is encountered.\n- The function calls `version_etc_arn(stream, command_name, package, version, authtab, n_authors)` with:\n  - `authtab` containing the extracted author strings (up to 10, excluding `NULL`).\n  - `n_authors` set to the number of non-`NULL` author strings extracted (0 \u2264 `n_authors` \u2264 10).\n- No other side effects occur.\n",
+        "consistent": true,
+        "arguments": {
+            "stream": "0x7f9d52e2b6a0",
+            "command_name": "cat",
+            "package": "GNU coreutils",
+            "version": "9.5.42-bbc97",
+            "authors": "0x7ffdfc232810"
+        },
+        "return": [],
+        "docstring": "Display the --version information the standard way.  See the initial\ncomment to this module, for more information.\n\nAuthor names are given in the NULL-terminated va_list AUTHORS."
+    },
+    {
+        "function": "version_etc",
+        "signature": "void version_etc(FILE * stream, const char * command_name, const char * package, const char * version)",
+        "precondition": "stream is a valid, open FILE pointer for writing.  \ncommand_name, package, and version are valid, null-terminated strings.  \nIf variadic arguments are provided, they must be valid pointers to null-terminated strings, ending with a NULL pointer.\n",
+        "postcondition": "The function version_etc_va is called with the arguments: stream, command_name, package, version, and a va_list containing the variadic arguments passed to version_etc.  \nThe state of the va_list is properly initialized before the call and cleaned up after the call.  \nThe state of stream, command_name, package, version, and any variadic arguments remains unchanged.\n",
+        "consistent": true,
+        "arguments": {
+            "stream": "0x7f9d52e2b6a0",
+            "command_name": "cat",
+            "package": "GNU coreutils",
+            "version": "9.5.42-bbc97"
+        },
+        "return": [],
+        "docstring": "Display the --version information the standard way.\n\nIf COMMAND_NAME is NULL, the PACKAGE is assumed to be the name of\nthe program.  The formats are therefore:\n\nPACKAGE VERSION\n\nor\n\nCOMMAND_NAME (PACKAGE) VERSION.\n\nThe authors names are passed as separate arguments, with an additional\nNULL argument at the end."
+    },
+    {
+        "function": "io_blksize",
+        "signature": "static inline idx_t io_blksize(const struct stat * st)",
+        "precondition": "st is a valid pointer to a `struct stat` object, and the global constants `IO_BUFSIZE`, `IDX_MAX`, `SIZE_MAX`, and macros/functions `STP_BLKSIZE`, `S_ISREG`, `stdc_leading_zeros_ull`, `ULLONG_WIDTH`, and `MIN` are correctly defined and accessible. Additionally, `STP_BLKSIZE(st)` must return a non-negative integer value representing the block size of the file system object described by `st`.\n",
+        "postcondition": "The function returns a value `blocksize` such that:\n1. If `STP_BLKSIZE(st) <= 0`, `blocksize` starts as `IO_BUFSIZE`. Otherwise, it starts as `STP_BLKSIZE(st)`.\n2. `blocksize` is adjusted to be at least `IO_BUFSIZE` and a multiple of its original value.\n3. If `st->st_mode` indicates a regular file (`S_ISREG(st->st_mode)` is true) and `blocksize` is not a power of two, `blocksize` is replaced with the next power of two, provided it does not exceed `IDX_MAX`.\n4. The final `blocksize` is capped at the largest power of two that fits within both `idx_t` and `size_t`, calculated as `MIN(MIN(IDX_MAX, SIZE_MAX) / 2 + 1, blocksize)`.\n",
+        "consistent": true,
+        "arguments": {
+            "st": "0x7ffcd8b7eb20"
+        },
+        "return": [
+            "262144"
+        ],
+        "docstring": null
+    },
+    {
+        "function": "__gl_setmode",
+        "signature": "inline int __gl_setmode(int fd, int mode)",
+        "precondition": "No specific preconditions; `fd` and `mode` are unused.\n",
+        "postcondition": "The function always returns the constant value `O_BINARY`. No other state is modified.\n",
+        "consistent": true,
+        "arguments": {
+            "fd": "1",
+            "mode": "0"
+        },
+        "return": [
+            "0"
+        ],
+        "docstring": "Use a function rather than a macro, to avoid gcc warnings\n\"warning: statement with no effect\"."
+    },
+    {
+        "function": "set_binary_mode",
+        "signature": "inline int set_binary_mode(int fd, int mode)",
+        "precondition": "The file descriptor `fd` must be valid and open. The `mode` must be a valid mode supported by `__gl_setmode`.\n",
+        "postcondition": "The function returns the previous mode of the file descriptor `fd` if successful, or -1 if an error occurs. The mode of `fd` is updated to `mode` if the function succeeds.\n",
+        "consistent": true,
+        "arguments": {
+            "fd": "1",
+            "mode": "0"
+        },
+        "return": [
+            "0"
+        ],
+        "docstring": null
+    },
+    {
+        "function": "xset_binary_mode",
+        "signature": "inline void xset_binary_mode(int fd, int mode)",
+        "precondition": "The file descriptor `fd` is valid, and `mode` is a valid binary mode that can be passed to `set_binary_mode`.\n",
+        "postcondition": "If `set_binary_mode(fd, mode)` returns a value greater than or equal to 0, the binary mode of the file descriptor `fd` is successfully set to `mode`. If `set_binary_mode(fd, mode)` returns a value less than 0, the function `xset_binary_mode_error()` is called.\n",
+        "consistent": true,
+        "arguments": {
+            "fd": "1",
+            "mode": "0"
+        },
+        "return": [],
+        "docstring": "Set the mode of FD to MODE, which should be either O_TEXT or O_BINARY.\nReport an error and exit if this fails."
+    },
+    {
+        "function": "quoting_options_from_style",
+        "signature": "static struct quoting_options quoting_options_from_style(enum quoting_style style)",
+        "precondition": "The input `style` must be a valid enumeration value of type `enum quoting_style` and must not be `custom_quoting_style`.\n",
+        "postcondition": "The function returns a `struct quoting_options` object `o` such that:\n1. `o.style == style`.\n2. `o.quote_these_too == NULL`.\n3. `o.alloc_quote_these_too == NULL`.\n4. `o.flags == 0`.\n5. `o.style` is initialized to `literal_quoting_style` before being set to `style`.\nIf `style == custom_quoting_style`, the program aborts.\n",
+        "consistent": false,
+        "arguments": {
+            "<return_val>": "0x7ffff8531360",
+            "style": "3"
+        },
+        "return": [],
+        "docstring": "In O (or in the default if O is null),\nset the value of the quoting options flag to I, which can be a\nbitwise combination of enum quoting_flags, or 0 for default\nbehavior.  Return the old value."
+    },
+    {
+        "function": "set_char_quoting",
+        "signature": "int set_char_quoting(struct quoting_options * o, char c, int i)",
+        "precondition": "- `o` is either a valid pointer to a `struct quoting_options` or `NULL`.\n- `c` is a character (interpreted as an `unsigned char`).\n- `i` is an integer.\n- `default_quoting_options` is a valid global `struct quoting_options` object.\n- `quote_these_too` is a valid array of `unsigned int` values, large enough to accommodate the index `uc / INT_BITS`, where `uc = (unsigned char)c` and `INT_BITS` is the number of bits in an `int`.\n",
+        "postcondition": "- Let `uc = (unsigned char)c`, `p = (o ? o : &default_quoting_options)->quote_these_too + uc / INT_BITS`, and `shift = uc % INT_BITS`.\n- The function returns the previous value of the bit at position `shift` in the `unsigned int` pointed to by `p` (either 0 or 1).\n- The bit at position `shift` in the `unsigned int` pointed to by `p` is updated to `(i & 1)`.\n- All other bits in the array `quote_these_too` remain unchanged.\n",
+        "consistent": true,
+        "arguments": {
+            "o": "0x7ffff8531328",
+            "c": "58",
+            "i": "1"
+        },
+        "return": [
+            "0"
+        ],
+        "docstring": "In O (or in the default if O is null),\nset the value of the quoting options for character C to I.\nReturn the old value.  Currently, the only values defined for I are\n0 (the default) and 1 (which means to quote the character even if\nit would not otherwise be quoted)."
+    },
+    {
+        "function": "quotearg_buffer_restyled",
+        "signature": "static size_t quotearg_buffer_restyled(char * buffer, size_t buffersize, const char * arg, size_t argsize, enum quoting_style quoting_style, int flags, const unsigned int * quote_these_too, const char * left_quote, const char * right_quote)",
+        "precondition": "- `buffer` is a writable memory region of at least `buffersize` bytes, or `buffer` is `NULL` if `buffersize` is 0.\n- `arg` is a valid pointer to a null-terminated string if `argsize == SIZE_MAX`, or a valid pointer to a memory region of at least `argsize` bytes otherwise.\n- `quoting_style` is a valid value of type `enum quoting_style`.\n- `flags` is an integer containing valid bitwise flag values (e.g., `QA_ELIDE_OUTER_QUOTES`, `QA_SPLIT_TRIGRAPHS`, `QA_ELIDE_NULL_BYTES`).\n- `quote_these_too` is either `NULL` or a valid pointer to an array of bitmasks indicating additional characters to quote.\n- `left_quote` and `right_quote` are valid pointers to null-terminated strings representing custom quotation marks, or `NULL` if not used.\n- The program is in a valid state for memory access and string operations.\n",
+        "postcondition": "- The function processes the string `arg` according to the specified `quoting_style`, `flags`, and optional `quote_these_too` array, applying quoting and escaping rules as necessary.\n- The processed string is written to `buffer` (if `buffersize` > 0), truncated if necessary to fit within `buffersize - 1` bytes, and null-terminated if space allows.\n- If `buffersize` is 0, the function does not write to `buffer` but calculates the length of the fully processed string.\n- The return value is the total length (in bytes) of the fully processed string, excluding the null terminator.\n- If `QA_ELIDE_OUTER_QUOTES` is set in `flags` and outer quotes are deemed unnecessary, the function adjusts the quoting style to avoid outer quotes.\n- If `quote_these_too` is non-NULL, additional characters specified by the bitmask are quoted or escaped in the output.\n- The function ensures that all necessary quoting and escaping rules are applied to make the output string safe for the specified quoting context.",
+        "consistent": true,
+        "arguments": {
+            "buffer": "",
+            "buffersize": "256",
+            "arg": "out",
+            "argsize": "-1",
+            "quoting_style": "3",
+            "flags": "1",
+            "quote_these_too": "0x7ffff8531330",
+            "left_quote": "<null>",
+            "right_quote": "<null>"
+        },
+        "return": [
+            "3"
+        ],
+        "docstring": "Place into buffer BUFFER (of size BUFFERSIZE) a quoted version of\nargument ARG (of size ARGSIZE), using QUOTING_STYLE, FLAGS, and\nQUOTE_THESE_TOO to control quoting.\nTerminate the output with a null character, and return the written\nsize of the output, not counting the terminating null.\nIf BUFFERSIZE is too small to store the output string, return the\nvalue that would have been returned had BUFFERSIZE been large enough.\nIf ARGSIZE is SIZE_MAX, use the string length of the argument for ARGSIZE.\n\nThis function acts like quotearg_buffer (BUFFER, BUFFERSIZE, ARG,\nARGSIZE, O), except it breaks O into its component pieces and is\nnot careful about errno."
+    },
+    {
+        "function": "quotearg_n_options",
+        "signature": "static char * quotearg_n_options(int n, const char * arg, size_t argsize, const struct quoting_options * options)",
+        "precondition": "- `n` is a non-negative integer such that `0 <= n < MIN(INT_MAX, IDX_MAX)`.\n- `arg` is a pointer to a valid memory region of size `argsize` bytes, or NULL if `argsize` is 0.\n- `options` is a pointer to a valid `struct quoting_options` object, where:\n  - `options->flags` is a valid integer.\n  - `options->style` is a valid quoting style.\n  - `options->quote_these_too` is a valid pointer or NULL.\n  - `options->left_quote` and `options->right_quote` are valid pointers or NULL.\n- Global variable `slotvec` is a pointer to a valid `struct slotvec` array of size `nslots`.\n- If `slotvec` points to `slotvec0`, it is preallocated and must not be freed.\n- `errno` contains a valid error code.\n",
+        "postcondition": "- Returns a pointer to a null-terminated string that represents the quoted version of `arg` according to the `options` provided.\n- The returned string is stored in `slotvec[n].val`, which is dynamically allocated and large enough to hold the quoted string (including the null terminator).\n- `slotvec[n].size` is updated to the size of the allocated buffer.\n- If `slotvec` was reallocated, it now points to a new array of size `nslots`, and any new slots are zero-initialized.\n- If `slotvec[n].val` was not `slot0`, it is freed before being reallocated.\n- The global variable `errno` is restored to its original value `e` from before the function call.\n",
+        "consistent": true,
+        "arguments": {
+            "n": "0",
+            "arg": "out",
+            "argsize": "-1",
+            "options": "0x7ffff8531328"
+        },
+        "return": [
+            "out"
+        ],
+        "docstring": "Use storage slot N to return a quoted version of argument ARG.\nARG is of size ARGSIZE, but if that is SIZE_MAX, ARG is a\nnull-terminated string.\nOPTIONS specifies the quoting options.\nThe returned value points to static storage that can be\nreused by the next call to this function with the same value of N.\nN must be nonnegative; it is typically small, and must be\nless than MIN (INT_MAX, IDX_MAX).  The type of N is signed\nto allow for future extensions (using negative values)."
+    },
+    {
+        "function": "quotearg_n_style_colon",
+        "signature": "char * quotearg_n_style_colon(int n, enum quoting_style s, const char * arg)",
+        "precondition": "arg is a valid, null-terminated string pointer, n is a non-negative integer, and s is a valid enum quoting_style value. The global state is consistent, and any global variables used by quoting_options_from_style, set_char_quoting, and quotearg_n_options are properly initialized.\n",
+        "postcondition": "Returns a pointer to a dynamically allocated, null-terminated string that represents the argument `arg` quoted according to the quoting style `s`, with the colon character `':'` always quoted. The global state is updated as per the behavior of quoting_options_from_style, set_char_quoting, and quotearg_n_options. The returned string is valid until it is explicitly freed or overwritten by subsequent calls to functions that reuse the same memory.\n",
+        "consistent": true,
+        "arguments": {
+            "n": "0",
+            "s": "3",
+            "arg": "out"
+        },
+        "return": [
+            "out"
+        ],
+        "docstring": null
+    },
+    {
+        "function": "fdadvise",
+        "signature": "void fdadvise(int fd, off_t offset, off_t len, fadvice_t advice)",
+        "precondition": "The file descriptor `fd` must be valid and open. The `offset` and `len` must specify a valid range within the file associated with `fd`. The `advice` must be a valid `fadvice_t` value. The macro `HAVE_POSIX_FADVISE` must be defined if `posix_fadvise` is to be called.\n",
+        "postcondition": "If `HAVE_POSIX_FADVISE` is defined, the function attempts to provide advice about the file access pattern for the range `[offset, offset + len)` in the file associated with `fd` using `posix_fadvise`. Any return value from `posix_fadvise` is ignored. If `HAVE_POSIX_FADVISE` is not defined, the function has no effect.\n",
+        "consistent": true,
+        "arguments": {
+            "fd": "4",
+            "offset": "0",
+            "len": "0",
+            "advice": "2"
+        },
+        "return": [],
+        "docstring": null
+    },
+    {
+        "function": "rpl_fcntl",
+        "signature": "int rpl_fcntl(int fd, int action)",
+        "precondition": "The file descriptor `fd` must be valid (i.e., it must refer to an open file or resource). The `action` must be a valid command supported by the system or the function implementation. If the `action` requires an additional argument, it must be provided, and its type must match the expected type for the given `action`. The global state (e.g., file descriptors, system resources) must be consistent and not in an invalid or undefined state.\n",
+        "postcondition": "If the `action` is valid and the operation succeeds, the function returns a non-negative integer, and the global state is updated according to the semantics of the specified `action`. If the `action` is invalid or the operation fails, the function returns -1 and sets `errno` to an appropriate error code. No other global state is modified in the case of failure.\n",
+        "consistent": false,
+        "arguments": {
+            "fd": "1",
+            "action": "3"
+        },
+        "return": [
+            "33793"
+        ],
+        "docstring": "Perform the specified ACTION on the file descriptor FD, possibly\nusing the argument ARG further described below.  This replacement\nhandles the following actions, and forwards all others on to the\nnative fcntl.  An unrecognized ACTION returns -1 with errno set to\nEINVAL.\n\nF_DUPFD - duplicate FD, with int ARG being the minimum target fd.\nIf successful, return the duplicate, which will be inheritable;\notherwise return -1 and set errno.\n\nF_DUPFD_CLOEXEC - duplicate FD, with int ARG being the minimum\ntarget fd.  If successful, return the duplicate, which will not be\ninheritable; otherwise return -1 and set errno.\n\nF_GETFD - ARG need not be present.  If successful, return a\nnon-negative value containing the descriptor flags of FD (only\nFD_CLOEXEC is portable, but other flags may be present); otherwise\nreturn -1 and set errno."
+    },
+    {
+        "function": "rpl_copy_file_range",
+        "signature": "ssize_t rpl_copy_file_range(int infd, off_t * pinoff, int outfd, off_t * poutoff, size_t length, unsigned int flags)",
+        "precondition": "The program is running on a Linux system, and if the kernel version is 5.3 or later, the `copy_file_range` syscall is available. `infd` and `outfd` are valid file descriptors, `pinoff` and `poutoff` are either NULL or point to valid `off_t` values, and `length` is the number of bytes to copy.\n",
+        "postcondition": "If the kernel version is 5.3 or later, and the `copy_file_range` syscall succeeds, the function returns the number of bytes copied (a positive value). If the syscall fails, the function returns -1 and sets `errno` appropriately. If the kernel version is earlier than 5.3, the function always returns -1 and sets `errno` to `ENOSYS`.\n",
+        "consistent": true,
+        "arguments": {
+            "infd": "4",
+            "pinoff": "(nil)",
+            "outfd": "1",
+            "poutoff": "(nil)",
+            "length": "-1073741824",
+            "flags": "0"
+        },
+        "return": [
+            "0"
+        ],
+        "docstring": null
+    },
+    {
+        "function": "is_ENOTSUP",
+        "signature": "static inline _Bool is_ENOTSUP(int err)",
+        "precondition": "The global constants `EOPNOTSUPP` and `ENOTSUP` are defined, and `err` is an integer representing an error code.\n",
+        "postcondition": "The function returns `true` if `err` is equal to `EOPNOTSUPP`, or if `ENOTSUP` is not equal to `EOPNOTSUPP` and `err` is equal to `ENOTSUP`. Otherwise, it returns `false`.\n",
+        "consistent": true,
+        "arguments": {
+            "err": "22"
+        },
+        "return": [
+            "0"
+        ],
+        "docstring": "Return true if ERR is ENOTSUP or EOPNOTSUPP, otherwise false.\nThis wrapper function avoids the redundant 'or'd comparison on\nsystems like Linux for which they have the same value.  It also\navoids the gcc warning to that effect."
+    },
+    {
+        "function": "copy_cat",
+        "signature": "static int copy_cat()",
+        "precondition": "The global variables `input_desc` (a file descriptor for the input file) and `infile` (a string representing the input file name) must be properly initialized. The file descriptor `STDOUT_FILENO` must be valid and writable. The function `copy_file_range` must be available for use. The macros `SSIZE_MAX`, `SIZE_MAX`, and `MIN` must be defined. The function `is_ENOTSUP` must be defined and take an integer as input. The function `error` must be defined and accept the arguments `(int, int, const char *, ...)`. The function `quotef` must be defined and take a string as input. The program must have sufficient permissions to read from `input_desc` and write to `STDOUT_FILENO`.\n",
+        "postcondition": "If the function returns `1`, some data was successfully copied from `input_desc` to `STDOUT_FILENO` using `copy_file_range`. If the function returns `0`, no data was copied either because `copy_file_range` was unsupported, the input file was empty, or an error occurred that is handled by the function (e.g., `errno` is `ENOSYS`, `ENOTSUP`, `EINVAL`, `EBADF`, `EXDEV`, `ETXTBSY`, or `EPERM`). If the function returns `-1`, an unhandled error occurred, and an error message was printed using `error` with `infile` quoted by `quotef`. The global state of the program remains unchanged except for potential side effects of `copy_file_range` and `error`.\n",
+        "consistent": true,
+        "arguments": {},
+        "return": [
+            "0"
+        ],
+        "docstring": "Copy data from input to output using copy_file_range if possible.\nReturn 1 if successful, 0 if ordinary read+write should be tried,\n-1 if a serious problem has been diagnosed."
+    },
+    {
+        "function": "alignalloc",
+        "signature": "inline void * alignalloc(idx_t alignment, idx_t size)",
+        "precondition": "alignment > 0 and size > 0\n",
+        "postcondition": "If alignment and size are valid and memory allocation succeeds, the function returns a pointer `ptr` such that:\n1. `ptr` is aligned to `alignment` (i.e., `(uintptr_t)ptr % alignment == 0`).\n2. The allocated memory region is at least `size` bytes.\n3. If the platform supports CHERI and `__CHERI_PURE_CAPABILITY__` is defined, the returned pointer has bounds set to the allocated size (`cheri_bounds_set(ptr, size)`).\n\nIf memory allocation fails or invalid arguments are passed (e.g., `alignment` or `size` exceed `SIZE_MAX`), the function returns `NULL` and sets `errno` appropriately.\n",
+        "consistent": true,
+        "arguments": {
+            "alignment": "4096",
+            "size": "262144"
+        },
+        "return": [
+            "0x7f37464aa000"
+        ],
+        "docstring": "Return an ALIGNMENT-aligned pointer to new storage of size SIZE,\nor a null pointer (setting errno) if memory is exhausted.\nALIGNMENT must be a power of two.\nIf SIZE is zero, on success return a unique pointer each time.\nTo free storage later, call alignfree."
+    },
+    {
+        "function": "xalignalloc",
+        "signature": "void * xalignalloc(idx_t alignment, idx_t size)",
+        "precondition": "alignment > 0 and size > 0, and alignalloc(alignment, size) must be a valid function that either returns a pointer to a memory block of at least `size` bytes aligned to `alignment` or returns NULL if allocation fails.\n",
+        "postcondition": "If alignalloc(alignment, size) returns a non-NULL pointer `p`, then the function returns `p`. If alignalloc(alignment, size) returns NULL, the function terminates the program by calling xalloc_die().\n",
+        "consistent": true,
+        "arguments": {
+            "alignment": "4096",
+            "size": "262144"
+        },
+        "return": [
+            "0x7f37464aa000"
+        ],
+        "docstring": null
+    },
+    {
+        "function": "safe_read",
+        "signature": "size_t safe_read(int fd, void * buf, size_t count)",
+        "precondition": "The file descriptor `fd` is valid and open for reading or writing. The pointer `buf` points to a valid memory region of at least `count` bytes. The global variable `errno` is in an undefined state. `SYS_BUFSIZE_MAX` is a positive integer representing the maximum buffer size supported by the system. The function `rw` is a valid function that attempts to read or write `count` bytes from/to `fd` using `buf` and returns a non-negative value on success or -1 on failure, setting `errno` appropriately. The macro `IS_EINTR(errno)` evaluates to true if `errno` indicates an interrupt error.\n",
+        "postcondition": "If the function returns a value `r`, then:\n1. If `r` is greater than or equal to 0, `r` is the number of bytes successfully read or written by `rw`.\n2. If `r` is less than 0, the function encountered an error, and `errno` is set to indicate the error.\n3. The function handles `EINTR` errors by retrying the `rw` operation until it succeeds or encounters a different error.\n4. If `errno` is `EINVAL` and `count > SYS_BUFSIZE_MAX`, the function reduces `count` to `SYS_BUFSIZE_MAX` and retries the `rw` operation.\n",
+        "consistent": true,
+        "arguments": {
+            "fd": "4",
+            "buf": "0x7f37464aa000",
+            "count": "262144"
+        },
+        "return": [
+            "4"
+        ],
+        "docstring": "Read(write) up to COUNT bytes at BUF from(to) descriptor FD, retrying if\ninterrupted.  Return the actual number of bytes read(written), zero for EOF,\nor SAFE_READ_ERROR(SAFE_WRITE_ERROR) upon error."
+    },
+    {
+        "function": "safe_write",
+        "signature": "size_t safe_write(int fd, const void * buf, size_t count)",
+        "precondition": "The file descriptor `fd` is valid and open for reading or writing. `buf` points to a valid memory region of at least `count` bytes. `count` is non-negative. Global variables `errno`, `SYS_BUFSIZE_MAX`, and the function `rw` are defined and behave as expected. `IS_EINTR(errno)` correctly identifies whether `errno` indicates an interrupted system call.\n",
+        "postcondition": "If `rw(fd, buf, count)` succeeds (returns a non-negative value), the function returns that value. If `rw(fd, buf, count)` fails with `errno == EINTR`, the function retries until a non-EINTR result is obtained. If `rw(fd, buf, count)` fails with `errno == EINVAL` and `count > SYS_BUFSIZE_MAX`, `count` is reduced to `SYS_BUFSIZE_MAX` and the function retries. For any other failure, the function returns the result of `rw(fd, buf, count)` (a negative value).\n",
+        "consistent": true,
+        "arguments": {
+            "fd": "1",
+            "buf": "0x7f37464aa000",
+            "count": "4"
+        },
+        "return": [
+            "4"
+        ],
+        "docstring": "Read(write) up to COUNT bytes at BUF from(to) descriptor FD, retrying if\ninterrupted.  Return the actual number of bytes read(written), zero for EOF,\nor SAFE_READ_ERROR(SAFE_WRITE_ERROR) upon error."
+    },
+    {
+        "function": "full_write",
+        "signature": "size_t full_write(int fd, const void * buf, size_t count)",
+        "precondition": "- `fd` must be a valid file descriptor opened for reading or writing.\n- `buf` must point to a valid memory region of at least `count` bytes.\n- `count` must be non-negative.\n- The function `safe_rw(fd, ptr, count)` must be well-defined and behave as follows:\n  - It attempts to read or write up to `count` bytes from/to `fd` starting at `ptr`.\n  - It returns the number of bytes successfully read or written (`n_rw`), or `(size_t)-1` on error.\n  - If `n_rw == 0`, this indicates an end-of-file or other zero-byte transfer condition.\n",
+        "postcondition": "- The function returns the total number of bytes successfully read or written (`total`), which is less than or equal to `count`.\n- If `safe_rw` returns `(size_t)-1` at any point, the function stops and returns the total number of bytes successfully processed up to that point.\n- If `safe_rw` returns `0`, the function sets `errno` to `ZERO_BYTE_TRANSFER_ERRNO`, stops, and returns the total number of bytes successfully processed up to that point.\n- If the function completes without encountering an error or zero-byte transfer, `total == count`.\n",
+        "consistent": true,
+        "arguments": {
+            "fd": "1",
+            "buf": "0x7f37464aa000",
+            "count": "4"
+        },
+        "return": [
+            "4"
+        ],
+        "docstring": "Write(read) COUNT bytes at BUF to(from) descriptor FD, retrying if\ninterrupted or if a partial write(read) occurs.  Return the number\nof bytes transferred.\nWhen writing, set errno if fewer than COUNT bytes are written.\nWhen reading, if fewer than COUNT bytes are read, you must examine\nerrno to distinguish failure from EOF (errno == 0)."
+    },
+    {
+        "function": "fpurge",
+        "signature": "int fpurge(FILE * fp)",
+        "precondition": "The input `fp` must be a valid, non-NULL pointer to a `FILE` object that has been properly initialized and opened. The program must be in a state where the internal buffer of the `FILE` object can be safely accessed and modified. The behavior is undefined if `fp` is invalid or if the platform does not support the required internal structures or functions.\n",
+        "postcondition": "The internal buffer of the `FILE` object pointed to by `fp` is cleared, meaning any unread input data or unwritten output data in the buffer is discarded. Any memory allocated for ungetc buffers is freed. The invariants of the `FILE` object (such as read/write pointers and flags) are restored to a consistent state. The function returns 0 on success. If the platform does not support buffer purging, the function may result in a compilation error or undefined behavior.\n",
+        "consistent": true,
+        "arguments": {
+            "fp": "0x7f868d3f96a0"
+        },
+        "return": [
+            "0"
+        ],
+        "docstring": null
+    },
+    {
+        "function": "simple_cat",
+        "signature": "static _Bool simple_cat(char * buf, idx_t bufsize)",
+        "precondition": "- `buf` is a valid, writable buffer of size at least `bufsize`.\n- `bufsize` is greater than 0.\n- `input_desc` is a valid file descriptor open for reading.\n- `STDOUT_FILENO` is a valid file descriptor open for writing.\n- Global variables `errno` and `infile` are properly initialized.\n",
+        "postcondition": "- If the function returns `true`, the entire content of the file associated with `input_desc` has been successfully read and written to `STDOUT_FILENO` in blocks of up to `bufsize` bytes, and `buf` may contain the last block of data read.\n- If the function returns `false`, an error occurred during reading or writing. In this case:\n  - `errno` is set to indicate the error if it occurred during reading.\n  - `write_error()` has been called if the error occurred during writing.\n- In all cases, the file position of `input_desc` is advanced by the number of bytes successfully read, and `STDOUT_FILENO` is advanced by the number of bytes successfully written.",
+        "consistent": true,
+        "arguments": {
+            "buf": "",
+            "bufsize": "262144"
+        },
+        "return": [
+            "1"
+        ],
+        "docstring": "Plain cat.  Copy the file behind 'input_desc' to STDOUT_FILENO.\nBUF (of size BUFSIZE) is the I/O buffer, used by reads and writes.\nReturn true if successful."
+    },
+    {
+        "function": "write_pending",
+        "signature": "static inline void write_pending(char * outbuf, char ** bpout)",
+        "precondition": "- `outbuf` points to the beginning of a writable buffer of size at least `*bpout - outbuf` bytes.\n- `bpout` is a valid pointer to a writable memory location containing a pointer `*bpout` such that `*bpout >= outbuf`.\n- The file descriptor `STDOUT_FILENO` is valid and writable.\n",
+        "postcondition": "- If `*bpout - outbuf > 0`, the function attempts to write `*bpout - outbuf` bytes from the buffer `outbuf` to `STDOUT_FILENO`. If the write operation fails or writes fewer bytes than expected, `write_error()` is called (and may not return).\n- After a successful write (or if no write was needed because `*bpout - outbuf == 0`), `*bpout` is set to `outbuf`.\n",
+        "consistent": true,
+        "arguments": {
+            "outbuf": "a\rb^M$\nc$\n^M$\nd\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8",
+            "bpout": "0x7ffcf738de58"
+        },
+        "return": [],
+        "docstring": "Write any pending output to STDOUT_FILENO.\nPending is defined to be the *BPOUT - OUTBUF bytes starting at OUTBUF.\nThen set *BPOUT to OUTPUT if it's not already that value."
+    },
+    {
+        "function": "cat",
+        "signature": "static _Bool cat(char * inbuf, idx_t insize, char * outbuf, idx_t outsize, _Bool show_nonprinting, _Bool show_tabs, _Bool number, _Bool number_nonblank, _Bool show_ends, _Bool squeeze_blank)",
+        "precondition": "1. `inbuf` is a valid pointer to an input buffer of size `insize`.\n2. `outbuf` is a valid pointer to an output buffer of size `outsize`.\n3. `insize` and `outsize` are positive integers.\n4. The input file descriptor `input_desc` is valid and open for reading.\n5. The global variable `newlines2` is initialized to represent the current state of newline tracking.\n6. If `show_nonprinting`, `show_tabs`, `number`, `number_nonblank`, `show_ends`, or `squeeze_blank` are true, they modify the behavior of the function as described in their names.\n7. The global variables `line_num_print`, `pending_cr`, and `input_desc` are properly initialized.\n8. The function `full_write`, `safe_read`, `write_error`, `write_pending`, `next_line_num`, `error`, and `memmove` behave as expected and are available.\n",
+        "postcondition": "1. The function processes the input buffer `inbuf` and writes the transformed output to `outbuf` and/or the standard output (`STDOUT_FILENO`).\n2. If `show_nonprinting` is true, non-printable characters in the input are converted to a visible representation in the output.\n3. If `show_tabs` is true, tab characters (`\\t`) are represented as `^I` in the output.\n4. If `number` is true, line numbers are added to all lines in the output.\n5. If `number_nonblank` is true, line numbers are added only to non-blank lines in the output.\n6. If `show_ends` is true, a `$` is appended to the end of each line in the output.\n7. If `squeeze_blank` is true, consecutive blank lines in the input are reduced to a single blank line in the output.\n8. The function returns `true` if the input was processed successfully and `false` if an error occurred (e.g., read or write error).\n9. The global variable `newlines2` is updated to reflect the newline state at the end of processing.\n10. The output buffer `outbuf` contains any remaining unflushed output data, and its pointer `bpout` is updated accordingly.\n11. The input buffer `inbuf` is consumed, and its pointer `bpin` is updated to reflect the position of the next character to be processed.\n",
+        "consistent": false,
+        "arguments": {
+            "inbuf": "\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8",
+            "insize": "262144",
+            "outbuf": "\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8\u00a8",
+            "outsize": "262144",
+            "show_nonprinting": "0",
+            "show_tabs": "0",
+            "number": "0",
+            "number_nonblank": "0",
+            "show_ends": "1",
+            "squeeze_blank": "0"
+        },
+        "return": [
+            "1"
+        ],
+        "docstring": "Copy the file behind 'input_desc' to STDOUT_FILENO.\nUse INBUF and read INSIZE with each call,\nand OUTBUF and write OUTSIZE with each call.\n(The buffers are a bit larger than the I/O sizes.)\nThe remaining boolean args say what 'cat' options to use.\n\nReturn true if successful.\nCalled if any option more than -u was specified.\n\nA newline character is always put at the end of the buffer, to make\nan explicit test for buffer end unnecessary."
+    },
+    {
+        "function": "alignfree",
+        "signature": "inline void alignfree(void * ptr)",
+        "precondition": "ptr is either NULL or a pointer previously returned by a memory allocation function (e.g., malloc, calloc, realloc, or similar) and not already freed.\n",
+        "postcondition": "If ptr is NULL, no effect on the program state. If ptr is non-NULL, the memory block pointed to by ptr is deallocated, and ptr must not be used after this function call unless reassigned.\n",
+        "consistent": true,
+        "arguments": {
+            "ptr": "0x7f37464aa000"
+        },
+        "return": [],
+        "docstring": "Work around AddressSanitizer bug.\nhttps://gcc.gnu.org/bugzilla/show_bug.cgi?id=104262\nhttps://lists.llvm.org/pipermail/llvm-commits/Week-of-Mon-20220124/1001910.html"
+    },
+    {
+        "function": "main_0",
+        "signature": "int main(int argc, char ** argv)",
+        "precondition": "Precondition: \n- `argc` is the number of command-line arguments, and `argv` is an array of null-terminated strings representing those arguments.\n- The program has access to the file system and standard input/output streams.\n- The global environment is properly initialized, including locale settings and memory allocation mechanisms.\n- The program has permissions to read from the specified input files and write to standard output.\n- The global variables and functions used (e.g., `infile`, `input_desc`, `pending_cr`, `simple_cat`, `cat`, etc.) are correctly defined and initialized elsewhere in the program.\n\n",
+        "postcondition": "Postcondition:\n- The program processes the input files specified in `argv` (or standard input if no files are specified or `-` is passed as a file name) and writes their contents to standard output.\n- The behavior of the output depends on the command-line options provided:\n  - `-b` or `--number-nonblank`: Numbers only non-blank lines.\n  - `-n` or `--number`: Numbers all lines.\n  - `-s` or `--squeeze-blank`: Suppresses repeated blank lines.\n  - `-e`: Equivalent to `-vE` (shows non-printing characters and marks line endings with `$`).\n  - `-t`: Equivalent to `-vT` (shows non-printing characters and replaces tabs with `^I`).\n  - `-v` or `--show-nonprinting`: Displays non-printing characters visibly.\n  - `-A` or `--show-all`: Combines `-vET` (shows all non-printing characters, tabs, and line endings).\n  - `-E` or `--show-ends`: Marks line endings with `$`.\n  - `-T` or `--show-tabs`: Replaces tabs with `^I`.\n- If an input file is the same as the output file, the program detects this and avoids overwriting the output.\n- The program exits with `EXIT_SUCCESS` (0) if all files are processed successfully, or `EXIT_FAILURE` (non-zero) if any errors occur (e.g., file access errors, write errors).\n- Any allocated resources (e.g., memory buffers) are freed, and file descriptors are closed before exiting.\n",
+        "consistent": false,
+        "arguments": {
+            "argc": "2",
+            "argv": "0x563dc944d910"
+        },
+        "return": [
+            "0"
+        ],
+        "docstring": null
+    }
+]

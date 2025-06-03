@@ -1,6 +1,3 @@
-# Output directory
-output
-
 # Instrumentation log
 instrumented.json
 
