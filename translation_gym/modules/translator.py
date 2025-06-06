@@ -73,20 +73,37 @@ class DefaultTranslator(Translator):
 
 
 
-        # ─── New: explain C globals lifting ───
+
         globals_list = func.get("globals", [])
         if globals_list:
-            globalDesc = "This function uses the following C globals, which should be lifted into `&mut` arguments:\n"
+            items = []
             for g in globals_list:
-                ctype = g.get("type", "int")    # fallback
-                name  = g["name"]
-                # simple C→Rust type mapping
+                name = g["name"]
+                ctype = g.get("type", "int")
                 rust_ty = "libc::c_int" if ctype == "int" else ctype.replace("struct ", "")
-                globalDesc += f"- `{name}` (`{ctype}`) as `&mut {rust_ty}`\n"
-            globalDesc += "\nWhen you emit the Rust `<FUNC>` signature, add one `&mut` parameter per global above. " \
-                          "And when calling any `*_rust` callee that uses these globals, pass the same `&mut` value along.\n\n"
+                items.append(f"`{name}` (`{ctype}`) ⇒ `&mut {rust_ty}`")
+            globalDesc = (
+                "This function references the following C globals and **must** be translated into\n"
+                "a Rust function taking a mutable borrow of each (never call the C FFI version):\n\n"
+                " - " + "\n - ".join(items) + "\n\n"
+                "In your `<FUNC>` signature, name each parameter `*_ref` (e.g. `global_counter_ref`) to avoid\n"
+                "shadowing the `static mut global_counter`, and always pass that same reference into any\n"
+                "`*_rust` callee.\n\n"
+            )
         else:
             globalDesc = ""
+
+
+        # if the C function has no arguments but uses globals
+        if func['num_args'] == 0 and globals_list:
+            wrapperDesc = (
+            "Since this C function takes no parameters, your `<WRAPPER>` must also be zero-arg.  "
+            "Inside that zero-arg wrapper, you should `unsafe`-borrow the `static mut <global>` and "
+            "pass it into your `<FUNC>` implementation.\n\n"
+            )
+        else:
+            wrapperDesc = ""
+
 
         prompt = f'''Translate the following C function to idiomatic Rust:
 ```c
@@ -99,7 +116,8 @@ Do not use any dummy code like "// Full implementation goes here", etc. All the 
 Feel free to change the function signature and modify the function body as needed.
 If you need imports, you can add them in the <IMPORTS>...</IMPORTS> section. Do not provide them along with the function body.
 {importDesc}
-{globalDesc} 
+{globalDesc}
+{wrapperDesc} 
 
 Also provide a wrapper function that calls this function.
 The wrapper function should have the *same* arguments and return type as the C function, except with C types replaced with their corresponding libc crate types.
