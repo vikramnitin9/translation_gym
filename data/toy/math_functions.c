@@ -1,6 +1,9 @@
 #include "math_functions.h"
 #include "common.h"
 
+
+int test = 0;
+
 int add(int a, int b) {
     return a + b;
 }
