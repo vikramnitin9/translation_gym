@@ -95,12 +95,18 @@ class DefaultTranslator(Translator):
 
 
         # if the C function has no arguments but uses globals
-        if func['num_args'] == 0 and globals_list:
+        if func.get("num_args", 0) == 0 and globals_list:
             wrapperDesc = (
-            "Since this C function takes no parameters, your `<WRAPPER>` must also be zero-arg.  "
-            "Inside that zero-arg wrapper, you should `unsafe`-borrow the `static mut <global>` and "
-            "pass it into your `<FUNC>` implementation.\n\n"
-            )
+                "Since this C function has no parameters, your `<WRAPPER>` must also take no parameters.  "
+                "Inside that zero-arg wrapper, `unsafe`-borrow the `static mut` globals and pass them to the `<FUNC>` "
+                "implementation.  For example:\n\n"
+                "```rust\n"
+                "#[no_mangle]\n"
+                "pub extern \"C\" fn {name}() -> libc::c_int {{\n"
+                "    unsafe {{ {name}_rust(&mut global_counter) }}\n"
+                "}}\n"
+                "```\n\n"
+            ).format(name=func["name"])
         else:
             wrapperDesc = ""
 
