@@ -153,3 +153,22 @@ class DefaultOrchestrator(Orchestrator):
                 # Include only covered functions
                 continue
             yield unit
+
+
+
+    
+
+    def _dump_graph(self, graph, title="Dependency Graph"):
+        """
+        Dump all nodes and edges (with attributes) of a NetworkX graph.
+        """
+        print(f"\n{title}:")
+        print("  Nodes:")
+        for n in graph.nodes():
+            print(f"    {n}")
+        print("  Edges:")
+        for u, v, data in graph.edges(data=True):
+            # data is a dict of edge‐attributes, e.g. passed_structs
+            attrs = ", ".join(f"{k}={v!r}" for k, v in data.items())
+            print(f"    {u} -> {v}" + (f"  [{attrs}]" if attrs else ""))
+        print("-" * 40)

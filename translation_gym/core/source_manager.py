@@ -128,6 +128,61 @@ class CSourceManager(SourceManager):
             raise CompileException(e)
         finally:
             os.chdir(cwd)
+
+    def fix_globals(self):
+      
+        #  Grab the already-parsed globals from analysis.json
+        analysis = self.get_static_analysis_results()
+
+        #  Group globals by the C file they live in
+        by_file: Dict[str, List[Dict]] = {}
+        for gv in analysis['globals']:
+            by_file.setdefault(gv['filename'], []).append(gv)
+
+        for relpath, globals_list in by_file.items():
+            path = self.code_dir / relpath
+            orig = path.read_text()
+            lines = orig.splitlines(keepends=True)
+
+            # We'll track which files we mutated so we can revert if needed
+            mutated = False
+
+            for gv in globals_list:
+                ln = gv['startLine'] - 1 
+
+                # Remove leading `static ` if it’s there
+                if lines[ln].lstrip().startswith('static '):
+                    # preserve indentation
+                    indent = lines[ln][:len(lines[ln]) - len(lines[ln].lstrip())]
+                    lines[ln] = indent + lines[ln].lstrip()[len('static '):]
+                    mutated = True
+
+                # Build our extern declaration
+                decl = f"{gv['type']} {gv['name']}"
+                extern_line = f"{indent}extern {decl};\n"
+
+                # Check the 3 lines above for an identical extern already
+                window_start = max(0, ln - 3)
+                already = any(l.strip() == extern_line.strip() for l in lines[window_start:ln])
+                if not already:
+                    lines.insert(ln, extern_line)
+                    mutated = True
+
+            if not mutated:
+                continue
+
+            path.write_text(''.join(lines))
+
+            # Recompile the *entire* project to catch linking or cross-file errors
+            self.logger.log_status(f"[fix_globals] recompiling whole project…")
+            try:
+                self.compile(instrument=False, timeout=60)
+            except CompileException:
+                self.logger.log_status(f"[fix_globals] REVERT {path}")
+                path.write_text(orig)
+            else:
+                self.logger.log_success(f"[fix_globals] OK {path}")
+
     
     def get_build_path(self):
         return Path(self.code_dir)

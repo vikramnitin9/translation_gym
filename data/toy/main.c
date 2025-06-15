@@ -1,26 +1,41 @@
 #include <stdio.h>
+#include "common.h"             // <-- brings in struct Point once
 #include "math_functions.h"
 #include "string_functions.h"
 
-int global_counter = 0; // Global variable
+// Global state
+static int global_counter = 0;
+int test_global_extern = 1;     // definition, not "extern ... ="
 
-// Struct definition
-struct Point {
-    int x;
-    int y;
-};
+// Reset the counter to zero, return its previous value
+int reset_counter(void) {
+    int prev = global_counter;
+    global_counter = 0;
+    return prev;
+}
 
-int main() {
-    global_counter++; // Bump the global so the visitor still sees it
-    
-    // Use the struct locally so the visitor sees its declaration
-    struct Point p;
-    p.x = 5;
-    p.y = 3;
+// Double the counter in place, return the new value
+int double_counter(void) {
+    global_counter *= 2;
+    return global_counter;
+}
 
-    // Now call into your library functions
-    printf("Sum: %d\n", add(p.x, p.y));
-    printf("Difference: %d\n", subtract(p.x, p.y));
+int main(void) {
+    // 1) reset (silently)
+    (void)reset_counter();
+    // 2) bump by 1
+    global_counter++;
+    // 3) double it
+    (void)double_counter();
+
+    // Now the original toy logic:
+    struct Point p = {5, 3};
+    struct Point q = {9, 1};
+    struct Point mid = midpoint(p, q);
+    (void)mid;  // force use
+
+    printf("Sum: %d\n", add( p.x, p.y ));
+    printf("Difference: %d\n", subtract( p.x, p.y ));
     printf("Concatenation: %s\n", concatenate("Hello, ", "world!"));
 
     return 0;
