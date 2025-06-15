@@ -46,18 +46,40 @@ def construct_prompt_for_func(func):
         else:
             structDesc += f"{i+1}. {struct['name']}. This struct is not accessible to you, so you need to use a substitute.\n"
 
-    if len(func['globals']) == 0:
-        globalDesc = ""
+    globals_list = func.get("globals", [])
+    if globals_list:
+        items = []
+        for g in globals_list:
+            name = g["name"]
+            ctype = g.get("type", "int")
+            rust_ty = "libc::c_int" if ctype == "int" else ctype.replace("struct ", "")
+            items.append(f"`{name}` (`{ctype}`) ⇒ `&mut {rust_ty}`")
+        globalDesc = (
+            "This function references the following C globals and **must** be translated into\n"
+            "a Rust function taking a mutable borrow of each (never call the C FFI version):\n\n"
+            " - " + "\n - ".join(items) + "\n\n"
+            "In your function signature, name each parameter `*_ref` (e.g. `global_counter_ref`) to avoid\n"
+            "shadowing the `static mut global_counter`, and always pass that same reference into any\n"
+            "`*_rust` callee.\n\n"
+        )
     else:
-        globalDesc = "This function uses the following global variables:\n"
-    for i, glob in enumerate(func['globals']):
-        if 'binding' in glob:
-            globalDesc += f"{i+1}. {glob['name']}. This has a Rust FFI binding to the C global, with this definition:\n"
-            globalDesc += f"```rust\n{glob['binding']}\n```\n"
+        globalDesc = ""
 
-        globalDesc += "Since Rust does not have global variables, pass them as arguments to the translated function, but with native Rust types. Do not use raw pointers or libc types in the translated function.\n"
-        globalDesc += "However, the wrapper function can use the `unsafe` keyword to access a global variable, convert it to a native Rust type, and pass it to the translated function.\n"
-        globalDesc += "If the translated function needs to modify the global variable, you can use a mutable reference to it.\n"
+    # if the C function has no arguments but uses globals
+    if func.get("num_args", 0) == 0 and globals_list:
+        wrapperDesc = (
+            "Since this C function has no parameters, your wrapper must also take no parameters.  "
+            "Inside that zero-arg wrapper, `unsafe`-borrow the `static mut` globals and pass them to the `<FUNC>` "
+            "implementation.  For example:\n\n"
+            "```rust\n"
+            "#[no_mangle]\n"
+            "pub extern \"C\" fn {name}() -> libc::c_int {{\n"
+            "    unsafe {{ {name}_rust(&mut global_counter) }}\n"
+            "}}\n"
+            "```\n\n"
+        ).format(name=func["name"])
+    else:
+        wrapperDesc = ""
 
     if len(func['imports']) == 0:
         importDesc = ""
@@ -77,12 +99,13 @@ Do not use any dummy code like "// Full implementation goes here", etc. All the 
 Feel free to change the function signature and modify the function body as needed.
 If you need imports, you can add them in the <IMPORTS>...</IMPORTS> section. Do not provide them along with the function body.
 {importDesc}
+{globalDesc}
 
 Also provide a wrapper function that calls this function.
 The wrapper function should have the *same* arguments and return type as the C function, except with C types replaced with their corresponding libc crate types.
 For example, replace `int` with `libc::c_int`, `char*` with `*mut libc::c_char`, etc.
 Also remember to use `#[no_mangle]` and `pub extern "C" fn ...` for the wrapper function.
-{globalDesc}
+{wrapperDesc} 
 
 The name of the Rust function should be `{func['name']}_rust` and the wrapper function should be `{func['name']}`.
 
