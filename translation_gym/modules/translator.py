@@ -15,7 +15,26 @@ class Translator:
             {'name': 'function name',
              'body': 'function body',
              'signature': 'function signature',
-             'calledFunctions': ['func1', 'func2', ...]
+             'calledFunctions': [
+                {
+                    'binding': '<func1, FFI binding signature>',
+                    'translated': '<func1, translated version signature>
+                },
+                ...
+             ],
+             'structs': [
+                {
+                    'binding': '<struct1, FFI binding definition>',
+                    'translated': '<struct1, translated version definition>'
+                },
+                ...
+             ],
+             'globals': [
+                {
+                    'binding': '<global1, FFI binding declaration>',
+                },
+                ...
+             ],
             }
         :param source_manager: The source manager
         :return: A dictionary with the translated function
@@ -50,62 +69,8 @@ class DefaultTranslator(Translator):
         self.conversation = []
         self.unit = None
     
-    def attach_dependencies(self, unit, source_manager, target_manager):
-        # We first need to compile the source to get the most up-to-date static library
-        source_manager.compile()
-        # Then we get the Rust static analysis results
-        rust_static_analysis = target_manager.get_static_analysis_results()
-
-        source = source_manager.extract_source(unit)
-        unit['source'] = source
-
-        # Now we need to get the imports that are already in the Rust file
-        insertion_file = target_manager.get_insertion_file(unit)
-        code_dir = target_manager.get_code_dir()
-        file_candidates = [file for file in rust_static_analysis['files'] if compare_fnames(file['filename'], insertion_file, code_dir)]
-        if len(file_candidates) == 1:
-            unit['imports'] = [imp['source'] for imp in file_candidates[0]['imports']]
-        else:
-            unit['imports'] = []
-
-        if unit['type'] != 'functions':
-            return
-        # This is the part where we collect info about the called functions.
-        for i, called_func in enumerate(unit['calledFunctions']):
-            translated_rust_fns = [f for f in rust_static_analysis['functions'] if f['name'] == (called_func['name'] + "_rust")]
-            if len(translated_rust_fns) != 0:
-                assert len(translated_rust_fns) == 1
-                unit['calledFunctions'][i]['translated'] = translated_rust_fns[0]['signature']
-
-            rust_ffi_bindings = [f for f in rust_static_analysis['functions'] if f['name'] == called_func['name']]
-            if len(rust_ffi_bindings) != 0:
-                assert len(rust_ffi_bindings) == 1
-                unit['calledFunctions'][i]['binding'] = rust_ffi_bindings[0]['signature']
-
-        # Now we get information about the globals and structs
-        for i, struct in enumerate(unit['structs']):
-            translated_rust_structs = [s for s in rust_static_analysis['structs'] if s['name'] == (struct['name'] + "_rust")]
-            if len(translated_rust_structs) != 0:
-                assert len(translated_rust_structs) == 1
-                source = target_manager.extract_source(translated_rust_structs[0])
-                unit['structs'][i]['translated'] = source
-            
-            rust_ffi_bindings = [s for s in rust_static_analysis['structs'] if s['name'] == struct['name']]
-            if len(rust_ffi_bindings) != 0:
-                assert len(rust_ffi_bindings) == 1
-                source = target_manager.extract_source(rust_ffi_bindings[0])
-                unit['structs'][i]['binding'] = source
-        
-        for i, glob in enumerate(unit['globals']):
-            rust_ffi_bindings = [g for g in rust_static_analysis['globals'] if g['name'] == glob['name']]
-            if len(rust_ffi_bindings) != 0: 
-                assert len(rust_ffi_bindings) == 1
-                source = target_manager.extract_source(rust_ffi_bindings[0])
-                unit['globals'][i]['binding'] = source
-    
     def translate(self, unit, source_manager, target_manager):
 
-        self.attach_dependencies(unit, source_manager, target_manager)
         if unit['type'] == 'functions':
             translation_prompt = construct_prompt_for_func(unit)
         elif unit['type'] == 'structs':

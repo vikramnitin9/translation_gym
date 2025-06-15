@@ -8,8 +8,8 @@ class Validator:
         """
         Validate the translated code.
 
-        :param func: The original function
-        :param translation: The translated function
+        :param unit: The original unit of code
+        :param translation: The translated unit
         :param source_manager: The source manager
         :param target_manager: The target manager
         :param test_manager: The test manager
@@ -36,6 +36,8 @@ class DefaultValidator(Validator):
         elif unit['type'] == 'structs':
             target_manager.insert_translation(unit, translation['struct'])
             target_manager.insert_imports(unit, translation['imports'])
+        else:
+            raise NotImplementedError(f"Translation not implemented for {unit['type']}")
 
         compile_success = False
         error_message = ''

@@ -86,7 +86,7 @@ class TranslationEngine:
             translator: Translator,
             validator: Validator):
 
-        for unit in orchestrator.unit_iter(self.source_manager, self.instrumentation_results):
+        for unit in orchestrator.unit_iter(self.source_manager, self.target_manager, self.instrumentation_results):
             self.logger.log_status("Translating unit: {}".format(unit['name']))
 
             translation = translator.translate(unit, self.source_manager, self.target_manager)
@@ -106,6 +106,7 @@ class TranslationEngine:
 
                 if result['success']:
                     self.logger.log_success("Translation succeeded")
+                    orchestrator.update_state(unit, translation)
                     break
                 else:
                     self.logger.log_failure("Translation failed")
@@ -118,9 +119,6 @@ class TranslationEngine:
                     translation = translator.repair(result, self.source_manager, self.target_manager)
                     result = validator.validate(unit, translation, self.source_manager, self.target_manager, self.test_manager)
             
-            if result['success']:
-                self.logger.log_success("Translation succeeded")
-
             self.logger.log_result({'unit': unit['name'],
                                    'results': "Success" if result['success'] else result['category'],
                                    'attempts': i+1})

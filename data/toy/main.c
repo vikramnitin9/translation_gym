@@ -2,6 +2,8 @@
 #include "math_functions.h"
 #include "string_functions.h"
 
+int global_counter = 0; // Global variable
+
 // Struct definition
 struct Point {
     int x;
@@ -9,6 +11,8 @@ struct Point {
 };
 
 int main() {
+    global_counter++; // Bump the global so the visitor still sees it
+    
     // Use the struct locally so the visitor sees its declaration
     struct Point p;
     p.x = 5;

@@ -140,8 +140,6 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
 
 bool FunctionVisitor::VisitRecordDecl(RecordDecl *record) {
 
-    llvm::errs() << "Visiting RecordDecl: " << record->getNameAsString() << "\n";
-
     if (!record->isStruct() || !record->isThisDeclarationADefinition()) {
         return true;
     }
@@ -178,9 +176,6 @@ bool FunctionVisitor::VisitRecordDecl(RecordDecl *record) {
 }
 
 bool FunctionVisitor::VisitVarDecl(VarDecl *var) {
-
-
-    llvm::errs() << "Visiting VarDecl: " << var->getNameAsString() << "\n";
 
     if (!var->hasGlobalStorage() || !var->isFileVarDecl()) {
         return true;
