@@ -35,9 +35,7 @@ class DefaultOrchestrator(Orchestrator):
         :param unit: The translation unit
         :param translation: The translation result
         """
-        # This translation logic doesn't require a state update,
-        # but it is possible that a different orchestrator might need to keep track of the state.
-        pass
+        self.static_analysis_results = self.source_manager.get_static_analysis_results()
 
     def attach_dependencies(self, unit, source_manager, target_manager, instrumentation_results=None):
         # We first need to compile the source to get the most up-to-date static library
@@ -56,6 +54,13 @@ class DefaultOrchestrator(Orchestrator):
             unit['imports'] = [imp['source'] for imp in file_candidates[0]['imports']]
         else:
             unit['imports'] = []
+        
+        if unit['type'] == 'globals':
+            rust_ffi_bindings = [g for g in rust_static_analysis['globals'] if g['name'] == unit['name']]
+            if len(rust_ffi_bindings) != 0: 
+                assert len(rust_ffi_bindings) == 1
+                source = target_manager.extract_source(rust_ffi_bindings[0])
+                unit['binding'] = source
 
         if unit['type'] != 'functions':
             return
@@ -98,6 +103,13 @@ class DefaultOrchestrator(Orchestrator):
                 assert len(rust_ffi_bindings) == 1
                 source = target_manager.extract_source(rust_ffi_bindings[0])
                 unit['globals'][i]['binding'] = source
+            
+            wrapper_name = f"{''.join([s.capitalize() for s in glob['name'].split('_')])}Wrapper"
+            rust_wrapper = [g for g in rust_static_analysis['structs'] if g['name'] == wrapper_name]
+            if len(rust_wrapper) != 0:
+                assert len(rust_wrapper) == 1
+                source = target_manager.extract_source(rust_wrapper[0])
+                unit['globals'][i]['wrapper'] = source
 
 
     def unit_iter(self, source_manager, target_manager, instrumentation_results=None):
@@ -117,11 +129,11 @@ class DefaultOrchestrator(Orchestrator):
                 dep_graph.add_node(qcallee, type='functions')
                 dep_graph.add_edge(qname, qcallee)
 
-            # # 2) function → globals 
-            # for glob in func['globals']:
-            #     qglob = glob['name']
-            #     dep_graph.add_node(qglob, type='global')
-            #     dep_graph.add_edge(qname, qglob)
+            # 2) function → globals 
+            for glob in func['globals']:
+                qglob = glob['name']
+                dep_graph.add_node(qglob, type='globals')
+                dep_graph.add_edge(qname, qglob)
 
              # 3) function → structs
             for st in func['structs']:
@@ -154,9 +166,6 @@ class DefaultOrchestrator(Orchestrator):
                 continue
             yield unit
 
-
-
-    
 
     def _dump_graph(self, graph, title="Dependency Graph"):
         """

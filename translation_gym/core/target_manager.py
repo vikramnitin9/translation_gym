@@ -17,8 +17,8 @@ class TargetManager:
     def replace_func(self, func, new_body):
         raise NotImplementedError("replace_func() not implemented")
     
-    def reset_func(self, func):
-        raise NotImplementedError("reset_func() not implemented")
+    def reset_unit(self, func):
+        raise NotImplementedError("reset_unit() not implemented")
     
     def cleanup(self):
         raise NotImplementedError("cleanup() not implemented")
@@ -117,15 +117,12 @@ class RustTargetManager(TargetManager):
         with open(fpath, 'r') as f:
             lines = f.readlines()
 
-        old_lines = lines.copy()
         before = lines[:start_line-1] + [lines[start_line-1][:start_col-1]]
         after = [lines[end_line-1][end_col:]] + lines[end_line:]
         new_contents = ''.join(before + [new_body] + after)
 
         with open(fpath, 'w') as f:
             f.write(new_contents)
-        with open(fpath.with_suffix('.old'), 'w') as f:
-            f.write(''.join(old_lines))
 
     def get_executable(self):
         # The executable is created by `cargo parse`, 
@@ -177,7 +174,6 @@ class RustTargetManager(TargetManager):
         insertion_file = self.get_insertion_file(unit)
         # Read the contents of the insertion file
         contents = insertion_file.read_text()
-        old_contents = contents
         lines = contents.split('\n')
 
         inside_attribute = False
@@ -208,26 +204,19 @@ class RustTargetManager(TargetManager):
         except:
             self.logger.log_failure("Rustfmt failed. There may be a syntax error in the generated code.")
 
-        with open(insertion_file.with_suffix('.old'), 'w') as f:
-            f.write(old_contents)
-
     def insert_translation(self, unit, translation):
 
-        # Add the function to the bindgen blocklist
-        shutil.copy(self.bindgen_blocklist, self.bindgen_blocklist.with_suffix('.old'))
-        with open(self.bindgen_blocklist, 'a') as f:
-            f.write(f"{unit['name']}\n")
+        if unit['type'] == 'functions':
+            # Add the function to the bindgen blocklist
+            with open(self.bindgen_blocklist, 'a') as f:
+                f.write(f"{unit['name']}\n")
 
         insertion_file = self.get_insertion_file(unit)
         # Read the contents of the insertion file
         contents = insertion_file.read_text()
-        old_contents = contents
 
         # Insert the function_trans and wrapper at the bottom
         insertion_file.write_text(contents + '\n' + translation)
-
-        with open(insertion_file.with_suffix('.old'), 'w') as f:
-            f.write(old_contents)
 
     def get_insertion_file(self, func):
         # Get the file where the function will be inserted
@@ -235,10 +224,21 @@ class RustTargetManager(TargetManager):
         # But in the future, we may want a more modular approach
         return Path(self.code_dir, 'src/main.rs')
 
-    def reset_func(self, func):
+    def save_state(self, unit):
+        if unit['type'] != 'functions':
+            shutil.copy(self.bindgen_blocklist, self.bindgen_blocklist.with_suffix('.old'))
+        fpath = self.get_insertion_file(unit)
+        if not fpath.exists():
+            raise FileNotFoundError(f"File {fpath} does not exist.")
+        with open(fpath, 'r') as f:
+            contents = f.read()
+        with open(fpath.with_suffix('.old'), 'w') as f:
+            f.write(contents)
+
+    def reset_unit(self, unit):
         self.logger.log_status("Resetting changes.")
         # Replace the ".rs" files with the ".old" files if they exist
-        original_rust_file = Path(self.code_dir, 'src/main.rs')
+        original_rust_file = self.get_insertion_file(unit)
         for file in [original_rust_file, self.bindgen_blocklist]:
             if file.with_suffix('.old').exists():
                 shutil.copy(file.with_suffix('.old'), file)

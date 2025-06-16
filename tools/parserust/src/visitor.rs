@@ -341,11 +341,22 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
         let hir_id = fi.hir_id();
         let def_id = hir_id.owner.to_def_id();
 
-        if let rustc_hir::ForeignItemKind::Fn(..) = fi.kind {
-            // The signature is the same as the function because there is no body
-            self.functions.insert(def_id, FnInfo{span: fi.span, sig_span: fi.span, foreign: true, globals: HashMap::new(), structs: HashMap::new()});
-            push_walk_pop!(self, def_id, intravisit::walk_foreign_item(self, fi));
-            return;
+        match fi.kind {
+            rustc_hir::ForeignItemKind::Fn(..) => {
+                // The signature is the same as the function because there is no body
+                self.functions.insert(def_id, FnInfo{span: fi.span, sig_span: fi.span, foreign: true, globals: HashMap::new(), structs: HashMap::new()});
+                push_walk_pop!(self, def_id, intravisit::walk_foreign_item(self, fi));
+                return;
+            }
+            rustc_hir::ForeignItemKind::Static(..) => {
+                // foreign static variables
+                self.globals.insert(def_id, fi.span);
+            },
+            rustc_hir::ForeignItemKind::Type => {
+                // foreign types
+                self.structs.insert(def_id, fi.span);
+            },
+            _ => {}
         }
 
         // traverse

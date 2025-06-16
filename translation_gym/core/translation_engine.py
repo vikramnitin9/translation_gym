@@ -103,7 +103,9 @@ class TranslationEngine:
                                         'results': "No translation generated",
                                         'attempts': 0})
                 continue
-
+            
+            self.source_manager.save_state(unit)
+            self.target_manager.save_state(unit)
             result = validator.validate(unit, translation, self.source_manager, self.target_manager, self.test_manager)
 
             for i in range(self.num_attempts):
@@ -117,8 +119,8 @@ class TranslationEngine:
                     self.logger.log_failure("Translation failed")
                     self.logger.log_output(result['category'])
                     self.logger.log_output(result['message'])
-                    self.source_manager.reset_func(unit)
-                    self.target_manager.reset_func(unit)
+                    self.source_manager.reset_unit(unit)
+                    self.target_manager.reset_unit(unit)
                     if i == self.num_attempts - 1:
                         break
                     translation = translator.repair(result, self.source_manager, self.target_manager)

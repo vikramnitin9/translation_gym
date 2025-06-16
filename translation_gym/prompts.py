@@ -46,40 +46,25 @@ def construct_prompt_for_func(func):
         else:
             structDesc += f"{i+1}. {struct['name']}. This struct is not accessible to you, so you need to use a substitute.\n"
 
-    globals_list = func.get("globals", [])
-    if globals_list:
-        items = []
-        for g in globals_list:
-            name = g["name"]
-            ctype = g.get("type", "int")
-            rust_ty = "libc::c_int" if ctype == "int" else ctype.replace("struct ", "")
-            items.append(f"`{name}` (`{ctype}`) ⇒ `&mut {rust_ty}`")
-        globalDesc = (
-            "This function references the following C globals and **must** be translated into\n"
-            "a Rust function taking a mutable borrow of each (never call the C FFI version):\n\n"
-            " - " + "\n - ".join(items) + "\n\n"
-            "In your function signature, name each parameter `*_ref` (e.g. `global_counter_ref`) to avoid\n"
-            "shadowing the `static mut global_counter`, and always pass that same reference into any\n"
-            "`*_rust` callee.\n\n"
-        )
-    else:
+    if len(func['globals']) == 0:
         globalDesc = ""
-
-    # if the C function has no arguments but uses globals
-    if func.get("num_args", 0) == 0 and globals_list:
-        wrapperDesc = (
-            "Since this C function has no parameters, your wrapper must also take no parameters.  "
-            "Inside that zero-arg wrapper, `unsafe`-borrow the `static mut` globals and pass them to the `<FUNC>` "
-            "implementation.  For example:\n\n"
-            "```rust\n"
-            "#[no_mangle]\n"
-            "pub extern \"C\" fn {name}() -> libc::c_int {{\n"
-            "    unsafe {{ {name}_rust(&mut global_counter) }}\n"
-            "}}\n"
-            "```\n\n"
-        ).format(name=func["name"])
+        globalWrapperDesc = ""
     else:
-        wrapperDesc = ""
+        globalDesc = "This function uses the following global variables:\n"
+    for i, glob in enumerate(func['globals']):
+        if 'wrapper' in glob and 'binding' in glob:
+            globalDesc += f"{i+1}. {glob['name']}. This can be replaced by an object of this struct:\n"
+            globalDesc += f"```rust\n{glob['wrapper']}\n```\n"
+            globalDesc += "This struct has `get` and `set` methods to interact with the field.\n"
+            globalDesc += "The struct also has a `new` method that creates a new instance of the struct with a provided value.\n"
+            globalDesc += "The translated function should take an object of this struct as an argument.\n"
+            globalDesc += f"For inter-compatibility with the C code, there is also a Rust FFI binding to the C global, with this definition:\n"
+            globalDesc += f"```rust\n{glob['binding']}\n```\n"
+            globalDesc += "Note that you might need to use the `unsafe` keyword to access this binding.\n"
+        
+        globalWrapperDesc = "The wrapper function should also take care of passing the structures corresponding to global variables, as arguments to the translated function.\n"
+        globalWrapperDesc += "It should use `unsafe` code to read the FFI binding of each global variable, convert these to idiomatic types,"
+        globalWrapperDesc += " create structure objects corresponding to each global (as described above), and pass them to the translated function.\n"
 
     if len(func['imports']) == 0:
         importDesc = ""
@@ -94,6 +79,7 @@ def construct_prompt_for_func(func):
 {calledFunctionDesc}
 {structDesc}
 As far as possible, avoid raw pointers and unsafe function calls, and use only safe Rust. Also avoid libc types and use Rust native types instead.
+Avoid using bindings to C functions and structs as far as possible, and use the Rust reimplementations if available.
 You can assume that all the structures and global variables already have definitions in Rust, and you do not need to redefine them.
 Do not use any dummy code like "// Full implementation goes here", etc. All the code you write will be substituted directly into the codebase without a human reviewing it. So it should be functional and complete.
 Feel free to change the function signature and modify the function body as needed.
@@ -102,10 +88,11 @@ If you need imports, you can add them in the <IMPORTS>...</IMPORTS> section. Do 
 {globalDesc}
 
 Also provide a wrapper function that calls this function.
-The wrapper function should have the *same* arguments and return type as the C function, except with C types replaced with their corresponding libc crate types.
+The wrapper function should have the *same* arguments and return type as the C function, except with C types replaced with their corresponding libc crate types or FFI bindings.
 For example, replace `int` with `libc::c_int`, `char*` with `*mut libc::c_char`, etc.
-Also remember to use `#[no_mangle]` and `pub extern "C" fn ...` for the wrapper function.
-{wrapperDesc} 
+{globalWrapperDesc}
+Make sure to use `#[no_mangle]` and `pub unsafe extern "C" fn ...` for the wrapper function.
+Note that the wrapper function can use unsafe code to access FFI bindings to globals, structs, etc.
 
 The name of the Rust function should be `{func['name']}_rust` and the wrapper function should be `{func['name']}`.
 
@@ -121,7 +108,7 @@ fn {func['name']}_rust ...
 
 <WRAPPER>
 #[no_mangle]
-pub extern "C" fn {func['name']} ...
+pub unsafe extern "C" fn {func['name']} ...
 </WRAPPER>
 '''
     return prompt
@@ -159,6 +146,53 @@ Any imports you need for {struct['name']}_rust. Can be empty.
 </IMPORTS>
 <STRUCT>
 struct {struct['name']}_rust ...
+</STRUCT>
+'''
+    return prompt
+
+
+def construct_prompt_for_global(glob):
+    """
+    Constructs the prompt for translating a C global variable to Rust.
+    :param glob: The global variable to be translated
+    {'source': 'C global variable definition',
+     'name': 'global variable name'}
+    :return: The prompt string
+    """
+
+    if len(glob['imports']) == 0:
+        importDesc = ""
+    else:
+        importDesc = f"The Rust file where this global will be inserted already has the following imports:\n```rust\n{'\n'.join(glob['imports'])}\n```\n"
+        importDesc += "Do not repeat them in the <IMPORTS>...</IMPORTS> section, otherwise this will lead to duplicate imports.\n"
+
+    prompt = f'''Here is a declaration of a global variable in Rust:
+```rust
+{glob['binding']}
+```
+However, this uses non-idiomatic Rust types. We want an idiomatic Rust equivalent, that does not use libc types, raw pointers, or `static mut`.
+Your task is to create a struct that provides an idiomatic type interface for interacting with the global variable.
+The struct should be named `{''.join([s.capitalize() for s in glob['name'].split('_')])}Wrapper`. It has one field, `val: T`.
+It should implement 3 methods:
+    1. `get(&self) -> T`: A method that reads the value of the global variable (using unsafe code if necessary), converts it to an idiomatic type `T`, and returns it.
+    2. `set(&mut self, val: T)`: A method that takes a value of the idiomatic type T as an argument, and assigns it to the `val` field.
+        It also converts `val` to the type of the global variable, and (if necessary) uses `unsafe` code internally to write it to the global variable.
+        The global variable and the struct field should always be in sync.
+    3. `new(val: T) -> Self`: A constructor that creates a new instance of this structure with `val` as the field, and calls `set(val)` on this instance before returning it.
+Note that `T` here is a placeholder for the actual idiomatic equivalent type. Avoid libc types and raw pointers. For example, replace `libc::c_int` with `i32`, `*mut libc::c_char` with `String`, etc.
+If you need new imports, you can add them in the <IMPORTS>...</IMPORTS> section. Do not provide them along with the struct source.
+{importDesc}
+Follow this format:
+<IMPORTS>
+Any imports you need for `{''.join([s.capitalize() for s in glob['name'].split('_')])}Wrapper`. Can be empty.
+</IMPORTS>
+<STRUCT>
+pub struct {''.join([s.capitalize() for s in glob['name'].split('_')])}Wrapper {{
+    val: ...
+}}
+impl {''.join([s.capitalize() for s in glob['name'].split('_')])}Wrapper {{
+...
+}}
 </STRUCT>
 '''
     return prompt

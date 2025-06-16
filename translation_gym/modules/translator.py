@@ -75,6 +75,8 @@ class DefaultTranslator(Translator):
             translation_prompt = construct_prompt_for_func(unit)
         elif unit['type'] == 'structs':
             translation_prompt = construct_prompt_for_struct(unit)
+        elif unit['type'] == 'globals':
+            translation_prompt = construct_prompt_for_global(unit)
         else:
             raise NotImplementedError("Translation not implemented for this unit type")
 
@@ -118,7 +120,7 @@ class DefaultTranslator(Translator):
                         'imports': imports,
                     }
                 
-                elif unit['type'] == 'structs':
+                elif unit['type'] == 'structs' or unit['type'] == 'globals':
                     if '<STRUCT>\n' not in response:
                         self.logger.log_failure("Response does not contain <STRUCT> tag. Trying again.")
                         continue
@@ -129,6 +131,7 @@ class DefaultTranslator(Translator):
                         'struct': struct_trans,
                         'imports': imports,
                     }
+
                 break
             except ModelException as e:
                 self.logger.log_status(f"Model exception\n{e}\nTrying again")
@@ -187,7 +190,7 @@ class DefaultTranslator(Translator):
                         'wrapper': wrapper,
                         'imports': imports,
                     }
-                elif self.unit['type'] == 'structs':
+                elif self.unit['type'] == 'structs' or self.unit['type'] == 'globals':
                     if '<STRUCT>\n' not in response:
                         self.logger.log_failure("Response does not contain <STRUCT> tag. Trying again.")
                         continue

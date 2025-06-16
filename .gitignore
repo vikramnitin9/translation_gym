@@ -7,6 +7,9 @@ instrumented.json
 # Compile commands can contain full system paths
 compile_commands.json
 
+# Google Cloud service account key file
+vertex_ai_service_account.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

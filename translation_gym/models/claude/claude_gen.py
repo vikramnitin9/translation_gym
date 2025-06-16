@@ -1,12 +1,18 @@
 import time
 import os
 import requests
+import litellm
+from litellm import completion
+import json
 
 class ClaudeGen:
 
     def __init__(self, model):
 
-        self.api_key=os.environ['ANTHROPIC_API_KEY']
+        litellm.vertex_location = 'us-east5'
+
+        with open(os.environ['VERTEX_AI_JSON'], 'r') as file:
+            self.vertex_credentials = json.dumps(json.load(file))
         self.model = model
     
     def gen(self, messages, temperature=0, top_k=1):
@@ -21,46 +27,32 @@ class ClaudeGen:
                      ...]
         len(<returned>) == top_k
         '''
-        
-        from models import ModelException
+        from .. import ModelException
 
         if top_k != 1 and temperature == 0:
             raise ModelException("Top k sampling requires a non-zero temperature")
-
-        new_messages = [message for message in messages if message['role'] != 'system']
-        url = 'https://api.anthropic.com/v1/messages'
-
-        retry_count = 0
+        
+        count = 0
         while True:
             try:
-                response = requests.post(
-                                url,
-                                json={
-                                    "model": self.model,
-                                    "messages": new_messages,
-                                    "temperature": temperature,
-                                    "max_tokens": 4096
-                                },
-                                headers={
-                                    'x-api-key': self.api_key,
-                                    'content-type': 'application/json',
-                                    "anthropic-version": "2023-06-01"
-                                }
-                            )
-                if response.status_code != 200:
-                    raise ModelException(response.json()['error']['message'])
-                response = response.json()
-                if len(response['content']) > 1:
-                    raise ModelException("Claude returned multiple responses")
+                response = completion(
+                    model=f"vertex_ai/{self.model}",
+                    messages=messages,
+                    temperature=temperature,
+                    n=top_k,
+                    vertex_credentials=self.vertex_credentials
+                )
                 break
-            except Exception as e:
-                retry_count += 1
-                if retry_count >= 5:
-                    raise ModelException(f"Claude API Error: {e}")
-                print(f"Claude API Error: {e}. Waiting 10 seconds and retrying")
+            except (litellm.BadRequestError, litellm.AuthenticationError,
+                        litellm.NotFoundError, litellm.UnprocessableEntityError) as e:
+                    raise ModelException(f"Encountered an error with Vertex AI API {e}")
+            except (litellm.RateLimitError, litellm.InternalServerError, litellm.APIConnectionError) as e:
+                count += 1
+                if count >= 5:
+                    raise ModelException("Vertex AI API: Too many retries")
+                print(f"Vertex AI Error {e}. Waiting 10 seconds and retrying")
                 time.sleep(10)
+            except Exception as e:
+                raise ModelException(f"Vertex AI API Error: {e}")
         
-        if top_k > 1:
-            return [response['content'][0]['text']] + self.gen(messages, temperature, top_k=top_k-1)
-        else:
-            return [response['content'][0]['text']]
+        return [choice['message']['content'] for choice in response['choices']]

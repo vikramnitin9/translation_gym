@@ -17,8 +17,8 @@ class SourceManager:
     def replace_func(self, func, new_body):
         raise NotImplementedError("replace_func() not implemented")
     
-    def reset_func(self, func):
-        raise NotImplementedError("reset_func() not implemented")
+    def reset_unit(self, func):
+        raise NotImplementedError("reset_unit() not implemented")
 
     def cleanup(self):
         raise NotImplementedError("cleanup() not implemented")
@@ -223,31 +223,38 @@ class CSourceManager(SourceManager):
             source += lines[i]
         source += lines[end_line-1][:end_col]
         return source
-    
-    def replace_func(self, func, new_body):
 
-        fpath = Path(os.path.join(self.code_dir, func['filename']))
-        start_line = func['startLine']
-        start_col = func['startCol']
-        end_line = func['endLine']
-        end_col = func['endCol']
+    def save_state(self, unit):
+        # Save the current state of the file
+        fpath = Path(os.path.join(self.code_dir, unit['filename']))
+        if not fpath.exists():
+            raise FileNotFoundError(f"File {fpath} does not exist.")
+        with open(fpath, 'r') as f:
+            contents = f.read()
+        with open(fpath.with_suffix('.old'), 'w') as f:
+            f.write(contents)
+
+    def replace_unit(self, unit, new_body):
+
+        fpath = Path(os.path.join(self.code_dir, unit['filename']))
+        start_line = unit['startLine']
+        start_col = unit['startCol']
+        end_line = unit['endLine']
+        end_col = unit['endCol']
 
         with open(fpath, 'r') as f:
             lines = f.readlines()
 
-        old_lines = lines.copy()
         before = lines[:start_line-1] + [lines[start_line-1][:start_col-1]]
         after = [lines[end_line-1][end_col:]] + lines[end_line:]
         new_contents = ''.join(before + [new_body] + after)
 
         with open(fpath, 'w') as f:
             f.write(new_contents)
-        with open(fpath.with_suffix('.old'), 'w') as f:
-            f.write(''.join(old_lines))
 
     def remove_func(self, func):
         assert func['type'] == 'functions'
-        
+
         fpath = Path(os.path.join(self.code_dir, func['filename']))
         start_line = func['startLine']
         start_col = func['startCol']
@@ -257,7 +264,6 @@ class CSourceManager(SourceManager):
         with open(fpath, 'r') as f:
             lines = f.readlines()
 
-        old_lines = lines.copy()
         new_lines = lines[:start_line-1]
 
         # We need to keep the function declaration visible to other functions that may call it
@@ -268,21 +274,18 @@ class CSourceManager(SourceManager):
 
         with open(fpath, 'w') as f:
             f.write(''.join(new_lines))
-        with open(fpath.with_suffix('.old'), 'w') as f:
-            f.write(''.join(old_lines))
 
-    def comment_out(self, func):
+    def comment_out(self, unit):
 
-        fpath = Path(os.path.join(self.code_dir, func['filename']))
-        start_line = func['startLine']
-        start_col = func['startCol']
-        end_line = func['endLine']
-        end_col = func['endCol']
+        fpath = Path(os.path.join(self.code_dir, unit['filename']))
+        start_line = unit['startLine']
+        start_col = unit['startCol']
+        end_line = unit['endLine']
+        end_col = unit['endCol']
 
         with open(fpath, 'r') as f:
             lines = f.readlines()
 
-        old_lines = lines.copy()
         lines = [line.rstrip() for line in lines]
 
         # We can't do a multiline comment because C doesn't support nested multiline comments
@@ -297,13 +300,11 @@ class CSourceManager(SourceManager):
         
         with open(fpath, 'w') as f:
             f.write('\n'.join(lines))
-        with open(fpath.with_suffix('.old'), 'w') as f:
-            f.write(''.join(old_lines))
     
-    def reset_func(self, func):
+    def reset_unit(self, unit):
         self.logger.log_status("Resetting changes.")
         # Replace the ".c" file with the ".old" file if it exists
-        file = Path(self.code_dir, func['filename'])
+        file = Path(self.code_dir, unit['filename'])
         if file.with_suffix('.old').exists():
             shutil.copy(file.with_suffix('.old'), file)
             file.with_suffix('.old').unlink()

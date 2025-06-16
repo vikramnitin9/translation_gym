@@ -33,7 +33,7 @@ class DefaultValidator(Validator):
             target_manager.insert_translation(unit, translation['func'])
             target_manager.insert_translation(unit, translation['wrapper'])
             target_manager.insert_imports(unit, translation['imports'])
-        elif unit['type'] == 'structs':
+        elif unit['type'] == 'structs' or unit['type'] == 'globals':
             target_manager.insert_translation(unit, translation['struct'])
             target_manager.insert_imports(unit, translation['imports'])
         else:

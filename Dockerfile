@@ -83,5 +83,6 @@ RUN cd /app/tools/parserust && \
     cargo install --debug --locked --path . --force
 
 COPY --chown=${USER_ID}:${GROUP_ID} resources resources/
+COPY --chown=${USER_ID}:${GROUP_ID} vertex_ai_service_account.json vertex_ai_service_account.json
 
 USER appuser
