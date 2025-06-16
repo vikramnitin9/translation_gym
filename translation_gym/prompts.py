@@ -78,14 +78,13 @@ def construct_prompt_for_func(func):
 ```
 {calledFunctionDesc}
 {structDesc}
+{globalDesc}
 As far as possible, avoid raw pointers and unsafe function calls, and use only safe Rust. Also avoid libc types and use Rust native types instead.
 Avoid using bindings to C functions and structs as far as possible, and use the Rust reimplementations if available.
-You can assume that all the structures and global variables already have definitions in Rust, and you do not need to redefine them.
 Do not use any dummy code like "// Full implementation goes here", etc. All the code you write will be substituted directly into the codebase without a human reviewing it. So it should be functional and complete.
 Feel free to change the function signature and modify the function body as needed.
 If you need imports, you can add them in the <IMPORTS>...</IMPORTS> section. Do not provide them along with the function body.
 {importDesc}
-{globalDesc}
 
 Also provide a wrapper function that calls this function.
 The wrapper function should have the *same* arguments and return type as the C function, except with C types replaced with their corresponding libc crate types or FFI bindings.

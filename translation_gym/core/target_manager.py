@@ -215,7 +215,7 @@ class RustTargetManager(TargetManager):
         # Read the contents of the insertion file
         contents = insertion_file.read_text()
 
-        # Insert the function_trans and wrapper at the bottom
+        # Insert the translation at the bottom
         insertion_file.write_text(contents + '\n' + translation)
 
     def get_insertion_file(self, func):
@@ -225,7 +225,7 @@ class RustTargetManager(TargetManager):
         return Path(self.code_dir, 'src/main.rs')
 
     def save_state(self, unit):
-        if unit['type'] != 'functions':
+        if unit['type'] == 'functions':
             shutil.copy(self.bindgen_blocklist, self.bindgen_blocklist.with_suffix('.old'))
         fpath = self.get_insertion_file(unit)
         if not fpath.exists():
@@ -238,11 +238,14 @@ class RustTargetManager(TargetManager):
     def reset_unit(self, unit):
         self.logger.log_status("Resetting changes.")
         # Replace the ".rs" files with the ".old" files if they exist
-        original_rust_file = self.get_insertion_file(unit)
-        for file in [original_rust_file, self.bindgen_blocklist]:
+        files_to_restore = [self.get_insertion_file(unit)]
+        if unit['type'] == 'functions':
+            files_to_restore.append(self.bindgen_blocklist)
+        for file in files_to_restore:
             if file.with_suffix('.old').exists():
                 shutil.copy(file.with_suffix('.old'), file)
-                file.with_suffix('.old').unlink()
+            else:
+                raise FileNotFoundError(f"File {file.with_suffix('.old')} does not exist. Cannot reset unit {unit['name']}.")
 
     def cleanup(self):
         cwd = os.getcwd()

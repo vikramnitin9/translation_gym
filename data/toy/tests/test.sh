@@ -1,8 +1,12 @@
 #!/bin/bash
 
 EXECUTABLE="toy"
-EXPECTED_OUTPUT="Sum: 8
+EXPECTED_OUTPUT="Counter: 2
+Counter: 0
+Counter: 1
+Sum: 8
 Difference: 2
+Midpoint: (7, 2)
 Concatenation: Hello, world!"
 
 # Run the executable and capture its output

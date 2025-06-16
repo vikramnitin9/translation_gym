@@ -233,6 +233,7 @@ class CSourceManager(SourceManager):
             contents = f.read()
         with open(fpath.with_suffix('.old'), 'w') as f:
             f.write(contents)
+        self.logger.log_status(f"Saved state of {fpath} to {fpath.with_suffix('.old')}")
 
     def replace_unit(self, unit, new_body):
 
@@ -307,7 +308,8 @@ class CSourceManager(SourceManager):
         file = Path(self.code_dir, unit['filename'])
         if file.with_suffix('.old').exists():
             shutil.copy(file.with_suffix('.old'), file)
-            file.with_suffix('.old').unlink()
+        else:
+            raise FileNotFoundError(f"File {file.with_suffix('.old')} does not exist. Cannot reset unit.")
 
     def cleanup(self):
         cwd = os.getcwd()

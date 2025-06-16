@@ -93,6 +93,10 @@ class TranslationEngine:
 
         for unit in orchestrator.unit_iter(self.source_manager, self.target_manager, self.instrumentation_results):
             self.logger.log_status("Translating unit: {}".format(unit['name']))
+            
+            # Save a checkpoint to make sure we can reset if translation fails
+            self.source_manager.save_state(unit)
+            self.target_manager.save_state(unit)
 
             translation = translator.translate(unit, self.source_manager, self.target_manager)
             
@@ -104,8 +108,6 @@ class TranslationEngine:
                                         'attempts': 0})
                 continue
             
-            self.source_manager.save_state(unit)
-            self.target_manager.save_state(unit)
             result = validator.validate(unit, translation, self.source_manager, self.target_manager, self.test_manager)
 
             for i in range(self.num_attempts):
