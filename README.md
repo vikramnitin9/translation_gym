@@ -12,8 +12,8 @@ Translation Gym takes care of all this effort! It gives you:
 - [x] a function body
 - [x] the functions that it calls
 - [x] values of each argument and the returned value, from a sample execution 
-- [ ] any global variables used by this function
-- [ ] definitions of any structure or enum used in this function
+- [x] any global variables used by this function
+- [x] definitions of any structure or enum used in this function
 
 In exchange, you need to provide it with:
 - [x] the function translation
