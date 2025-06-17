@@ -141,7 +141,7 @@ int main(int argc, const char **argv) {
 		for (auto &entry : jsonData["functions"]) {
 			if (entry["name"] == F.getName() &&
 				compareFilenames(entry["filename"], SubProg->getFilename())) {
-				entry["calledFunctions"] = calledFunctions;
+				entry["functions"] = calledFunctions;
 				break;
 			}
 		}

@@ -19,7 +19,7 @@ extern crate smallvec;
 extern crate itertools;
 extern crate regex;
 
-use std::collections::{HashMap, HashSet};
+use std::collections::HashSet;
 use rustc_middle::ty::TyCtxt;
 use serde_json::json;
 
@@ -108,38 +108,40 @@ pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
             "startCol": start_col,
             "endLine": end_line,
             "endCol": end_col,
-            "calls": [],
+            "functions": [],
             "globals": [],
             "structs": [],
             "foreign": func_info.foreign,
         });
 
-        // Get all the calls to this function
+        // Get all functions called by this function
         for call in visitor.static_calls.iter().chain(visitor.dynamic_calls.iter()) {
-            if call.callee == *func_defid {
-                let call_span = get_parent_span(&call.call_expr, &tcx).unwrap();
+            if call.caller == Some(*func_defid) {
                 let call_json = json!({
-                    "caller": if call.caller.is_some() { format!("{:?}", call.caller.unwrap()) } else { "".to_string()},
-                    "span": format!("{:?}", call_span),
-                    "source": span_to_string(tcx, &call_span)
+                    "name": tcx.item_name(call.callee).to_string(),
                 });
-                this_func_json["calls"].as_array_mut().unwrap().push(call_json);
+                this_func_json["functions"].as_array_mut().unwrap().push(call_json);
             }
         }
         // Get globals corresponding to this function
         for (global_def_id, global_span) in func_info.globals.iter() {
             let global_json = json!({
                 "name": tcx.item_name(*global_def_id).to_string(),
-                "span": format!("{:?}", global_span),
-                "source": span_to_string(tcx, &global_span)
             });
             this_func_json["globals"].as_array_mut().unwrap().push(global_json);
+        }
+        for (struct_defid, struct_span) in func_info.structs.iter() {
+            let struct_json = json!({
+                "name": tcx.item_name(*struct_defid).to_string(),
+            });
+            this_func_json["structs"].as_array_mut().unwrap().push(struct_json);
         }
         funcs_json.push(this_func_json);
     }
 
     for (global_defid, global_span) in visitor.globals.iter() {
         let ((fname, start_line, start_col), (_, end_line, end_col)) = span_to_data(tcx, &global_span);
+        let foreign = fname.ends_with("bindings.rs"); // This is a quick fix for now but needs a better solution
         let global_json = json!({
             "name": tcx.item_name(*global_defid).to_string(),
             "filename": fname,
@@ -147,12 +149,14 @@ pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
             "startCol": start_col,
             "endLine": end_line,
             "endCol": end_col,
+            "foreign": foreign,
         });
         globals_json.push(global_json);
     }
 
     for (struct_defid, struct_span) in visitor.structs.iter() {
         let ((fname, start_line, start_col), (_, end_line, end_col)) = span_to_data(tcx, &struct_span);
+        let foreign = fname.ends_with("bindings.rs"); // This is a quick fix for now but needs a better solution
         let struct_json = json!({
             "name": tcx.item_name(*struct_defid).to_string(),
             "filename": fname,
@@ -160,6 +164,7 @@ pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
             "startCol": start_col,
             "endLine": end_line,
             "endCol": end_col,
+            "foreign": foreign,
         });
         structs_json.push(struct_json);
     }

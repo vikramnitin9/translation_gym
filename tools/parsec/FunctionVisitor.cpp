@@ -113,25 +113,22 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
                 {"startCol", startCol},
                 {"endCol", endCol},
         };
-    {
-    json arr = json::array();
-    for (auto &n : currentGlobals) {
-        json obj;
-        obj["name"] = n;
-        arr.push_back(std::move(obj));
-    }
-    functionData["globals"] = std::move(arr);
-    }
+    
+        json global_arr = json::array();
+        for (auto &n : currentGlobals) {
+            json obj;
+            obj["name"] = n;
+            global_arr.push_back(std::move(obj));
+        }
+        functionData["globals"] = std::move(global_arr);
 
-   {
-    json arr = json::array();
-    for (auto &n : currentStructs) {
-        json obj;
-        obj["name"] = n;
-        arr.push_back(std::move(obj));
-    }
-    functionData["structs"] = std::move(arr);
-   }
+        json struct_arr = json::array();
+        for (auto &n : currentStructs) {
+            json obj;
+            obj["name"] = n;
+            struct_arr.push_back(std::move(obj));
+        }
+        functionData["structs"] = std::move(struct_arr);
 
         this->data["functions"].push_back(functionData);
     }
@@ -177,7 +174,7 @@ bool FunctionVisitor::VisitRecordDecl(RecordDecl *record) {
 
 bool FunctionVisitor::VisitVarDecl(VarDecl *var) {
 
-    if (!var->hasGlobalStorage() || !var->isFileVarDecl()) {
+    if (!var->hasGlobalStorage() || !var->isFileVarDecl() || !var->isThisDeclarationADefinition()) {
         return true;
     }
 

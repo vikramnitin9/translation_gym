@@ -15,7 +15,7 @@ class Translator:
             {'name': 'function name',
              'body': 'function body',
              'signature': 'function signature',
-             'calledFunctions': [
+             'functions': [
                 {
                     'binding': '<func1, FFI binding signature>',
                     'translated': '<func1, translated version signature>

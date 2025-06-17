@@ -7,11 +7,7 @@ RUN apt install -y build-essential
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt install -y llvm-10 llvm-10-dev llvm-10-tools clang-10 libclang-10-dev
-RUN apt install -y cmake
-RUN apt install -y wget
-RUN apt install -y unzip
-RUN apt install -y bear
-RUN apt install -y curl
+RUN apt install -y cmake wget unzip bear curl graphviz
 
 # Install Docker CLI
 RUN apt install -y docker.io
@@ -83,6 +79,5 @@ RUN cd /app/tools/parserust && \
     cargo install --debug --locked --path . --force
 
 COPY --chown=${USER_ID}:${GROUP_ID} resources resources/
-COPY --chown=${USER_ID}:${GROUP_ID} vertex_ai_service_account.json vertex_ai_service_account.json
 
 USER appuser

@@ -112,6 +112,7 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
             rustc_hir::ExprKind::Call(
                     rustc_hir::Expr{
                         kind: rustc_hir::ExprKind::Path(ref qpath),
+                        hir_id: sub_hir_id,
                         ..
                     }, _) => {
                 if let rustc_hir::QPath::Resolved(_, p) = qpath {
@@ -126,6 +127,26 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
                         });
                     }
                 }
+                // Functions like ::new and ::default apparently need to be resolved using type checking
+                let o_def_id = (hir_id).owner;
+                let typeck_tables = self.tcx.typeck(o_def_id);
+                let substs = typeck_tables.node_args(hir_id);
+                let method_id = typeck_tables.type_dependent_def_id(*sub_hir_id);
+                if let Some(method_id) = method_id {
+                    let param_env = self.tcx.param_env(method_id);
+                    if let Ok(Some(inst)) = self.tcx.resolve_instance_raw(ParamEnvAnd{param_env, value: (method_id, substs)})
+                    {
+                        let res_def_id = inst.def_id();
+                        self.static_calls.insert(Call {
+                            call_expr: hir_id,
+                            call_expr_span: expr.span,
+                            caller: self.cur_fn,
+                            caller_span: None,
+                            callee: res_def_id,
+                            callee_span: Span::default(), // TODO: get the span of the method call
+                        });
+                    }
+                }
             },            
             rustc_hir::ExprKind::MethodCall(_, _, _, _) => {
                 let o_def_id = hir_id.owner;
@@ -137,7 +158,6 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
                 if let Ok(Some(inst)) =
                     // self.tcx.resolve_instance(ParamEnvAnd{param_env, value: (method_id, substs)})
                     self.tcx.resolve_instance_raw(ParamEnvAnd{param_env, value: (method_id, substs)}) // For nightly-2024-08-07
-                    
                 {
                     let res_def_id = inst.def_id();
                     let node = self.tcx.hir().get_if_local(res_def_id);
@@ -171,40 +191,58 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
                     };
                 }
             },
-            rustc_hir::ExprKind::Path(ref qpath) => {
-                if let rustc_hir::QPath::Resolved(_, p) = qpath {
-                    if let rustc_hir::def::Res::Def(_, def_id) = p.res {
-                        if let Some(local_def_id) = def_id.as_local() {
-                            // We got the node corresponding to the definition
-                            let node = self.tcx.hir_node_by_def_id(local_def_id);
-                            if let rustc_hir::Node::Item(
-                                    rustc_hir::Item{kind, span, ..}) = node {
-                                match kind {
-                                    rustc_hir::ItemKind::Fn(..) => {
-                                        // Do nothing - we don't want functions
-                                    },
-                                    _ => {
-                                        // If the definition is outside the current function
-                                        if let Some(cur_fn_def_id) = self.cur_fn {
-                                            if !self.tcx.is_descendant_of(def_id, cur_fn_def_id) {
-                                                self.globals.insert(def_id, *span);
-                                                // Add it to the globals for this function
-                                                if let Some(func) = self.functions.get_mut(&cur_fn_def_id) {
-                                                    func.globals.insert(def_id, *span);
-                                                }        
-                                            }
-                                        }
-                                    },
-                                }
-                            }
-                        }
-                    }
-                }
-            },
             _ => {}
         }
         // traverse
         intravisit::walk_expr(self, expr);
+    }
+
+    fn visit_qpath(&mut self, qpath: &'tcx rustc_hir::QPath<'tcx>, id: HirId, _span: Span) {
+        skip_generated_code!(qpath.span());
+
+        let cur_fn_name: String = self.cur_fn.
+                                and_then(|def_id| Some(self.tcx.item_name(def_id).to_string())).
+                                unwrap_or_else(|| "<unknown>".to_string());
+        
+        if let rustc_hir::QPath::Resolved(_, path) = qpath {
+            if let rustc_hir::def::Res::Def(def_kind, def_id) = path.res {
+                if let Some(node) = self.tcx.hir().get_if_local(def_id) {
+                    match node {
+                        Node::Item(rustc_hir::Item{span, ..}) |
+                                Node::ForeignItem(rustc_hir::ForeignItem{span, ..}) => {
+                            match def_kind {
+                                rustc_hir::def::DefKind::Struct |
+                                rustc_hir::def::DefKind::Union |
+                                rustc_hir::def::DefKind::Enum | 
+                                rustc_hir::def::DefKind::ForeignTy => {
+                                    self.structs.insert(def_id, *span);
+                                    // Add it to the structs for this function
+                                    if let Some(cur_fn_def_id) = self.cur_fn {
+                                        if let Some(func) = self.functions.get_mut(&cur_fn_def_id) {
+                                            func.structs.insert(def_id, *span);
+                                        }
+                                    }
+                                },
+                                rustc_hir::def::DefKind::Static{..} |
+                                rustc_hir::def::DefKind::Const => {
+                                    self.globals.insert(def_id, *span);
+                                    // Add it to the globals for this function
+                                    if let Some(cur_fn_def_id) = self.cur_fn {
+                                        if let Some(func) = self.functions.get_mut(&cur_fn_def_id) {
+                                            func.globals.insert(def_id, *span);
+                                        }
+                                    }
+                                },
+                                _ => {}
+                            }
+                        },
+                        _ => {}
+                    }
+                }
+            }
+        }
+        // traverse
+        intravisit::walk_qpath(self, qpath, id);
     }
 
     fn visit_item(&mut self, item: &'tcx rustc_hir::Item) {
@@ -280,8 +318,6 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
                 self.method_impls.entry(def_id).or_default().push(def_id);
 
                 push_walk_pop!(self, def_id, intravisit::walk_trait_item(self, ti));
-
-                return;
             }
             _ => {}
         }
@@ -356,7 +392,6 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
                 // foreign types
                 self.structs.insert(def_id, fi.span);
             },
-            _ => {}
         }
 
         // traverse

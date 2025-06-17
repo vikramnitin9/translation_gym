@@ -28,6 +28,7 @@ class DefaultOrchestrator(Orchestrator):
 
     def __init__(self, logger):
         self.logger = logger
+        self.translation_map = {}
 
     def update_state(self, unit, translation):
         """
@@ -35,115 +36,147 @@ class DefaultOrchestrator(Orchestrator):
         :param unit: The translation unit
         :param translation: The translation result
         """
-        self.static_analysis_results = self.source_manager.get_static_analysis_results()
+        self.source_static_analysis = self.source_manager.get_static_analysis_results()
+        self.target_static_analysis = self.target_manager.get_static_analysis_results()
+        self.rebuild_dependency_graph()
 
-    def attach_dependencies(self, unit, source_manager, target_manager, instrumentation_results=None):
-        # We first need to compile the source to get the most up-to-date static library
-        source_manager.compile()
-        # Then we get the Rust static analysis results
-        rust_static_analysis = target_manager.get_static_analysis_results()
+        # Right now we use fixed naming conventions to create this map,
+        # assuming that the translator follows the same conventions.
+        # But to make it more robust, we might want to detect the name from `translation`.
+        if unit['type'] in ['functions', 'structs']:
+            self.translation_map[unit['name']] = unit['name'] + "_rust"
+        elif unit['type'] == 'globals':
+            self.translation_map[unit['name']] = f"{''.join([s.capitalize() for s in unit['name'].split('_')])}Wrapper"
+        else:
+            raise ValueError(f"Unknown unit type: {unit['type']}")
+    
+    def __lookup_unit(self, unit_name, unit_type, language):
+        """
+        Look up a unit in the static analysis results.
+        :param unit_name: The name of the unit
+        :param unit_type: The type of the unit (functions, structs, globals)
+        :return: The unit if found, None otherwise
+        """
+        if language == 'source':
+            units = [res for res in self.source_static_analysis[unit_type] if res['name'] == unit_name]
+        elif language == 'target':
+            units = [res for res in self.target_static_analysis[unit_type] if res['name'] == unit_name]
+        else:
+            raise ValueError("Invalid language specified")
+        
+        if len(units) == 0:
+            return None
+        if len(units) > 1:
+            self.logger.log_failure(f"Multiple units found for {unit_name} of type {unit_type} in {language}.")
+            
+        return units[0]
 
-        source = source_manager.extract_source(unit)
+    def get_attributes(self, unit_name):
+        """
+        Get the attributes of a source unit from the static analysis results.
+        Note: This method assumes that the static analysis results are up to date.
+        `get_static_analysis_results` should be called before this method.
+        """
+
+        unit_type = self.dep_graph.nodes[unit_name]['type']
+        unit = self.__lookup_unit(unit_name, unit_type, 'source') # Look it up in 'source' specifically
+        if not unit:
+            return None
+        unit['type'] = unit_type
+
+        source = self.source_manager.extract_source(unit)
         unit['source'] = source
 
-        # Now we need to get the imports that are already in the Rust file
-        insertion_file = target_manager.get_insertion_file(unit)
-        code_dir = target_manager.get_code_dir()
-        file_candidates = [file for file in rust_static_analysis['files'] if compare_fnames(file['filename'], insertion_file, code_dir)]
+        # Now we get the imports that are already in the Rust file
+        insertion_file = self.target_manager.get_insertion_file(unit)
+        code_dir = self.target_manager.get_code_dir()
+        file_candidates = [file for file in self.target_static_analysis['files'] if compare_fnames(file['filename'], insertion_file, code_dir)]
         if len(file_candidates) == 1:
             unit['imports'] = [imp['source'] for imp in file_candidates[0]['imports']]
         else:
             unit['imports'] = []
         
+        # For translating globals, we need the binding information while performing translation
         if unit['type'] == 'globals':
-            rust_ffi_bindings = [g for g in rust_static_analysis['globals'] if g['name'] == unit['name']]
-            if len(rust_ffi_bindings) != 0: 
-                assert len(rust_ffi_bindings) == 1
-                source = target_manager.extract_source(rust_ffi_bindings[0])
-                unit['binding'] = source
+            binding = self.__lookup_unit(unit['name'], 'globals', 'target')
+            if binding is not None:
+                unit['binding'] = self.target_manager.extract_source(binding)
 
+        # The remaining steps are only relevant for functions
         if unit['type'] != 'functions':
-            return
-
-        if (unit['type'] == "functions") and (instrumentation_results is not None):
-            instrumentation_logs = [log for log in instrumentation_results if log['name'] == unit['name']]
-            if len(instrumentation_logs) != 0:
-                unit['instrumentation'] = {'args': instrumentation_logs[0]['args'],
-                                           'return': instrumentation_logs[0]['return']}
-
-        # This is the part where we collect info about the called functions.
-        for i, called_func in enumerate(unit['calledFunctions']):
-            translated_rust_fns = [f for f in rust_static_analysis['functions'] if f['name'] == (called_func['name'] + "_rust")]
-            if len(translated_rust_fns) != 0:
-                assert len(translated_rust_fns) == 1
-                unit['calledFunctions'][i]['translated'] = translated_rust_fns[0]['signature']
-
-            rust_ffi_bindings = [f for f in rust_static_analysis['functions'] if f['name'] == called_func['name']]
-            if len(rust_ffi_bindings) != 0:
-                assert len(rust_ffi_bindings) == 1
-                unit['calledFunctions'][i]['binding'] = rust_ffi_bindings[0]['signature']
-
-        # Now we get information about the globals and structs
-        for i, struct in enumerate(unit['structs']):
-            translated_rust_structs = [s for s in rust_static_analysis['structs'] if s['name'] == (struct['name'] + "_rust")]
-            if len(translated_rust_structs) != 0:
-                assert len(translated_rust_structs) == 1
-                source = target_manager.extract_source(translated_rust_structs[0])
-                unit['structs'][i]['translated'] = source
-            
-            rust_ffi_bindings = [s for s in rust_static_analysis['structs'] if s['name'] == struct['name']]
-            if len(rust_ffi_bindings) != 0:
-                assert len(rust_ffi_bindings) == 1
-                source = target_manager.extract_source(rust_ffi_bindings[0])
-                unit['structs'][i]['binding'] = source
+            return unit
         
-        for i, glob in enumerate(unit['globals']):
-            rust_ffi_bindings = [g for g in rust_static_analysis['globals'] if g['name'] == glob['name']]
-            if len(rust_ffi_bindings) != 0: 
-                assert len(rust_ffi_bindings) == 1
-                source = target_manager.extract_source(rust_ffi_bindings[0])
-                unit['globals'][i]['binding'] = source
-            
-            wrapper_name = f"{''.join([s.capitalize() for s in glob['name'].split('_')])}Wrapper"
-            rust_wrapper = [g for g in rust_static_analysis['structs'] if g['name'] == wrapper_name]
-            if len(rust_wrapper) != 0:
-                assert len(rust_wrapper) == 1
-                source = target_manager.extract_source(rust_wrapper[0])
-                unit['globals'][i]['wrapper'] = source
+        # Reset all the attributes that we will fill in later
+        unit['functions'], unit['structs'], unit['globals'] = [], [], []
+        
+        # Get all the neighboring nodes in the dependency graph
+        for dep_name in self.dep_graph.neighbors(unit_name):
+            dep = self.dep_graph.nodes[dep_name]
+            dep_info = {'name': dep_name}
+            # If the dependency is in the source language, look for a binding to it from the target language
+            if dep['language'] == 'source':
+                binding = self.__lookup_unit(dep_name, dep['type'], 'target')
+                if binding is not None and binding['foreign']:
+                    dep_info['binding'] = self.target_manager.extract_source(binding)
+            # Now look for a translated version of the dependency (irrespective of which language it is in)
+            if dep_name in self.translation_map:
+                translated_name = self.translation_map[dep_name]
+                if dep['type'] == 'globals':
+                    # Globals get translated to a wrapper struct in Rust
+                    translated_unit = self.__lookup_unit(translated_name, 'structs', 'target')
+                else:
+                    translated_unit = self.__lookup_unit(translated_name, dep['type'], 'target')
+                if translated_unit is not None:
+                    if dep['type'] == 'functions':
+                        # For functions, we only extract the signature for conciseness
+                        dep_info['translated'] = translated_unit['signature']
+                    else:
+                        # For structs and globals, we extract the full source code
+                        dep_info['translated'] = self.target_manager.extract_source(translated_unit)
+            unit[dep['type']].append(dep_info)
+        
+        return unit
+    
+    def rebuild_dependency_graph(self):
+        """
+        Rebuild the dependency graph based on the static analysis results of the source and target code.
+        Note: This method assumes that the static analysis results are up to date.
+        `get_static_analysis_results` should be called before this method.
+        """
 
+        self.dep_graph = nx.DiGraph()
+        
+        for unit_type in ['functions', 'structs', 'globals']:
+            for unit in self.source_static_analysis[unit_type]:
+                self.dep_graph.add_node(unit['name'], type=unit_type, language='source')
+
+        for unit_type in ['functions', 'structs', 'globals']:
+            for unit in self.target_static_analysis[unit_type]:
+                # Skip foreign units, as they represent bindings to the source language
+                if unit['foreign']:
+                    continue
+                self.dep_graph.add_node(unit['name'], type=unit_type, language='target')
+
+        for func in self.source_static_analysis['functions'] + self.target_static_analysis['functions']:
+            qname = func['name']
+            for dep_type in ['functions', 'globals', 'structs']:
+                for dep in func[dep_type]:
+                    qdep = dep['name']
+                    if qdep in self.dep_graph:
+                        self.dep_graph.add_edge(qname, qdep)
 
     def unit_iter(self, source_manager, target_manager, instrumentation_results=None):
         self.source_manager = source_manager
         self.target_manager = target_manager
 
-        self.static_analysis_results = self.source_manager.get_static_analysis_results()
-        dep_graph = nx.DiGraph()
+        self.source_static_analysis = self.source_manager.get_static_analysis_results()
+        self.target_static_analysis = self.target_manager.get_static_analysis_results()
 
-        for func in self.static_analysis_results['functions']:
-            qname = func['name']
-            dep_graph.add_node(qname, type='functions')
-
-            # 1) function → callees
-            for callee in func['calledFunctions']:
-                qcallee = callee['name']
-                dep_graph.add_node(qcallee, type='functions')
-                dep_graph.add_edge(qname, qcallee)
-
-            # 2) function → globals 
-            for glob in func['globals']:
-                qglob = glob['name']
-                dep_graph.add_node(qglob, type='globals')
-                dep_graph.add_edge(qname, qglob)
-
-             # 3) function → structs
-            for st in func['structs']:
-                qstruct = st['name']
-                dep_graph.add_node(qstruct, type='structs')
-                dep_graph.add_edge(qname, qstruct)
+        self.rebuild_dependency_graph()
 
         # We only want to translate functions that are reachable from main
-        reachable_q = nx.descendants(dep_graph, 'main_0') | {'main_0'}
-        subgraph   = dep_graph.subgraph(reachable_q)
+        reachable_q = nx.descendants(self.dep_graph, 'main_0') | {'main_0'}
+        subgraph   = self.dep_graph.subgraph(reachable_q)
 
         components = nx.weakly_connected_components(subgraph)
         assert len(list(components)) == 1
@@ -154,30 +187,20 @@ class DefaultOrchestrator(Orchestrator):
             unit_ordering = list(nx.dfs_postorder_nodes(subgraph, source='main_0'))
         
         for unit_name in unit_ordering:
-            unit_type = subgraph.nodes[unit_name]['type']
-            units = [res for res in self.static_analysis_results[unit_type] if res['name'] == unit_name]
-            if len(units) == 0:
+            # The translator will call `update_state` if the translation is successful,
+            # which gets the latest static analysis results and rebuilds the dependency graph.
+            # So at this point, we can safely assume that the static analysis and graph are up to date.
+            unit = self.get_attributes(unit_name)
+            if not unit:
                 continue
-            unit = units[0]
-            unit['type'] = unit_type
-            self.attach_dependencies(unit, source_manager, target_manager, instrumentation_results)
-            if unit_type == "functions" and instrumentation_results is not None and 'instrumentation' not in unit:
-                # Include only covered functions
-                continue
+            if unit['type'] == "functions":
+                if instrumentation_results is not None:
+                    instrumentation_logs = [log for log in instrumentation_results if log['name'] == unit['name']]
+                    if len(instrumentation_logs) != 0:
+                        unit['instrumentation'] = {'args': instrumentation_logs[0]['args'],
+                                                   'return': instrumentation_logs[0]['return']}
+                else:
+                    # Include only covered functions
+                    continue
+
             yield unit
-
-
-    def _dump_graph(self, graph, title="Dependency Graph"):
-        """
-        Dump all nodes and edges (with attributes) of a NetworkX graph.
-        """
-        print(f"\n{title}:")
-        print("  Nodes:")
-        for n in graph.nodes():
-            print(f"    {n}")
-        print("  Edges:")
-        for u, v, data in graph.edges(data=True):
-            # data is a dict of edge‐attributes, e.g. passed_structs
-            attrs = ", ".join(f"{k}={v!r}" for k, v in data.items())
-            print(f"    {u} -> {v}" + (f"  [{attrs}]" if attrs else ""))
-        print("-" * 40)

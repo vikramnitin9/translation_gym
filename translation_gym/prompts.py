@@ -10,18 +10,18 @@ def construct_prompt_for_func(func):
     :param func: The function to be translated
     {'source': 'C function body',
      'name': 'function name',
-     'calledFunctions': [{'name': 'called function name',
+     'functions': [{'name': 'called function name',
                           'binding': 'Signature of Rust FFI binding',
                           'translated': 'Signature of translated version of function'}],
      'imports': ['import1', 'import2']}
     :return: The prompt string
     """
 
-    if len(func['calledFunctions']) == 0:
+    if len(func['functions']) == 0:
         calledFunctionDesc = ""
     else:
         calledFunctionDesc = "This function calls the following functions:\n"
-    for i, called_func in enumerate(func['calledFunctions']):
+    for i, called_func in enumerate(func['functions']):
         if 'translated' in called_func:
             calledFunctionDesc += f"{i+1}. {called_func['name']}. This has a Rust reimplementation, with this signature:\n"
             calledFunctionDesc += f"```rust\n{called_func['translated']}\n```\n"
@@ -52,15 +52,19 @@ def construct_prompt_for_func(func):
     else:
         globalDesc = "This function uses the following global variables:\n"
     for i, glob in enumerate(func['globals']):
-        if 'wrapper' in glob and 'binding' in glob:
+        if 'translated' in glob and 'binding' in glob:
             globalDesc += f"{i+1}. {glob['name']}. This can be replaced by an object of this struct:\n"
-            globalDesc += f"```rust\n{glob['wrapper']}\n```\n"
+            globalDesc += f"```rust\n{glob['translated']}\n```\n"
             globalDesc += "This struct has `get` and `set` methods to interact with the field.\n"
             globalDesc += "The struct also has a `new` method that creates a new instance of the struct with a provided value.\n"
             globalDesc += "The translated function should take an object of this struct as an argument.\n"
             globalDesc += f"For inter-compatibility with the C code, there is also a Rust FFI binding to the C global, with this definition:\n"
             globalDesc += f"```rust\n{glob['binding']}\n```\n"
             globalDesc += "Note that you might need to use the `unsafe` keyword to access this binding.\n"
+        elif 'binding' in glob:
+            globalDesc += f"{i+1}. {glob['name']}. This is accessible through its Rust FFI binding to C, with this declaration:\n"
+            globalDesc += f"```rust\n{glob['binding']}\n```\n"
+            globalDesc += "Note that you will need to use the `unsafe` keyword to access this binding.\n"
         
         globalWrapperDesc = "The wrapper function should also take care of passing the structures corresponding to global variables, as arguments to the translated function.\n"
         globalWrapperDesc += "It should use `unsafe` code to read the FFI binding of each global variable, convert these to idiomatic types,"

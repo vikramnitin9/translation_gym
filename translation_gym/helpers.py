@@ -12,6 +12,8 @@ import docker
 import socket
 import pathlib
 import time
+import itertools
+import pydot
 
 def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
 def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
@@ -73,6 +75,21 @@ class Logger:
             prLightGray(output)
         with open(self.output_file, 'a') as f:
             f.write(f"{output}\n")
+    
+    def dump_graph(self, graph: nx.Graph):
+        graph = graph.copy()
+        colour_map = {'source': '#FFF2CC', 'target': '#D5E8D4'}
+        shape_map = {'functions': 'ellipse', 'structs': 'box', 'globals': 'diamond'}
+        for node in graph.nodes:
+            graph.nodes[node]['fillcolor'] = colour_map.get(graph.nodes[node]['language'], 'white')
+            graph.nodes[node]['style'] = 'filled'
+            graph.nodes[node]['shape'] = shape_map.get(graph.nodes[node]['type'], 'ellipse')
+        nx.drawing.nx_pydot.write_dot(graph, Path(self.output_dir, 'graph.dot'))
+        try:
+            run('dot -Tpdf {} -o {}'.format(Path(self.output_dir, 'graph.dot'), Path(self.output_dir, 'graph.pdf')))
+        except:
+            prRed('Warning - failed to generate callgraph PDF')
+            pass
     
 
 def run(command, timeout=120, logger=None):

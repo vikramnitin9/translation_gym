@@ -163,6 +163,10 @@ class RustTargetManager(TargetManager):
         with open(fpath, 'r') as f:
             lines = f.readlines()
         
+        if start_line == end_line:
+            # If the start and end lines are the same, just return that line
+            return lines[start_line-1][start_col-1:end_col]
+        # If the start and end lines are different, we need to concatenate the lines
         source = lines[start_line-1][start_col-1:]
         for i in range(start_line, end_line-1):
             source += lines[i]
