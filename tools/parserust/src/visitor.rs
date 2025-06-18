@@ -105,7 +105,8 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
     }
 
     fn visit_expr(&mut self, expr: &'tcx rustc_hir::Expr) {
-        skip_generated_code!(expr.span);
+        // Don't do this - it skips macros like println!
+        // skip_generated_code!(expr.span);
 
         let hir_id = expr.hir_id;
         match expr.kind {

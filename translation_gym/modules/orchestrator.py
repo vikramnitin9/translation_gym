@@ -164,6 +164,7 @@ class DefaultOrchestrator(Orchestrator):
                     qdep = dep['name']
                     if qdep in self.dep_graph:
                         self.dep_graph.add_edge(qname, qdep)
+        import pdb; pdb.set_trace()
 
     def unit_iter(self, source_manager, target_manager, instrumentation_results=None):
         self.source_manager = source_manager
