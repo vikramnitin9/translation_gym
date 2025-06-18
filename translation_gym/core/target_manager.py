@@ -55,6 +55,7 @@ class RustTargetManager(TargetManager):
         self.last_compile_time = 0
         self.static_analysis_results = None
         self.logger = logger
+        self.modified = True
 
     def get_code_dir(self):
         return self.code_dir
@@ -65,6 +66,7 @@ class RustTargetManager(TargetManager):
         if self.bindgen_blocklist.exists():
             self.bindgen_blocklist.unlink()
         self.bindgen_blocklist.touch()
+        self.modified = True
 
     def set_target_name(self, target):
         cargo_toml_path = Path(self.code_dir, 'Cargo.toml')
@@ -92,8 +94,6 @@ class RustTargetManager(TargetManager):
         self.cargo_bin_target = target
 
     def get_static_analysis_results(self):
-        # Just re-run compilation. It's possible to figure it out from the last compile time
-        # but it is not reliable
         self.compile()
         analysis_json_path = Path(self.code_dir)/'analysis.json'
         self.static_analysis_results = json.load(open(analysis_json_path, 'r'))
@@ -123,6 +123,7 @@ class RustTargetManager(TargetManager):
 
         with open(fpath, 'w') as f:
             f.write(new_contents)
+        self.modified = True
 
     def get_executable(self):
         # The executable is created by `cargo parse`, 
@@ -140,6 +141,8 @@ class RustTargetManager(TargetManager):
         return self.instrumentation_dir
     
     def compile(self, timeout=60):
+        if not self.modified:
+            return
         cwd = os.getcwd()
         cmd = 'cd {} && RUSTFLAGS="-Awarnings" C_BUILD_PATH="{}" cargo parse'.format(self.code_dir, self.src_build_path)
         try:
@@ -149,6 +152,7 @@ class RustTargetManager(TargetManager):
             raise CompileException(e)
         finally:
             os.chdir(cwd)
+            self.modified = False
     
     def extract_source(self, unit):
         if not Path(unit['filename']).is_absolute():
@@ -208,6 +212,8 @@ class RustTargetManager(TargetManager):
         except:
             self.logger.log_failure("Rustfmt failed. There may be a syntax error in the generated code.")
 
+        self.modified = True
+
     def insert_translation(self, unit, translation):
 
         if unit['type'] == 'functions':
@@ -221,6 +227,7 @@ class RustTargetManager(TargetManager):
 
         # Insert the translation at the bottom
         insertion_file.write_text(contents + '\n' + translation)
+        self.modified = True
 
     def get_insertion_file(self, func):
         # Get the file where the function will be inserted
@@ -250,6 +257,7 @@ class RustTargetManager(TargetManager):
                 shutil.copy(file.with_suffix('.old'), file)
             else:
                 raise FileNotFoundError(f"File {file.with_suffix('.old')} does not exist. Cannot reset unit {unit['name']}.")
+        self.modified = True
 
     def cleanup(self):
         cwd = os.getcwd()
@@ -276,4 +284,6 @@ class RustTargetManager(TargetManager):
                 run(cmd)
             except RunException as e:
                 self.logger.log_failure(f"Failed to fully cleanup {self.code_dir}")
-        os.chdir(cwd)
+        finally:
+            os.chdir(cwd)
+            self.modified = True

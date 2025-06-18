@@ -5,7 +5,7 @@ extern crate glob;
 use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
-use std::process::Command;
+// use std::process::Command;
 // use glob::glob;
 
 use bindgen::callbacks::{ParseCallbacks, ItemInfo, ItemKind};
@@ -68,7 +68,7 @@ fn main() {
         panic!("No .c files found in compile_commands.json");
     }
 
-    let mut main_file: Option<String> = None;
+    // let mut main_file: Option<String> = None;
     let mut main_num_args: i32 = 0;
 
     // Read c_build_path/analysis.json to find the function main_0
@@ -85,12 +85,12 @@ fn main() {
         let function = function.as_object().expect("Expected an object");
         let name = function.get("name").expect("Expected a name").as_str().expect("Expected a string");
         if name == "main_0" {
-            let main_file_name = function.get("filename").expect("Expected a filename").as_str().expect("Expected a string");
-            main_file = if Path::new(main_file_name).is_absolute() {
-                Some(PathBuf::from(main_file_name).to_str().unwrap().to_string())
-            } else {
-                Some(Path::new(&c_build_path).join(main_file_name).to_str().unwrap().to_string())
-            };
+            // let main_file_name = function.get("filename").expect("Expected a filename").as_str().expect("Expected a string");
+            // main_file = if Path::new(main_file_name).is_absolute() {
+            //     Some(PathBuf::from(main_file_name).to_str().unwrap().to_string())
+            // } else {
+            //     Some(Path::new(&c_build_path).join(main_file_name).to_str().unwrap().to_string())
+            // };
             main_num_args = function.get("num_args").expect("Expected a num_args").as_i64().expect("Expected an integer") as i32;
         }
     }
@@ -107,18 +107,25 @@ fn main() {
         .generate_inline_functions(true)
         .parse_callbacks(Box::new(Renamer)); // Need to rename main as main_0
 
-    if main_file.is_some() {
-        // Add the main file to the builder
-        // Assuming that the main file includes all the relevant header files
-        bindings = bindings.header(main_file.unwrap());
-    }
-    else {
-        // If we couldn't find a file with `main`, add all the source files to the builder
-        // Assuming that the source files include all the relevant header files
-        bindings = source_paths.iter().fold(bindings, |bindings, file_path| {
+    bindings = source_paths.iter().fold(bindings, |bindings, file_path| {
             bindings.header(file_path.to_str().unwrap())
         });
-    }
+    
+    // // This logic is causing problems when the main function is moved from C into Rust.
+    // // The header files change suddenly, which sometimes causes incompatibilities with previously generated Rust code.
+    // // So we will just add all source files to the builder.
+    // if main_file.is_some() {
+    //     // Add the main file to the builder
+    //     // Assuming that the main file includes all the relevant header files
+    //     bindings = bindings.header(main_file.unwrap());
+    // }
+    // else {
+    //     // If we couldn't find a file with `main`, add all the source files to the builder
+    //     // Assuming that the source files include all the relevant header files
+    //     bindings = source_paths.iter().fold(bindings, |bindings, file_path| {
+    //         bindings.header(file_path.to_str().unwrap())
+    //     });
+    // }
     // Also for each entry in compile_commands, read the "arguments" list and look for "-I.."
     // and add them to the builder
     let mut include_paths = Vec::new();
