@@ -192,6 +192,7 @@ class DefaultOrchestrator(Orchestrator):
                         if not self.dep_graph.has_edge(f, g):
                             self.dep_graph.add_edge(f, g)
                             new_edge_added = True
+        self.logger.dump_graph(self.dep_graph)
 
                         
 
