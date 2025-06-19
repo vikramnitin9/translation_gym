@@ -170,7 +170,7 @@ class DefaultOrchestrator(Orchestrator):
                     qdep = dep['name']
                     if qdep in self.dep_graph:
                         self.dep_graph.add_edge(qname, qdep)
-
+                        
 
     def unit_iter(self, instrumentation_results=None):
         self.source_static_analysis = self.source_manager.get_static_analysis_results()
@@ -205,12 +205,16 @@ class DefaultOrchestrator(Orchestrator):
                 else:
                     # Include only covered functions
                     continue
-
             yield unit
-
+    
     def prune(self, validator: Validator, test_manager: TestManager):
         
         self.logger.log_status("Pruning dependency graph...")
+
+        # First, handle global variables. For each "wrapper" struct in the target code that
+        # we created, ask an LLM to rewrite it to use its internal `val` field instead of
+        # accessing the global variable binding to the source language.
+        # TODO: Implement this logic
 
         self.source_static_analysis = self.source_manager.get_static_analysis_results()
         self.target_static_analysis = self.target_manager.get_static_analysis_results()
@@ -250,4 +254,3 @@ class DefaultOrchestrator(Orchestrator):
             self.source_static_analysis = self.source_manager.get_static_analysis_results()
             self.target_static_analysis = self.target_manager.get_static_analysis_results()
             self.rebuild_dependency_graph()
-            

@@ -65,6 +65,30 @@ pub fn compile_time_sysroot() -> Option<String> {
     })
 }
 
+pub fn get_fn_name(def_id: rustc_hir::def_id::DefId,
+                   impl_id: Option<rustc_hir::def_id::DefId>,
+                   tcx: TyCtxt<'_>) -> String {
+    // Get the function name from the DefId
+    let fn_name = tcx.item_name(def_id).to_string();
+    let fn_name = if fn_name.is_empty() {
+        // If the name is empty, "<unknown>"
+        "<unknown>".to_string()
+    } else {
+        fn_name
+    };
+    // If the function is in an impl, prepend the impl name
+    if let Some(impl_id) = impl_id {
+        let impl_name = tcx.opt_item_name(impl_id);
+        if let Some(impl_name) = impl_name {
+            format!("{}::{}", impl_name.to_string(), fn_name)
+        } else {
+            fn_name
+        }
+    } else {
+        fn_name
+    }
+}
+
 pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
 
     let mut visitor = visitor::CallgraphVisitor::new(&tcx);
@@ -101,7 +125,7 @@ pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
         let ((fname, start_line, start_col), (_, end_line, end_col)) = span_to_data(tcx, &func_info.span);
 
         let mut this_func_json = json!({
-            "name": tcx.item_name(*func_defid).to_string(),
+            "name": get_fn_name(*func_defid, func_info.impl_id, tcx),
             "filename": fname,
             "signature": span_to_string(tcx, &func_info.sig_span),
             "startLine": start_line,
@@ -117,8 +141,13 @@ pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
         // Get all functions called by this function
         for call in visitor.static_calls.iter().chain(visitor.dynamic_calls.iter()) {
             if call.caller == Some(*func_defid) {
+                let impl_id = if let Some(callee_info) = visitor.functions.get(&call.callee) {
+                    callee_info.impl_id
+                } else {
+                    None
+                };
                 let call_json = json!({
-                    "name": tcx.item_name(call.callee).to_string(),
+                    "name": get_fn_name(call.callee, impl_id, tcx),
                 });
                 this_func_json["functions"].as_array_mut().unwrap().push(call_json);
             }

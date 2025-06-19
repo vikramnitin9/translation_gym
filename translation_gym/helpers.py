@@ -84,6 +84,8 @@ class Logger:
             graph.nodes[node]['fillcolor'] = colour_map.get(graph.nodes[node]['language'], 'white')
             graph.nodes[node]['style'] = 'filled'
             graph.nodes[node]['shape'] = shape_map.get(graph.nodes[node]['type'], 'ellipse')
+        remapping = {key: f"\"{key}\""for key in list(graph.nodes)} # Ensure node names are quoted for pydot compatibility
+        graph = nx.relabel_nodes(graph, remapping)
         nx.drawing.nx_pydot.write_dot(graph, Path(self.output_dir, 'graph.dot'))
         try:
             run('dot -Tpdf {} -o {}'.format(Path(self.output_dir, 'graph.dot'), Path(self.output_dir, 'graph.pdf')))

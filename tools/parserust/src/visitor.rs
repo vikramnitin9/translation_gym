@@ -48,6 +48,7 @@ pub struct FnInfo {
     pub foreign: bool,
     pub globals: HashMap<DefId, Span>,
     pub structs: HashMap<DefId, Span>,
+    pub impl_id: Option<DefId>, // the impl id if this is a method
 }
 
 pub struct CallgraphVisitor<'tcx> {
@@ -266,7 +267,7 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
         match item.kind {
             rustc_hir::ItemKind::Fn(fn_sig, _, _) => {
                 let def_id = hir_id.owner.to_def_id();
-                self.functions.insert(def_id, FnInfo{span: item.span, sig_span: fn_sig.span, foreign: false, globals: HashMap::new(), structs: HashMap::new()});
+                self.functions.insert(def_id, FnInfo{span: item.span, sig_span: fn_sig.span, foreign: false, globals: HashMap::new(), structs: HashMap::new(), impl_id: None});
                 push_walk_pop!(self, def_id, intravisit::walk_item(self, item));
                 return;
             },
@@ -315,7 +316,7 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
             rustc_hir::TraitItemKind::Fn(fn_sig, rustc_hir::TraitFn::Provided(_)) => {
                 // a method decl and def
                 self.method_decls.insert(def_id);
-                self.functions.insert(def_id, FnInfo{span: ti.span, sig_span: fn_sig.span, foreign: false, globals: HashMap::new(), structs: HashMap::new()});
+                self.functions.insert(def_id, FnInfo{span: ti.span, sig_span: fn_sig.span, foreign: false, globals: HashMap::new(), structs: HashMap::new(), impl_id: None});
                 self.method_impls.entry(def_id).or_default().push(def_id);
 
                 push_walk_pop!(self, def_id, intravisit::walk_trait_item(self, ti));
@@ -334,34 +335,21 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
         let def_id = hir_id.owner.to_def_id();
 
         if let rustc_hir::ImplItemKind::Fn(fn_sig, _) = ii.kind {
-            self.functions.insert(def_id, FnInfo{span: ii.span, sig_span: fn_sig.span, foreign: false, globals: HashMap::new(), structs: HashMap::new()});
-
             // store link to decl
             let mut decl_id = None;
             if let Some(impl_id) = self.tcx.impl_of_method(def_id) {
                 if let Some(Node::Item(item)) = self.tcx.hir().get_if_local(impl_id) {
-                    if let rustc_hir::ItemKind::Impl(..) = item.kind {
-                        // the next one filters methods that are just associated
-                        // and do not belong to a struct
-                        if let Some(trait_def_id) = self.tcx.trait_id_of_impl(impl_id) {
-                            let item = self.tcx
-                                .associated_items(trait_def_id)
-                                .filter_by_name_unhygienic(ii.ident.name)
-                                .next(); // There should ideally be only one item matching the name
-                            if let Some(item) = item {
-                                decl_id = Some(item.def_id);
-                            };
+                    if let rustc_hir::ItemKind::Impl(rustc_hir::Impl{self_ty, ..}) = item.kind {
+                        if let rustc_hir::TyKind::Path(rustc_hir::QPath::Resolved(_, path)) = self_ty.kind {
+                            if let rustc_hir::def::Res::Def(_, impl_def_id) = path.res {
+                                decl_id = Some(impl_def_id);
+                            }
                         }
                     }
                 }
             }
 
-            if let Some(decl_def_id) = decl_id {
-                self.method_impls
-                    .entry(decl_def_id)
-                    .or_default()
-                    .push(def_id);
-            }
+            self.functions.insert(def_id, FnInfo{span: ii.span, sig_span: fn_sig.span, foreign: false, globals: HashMap::new(), structs: HashMap::new(), impl_id: decl_id});
 
             push_walk_pop!(self, def_id, intravisit::walk_impl_item(self, ii));
 
@@ -381,7 +369,7 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
         match fi.kind {
             rustc_hir::ForeignItemKind::Fn(..) => {
                 // The signature is the same as the function because there is no body
-                self.functions.insert(def_id, FnInfo{span: fi.span, sig_span: fi.span, foreign: true, globals: HashMap::new(), structs: HashMap::new()});
+                self.functions.insert(def_id, FnInfo{span: fi.span, sig_span: fi.span, foreign: true, globals: HashMap::new(), structs: HashMap::new(), impl_id: None});
                 push_walk_pop!(self, def_id, intravisit::walk_foreign_item(self, fi));
                 return;
             }

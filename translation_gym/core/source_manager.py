@@ -180,6 +180,7 @@ class CSourceManager(SourceManager):
             except CompileException:
                 self.logger.log_status(f"[fix_globals] REVERT {path}")
                 path.write_text(orig)
+                self.modified = True
             else:
                 self.logger.log_success(f"[fix_globals] OK {path}")
 
