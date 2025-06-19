@@ -170,6 +170,29 @@ class DefaultOrchestrator(Orchestrator):
                     qdep = dep['name']
                     if qdep in self.dep_graph:
                         self.dep_graph.add_edge(qname, qdep)
+        
+        
+        # Propagate global dependencies through the call graph ⏬
+        new_edge_added = True
+        while new_edge_added:
+            new_edge_added = False
+            for f in list(self.dep_graph.nodes):
+                if self.dep_graph.nodes[f]['type'] != 'functions':
+                    continue
+                callees = list(self.dep_graph.successors(f))  # Freeze here
+                for c in callees:
+                    if self.dep_graph.nodes[c]['type'] != 'functions':
+                        continue
+                    if c not in self.translation_map:
+                        continue
+                    globals_used_by_c = list(self.dep_graph.successors(c))  # Freeze here too
+                    for g in globals_used_by_c:
+                        if self.dep_graph.nodes[g]['type'] != 'globals':
+                            continue
+                        if not self.dep_graph.has_edge(f, g):
+                            self.dep_graph.add_edge(f, g)
+                            new_edge_added = True
+
                         
 
     def unit_iter(self, instrumentation_results=None):
