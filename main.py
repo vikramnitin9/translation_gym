@@ -28,14 +28,17 @@ if __name__ == '__main__':
 
     logger = Logger(args.output_dir, args, verbose=args.verbose)
 
-    orchestrator = DefaultOrchestrator(logger)
-    translator = DefaultTranslator(args.model, logger)
-    validator = DefaultValidator(compile_attempts=2, logger=logger) # In case compilation times out, how many times to retry
-
     engine = TranslationEngine(dataset=dataset,
                                output_dir=args.output_dir,
                                num_attempts=args.num_attempts,
                                logger=logger)
+    
+    source_manager = engine.get_source_manager()
+    target_manager = engine.get_target_manager()
+
+    orchestrator = DefaultOrchestrator(source_manager, target_manager, logger)
+    translator = DefaultTranslator(args.model, logger)
+    validator = DefaultValidator(compile_attempts=2, logger=logger) # In case compilation times out, how many times to retry
 
     engine.run(translator=translator,
                orchestrator=orchestrator,

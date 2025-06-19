@@ -177,6 +177,32 @@ class RustTargetManager(TargetManager):
         source += lines[end_line-1][:end_col]
         return source
 
+    def remove_unit(self, unit):
+        fpath = Path(os.path.join(self.code_dir, unit['filename']))
+        start_line = unit['startLine']
+        start_col = unit['startCol']
+        end_line = unit['endLine']
+        end_col = unit['endCol']
+
+        with open(fpath, 'r') as f:
+            lines = f.readlines()
+
+        new_lines = lines[:start_line-1]
+
+        if start_line == end_line:
+            # If the start and end lines are the same, just remove that line
+            new_lines.append(lines[start_line-1][:start_col-1] + lines[start_line-1][end_col:])
+        else:
+            new_lines.append(lines[start_line-1][:start_col-1])
+            new_lines.append(lines[end_line-1][end_col:])
+            
+        new_lines += lines[end_line:]
+
+        with open(fpath, 'w') as f:
+            f.write(''.join(new_lines))
+            
+        self.modified = True
+
     def insert_imports(self, unit, imports):
 
         insertion_file = self.get_insertion_file(unit)

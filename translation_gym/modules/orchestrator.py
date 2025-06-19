@@ -1,4 +1,6 @@
 from translation_gym.helpers import *
+from translation_gym.modules.validator import Validator
+from translation_gym.core.test_manager import TestManager
 
 class Orchestrator:
 
@@ -26,7 +28,9 @@ class Orchestrator:
 
 class DefaultOrchestrator(Orchestrator):
 
-    def __init__(self, logger):
+    def __init__(self, source_manager, target_manager, logger):
+        self.source_manager = source_manager
+        self.target_manager = target_manager
         self.logger = logger
         self.translation_map = {}
 
@@ -68,8 +72,11 @@ class DefaultOrchestrator(Orchestrator):
             return None
         if len(units) > 1:
             self.logger.log_failure(f"Multiple units found for {unit_name} of type {unit_type} in {language}.")
-            
-        return units[0]
+        
+        unit_to_return = units[0]
+        unit_to_return['type'] = unit_type
+
+        return unit_to_return
 
     def get_attributes(self, unit_name):
         """
@@ -82,7 +89,6 @@ class DefaultOrchestrator(Orchestrator):
         unit = self.__lookup_unit(unit_name, unit_type, 'source') # Look it up in 'source' specifically
         if not unit:
             return None
-        unit['type'] = unit_type
 
         source = self.source_manager.extract_source(unit)
         unit['source'] = source
@@ -164,12 +170,9 @@ class DefaultOrchestrator(Orchestrator):
                     qdep = dep['name']
                     if qdep in self.dep_graph:
                         self.dep_graph.add_edge(qname, qdep)
-        import pdb; pdb.set_trace()
 
-    def unit_iter(self, source_manager, target_manager, instrumentation_results=None):
-        self.source_manager = source_manager
-        self.target_manager = target_manager
 
+    def unit_iter(self, instrumentation_results=None):
         self.source_static_analysis = self.source_manager.get_static_analysis_results()
         self.target_static_analysis = self.target_manager.get_static_analysis_results()
 
@@ -194,14 +197,57 @@ class DefaultOrchestrator(Orchestrator):
             unit = self.get_attributes(unit_name)
             if not unit:
                 continue
-            if unit['type'] == "functions":
-                if instrumentation_results is not None:
-                    instrumentation_logs = [log for log in instrumentation_results if log['name'] == unit['name']]
-                    if len(instrumentation_logs) != 0:
-                        unit['instrumentation'] = {'args': instrumentation_logs[0]['args'],
-                                                   'return': instrumentation_logs[0]['return']}
+            if unit['type'] == "functions" and instrumentation_results is not None:
+                instrumentation_logs = [log for log in instrumentation_results if log['name'] == unit['name']]
+                if len(instrumentation_logs) != 0:
+                    unit['instrumentation'] = {'args': instrumentation_logs[0]['args'],
+                                                'return': instrumentation_logs[0]['return']}
                 else:
                     # Include only covered functions
                     continue
 
             yield unit
+
+    def prune(self, validator: Validator, test_manager: TestManager):
+        
+        self.logger.log_status("Pruning dependency graph...")
+
+        self.source_static_analysis = self.source_manager.get_static_analysis_results()
+        self.target_static_analysis = self.target_manager.get_static_analysis_results()
+        
+        graph_changed = True
+
+        while graph_changed:
+            graph_changed = False
+            # Find nodes with no incoming edges
+            nodes_to_remove = [node for node, in_degree in self.dep_graph.in_degree() if in_degree == 0]
+            for node in nodes_to_remove:
+                if node == "main":
+                    # Don't prune the main function!
+                    continue
+                unit_type = self.dep_graph.nodes[node]['type']
+                unit_lang = self.dep_graph.nodes[node]['language']
+                if unit_lang == 'source':
+                    continue # We don't prune source units
+                # If the unit has been changed in the previous iteration, we make sure to
+                # call get_static_analysis_results. So at this point, we can assume that the
+                # static analysis results are up to date.
+                unit = self.__lookup_unit(node, unit_type, unit_lang)
+                if unit is not None:
+                    self.logger.log_status(f"Removing unused unit: '{node}' of type '{unit_type}' in the {unit_lang} code.")
+                    self.target_manager.save_state(unit)
+                    self.target_manager.remove_unit(unit)
+                    result = validator.compile_and_test(self.source_manager, self.target_manager, test_manager)
+                    if not result['success']:
+                        self.logger.log_failure(f"Failed to compile after removing {unit['name']}: {result['message']}")
+                        self.target_manager.reset_unit(unit)
+                    else:
+                        self.logger.log_success(f"Successfully pruned {unit['name']}.")
+                        self.source_static_analysis = self.source_manager.get_static_analysis_results()
+                        self.target_static_analysis = self.target_manager.get_static_analysis_results()
+                        graph_changed = True
+            
+            self.source_static_analysis = self.source_manager.get_static_analysis_results()
+            self.target_static_analysis = self.target_manager.get_static_analysis_results()
+            self.rebuild_dependency_graph()
+            

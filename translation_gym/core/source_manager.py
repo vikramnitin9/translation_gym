@@ -43,6 +43,7 @@ class CSourceManager(SourceManager):
         self.last_compile_time = 0
         self.static_analysis_results = None
         self.logger = logger
+        self.modified = True
 
     def get_code_dir(self):
         return self.code_dir
@@ -93,6 +94,8 @@ class CSourceManager(SourceManager):
         return target
 
     def compile(self, instrument=False, timeout=60):
+        if not self.modified:
+            return
         cwd = os.getcwd()
         os.chdir(self.code_dir)
         compile_commands_json = Path(self.code_dir)/'compile_commands.json'
@@ -128,6 +131,7 @@ class CSourceManager(SourceManager):
             raise CompileException(e)
         finally:
             os.chdir(cwd)
+            self.modified = False
 
     def fix_globals(self):
       
@@ -160,18 +164,14 @@ class CSourceManager(SourceManager):
                 # Build our extern declaration
                 decl = f"{gv['type']} {gv['name']}"
                 extern_line = f"{indent}extern {decl};\n"
-
-                # Check the 3 lines above for an identical extern already
-                window_start = max(0, ln - 3)
-                already = any(l.strip() == extern_line.strip() for l in lines[window_start:ln])
-                if not already:
-                    lines.insert(ln, extern_line)
-                    mutated = True
+                lines.insert(ln, extern_line)
+                mutated = True
 
             if not mutated:
                 continue
 
             path.write_text(''.join(lines))
+            self.modified = True
 
             # Recompile the *entire* project to catch linking or cross-file errors
             self.logger.log_status(f"[fix_globals] recompiling whole project…")
@@ -188,8 +188,6 @@ class CSourceManager(SourceManager):
         return Path(self.code_dir)
     
     def get_static_analysis_results(self):
-        # Just re-run compilation. It's possible to figure it out from the last compile time
-        # but it is not reliable
         self.compile()
         analysis_json_path = Path(self.code_dir)/'analysis.json'
         self.static_analysis_results = json.load(open(analysis_json_path, 'r'))
@@ -257,6 +255,8 @@ class CSourceManager(SourceManager):
         with open(fpath, 'w') as f:
             f.write(new_contents)
 
+        self.modified = True
+
     def remove_func(self, func):
         assert func['type'] == 'functions'
 
@@ -279,6 +279,8 @@ class CSourceManager(SourceManager):
 
         with open(fpath, 'w') as f:
             f.write(''.join(new_lines))
+
+        self.modified = True
 
     def comment_out(self, unit):
 
@@ -305,6 +307,8 @@ class CSourceManager(SourceManager):
         
         with open(fpath, 'w') as f:
             f.write('\n'.join(lines))
+
+        self.modified = True
     
     def reset_unit(self, unit):
         self.logger.log_status("Resetting changes.")
@@ -314,6 +318,7 @@ class CSourceManager(SourceManager):
             shutil.copy(file.with_suffix('.old'), file)
         else:
             raise FileNotFoundError(f"File {file.with_suffix('.old')} does not exist. Cannot reset unit.")
+        self.modified = True
 
     def cleanup(self):
         cwd = os.getcwd()
@@ -340,4 +345,6 @@ class CSourceManager(SourceManager):
                 run(cmd)
             except RunException as e:
                 self.logger.log_failure(f"Failed to fully cleanup {self.code_dir}")
-        os.chdir(cwd)
+        finally:
+            os.chdir(cwd)
+            self.modified = True

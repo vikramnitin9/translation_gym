@@ -20,6 +20,20 @@ class Validator:
         """
         raise NotImplementedError("Subclasses must implement this method")
     
+    def compile_and_test(self, source_manager, target_manager, test_manager):
+        """
+        Compile the current code and run tests.
+
+        :param source_manager: The source manager
+        :param target_manager: The target manager
+        :param test_manager: The test manager
+        :return: A dictionary with the compilation and test results
+                {"success": True/False,
+                 "category": "Compile Error" or "Test Failure",
+                 "message": "Error message"}
+        """
+        raise NotImplementedError("Subclasses must implement this method")
+    
     
 class DefaultValidator(Validator):
 
@@ -38,6 +52,10 @@ class DefaultValidator(Validator):
             target_manager.insert_imports(unit, translation['imports'])
         else:
             raise NotImplementedError(f"Translation not implemented for {unit['type']}")
+        
+        return self.compile_and_test(source_manager, target_manager, test_manager)
+
+    def compile_and_test(self, source_manager, target_manager, test_manager):
 
         compile_success = False
         error_message = ''

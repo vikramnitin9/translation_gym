@@ -44,7 +44,6 @@ class TranslationEngine:
         self.logger.log_status("Copied over the code to {}".format(code_dir.absolute()))
         self.source_manager = CSourceManager(code_dir/'c_src', logger=self.logger)
 
-
         # Rewrite any static globals to extern + definition
         self.logger.log_status("Rewriting static globals to extern declarations…")
         self.source_manager.fix_globals()
@@ -91,7 +90,7 @@ class TranslationEngine:
             translator: Translator,
             validator: Validator):
 
-        for unit in orchestrator.unit_iter(self.source_manager, self.target_manager, self.instrumentation_results):
+        for unit in orchestrator.unit_iter(self.instrumentation_results):
             self.logger.log_status("Translating unit: {}".format(unit['name']))
             
             # Save a checkpoint to make sure we can reset if translation fails
@@ -131,6 +130,9 @@ class TranslationEngine:
             self.logger.log_result({'unit': unit['name'],
                                    'results': "Success" if result['success'] else result['category'],
                                    'attempts': i+1})
+    
+        orchestrator.prune(validator, self.test_manager)
+        
     
     def print_results(self):
         # Draw an ascii table with the results
