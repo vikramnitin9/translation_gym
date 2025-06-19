@@ -248,7 +248,18 @@ class DefaultOrchestrator(Orchestrator):
         while graph_changed:
             graph_changed = False
             # Find nodes with no incoming edges
-            nodes_to_remove = [node for node, in_degree in self.dep_graph.in_degree() if in_degree == 0]
+            # # skip any bindgen‐only functions
+            nodes_to_remove = []
+            for node, in_degree in self.dep_graph.in_degree():
+                if in_degree != 0:
+                    continue
+                meta = self.__lookup_unit(node, self.dep_graph.nodes[node]['type'], 'target')
+                # skip if it came from bindings.rs or is a bindgen helper
+                if meta is None:
+                    continue
+                if meta.get('foreign', False) or meta.get('filename', '').endswith('bindings.rs'):
+                    continue
+                nodes_to_remove.append(node)
             for node in nodes_to_remove:
                 if node == "main":
                     # Don't prune the main function!
