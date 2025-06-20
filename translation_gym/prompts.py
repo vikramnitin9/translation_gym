@@ -50,14 +50,14 @@ def construct_prompt_for_func(func):
         globalDesc = ""
         globalWrapperDesc = ""
     else:
-        globalDesc = "This function uses the following global variables:\n"
+        globalDesc = "This function (or one of its callees) uses the following global variables:\n"
     for i, glob in enumerate(func['globals']):
         if 'translated' in glob and 'binding' in glob:
             globalDesc += f"{i+1}. {glob['name']}. This can be replaced by an object of this struct:\n"
             globalDesc += f"```rust\n{glob['translated']}\n```\n"
             globalDesc += "This struct has `get` and `set` methods to interact with the field.\n"
             globalDesc += "The struct also has a `new` method that creates a new instance of the struct with a provided value.\n"
-            globalDesc += "The translated function should take an object of this struct as an argument.\n"
+            globalDesc += "The translated function should take an object of this struct as one of its arguments.\n"
             globalDesc += f"For inter-compatibility with the C code, there is also a Rust FFI binding to the C global, with this definition:\n"
             globalDesc += f"```rust\n{glob['binding']}\n```\n"
             globalDesc += "Note that you might need to use the `unsafe` keyword to access this binding.\n"
@@ -95,7 +95,7 @@ The wrapper function should have the *same* arguments and return type as the C f
 For example, replace `int` with `libc::c_int`, `char*` with `*mut libc::c_char`, etc.
 {globalWrapperDesc}
 Make sure to use `#[no_mangle]` and `pub unsafe extern "C" fn ...` for the wrapper function.
-Note that the wrapper function can use unsafe code to access FFI bindings to globals, structs, etc.
+Note that the wrapper function can use unsafe code to access FFI bindings to globals, structs, etc. Make sure that the wrapper function actually calls the translated function!
 
 The name of the Rust function should be `{func['name']}_rust` and the wrapper function should be `{func['name']}`.
 
