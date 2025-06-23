@@ -39,7 +39,7 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
     SourceManager &SM = context->getSourceManager();
     startLocation = SM.getFileLoc(startLocation); // To compensate for macros
     FullSourceLoc startLoc = context->getFullLoc(startLocation);
-    FullSourceLoc endLoc = context->getFullLoc(function->getEndLoc());
+    FullSourceLoc endLoc = context->getFullLoc(SM.getFileLoc(function->getEndLoc()));
 
     if (!startLoc.isValid() || !endLoc.isValid()) {
         return true;
@@ -147,7 +147,7 @@ bool FunctionVisitor::VisitRecordDecl(RecordDecl *record) {
     SourceManager &SM = context->getSourceManager();
     SourceLocation startLocation = SM.getFileLoc(record->getBeginLoc());
     FullSourceLoc startLoc = context->getFullLoc(startLocation);
-    FullSourceLoc endLoc = context->getFullLoc(record->getEndLoc());
+    FullSourceLoc endLoc = context->getFullLoc(SM.getFileLoc(record->getEndLoc()));
 
     if (!startLoc.isValid() || !endLoc.isValid() || SM.isInSystemHeader(startLoc)) {
         return true;
@@ -184,7 +184,7 @@ bool FunctionVisitor::VisitVarDecl(VarDecl *var) {
     SourceManager &SM = context->getSourceManager();
     SourceLocation startLocation = SM.getFileLoc(var->getBeginLoc());
     FullSourceLoc startLoc = context->getFullLoc(startLocation);
-    FullSourceLoc endLoc = context->getFullLoc(var->getEndLoc());
+    FullSourceLoc endLoc = context->getFullLoc(SM.getFileLoc(var->getEndLoc()));
 
     if (!startLoc.isValid() || !endLoc.isValid() || SM.isInSystemHeader(startLoc)) {
         return true;

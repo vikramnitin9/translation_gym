@@ -168,6 +168,9 @@ fn main() {
             bindings.blocklist_function(function)
         }
     });
+    // Bindgen uses `i` in loops, and this creates conflicts if there is a global variable named `i` in the C code.
+    // This is not perfect, so it needs fixing in the long term.
+    let bindings = bindings.blocklist_item("i");
 
     let bindings = bindings.generate() // Finish the builder and generate the bindings.
                         .expect("Unable to generate bindings"); // Unwrap the Result and panic on failure.

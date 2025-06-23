@@ -135,56 +135,38 @@ class CSourceManager(SourceManager):
 
     def fix_globals(self):
       
-        #  Grab the already-parsed globals from analysis.json
         analysis = self.get_static_analysis_results()
+        globals = [glob['name'] for glob in analysis['globals']]
 
-        #  Group globals by the C file they live in
-        by_file: Dict[str, List[Dict]] = {}
-        for gv in analysis['globals']:
-            by_file.setdefault(gv['filename'], []).append(gv)
-
-        for relpath, globals_list in by_file.items():
-            path = self.code_dir / relpath
-            orig = path.read_text()
-            lines = orig.splitlines(keepends=True)
-
-            # We'll track which files we mutated so we can revert if needed
-            mutated = False
-
-            for gv in globals_list:
-                ln = gv['startLine'] - 1 
-
-                # Remove leading `static ` if it’s there
-                if lines[ln].lstrip().startswith('static '):
-                    # preserve indentation
-                    indent = lines[ln][:len(lines[ln]) - len(lines[ln].lstrip())]
-                    lines[ln] = indent + lines[ln].lstrip()[len('static '):]
-                    mutated = True
-
-                # Build our extern declaration
-                decl = f"{gv['type']} {gv['name']}"
-                extern_line = f"{indent}extern {decl};\n"
-                lines.insert(ln, extern_line)
-                mutated = True
-
-            if not mutated:
+        for glob_name in globals:
+            analysis = self.get_static_analysis_results()
+            candidates = [glob for glob in analysis['globals'] if glob['name'] == glob_name]
+            if len(candidates) != 1:
+                self.logger.log_failure(f"[fix_globals] Skipping {glob_name}")
                 continue
-
-            path.write_text(''.join(lines))
-            self.modified = True
-
-            # Recompile the *entire* project to catch linking or cross-file errors
-            self.logger.log_status(f"[fix_globals] recompiling whole project…")
+            glob = candidates[0]
             try:
-                self.compile(instrument=False, timeout=60)
-            except CompileException:
-                self.logger.log_status(f"[fix_globals] REVERT {path}")
-                path.write_text(orig)
-                self.modified = True
-            else:
-                self.logger.log_success(f"[fix_globals] OK {path}")
+                source = self.extract_source(glob)
+            except:
+                # Sometimes, extract_source fails due to macro expansions
+                self.logger.log_failure(f"[fix_globals] Failed to extract source for {glob['name']}")
+                continue
+            if glob['isStatic']:
+                assert 'static ' in source, f"Expected 'static ' in {glob['name']} but got {source}"
+                source = source.replace('static ', '', 1)
+            # Extract everything until '='
+            extern_decl = f"extern {source.split('=')[0].strip()};\n"
+            source = extern_decl + source
+            self.save_state(glob)
+            self.replace_unit(glob, source)
+            try:
+                self.compile()
+            except CompileException as e:
+                self.logger.log_failure(f"[fix_globals] Failed to compile after patching {glob['name']}")
+                self.reset_unit(glob)
+                continue
+            self.logger.log_success(f"[fix_globals] Fixed global {glob['name']} in {glob['filename']}")
 
-    
     def get_build_path(self):
         return Path(self.code_dir)
     
