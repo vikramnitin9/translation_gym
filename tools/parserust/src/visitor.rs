@@ -130,24 +130,19 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
                     }
                 }
                 // Functions like ::new and ::default apparently need to be resolved using type checking
-                let o_def_id = (hir_id).owner;
+                let o_def_id = hir_id.owner;
                 let typeck_tables = self.tcx.typeck(o_def_id);
                 let substs = typeck_tables.node_args(hir_id);
                 let method_id = typeck_tables.type_dependent_def_id(*sub_hir_id);
                 if let Some(method_id) = method_id {
-                    let param_env = self.tcx.param_env(method_id);
-                    if let Ok(Some(inst)) = self.tcx.resolve_instance_raw(ParamEnvAnd{param_env, value: (method_id, substs)})
-                    {
-                        let res_def_id = inst.def_id();
-                        self.static_calls.insert(Call {
-                            call_expr: hir_id,
-                            call_expr_span: expr.span,
-                            caller: self.cur_fn,
-                            caller_span: None,
-                            callee: res_def_id,
-                            callee_span: Span::default(), // TODO: get the span of the method call
-                        });
-                    }
+                    self.static_calls.insert(Call {
+                        call_expr: hir_id,
+                        call_expr_span: expr.span,
+                        caller: self.cur_fn,
+                        caller_span: None,
+                        callee: method_id,
+                        callee_span: Span::default(), // TODO: get the span of the method call
+                    });
                 }
             },            
             rustc_hir::ExprKind::MethodCall(_, _, _, _) => {
@@ -156,6 +151,7 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
                 // let substs = typeck_tables.node_substs(hir_id); // Substitutions
                 let substs = typeck_tables.node_args(hir_id); // For nightly-2024-08-07
                 let method_id = typeck_tables.type_dependent_def_id(hir_id).expect("fail");
+                // TODO: find out whether this is all needed or whether we can directly use the method_id
                 let param_env = self.tcx.param_env(method_id);
                 if let Ok(Some(inst)) =
                     // self.tcx.resolve_instance(ParamEnvAnd{param_env, value: (method_id, substs)})
