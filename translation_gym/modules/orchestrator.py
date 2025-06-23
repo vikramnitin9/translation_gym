@@ -40,10 +40,6 @@ class DefaultOrchestrator(Orchestrator):
         :param unit: The translation unit
         :param translation: The translation result
         """
-        self.source_static_analysis = self.source_manager.get_static_analysis_results()
-        self.target_static_analysis = self.target_manager.get_static_analysis_results()
-        self.rebuild_dependency_graph()
-
         # Right now we use fixed naming conventions to create this map,
         # assuming that the translator follows the same conventions.
         # But to make it more robust, we might want to detect the name from `translation`.
@@ -53,6 +49,10 @@ class DefaultOrchestrator(Orchestrator):
             self.translation_map[unit['name']] = f"{''.join([s.capitalize() for s in unit['name'].split('_')])}Wrapper"
         else:
             raise ValueError(f"Unknown unit type: {unit['type']}")
+        
+        self.source_static_analysis = self.source_manager.get_static_analysis_results()
+        self.target_static_analysis = self.target_manager.get_static_analysis_results()
+        self.rebuild_dependency_graph()
     
     def __lookup_unit(self, unit_name, unit_type, language):
         """
@@ -164,6 +164,8 @@ class DefaultOrchestrator(Orchestrator):
                 self.dep_graph.add_node(unit['name'], type=unit_type, language='target')
 
         for func in self.source_static_analysis['functions'] + self.target_static_analysis['functions']:
+            if 'foreign' in func and func['foreign']:
+                continue
             qname = func['name']
             for dep_type in ['functions', 'globals', 'structs']:
                 for dep in func[dep_type]:
@@ -193,8 +195,6 @@ class DefaultOrchestrator(Orchestrator):
                             self.dep_graph.add_edge(f, g)
                             new_edge_added = True
         self.logger.dump_graph(self.dep_graph)
-
-                        
 
     def unit_iter(self, instrumentation_results=None):
         self.source_static_analysis = self.source_manager.get_static_analysis_results()

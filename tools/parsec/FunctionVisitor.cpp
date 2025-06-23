@@ -6,11 +6,15 @@ using json = nlohmann::json;
 
 bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
 
+    std::string functionName = function->getNameInfo().getName().getAsString();
 
      // only definitions have bodies
-    if (!function->hasBody() || !function->isThisDeclarationADefinition())
-        return true;
-
+    if (!function->hasBody() || !function->isThisDeclarationADefinition()) {
+        // For main function alone, we retain it even if it has no body
+        if (functionName != "main") {
+            return true;
+        }
+    }
     // Clear last-function’s deps
     currentGlobals.clear();
     currentStructs.clear();
@@ -18,8 +22,6 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
     // Traverse the function body to collect calls, globals, structs
     RecursiveASTVisitor<FunctionVisitor>::TraverseStmt(function->getBody());
     
-    std::string functionName = function->getNameInfo().getName().getAsString();
-
     if (config.renameMainFunction && functionName == "main") {
         // Here we are assuming that `main` is not called by any other functions
 		// If it is, then we need to make this modification while generating the CFG
@@ -46,7 +48,7 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
     if (SM.isInSystemHeader(startLoc)) {
         return true;
     }
-    if (function->isThisDeclarationADefinition()) {
+    if (function->isThisDeclarationADefinition() || functionName == "main_0") {
         int startLine = startLoc.getSpellingLineNumber();
         int endLine = endLoc.getSpellingLineNumber();
         int startCol = startLoc.getSpellingColumnNumber();
@@ -112,6 +114,7 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
                 {"endLine", endLine},
                 {"startCol", startCol},
                 {"endCol", endCol},
+                {"functions", json::array()}
         };
     
         json global_arr = json::array();
