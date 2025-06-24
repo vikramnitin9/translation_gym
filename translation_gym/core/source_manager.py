@@ -44,9 +44,75 @@ class CSourceManager(SourceManager):
         self.static_analysis_results = None
         self.logger = logger
         self.modified = True
+        self.setup()
 
     def get_code_dir(self):
         return self.code_dir
+    
+    def setup(self):
+        cwd = os.getcwd()
+        
+        # First generate compile_commands.json using bear
+        os.chdir(self.code_dir)
+        # Get the output of bear --version
+        try:
+            bear_version = run("bear --version", logger=self.logger)
+        except RunException as e:
+            raise CompileException(e)
+        version = bear_version.split()[1]
+        major, _, _ = version.split('.')
+        if int(major) >= 3:
+            cmd = 'make clean && bear -- make'
+        else:
+            cmd = "make clean && bear make"
+        try:
+            run(cmd, logger=self.logger)
+        except RunException as e:
+            raise CompileException(e)
+        finally:
+            os.chdir(cwd)
+        
+        # Next, expand all macros in the source code
+        os.chdir(self.code_dir)
+        try:
+            run('make macros', timeout=60, logger=self.logger)
+            self.logger.log_success("Successfully expanded macros")
+        except RunException as e:
+            self.logger.log_failure(f"WARNING: failed to expand macros!\n{e}")
+        os.chdir(cwd)
+        
+        # Finally, patch global variables by removing "static" and adding "extern" declarations
+        analysis = self.get_static_analysis_results()
+        globals = [glob['name'] for glob in analysis['globals']]
+
+        for glob_name in globals:
+            analysis = self.get_static_analysis_results()
+            candidates = [glob for glob in analysis['globals'] if glob['name'] == glob_name]
+            if len(candidates) != 1:
+                self.logger.log_failure(f"[fix_globals] Skipping {glob_name}")
+                continue
+            glob = candidates[0]
+            try:
+                source = self.extract_source(glob)
+            except:
+                # Sometimes, extract_source fails due to macro expansions
+                self.logger.log_failure(f"[fix_globals] Failed to extract source for {glob['name']}")
+                continue
+            if glob['isStatic']:
+                assert 'static ' in source, f"Expected 'static ' in {glob['name']} but got {source}"
+                source = source.replace('static ', '', 1)
+            # Extract everything until '='
+            extern_decl = f"extern {source.split('=')[0].strip()};\n"
+            source = extern_decl + source
+            self.save_state(glob)
+            self.replace_unit(glob, source)
+            try:
+                self.compile()
+            except CompileException as e:
+                self.logger.log_failure(f"[fix_globals] Failed to compile after patching {glob['name']}")
+                self.reset_unit(glob)
+                continue
+            self.logger.log_success(f"[fix_globals] Fixed global {glob['name']} in {glob['filename']}")
     
     def get_bin_target(self):
 
@@ -99,23 +165,6 @@ class CSourceManager(SourceManager):
         cwd = os.getcwd()
         os.chdir(self.code_dir)
         compile_commands_json = Path(self.code_dir)/'compile_commands.json'
-        # Note - do not re-generate compile_commands.json if it already exists
-        if not compile_commands_json.exists():
-            # Get the output of bear --version
-            try:
-                bear_version = run("bear --version", logger=self.logger)
-            except RunException as e:
-                raise CompileException(e)
-            version = bear_version.split()[1]
-            major, _, _ = version.split('.')
-            if int(major) >= 3:
-                cmd = 'make clean && bear -- make'
-            else:
-                cmd = "make clean && bear make"
-            try:
-                run(cmd, logger=self.logger)
-            except RunException as e:
-                raise CompileException(e)
         # Check if the compile_commands.json file exists
         if not compile_commands_json.exists():
             raise CompileException("Error: compile_commands.json not found. Something wrong.")
@@ -132,40 +181,6 @@ class CSourceManager(SourceManager):
         finally:
             os.chdir(cwd)
             self.modified = False
-
-    def fix_globals(self):
-      
-        analysis = self.get_static_analysis_results()
-        globals = [glob['name'] for glob in analysis['globals']]
-
-        for glob_name in globals:
-            analysis = self.get_static_analysis_results()
-            candidates = [glob for glob in analysis['globals'] if glob['name'] == glob_name]
-            if len(candidates) != 1:
-                self.logger.log_failure(f"[fix_globals] Skipping {glob_name}")
-                continue
-            glob = candidates[0]
-            try:
-                source = self.extract_source(glob)
-            except:
-                # Sometimes, extract_source fails due to macro expansions
-                self.logger.log_failure(f"[fix_globals] Failed to extract source for {glob['name']}")
-                continue
-            if glob['isStatic']:
-                assert 'static ' in source, f"Expected 'static ' in {glob['name']} but got {source}"
-                source = source.replace('static ', '', 1)
-            # Extract everything until '='
-            extern_decl = f"extern {source.split('=')[0].strip()};\n"
-            source = extern_decl + source
-            self.save_state(glob)
-            self.replace_unit(glob, source)
-            try:
-                self.compile()
-            except CompileException as e:
-                self.logger.log_failure(f"[fix_globals] Failed to compile after patching {glob['name']}")
-                self.reset_unit(glob)
-                continue
-            self.logger.log_success(f"[fix_globals] Fixed global {glob['name']} in {glob['filename']}")
 
     def get_build_path(self):
         return Path(self.code_dir)

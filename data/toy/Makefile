@@ -15,4 +15,10 @@ $(TARGET): $(OBJS)
 clean:
 	rm -f $(OBJS) $(TARGET)
 
-.PHONY: all clean
+macros:
+	@for file in $(SRCS); do \
+		echo "Expanding macros in $$file..."; \
+		gcc $(CFLAGS) -E -P $$file -o $$file.tmp && mv $$file.tmp $$file; \
+	done
+
+.PHONY: all clean macros
