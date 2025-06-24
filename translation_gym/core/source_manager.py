@@ -52,7 +52,16 @@ class CSourceManager(SourceManager):
     def setup(self):
         cwd = os.getcwd()
         
-        # First generate compile_commands.json using bear
+        # First, expand all macros in the source code
+        os.chdir(self.code_dir)
+        try:
+            run('make macros', timeout=60, logger=self.logger)
+            self.logger.log_success("Successfully expanded macros")
+        except RunException as e:
+            self.logger.log_failure(f"WARNING: failed to expand macros!\n{e}")
+        os.chdir(cwd)
+
+        # Next, generate compile_commands.json using bear
         os.chdir(self.code_dir)
         # Get the output of bear --version
         try:
@@ -71,15 +80,6 @@ class CSourceManager(SourceManager):
             raise CompileException(e)
         finally:
             os.chdir(cwd)
-        
-        # Next, expand all macros in the source code
-        os.chdir(self.code_dir)
-        try:
-            run('make macros', timeout=60, logger=self.logger)
-            self.logger.log_success("Successfully expanded macros")
-        except RunException as e:
-            self.logger.log_failure(f"WARNING: failed to expand macros!\n{e}")
-        os.chdir(cwd)
         
         # Finally, patch global variables by removing "static" and adding "extern" declarations
         analysis = self.get_static_analysis_results()

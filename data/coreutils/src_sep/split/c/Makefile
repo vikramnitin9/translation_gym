@@ -6,15 +6,15 @@ OBJS := $(SRCS:.c=.o)
 all: clean split
 
 split: $(OBJS)
-	gcc $^ -o $@
+	clang $^ -o $@
 
 %.o: %.c
-	gcc $(CFLAGS) -c $< -o $@
+	clang $(CFLAGS) -c $< -o $@
 
 macros:
 	@for file in $(SRCS); do \
 		echo "Expanding macros in $$file..."; \
-		gcc $(CFLAGS) -E -P $$file -o $$file.tmp && mv $$file.tmp $$file; \
+		clang $(CFLAGS) -E -CC -P $$file -o $$file.tmp && mv $$file.tmp $$file; \
 	done
 
 .PHONY: clean macros

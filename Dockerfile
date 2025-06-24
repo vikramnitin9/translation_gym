@@ -9,6 +9,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt install -y llvm-10 llvm-10-dev llvm-10-tools clang-10 libclang-10-dev
 RUN apt install -y cmake wget unzip bear curl graphviz
 
+RUN ln -s /usr/bin/clang-10 /usr/bin/clang
+
 # Install Docker CLI
 RUN apt install -y docker.io
 
