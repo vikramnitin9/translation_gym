@@ -160,7 +160,7 @@ class CSourceManager(SourceManager):
         return target
 
     def compile(self, instrument=False, timeout=60):
-        if not self.modified:
+        if not self.modified and not instrument:
             return
         cwd = os.getcwd()
         os.chdir(self.code_dir)
