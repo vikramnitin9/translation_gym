@@ -9,6 +9,9 @@ class Orchestrator:
     and annotating them with the necessary dependencies for translation.
     """
 
+    def __init__(self, source_manager, target_manager, logger):
+        pass
+
     def update_state(self, unit, translation):
         """
         Update the state of the source and target managers after a successful translation.
@@ -21,6 +24,8 @@ class Orchestrator:
         """
         Iterate over the translation units in the source code.
         :param source_manager: The source manager
+        :param target_manager: The target manager
+        :param instrumentation_results: [Optional] instrumentation results to include only covered functions
         :return: An iterator over the translation units
         """
         raise NotImplementedError("Subclasses must implement this method")
@@ -52,7 +57,7 @@ class DefaultOrchestrator(Orchestrator):
         
         self.source_static_analysis = self.source_manager.get_static_analysis_results()
         self.target_static_analysis = self.target_manager.get_static_analysis_results()
-        self.rebuild_dependency_graph()
+        self.__rebuild_dependency_graph()
     
     def __lookup_unit(self, unit_name, unit_type, language):
         """
@@ -78,7 +83,7 @@ class DefaultOrchestrator(Orchestrator):
 
         return unit_to_return
 
-    def get_attributes(self, unit_name):
+    def __get_attributes(self, unit_name):
         """
         Get the attributes of a source unit from the static analysis results.
         Note: This method assumes that the static analysis results are up to date.
@@ -105,8 +110,10 @@ class DefaultOrchestrator(Orchestrator):
         # For translating globals, we need the binding information while performing translation
         if unit['type'] == 'globals':
             binding = self.__lookup_unit(unit['name'], 'globals', 'target')
-            if binding is not None:
-                unit['binding'] = self.target_manager.extract_source(binding)
+            if binding is None:
+                self.logger.log_failure(f"Could not find binding for global variable '{unit['name']}' in target code.")
+                return None
+            unit['binding'] = self.target_manager.extract_source(binding)
 
         # The remaining steps are only relevant for functions
         if unit['type'] != 'functions':
@@ -143,7 +150,7 @@ class DefaultOrchestrator(Orchestrator):
         
         return unit
     
-    def rebuild_dependency_graph(self):
+    def __rebuild_dependency_graph(self):
         """
         Rebuild the dependency graph based on the static analysis results of the source and target code.
         Note: This method assumes that the static analysis results are up to date.
@@ -167,11 +174,14 @@ class DefaultOrchestrator(Orchestrator):
             if 'foreign' in func and func['foreign']:
                 continue
             qname = func['name']
+            func_node = self.dep_graph.nodes[qname]
             for dep_type in ['functions', 'globals', 'structs']:
                 for dep in func[dep_type]:
                     qdep = dep['name']
-                    if qdep in self.dep_graph:
-                        self.dep_graph.add_edge(qname, qdep)
+                    if qdep not in self.dep_graph:
+                        # If the dependency is not in the graph, add it
+                        self.dep_graph.add_node(qdep, type=dep_type, language=func_node['language'])
+                    self.dep_graph.add_edge(qname, qdep)
         
         
         # Propagate global dependencies through the call graph ⏬
@@ -200,7 +210,7 @@ class DefaultOrchestrator(Orchestrator):
         self.source_static_analysis = self.source_manager.get_static_analysis_results()
         self.target_static_analysis = self.target_manager.get_static_analysis_results()
 
-        self.rebuild_dependency_graph()
+        self.__rebuild_dependency_graph()
 
         # We only want to translate functions that are reachable from main
         reachable_q = nx.descendants(self.dep_graph, 'main_0') | {'main_0'}
@@ -218,7 +228,7 @@ class DefaultOrchestrator(Orchestrator):
             # The translator will call `update_state` if the translation is successful,
             # which gets the latest static analysis results and rebuilds the dependency graph.
             # So at this point, we can safely assume that the static analysis and graph are up to date.
-            unit = self.get_attributes(unit_name)
+            unit = self.__get_attributes(unit_name)
             if not unit:
                 continue
             if unit['type'] == "functions" and instrumentation_results is not None:
@@ -288,4 +298,4 @@ class DefaultOrchestrator(Orchestrator):
             
             self.source_static_analysis = self.source_manager.get_static_analysis_results()
             self.target_static_analysis = self.target_manager.get_static_analysis_results()
-            self.rebuild_dependency_graph()
+            self.__rebuild_dependency_graph()

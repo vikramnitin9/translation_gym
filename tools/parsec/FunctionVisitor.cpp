@@ -182,9 +182,14 @@ bool FunctionVisitor::VisitVarDecl(VarDecl *var) {
     }
 
     SourceManager &SM = context->getSourceManager();
-    SourceLocation startLocation = SM.getFileLoc(var->getBeginLoc());
-    FullSourceLoc startLoc = context->getFullLoc(startLocation);
-    FullSourceLoc endLoc = context->getFullLoc(SM.getFileLoc(var->getEndLoc()));
+    SourceLocation startLocation = var->getBeginLoc();
+    SourceLocation endLocation = var->getEndLoc();
+    // If there is a declaration without assignment, like `int abcd`, then
+    // the end location is just the first character of the variable name, for some reason
+    // So it stops at `int a`. We need to get the end of the token
+    endLocation = Lexer::getLocForEndOfToken(endLocation, 0, SM, context->getLangOpts());
+    FullSourceLoc startLoc = context->getFullLoc(SM.getFileLoc(startLocation));
+    FullSourceLoc endLoc = context->getFullLoc(SM.getFileLoc(endLocation));
 
     if (!startLoc.isValid() || !endLoc.isValid() || SM.isInSystemHeader(startLoc)) {
         return true;

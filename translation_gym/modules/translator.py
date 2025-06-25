@@ -8,7 +8,7 @@ class Translator:
     Base class for translators. This class is responsible for translating the code.
     """
 
-    def translate(self, func, source_manager, target_manager):
+    def translate(self, func):
         """
         Translate the given function to Rust.
         :param func: The function to translate
@@ -36,7 +36,6 @@ class Translator:
                 ...
              ],
             }
-        :param source_manager: The source manager
         :return: A dictionary with the translated function
                 {"func": "translated function",
                  "wrapper": "wrapper function",
@@ -44,7 +43,7 @@ class Translator:
         """
         raise NotImplementedError("Subclasses must implement this method")
     
-    def repair(self, result, source_manager, target_manager):
+    def repair(self, result):
         """
         Repair the given function.
         :param result: The result of the translation
@@ -69,7 +68,7 @@ class DefaultTranslator(Translator):
         self.conversation = []
         self.unit = None
     
-    def translate(self, unit, source_manager, target_manager):
+    def translate(self, unit):
 
         if unit['type'] == 'functions':
             translation_prompt = construct_prompt_for_func(unit)
@@ -139,7 +138,7 @@ class DefaultTranslator(Translator):
 
         return None
     
-    def repair(self, result, source_manager, target_manager):
+    def repair(self, result):
 
         assert len(self.conversation) > 0, "Repair called before translation"
 

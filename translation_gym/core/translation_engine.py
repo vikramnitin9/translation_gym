@@ -38,11 +38,11 @@ class TranslationEngine:
 
         # Creating new subdirectories
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        shutil.copytree(code_dir, self.output_dir/'c_src')
+        shutil.copytree(code_dir, self.output_dir/'source')
 
         code_dir = self.output_dir
         self.logger.log_status("Copied over the code to {}".format(code_dir.absolute()))
-        self.source_manager = CSourceManager(code_dir/'c_src', logger=self.logger)
+        self.source_manager = CSourceManager(code_dir/'source', logger=self.logger)
         
         # First compile the source code
         try:
@@ -93,12 +93,13 @@ class TranslationEngine:
             self.source_manager.save_state(unit)
             self.target_manager.save_state(unit)
 
-            translation = translator.translate(unit, self.source_manager, self.target_manager)
+            translation = translator.translate(unit)
             
             if translation is None:
                 self.logger.log_failure("Translation failed")
                 self.logger.log_output("No translation generated")
                 self.logger.log_result({'unit': unit['name'],
+                                        'type': unit['type'],
                                         'results': "No translation generated",
                                         'attempts': 0})
                 continue
@@ -120,10 +121,11 @@ class TranslationEngine:
                     self.target_manager.reset_unit(unit)
                     if i == self.num_attempts - 1:
                         break
-                    translation = translator.repair(result, self.source_manager, self.target_manager)
+                    translation = translator.repair(result)
                     result = validator.validate(unit, translation, self.source_manager, self.target_manager, self.test_manager)
             
             self.logger.log_result({'unit': unit['name'],
+                                    'type': unit['type'],
                                    'results': "Success" if result['success'] else result['category'],
                                    'attempts': i+1})
     

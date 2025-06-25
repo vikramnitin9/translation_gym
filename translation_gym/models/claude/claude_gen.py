@@ -40,7 +40,8 @@ class ClaudeGen:
                     messages=messages,
                     temperature=temperature,
                     n=top_k,
-                    vertex_credentials=self.vertex_credentials
+                    vertex_credentials=self.vertex_credentials,
+                    max_tokens=64000
                 )
                 break
             except (litellm.BadRequestError, litellm.AuthenticationError,

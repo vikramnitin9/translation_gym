@@ -52,23 +52,21 @@ def construct_prompt_for_func(func):
     else:
         globalDesc = "This function (or one of its callees) uses the following global variables:\n"
     for i, glob in enumerate(func['globals']):
-        if 'translated' in glob and 'binding' in glob:
+        if 'translated' in glob:
             globalDesc += f"{i+1}. {glob['name']}. This can be replaced by an object of this struct:\n"
             globalDesc += f"```rust\n{glob['translated']}\n```\n"
             globalDesc += "This struct has `get` and `set` methods to interact with the field.\n"
-            globalDesc += "The struct also has a `new` method that creates a new instance of the struct with a provided value.\n"
+            globalDesc += "The struct also has a `new` method that creates a new instance of the struct, "
+            globalDesc += "and initializes it with the current value of the global variable in C. So you do not need to provide it with an initial value.\n"
+            globalDesc += "Likewise, the `get` and `set` methods also automatically synchronize with the global variable in C, so you do not need to worry about that.\n"
             globalDesc += "The translated function should take an object of this struct as one of its arguments.\n"
-            globalDesc += f"For inter-compatibility with the C code, there is also a Rust FFI binding to the C global, with this definition:\n"
-            globalDesc += f"```rust\n{glob['binding']}\n```\n"
-            globalDesc += "Note that you might need to use the `unsafe` keyword to access this binding.\n"
         elif 'binding' in glob:
             globalDesc += f"{i+1}. {glob['name']}. This is accessible through its Rust FFI binding to C, with this declaration:\n"
             globalDesc += f"```rust\n{glob['binding']}\n```\n"
             globalDesc += "Note that you will need to use the `unsafe` keyword to access this binding.\n"
         
         globalWrapperDesc = "The wrapper function should also take care of passing the structures corresponding to global variables, as arguments to the translated function.\n"
-        globalWrapperDesc += "It should use `unsafe` code to read the FFI binding of each global variable, convert these to idiomatic types,"
-        globalWrapperDesc += " create structure objects corresponding to each global (as described above), and pass them to the translated function.\n"
+        globalWrapperDesc += "It should call the `new` method of the global variable's struct with no arguments, and pass the resulting object to the translated function.\n"
 
     if len(func['imports']) == 0:
         importDesc = ""
@@ -177,12 +175,13 @@ However, this uses non-idiomatic Rust types. We want an idiomatic Rust equivalen
 Your task is to create a struct that provides an idiomatic type interface for interacting with the global variable.
 The struct should be named `{''.join([s.capitalize() for s in glob['name'].split('_')])}Wrapper`. It has one field, `val: T`.
 It should implement 3 methods:
-    1. `get(&self) -> T`: A method that reads the value of the global variable (using unsafe code if necessary), converts it to an idiomatic type `T`, and returns it.
+    1. `get(&self) -> T`: A method that reads the value of the global variable (NOT `val`!), using unsafe code if necessary, converts it to an idiomatic type `T`, and returns it.
     2. `set(&mut self, val: T)`: A method that takes a value of the idiomatic type T as an argument, and assigns it to the `val` field.
         It also converts `val` to the type of the global variable, and (if necessary) uses `unsafe` code internally to write it to the global variable.
         The global variable and the struct field should always be in sync.
-    3. `new(val: T) -> Self`: A constructor that creates a new instance of this structure with `val` as the field, and calls `set(val)` on this instance before returning it.
-Note that `T` here is a placeholder for the actual idiomatic equivalent type. Avoid libc types and raw pointers. For example, replace `libc::c_int` with `i32`, `*mut libc::c_char` with `String`, etc.
+    3. `new() -> Self`: Reads the current value of the global variable (using unsafe code if necessary), converts it to an idiomatic type `T` (very similar to `get`), and returns a new instance of this structure with `val` initialized to this value.
+Through these two functions, the wrapper should ensure that the global variable and struct field are always in sync.
+Note that `T` here is a placeholder for the actual idiomatic equivalent type. Avoid libc types and raw pointers for `T`. For example, replace `libc::c_int` with `i32`, `*mut libc::c_char` with `String`, etc.
 If you need new imports, you can add them in the <IMPORTS>...</IMPORTS> section. Do not provide them along with the struct source.
 {importDesc}
 Follow this format:

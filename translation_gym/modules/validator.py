@@ -71,10 +71,7 @@ class DefaultValidator(Validator):
                 if "Timeout" in str(e):
                     self.logger.log_failure("Timeout. Trying again.")
                     continue
-                elif "rust-lld: error:" in str(e):
-                    self.logger.log_failure("Linker error. Cleaning up and trying again.")
-                    source_manager.cleanup()
-                    continue
+                break
 
         if not compile_success:
             return {"success": False,
@@ -92,12 +89,6 @@ class DefaultValidator(Validator):
                 error_message = str(e)
                 if "Timeout" in str(e):
                     self.logger.log_failure("Timeout. Trying again.")
-                    continue
-                elif "rust-lld: error:" in str(e):
-                    self.logger.log_failure("Linker error. Cleaning up and trying again.")
-                    source_manager.cleanup()
-                    target_manager.cleanup()
-                    source_manager.compile()
                     continue
                 break # Unless it's a timeout or linker error, we don't want to retry
 
