@@ -122,6 +122,15 @@ class TranslationEngine:
                     if i == self.num_attempts - 1:
                         break
                     translation = translator.repair(result)
+
+                    if translation is None:
+                        self.logger.log_failure("Repair did not produce any code")
+                        result = {
+                            'success': False,
+                            'category': 'repair_failed',
+                            'message': 'translator.repair() returned None'
+                        }
+                        break
                     result = validator.validate(unit, translation, self.source_manager, self.target_manager, self.test_manager)
             
             self.logger.log_result({'unit': unit['name'],

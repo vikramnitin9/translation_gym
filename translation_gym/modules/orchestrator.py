@@ -90,7 +90,12 @@ class DefaultOrchestrator(Orchestrator):
         `get_static_analysis_results` should be called before this method.
         """
 
-        unit_type = self.dep_graph.nodes[unit_name]['type']
+        try:
+            unit_type = self.dep_graph.nodes[unit_name]['type']
+        except KeyError:
+            self.logger.log_failure(f"Skipping unknown unit '{unit_name}' (not in dependency graph)")
+            return None
+
         unit = self.__lookup_unit(unit_name, unit_type, 'source') # Look it up in 'source' specifically
         if not unit:
             return None
@@ -223,7 +228,6 @@ class DefaultOrchestrator(Orchestrator):
             unit_ordering = list(reversed(list(nx.topological_sort(subgraph))))
         except nx.NetworkXUnfeasible:
             unit_ordering = list(nx.dfs_postorder_nodes(subgraph, source='main_0'))
-        
         for unit_name in unit_ordering:
             # The translator will call `update_state` if the translation is successful,
             # which gets the latest static analysis results and rebuilds the dependency graph.

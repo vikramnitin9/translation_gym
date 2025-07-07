@@ -157,7 +157,7 @@ class DefaultTranslator(Translator):
         
         self.conversation += [{'role': 'user', 'content': prompt.strip()}]
 
-        while True:
+        for _ in range(5):
             try:
                 self.logger.log_status("Calling LLM for repair")
                 response = self.model.gen(self.conversation, top_k=1, temperature=0)[0]

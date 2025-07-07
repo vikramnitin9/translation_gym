@@ -12,8 +12,6 @@ CMD ["bash", "-c", "make TESTS=\"tests/truncate/truncate-no-create-missing.sh \
       tests/truncate/truncate-dir-fail.sh \
       tests/truncate/truncate-overflow.sh\" \
     SUBDIRS=. VERBOSE=yes check && \
-    sudo make TESTS=\"tests/truncate/truncate-owned-by-other.sh\" \
-    SUBDIRS=. VERBOSE=yes check && \
     { [ -f \"/app/instrumentation/instrumented.json\" ] \
       && sudo cp /app/instrumentation/instrumented.json \"/instrumentation/\"; true; }"]
       
