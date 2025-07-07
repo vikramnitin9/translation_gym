@@ -130,19 +130,14 @@ def safe_load_json(filepath):
 
     json_str = raw_bytes.decode("latin-1", errors="backslashreplace").strip()
 
-    if json_str.endswith(","):  
-        json_str = json_str[:-1]  # Remove trailing comma
-    if not json_str.startswith("["):
-        json_str = "[" + json_str
-    if not json_str.endswith("]"):
-        json_str = json_str + "]"
-
-    try:
-        data = json.loads(json_str.strip(), strict=False)
-        return data
-    except:
-        print(f"Failed to load JSON from {filepath}")
-        return None
+    data = []
+    for line in json_str.strip().split('\n'):
+        line = line.rstrip(",")
+        try:
+            data.append(json.loads(line, strict=False))
+        except Exception as e:
+            print(f"Warning: Failed to read a line from {filepath}. Error: \n{e}")
+    return data
 
 def to_host_path(path):
     if not os.path.exists('/.dockerenv'):
