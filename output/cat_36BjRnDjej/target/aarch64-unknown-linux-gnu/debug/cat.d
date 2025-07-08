@@ -1,0 +1,1 @@
+/app/output/cat_36BjRnDjej/target/aarch64-unknown-linux-gnu/debug/cat: /app/output/cat_36BjRnDjej/build.rs /app/output/cat_36BjRnDjej/src/main.rs /app/output/cat_36BjRnDjej/src/main_func.rs /app/output/cat_36BjRnDjej/target/aarch64-unknown-linux-gnu/debug/build/foo-9002df7649ca9c67/out/bindings.rs

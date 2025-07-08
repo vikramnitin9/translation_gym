@@ -1,0 +1,6 @@
+clang diag: /app/output/uniq_vQBgNR9l4z/source/uniq.c:29587:54: warning: static_assert with no message is a C++17 extension [-Wc++17-extensions]
+clang diag: /app/output/uniq_vQBgNR9l4z/source/uniq.c:30032:33: warning: static_assert with no message is a C++17 extension [-Wc++17-extensions]
+clang diag: /app/output/uniq_vQBgNR9l4z/source/uniq.c:30037:63: warning: static_assert with no message is a C++17 extension [-Wc++17-extensions]
+clang diag: /app/output/uniq_vQBgNR9l4z/source/uniq.c:30040:41: warning: static_assert with no message is a C++17 extension [-Wc++17-extensions]
+clang diag: /app/output/uniq_vQBgNR9l4z/source/uniq.c:30043:23: warning: static_assert with no message is a C++17 extension [-Wc++17-extensions]
+clang diag: /app/output/uniq_vQBgNR9l4z/source/uniq.c:30722:13: warning: function 'writeline' has internal linkage but is not defined [-Wundefined-internal]

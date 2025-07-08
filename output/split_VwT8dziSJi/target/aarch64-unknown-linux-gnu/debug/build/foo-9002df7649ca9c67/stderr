@@ -1,0 +1,5 @@
+clang diag: /app/output/split_VwT8dziSJi/source/split.c:26666:21: warning: function 'usable_st_size' has internal linkage but is not defined [-Wundefined-internal]
+clang diag: /app/output/split_VwT8dziSJi/source/split.c:28739:21: warning: function 'ignorable' has internal linkage but is not defined [-Wundefined-internal]
+clang diag: /app/output/split_VwT8dziSJi/source/split.c:23598:29: warning: function 'to_uchar' has internal linkage but is not defined [-Wundefined-internal]
+clang diag: /app/output/split_VwT8dziSJi/source/split.c:28157:21: warning: function 'io_blksize' has internal linkage but is not defined [-Wundefined-internal]
+clang diag: /app/output/split_VwT8dziSJi/source/split.c:29544:13: warning: function 'bytes_chunk_extract' has internal linkage but is not defined [-Wundefined-internal]

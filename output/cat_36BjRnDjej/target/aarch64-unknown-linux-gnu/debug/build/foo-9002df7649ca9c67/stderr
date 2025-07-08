@@ -1,0 +1,4 @@
+clang diag: /app/output/cat_36BjRnDjej/source/cat.c:28077:20: warning: function 'write_pending' has internal linkage but is not defined [-Wundefined-internal]
+clang diag: /app/output/cat_36BjRnDjej/source/cat.c:27558:21: warning: function 'io_blksize' has internal linkage but is not defined [-Wundefined-internal]
+clang diag: /app/output/cat_36BjRnDjej/source/cat.c:28386:12: warning: function 'copy_cat' has internal linkage but is not defined [-Wundefined-internal]
+clang diag: /app/output/cat_36BjRnDjej/source/cat.c:28068:14: warning: function 'simple_cat' has internal linkage but is not defined [-Wundefined-internal]

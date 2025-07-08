@@ -1,0 +1,5 @@
+clang diag: /app/output/split_GPUrJGwqSc/source/split.c:28739:21: warning: function 'ignorable' has internal linkage but is not defined [-Wundefined-internal]
+clang diag: /app/output/split_GPUrJGwqSc/source/split.c:23598:29: warning: function 'to_uchar' has internal linkage but is not defined [-Wundefined-internal]
+clang diag: /app/output/split_GPUrJGwqSc/source/split.c:28157:21: warning: function 'io_blksize' has internal linkage but is not defined [-Wundefined-internal]
+clang diag: /app/output/split_GPUrJGwqSc/source/split.c:28870:14: warning: function 'input_file_size' has internal linkage but is not defined [-Wundefined-internal]
+clang diag: /app/output/split_GPUrJGwqSc/source/split.c:29505:13: warning: function 'bytes_chunk_extract' has internal linkage but is not defined [-Wundefined-internal]

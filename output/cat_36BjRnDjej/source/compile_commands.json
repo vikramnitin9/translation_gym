@@ -1,0 +1,496 @@
+[
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fadvise.o",
+            "fadvise.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "fadvise.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "c32isprint.o",
+            "c32isprint.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "c32isprint.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "safe-read.o",
+            "safe-read.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "safe-read.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "alignalloc.o",
+            "alignalloc.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "alignalloc.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "close-stream.o",
+            "close-stream.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "close-stream.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "version.o",
+            "version.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "version.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "stdc_leading_zeros.o",
+            "stdc_leading_zeros.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "stdc_leading_zeros.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "hard-locale.o",
+            "hard-locale.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "hard-locale.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "setlocale_null-unlocked.o",
+            "setlocale_null-unlocked.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "setlocale_null-unlocked.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fcntl.o",
+            "fcntl.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "fcntl.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "stdbit.o",
+            "stdbit.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "stdbit.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xmalloc.o",
+            "xmalloc.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "xmalloc.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "c-ctype.o",
+            "c-ctype.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "c-ctype.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "closeout.o",
+            "closeout.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "closeout.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xbinary-io.o",
+            "xbinary-io.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "xbinary-io.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fseeko.o",
+            "fseeko.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "fseeko.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fflush.o",
+            "fflush.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "fflush.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "version-etc.o",
+            "version-etc.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "version-etc.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fclose.o",
+            "fclose.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "fclose.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "full-write.o",
+            "full-write.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "full-write.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "quotearg.o",
+            "quotearg.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "quotearg.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "version-etc-fsf.o",
+            "version-etc-fsf.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "version-etc-fsf.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "safe-write.o",
+            "safe-write.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "safe-write.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "progname.o",
+            "progname.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "progname.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "binary-io.o",
+            "binary-io.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "binary-io.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "localcharset.o",
+            "localcharset.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "localcharset.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "mbszero.o",
+            "mbszero.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "mbszero.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "cat.o",
+            "cat.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "cat.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "setlocale_null.o",
+            "setlocale_null.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "setlocale_null.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "exitfail.o",
+            "exitfail.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "exitfail.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xalignalloc.o",
+            "xalignalloc.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "xalignalloc.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xalloc-die.o",
+            "xalloc-die.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "xalloc-die.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "propername-lite.o",
+            "propername-lite.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "propername-lite.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fpurge.o",
+            "fpurge.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "fpurge.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "ialloc.o",
+            "ialloc.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "ialloc.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "mbrtoc32.o",
+            "mbrtoc32.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "mbrtoc32.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "c-strcasecmp.o",
+            "c-strcasecmp.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "c-strcasecmp.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "copy-file-range.o",
+            "copy-file-range.c"
+        ],
+        "directory": "/app/output/cat_36BjRnDjej/source",
+        "file": "copy-file-range.c"
+    }
+]

@@ -1,0 +1,2 @@
+cargo::rustc-link-search=native=/app/output/tail_um4e9l25qv/source
+cargo:rustc-link-lib=static=foo
