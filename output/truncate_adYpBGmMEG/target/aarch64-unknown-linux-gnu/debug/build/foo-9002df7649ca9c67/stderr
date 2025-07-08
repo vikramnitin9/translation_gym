@@ -1,2 +1,0 @@
-clang diag: /app/output/truncate_adYpBGmMEG/source/truncate.c:26348:21: warning: function 'usable_st_size' has internal linkage but is not defined [-Wundefined-internal]
-clang diag: /app/output/truncate_adYpBGmMEG/source/truncate.c:23280:29: warning: function 'to_uchar' has internal linkage but is not defined [-Wundefined-internal]

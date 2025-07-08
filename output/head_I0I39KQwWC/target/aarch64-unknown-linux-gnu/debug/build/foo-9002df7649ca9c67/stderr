@@ -1,8 +1,0 @@
-clang diag: /app/output/head_I0I39KQwWC/source/head.c:27437:13: warning: function 'xwrite_stdout' has internal linkage but is not defined [-Wundefined-internal]
-clang diag: /app/output/head_I0I39KQwWC/source/head.c:27455:14: warning: function 'elseek' has internal linkage but is not defined [-Wundefined-internal]
-clang diag: /app/output/head_I0I39KQwWC/source/head.c:27445:28: warning: function 'copy_fd' has internal linkage but is not defined [-Wundefined-internal]
-clang diag: /app/output/head_I0I39KQwWC/source/head.c:26030:21: warning: function 'usable_st_size' has internal linkage but is not defined [-Wundefined-internal]
-clang diag: /app/output/head_I0I39KQwWC/source/head.c:27735:14: warning: function 'elide_tail_lines_file' has internal linkage but is not defined [-Wundefined-internal]
-clang diag: /app/output/head_I0I39KQwWC/source/head.c:27745:14: warning: function 'head_lines' has internal linkage but is not defined [-Wundefined-internal]
-clang diag: /app/output/head_I0I39KQwWC/source/head.c:27740:14: warning: function 'head_bytes' has internal linkage but is not defined [-Wundefined-internal]
-clang diag: /app/output/head_I0I39KQwWC/source/head.c:27824:18: warning: function 'string_to_integer' has internal linkage but is not defined [-Wundefined-internal]

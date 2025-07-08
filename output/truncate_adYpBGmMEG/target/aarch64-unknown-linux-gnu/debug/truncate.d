@@ -1,1 +1,0 @@
-/app/output/truncate_adYpBGmMEG/target/aarch64-unknown-linux-gnu/debug/truncate: /app/output/truncate_adYpBGmMEG/build.rs /app/output/truncate_adYpBGmMEG/src/main.rs /app/output/truncate_adYpBGmMEG/src/main_func.rs /app/output/truncate_adYpBGmMEG/target/aarch64-unknown-linux-gnu/debug/build/foo-9002df7649ca9c67/out/bindings.rs
