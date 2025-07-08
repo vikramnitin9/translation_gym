@@ -1,0 +1,630 @@
+{
+    "date": "2025-07-07 15:01:50.961658",
+    "args": {
+        "dataset": "split",
+        "model": "claude37",
+        "num_attempts": 5,
+        "output_dir": "/app/output/split_VwT8dziSJi",
+        "verbose": true
+    },
+    "results": [
+        {
+            "unit": "program_name",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "set_program_name",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "bkm_scale",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "bkm_scale_by_power",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "xstrtoimax",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "exit_failure",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "xrealloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "xpalloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "locale_charset",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "c_tolower",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "c_strcasecmp",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "gettext_quote",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "quotearg_buffer_restyled",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "check_nonnull",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "xmalloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "quotearg_n_options",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "quote_quoting_options",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "quote_n_mem",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "quote_n",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "quote",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "xnumtoimax",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "xdectoimax",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "last_component",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "infomap",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "parse_n_units",
+            "type": "functions",
+            "results": "repair_failed",
+            "attempts": 4
+        },
+        {
+            "unit": "to_uchar",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "quote_mem",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "parse_chunk",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "xstrtoumax",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "xnumtoumax",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "xdectoumax",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "proper_name_lite",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "version_etc_copyright",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "version_etc_arn",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "version_etc_va",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "version_etc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "suffix_length",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "suffix_alphabet",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "suffix_auto",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "numeric_suffix_start",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "set_suffix_length",
+            "type": "functions",
+            "results": "repair_failed",
+            "attempts": 4
+        },
+        {
+            "unit": "fd_reopen",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "quoting_options",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "quoting_options_from_style",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "quotearg_n_style",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "quotearg_style",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "fdadvise",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "io_blksize",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "alignalloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "xalignalloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "usable_st_size",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "stat",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "fd_safer",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "_IO_FILE",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "rpl_fflush",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "rpl_fclose",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "input_file_size",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "filter_command",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ignorable",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "open_pipes",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "n_open_pipes",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "closeout",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "irealloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "xirealloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "icalloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "xicalloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "outfile_mid",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "additional_suffix",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "outbase",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "outfile",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "next_file_name",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "open_safer",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "psame_inode",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "open_pipes_alloc",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "in_stat_buf",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "filter_pid",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "verbose",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "default_SIGPIPE",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "create",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "safe_write",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "full_write",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "output_desc",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "elide_empty_files",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "cwrite",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "eolchar",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "infile",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "lines_split",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "bytes_split",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "line_bytes_split",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "bytes_chunk_extract",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "lines_chunk_split",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "ireallocarray",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "xireallocarray",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "xinmalloc",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "xmemdup",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "xstrdup",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ofile_open",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "unbuffered",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "of_info",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "lines_rr",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "longopts",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "Version",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        }
+    ]
+}

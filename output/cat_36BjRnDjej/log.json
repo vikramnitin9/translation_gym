@@ -1,0 +1,300 @@
+{
+    "date": "2025-07-07 12:54:13.015800",
+    "args": {
+        "dataset": "cat",
+        "model": "claude37",
+        "num_attempts": 5,
+        "output_dir": "/app/output/cat_36BjRnDjej",
+        "verbose": true
+    },
+    "results": [
+        {
+            "unit": "program_name",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "set_program_name",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "infomap",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "locale_charset",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "c_tolower",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "c_strcasecmp",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "proper_name_lite",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "version_etc_copyright",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "version_etc_arn",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "version_etc_va",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "version_etc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "io_blksize",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "quoting_options",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "quoting_options_from_style",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "set_char_quoting",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "exit_failure",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "quotearg_buffer_restyled",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "quotearg_n_options",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "quotearg_n_style_colon",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "fdadvise",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "rpl_fcntl",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "utsname",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "rpl_copy_file_range",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "is_ENOTSUP",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "infile",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "input_desc",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "copy_cat",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "alignalloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "xalignalloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "safe_read",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "safe_write",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "full_write",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "fpurge",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "simple_cat",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "write_pending",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "line_num_print",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "line_buf",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "line_num_start",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "line_num_end",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "pending_cr",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "newlines2",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "cat",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "alignfree",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "Version",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "option",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "stat",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "main_0",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        }
+    ]
+}

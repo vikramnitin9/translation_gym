@@ -1,0 +1,342 @@
+{
+    "date": "2025-07-06 01:25:44.037026",
+    "args": {
+        "dataset": "uniq",
+        "model": "claude37",
+        "num_attempts": 5,
+        "output_dir": "/app/output/uniq_vQBgNR9l4z",
+        "verbose": true
+    },
+    "results": [
+        {
+            "unit": "program_name",
+            "type": "globals",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "set_program_name",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "exit_failure",
+            "type": "globals",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "xrealloc",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "xpalloc",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "locale_charset",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "c_tolower",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "c_strcasecmp",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "quote_quoting_options",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "infomap",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "xstrtoimax",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "quoting_options",
+            "type": "structs",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "size_opt",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "proper_name_lite",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "version_etc_copyright",
+            "type": "globals",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "version_etc_arn",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "version_etc_va",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "version_etc",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "freopen_safer",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "fdadvise",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "fadvise",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "initbuffer",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "readlinebuffer_delim",
+            "type": "functions",
+            "results": "repair_failed",
+            "attempts": 4
+        },
+        {
+            "unit": "mcel_isbasic",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "mcel_ch",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "mcel_scan",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "skip_buf_matching",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "check_chars",
+            "type": "globals",
+            "results": "repair_failed",
+            "attempts": 2
+        },
+        {
+            "unit": "skip_chars",
+            "type": "globals",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "skip_fields",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "find_field",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "ignore_case",
+            "type": "globals",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "different",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "linebuffer",
+            "type": "structs",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "swap_lines",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        },
+        {
+            "unit": "count_occurrences",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "output_later_repeated",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "output_first_repeated",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "output_unique",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "writeline",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "clear_ungetc_buffer_preserving_position",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "rpl_fflush",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "rpl_fclose",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "delimit_groups",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "grouping",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "check_file",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "Version",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "grouping_method_string",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "grouping_method_map",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "delimit_method_map",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "longopts",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "delimit_method_string",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "argmatch_die",
+            "type": "globals",
+            "results": "repair_failed",
+            "attempts": 1
+        },
+        {
+            "unit": "main_0",
+            "type": "functions",
+            "results": "No translation generated",
+            "attempts": 0
+        }
+    ]
+}
