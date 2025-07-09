@@ -80,6 +80,9 @@ ENV PARSEC_BUILD_DIR=/app/tools/parsec/build
 RUN cd /app/tools/parserust && \
     cargo install --debug --locked --path . --force
 
+RUN cd /app/tools/metrics && \
+    cargo install --debug --locked --path . --force
+
 COPY --chown=${USER_ID}:${GROUP_ID} resources resources/
 
 USER appuser

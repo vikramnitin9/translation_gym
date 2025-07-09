@@ -228,6 +228,7 @@ class DefaultOrchestrator(Orchestrator):
             unit_ordering = list(reversed(list(nx.topological_sort(subgraph))))
         except nx.NetworkXUnfeasible:
             unit_ordering = list(nx.dfs_postorder_nodes(subgraph, source='main_0'))
+            
         for unit_name in unit_ordering:
             # The translator will call `update_state` if the translation is successful,
             # which gets the latest static analysis results and rebuilds the dependency graph.
