@@ -3,10 +3,10 @@ SRCS := $(wildcard *.c)
 OBJS := $(SRCS:.c=.o)
 
 .PHONY: all
-all: clean truncate
+all: clean $(OBJS)
 
-truncate: $(OBJS)
-	clang $^ -o $@
+# truncate: $(OBJS)
+# 	clang $^ -o $@
 
 %.o: %.c
 	clang $(CFLAGS) -c $< -o $@

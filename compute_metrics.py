@@ -33,12 +33,12 @@ def parse_metrics_output(metrics_output):
     for line in metrics_output.split('\n'):
         
         # If the line is of the format "Unsafe spans: <num>", extract the num
-        unsafe_spans = re.match(r'Unsafe lines: (\d+)', line)
-        if unsafe_spans:
-            if 'unsafe_spans' in metrics:
-                metrics['unsafe_spans'] += int(unsafe_spans.group(1))
+        unsafe_lines = re.match(r'Unsafe lines: (\d+)', line)
+        if unsafe_lines:
+            if 'unsafe_lines' in metrics:
+                metrics['unsafe_lines'] += int(unsafe_lines.group(1))
             else:
-                metrics['unsafe_spans'] = int(unsafe_spans.group(1))
+                metrics['unsafe_lines'] = int(unsafe_lines.group(1))
 
         unsafe_calls = re.match(r'Unsafe calls: (\d+)', line)
         if unsafe_calls:
@@ -89,13 +89,65 @@ if __name__ == "__main__":
             dir = dir.name
             print(f"Processing {dir}...")
             os.chdir(root_dir)
-            subdir = Path('output/{}'.format(dir))
+            subdir = Path('output/{}'.format(dir)).absolute()
             os.chdir(subdir)
+            c_build_path = subdir / "source"
+            if not c_build_path.exists():
+                print(f"Error: {c_build_path} does not exist")
+                continue
+
+            compile_commands_json = c_build_path / "compile_commands.json"
+            if not compile_commands_json.exists():
+                cwd = os.getcwd()
+                # Generate compile_commands.json using bear
+                os.chdir(c_build_path)
+                # Get the output of bear --version
+                try:
+                    bear_version = run("bear --version")
+                except RuntimeError as e:
+                    print(f"Error: Unable to get bear version. {e}")
+                    continue
+                version = bear_version.split()[1]
+                major, _, _ = version.split('.')
+                if int(major) >= 3:
+                    cmd = 'make clean && bear -- make'
+                else:
+                    cmd = "make clean && bear make"
+                try:
+                    run(cmd)
+                except RuntimeError as e:
+                    print(f"Error: Unable to run bear. {e}")
+                finally:
+                    os.chdir(cwd)
+
+            if not compile_commands_json.exists():
+                print(f"Error: {compile_commands_json} does not exist after running bear. Something wrong.")
+                continue
+            
+            print("Generated compile_commands.json")
+
+            # Next, compile the C code
+            cwd = os.getcwd()
+            # Check if PARSEC_BUILD_DIR is set
+            parsec_build_dir = os.environ.get('PARSEC_BUILD_DIR')
+            if parsec_build_dir is None:
+                print("Error: $PARSEC_BUILD_DIR not set.")
+                continue
+            try:
+                os.chdir(c_build_path)
+                run(f'{parsec_build_dir}/parsec --rename-main=true --add-instr=False *.c', timeout=60)
+            except RuntimeError as e:
+                print(f"Error compiling C code: {e}")
+                continue
+            finally:
+                print("Compiled C code")
+                os.chdir(cwd)
+
             try:
                 cmd = f'C_BUILD_PATH="$(pwd)/source" RUSTFLAGS="-Awarnings" cargo metrics{filter_arg}'
                 metrics_output = run(cmd)
             except RuntimeError as e:
-                print(f"Error in {subdir}: \n{e}")
+                print(f"Error running cargo metrics for {subdir}: \n{e}")
                 continue
             os.chdir(root_dir)
 

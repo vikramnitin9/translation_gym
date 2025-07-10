@@ -34,12 +34,15 @@ fn main() {
     let cargo_manifest_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
     let c_build_path = env::var("C_BUILD_PATH").expect("C_BUILD_PATH not set");
 
+    // This build script assumes that the C program has already been built into a static library,
+    // and there is a compile_commands.json
+
     // Go through {c_build_path}/compile_commands.json, get the list of files
     let compile_commands_path = PathBuf::from(format!("{}/compile_commands.json", c_build_path));
     let compile_commands = std::fs::read_to_string(compile_commands_path)
-        .expect("Unable to read compile_commands.json");
+        .expect(format!("Unable to read '{}/compile_commands.json'", c_build_path));
     let compile_commands: serde_json::Value = serde_json::from_str(&compile_commands)
-        .expect("Unable to parse compile_commands.json");
+        .expect(format!("Unable to parse '{}/compile_commands.json'", c_build_path));
     let files = compile_commands.as_array().expect("Expected an array");
     let source_paths = files.iter().map(|file| {
         let file = file.as_object().expect("Expected an object");
