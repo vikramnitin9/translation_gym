@@ -5,8 +5,8 @@ OBJS := $(SRCS:.c=.o)
 .PHONY: all
 all: clean $(OBJS)
 
-# head: $(OBJS)
-# 	clang $^ -o $@
+head: $(OBJS)
+	clang $^ -o $@
 
 %.o: %.c
 	clang $(CFLAGS) -c $< -o $@
