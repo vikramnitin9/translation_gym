@@ -1,7 +1,7 @@
-// tools/C_metrics/MetricsVisitorConsumer.h
 #ifndef METRICSVISITORCONSUMER_H
 #define METRICSVISITORCONSUMER_H
 
+#include <unordered_set>
 #include "clang/AST/ASTConsumer.h"
 #include "clang/Frontend/CompilerInstance.h"
 #include "MetricsVisitor.h"
@@ -9,21 +9,19 @@
 
 class MetricsVisitorConsumer : public clang::ASTConsumer {
 public:
-  explicit MetricsVisitorConsumer(clang::ASTContext &Ctx)
-    : Visitor(Ctx)
-  {}
 
-  void HandleTranslationUnit(clang::ASTContext &Ctx) override {
-    Visitor.TraverseDecl(Ctx.getTranslationUnitDecl());
-    llvm::outs()
-      << "pointerDecls: "   << Visitor.pointerDecls   << "\n"
-      << "pointerDerefs: "  << Visitor.pointerDerefs  << "\n"
-      << "casts: "          << Visitor.casts          << "\n"
-      << "calls: "          << Visitor.calls          << "\n";
-  }
+  explicit MetricsVisitorConsumer(clang::ASTContext& Ctx);
+
+
+  MetricsVisitorConsumer(clang::ASTContext& Ctx,
+                         const std::unordered_set<std::string>& Covered);
+
+  void HandleTranslationUnit(clang::ASTContext& Ctx) override;
 
 private:
+
+  static const std::unordered_set<std::string> kEmpty;
   MetricsVisitor Visitor;
 };
 
-#endif // METRICSVISITORCONSUMER_H
+#endif  // METRICSVISITORCONSUMER_H
