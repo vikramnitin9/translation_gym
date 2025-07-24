@@ -86,8 +86,10 @@ USER root
 RUN install -m 0755 /app/tools/C_metrics/build/C_metrics /usr/local/bin/C_metrics
 USER appuser 
 
-
 RUN cd /app/tools/parserust && \
+    cargo install --debug --locked --path . --force
+
+RUN cd /app/tools/metrics && \
     cargo install --debug --locked --path . --force
 
 COPY --chown=${USER_ID}:${GROUP_ID} resources resources/

@@ -1,4 +1,10 @@
 {
+  "urlparser" : {
+    "description": "A simple URL parser",
+    "code_dir": "urlparser",
+    "test_docker_image": "urlparser:latest",
+    "language": "c"
+  },
   "toy" : {
     "description": "A small dataset for testing purposes.",
     "code_dir": "toy",

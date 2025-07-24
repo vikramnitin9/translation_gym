@@ -1,6 +1,17 @@
 version: '3'
 
 services:
+  urlparser:
+    build:
+      context: .
+      dockerfile: ./urlparser/tests/Dockerfile
+      args:
+        USER_ID: "${USER_ID}"
+        GROUP_ID: "${GROUP_ID}"
+    working_dir: /app
+    image: urlparser:latest
+    container_name: urlparser
+
   toy:
     build:
       context: .
