@@ -1,56 +1,72 @@
 {
+  "avl-tree": {
+    "description": "An implementation of an AVL tree",
+    "code_dir": "avl-tree",
+    "test_docker_image": "avl-tree:latest",
+    "language": "c",
+    "instrument": false
+  },
   "urlparser" : {
     "description": "A simple URL parser",
     "code_dir": "urlparser",
     "test_docker_image": "urlparser:latest",
-    "language": "c"
+    "language": "c",
+    "instrument": true
   },
   "toy" : {
     "description": "A small dataset for testing purposes.",
     "code_dir": "toy",
     "test_docker_image": "toy:latest",
-    "language": "c"
+    "language": "c",
+    "instrument": true
   },
   "cat" : {
     "description": "Coreutils cat",
     "code_dir": "coreutils/src_sep/cat/c",
     "test_docker_image": "cat:latest",
-    "language": "c"
+    "language": "c",
+    "instrument": true
   },
   "head" : {
     "description": "Coreutils head",
     "code_dir": "coreutils/src_sep/head/c",
     "test_docker_image": "head:latest",
-    "language": "c"
+    "language": "c",
+    "instrument": true
   },
   "pwd" : {
     "description": "Coreutils pwd",
     "code_dir": "coreutils/src_sep/pwd/c",
     "test_docker_image": "pwd:latest",
-    "language": "c"
+    "language": "c",
+    "instrument": true
   },
   "split" : {
     "description": "Coreutils split",
     "code_dir": "coreutils/src_sep/split/c",
     "test_docker_image": "split:latest",
-    "language": "c"
+    "language": "c",
+    "instrument": true
   },
   "tail" : {
     "description": "Coreutils tail",
     "code_dir": "coreutils/src_sep/tail/c",
     "test_docker_image": "tail:latest",
-    "language": "c"
+    "language": "c",
+    "instrument": true
   },
   "truncate" : {
     "description": "Coreutils truncate",
     "code_dir": "coreutils/src_sep/truncate/c",
     "test_docker_image": "truncate:latest",
-    "language": "c"
+    "language": "c",
+    "instrument": true
   },
   "uniq" : {
     "description": "Coreutils uniq",
     "code_dir": "coreutils/src_sep/uniq/c",
     "test_docker_image": "uniq:latest",
-    "language": "c"
+    "language": "c",
+    "instrument": true
   }
 }

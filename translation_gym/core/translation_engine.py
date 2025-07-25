@@ -46,7 +46,7 @@ class TranslationEngine:
         
         # First compile the source code
         try:
-            self.source_manager.compile(instrument=True, timeout=120) # Instrument first compile
+            self.source_manager.compile(instrument=self.dataset.get("instrument", True), timeout=120) # Instrument first compile
             self.logger.log_success("Compilation succeeded")
         except CompileException as e:
             self.logger.log_failure("Compilation failed")

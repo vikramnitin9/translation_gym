@@ -1,10 +1,10 @@
 CC = clang
 CFLAGS = -Wall -Wextra -std=c11
-SRCS = main.c math_functions.c string_functions.c
+SRCS = avl_bf.c avl_data.c avl_test.c
 OBJS = $(SRCS:.c=.o)
-TARGET = toy
+TARGET = avl-tree-test
 
-all: $(TARGET)
+all: clean $(TARGET)
 
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^

@@ -1,6 +1,17 @@
 version: '3'
 
 services:
+  avl-tree:
+    build:
+      context: .
+      dockerfile: ./avl-tree/Dockerfile
+      args:
+        USER_ID: "${USER_ID}"
+        GROUP_ID: "${GROUP_ID}"
+    working_dir: /app
+    image: avl-tree:latest
+    container_name: avl-tree
+
   urlparser:
     build:
       context: .

@@ -1,4 +1,4 @@
-CC = gcc
+CC = clang
 CFLAGS = -Wall -Wextra -std=c11
 SRCS = url.c test.c
 OBJS = $(SRCS:.c=.o)
@@ -18,7 +18,7 @@ clean:
 macros:
 	@for file in $(SRCS); do \
 		echo "Expanding macros in $$file..."; \
-		gcc $(CFLAGS) -E -CC -P $$file -o $$file.tmp && mv $$file.tmp $$file; \
+		$(CC) $(CFLAGS) -E -CC -P $$file -o $$file.tmp && mv $$file.tmp $$file; \
 	done
 
 .PHONY: all clean macros
