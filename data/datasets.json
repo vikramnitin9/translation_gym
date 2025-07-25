@@ -1,4 +1,11 @@
 {
+  "zopfli": {
+    "description": "Zopfli compression algorithm",
+    "code_dir": "zopfli",
+    "test_docker_image": "zopfli:latest",
+    "language": "c",
+    "instrument": false
+  },
   "avl-tree": {
     "description": "An implementation of an AVL tree",
     "code_dir": "avl-tree",

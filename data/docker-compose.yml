@@ -1,6 +1,17 @@
 version: '3'
 
 services:
+  zopfli:
+    build:
+      context: .
+      dockerfile: ./zopfli/Dockerfile
+      args:
+        USER_ID: "${USER_ID}"
+        GROUP_ID: "${GROUP_ID}"
+    working_dir: /app
+    image: zopfli:latest
+    container_name: zopfli
+    
   avl-tree:
     build:
       context: .
