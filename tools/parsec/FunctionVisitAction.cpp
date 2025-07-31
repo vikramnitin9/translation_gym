@@ -51,6 +51,15 @@ void FunctionVisitAction::EndSourceFileAction() {
       }
     }
 
+    // Merge enums
+    for (const auto &entry : subData["enums"]) {
+        if (std::find_if(data["enums"].begin(), data["enums"].end(),
+        [&entry](const json &e){ return e["name"] == entry["name"]; })
+        == data["enums"].end()) {
+      data["enums"].push_back(entry);
+      }
+    }
+
     // Merge globals
    for (const auto &entry : subData["globals"]) {
     if (std::find_if(data["globals"].begin(), data["globals"].end(),

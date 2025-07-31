@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(C_metrics)
+project(c_metrics)
 
 find_package(LLVM REQUIRED CONFIG)
 find_package(Clang REQUIRED CONFIG)
@@ -15,13 +15,14 @@ set(LLVM_ENABLE_PIC ON)
 set(BUILD_SHARED_LIBS ON)
 set(LLVM_LINK_COMPONENTS Support)
 
-add_executable(C_metrics
-  main_metrics.cpp
+add_executable(c_metrics
+  main.cpp
   MetricsVisitor.cpp
   MetricsVisitorConsumer.cpp
+  ToolActionWrapper.cpp
 )
 
-target_link_libraries(C_metrics
+target_link_libraries(c_metrics
   PRIVATE
     clangAST
     clangBasic

@@ -3,7 +3,7 @@ io_blksize
 version_etc_va
 cat
 set_binary_mode
-main_0
+main
 alignfree
 fdadvise
 copy_cat

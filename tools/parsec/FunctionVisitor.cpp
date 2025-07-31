@@ -140,7 +140,7 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
 
 bool FunctionVisitor::VisitRecordDecl(RecordDecl *record) {
 
-    if (!record->isStruct() || !record->isThisDeclarationADefinition()) {
+    if (!(record->isStruct() || record->isEnum()) || !record->isThisDeclarationADefinition()) {
         return true;
     }
 
@@ -163,7 +163,7 @@ bool FunctionVisitor::VisitRecordDecl(RecordDecl *record) {
     int startCol = startLoc.getSpellingColumnNumber();
     int endCol = endLoc.getSpellingColumnNumber();
 
-    json structData = {
+    json recordData = {
         {"name", record->getNameAsString()},
         {"filename", fileName},
         {"startLine", startLine},
@@ -171,7 +171,10 @@ bool FunctionVisitor::VisitRecordDecl(RecordDecl *record) {
         {"startCol", startCol},
         {"endCol", endCol}
     };
-    this->data["structs"].push_back(structData);
+    if (record->isStruct())
+        this->data["structs"].push_back(recordData);
+    else if (record->isEnum())
+        this->data["enums"].push_back(recordData);
     return true;
 }
 

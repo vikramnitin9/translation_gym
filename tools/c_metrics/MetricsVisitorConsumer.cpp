@@ -15,11 +15,5 @@ MetricsVisitorConsumer::MetricsVisitorConsumer(
 
 void MetricsVisitorConsumer::HandleTranslationUnit(clang::ASTContext& Ctx) {
   Visitor.TraverseDecl(Ctx.getTranslationUnitDecl());
-
-  llvm::outs()
-      << "pointerDecls: "  << Visitor.pointerDecls  << '\n'
-      << "pointerDerefs: " << Visitor.pointerDerefs << '\n'
-      << "casts: "         << Visitor.casts         << '\n'
-      << "calls: "         << Visitor.calls         << '\n'
-      << "unsafeLines: "   << Visitor.unsafeLines   << '\n';
+  data = Visitor.getData();
 }

@@ -6,6 +6,9 @@
 
 #include "clang/AST/ASTContext.h"
 #include "clang/AST/RecursiveASTVisitor.h"
+#include "nlohmann/json.hpp"
+
+using json = nlohmann::json;
 
 namespace clang {
   class VarDecl;
@@ -36,6 +39,8 @@ public:
 
   /* override traversal to detect when we’re inside a covered function */
   bool TraverseFunctionDecl(clang::FunctionDecl *F);
+
+  json getData();
 
   /* public counters */
   int pointerDecls  = 0;

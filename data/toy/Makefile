@@ -4,7 +4,7 @@ SRCS = main.c math_functions.c string_functions.c
 OBJS = $(SRCS:.c=.o)
 TARGET = toy
 
-all: $(TARGET)
+all: $(OBJS)
 
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^

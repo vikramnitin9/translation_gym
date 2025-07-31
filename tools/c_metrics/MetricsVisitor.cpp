@@ -74,3 +74,13 @@ bool MetricsVisitor::VisitCallExpr(CallExpr *) {
   if (inCovered) ++calls;
   return true;
 }
+
+json MetricsVisitor::getData() {
+    json data;
+    data["pointerDecls"]  = pointerDecls;
+    data["pointerDerefs"] = pointerDerefs;
+    data["casts"]         = casts;
+    data["calls"]         = calls;
+    data["unsafeLines"]   = unsafeLines;
+    return data;
+}

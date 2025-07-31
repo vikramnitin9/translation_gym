@@ -67,8 +67,7 @@ RUN rustup component add llvm-tools rustc-dev
 COPY --chown=${USER_ID}:${GROUP_ID} requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY --chown=${USER_ID}:${GROUP_ID} tools/ tools/
-
+COPY --chown=${USER_ID}:${GROUP_ID} tools/parsec tools/parsec
 RUN cd /app/tools/parsec && \
     rm -rf build && \
     mkdir build && \
@@ -77,20 +76,19 @@ RUN cd /app/tools/parsec && \
     make -j 4
 ENV PARSEC_BUILD_DIR=/app/tools/parsec/build
 
-RUN cd /app/tools/C_metrics && \
-    rm -rf build && mkdir build && cd build && \
-    cmake .. && make -j4
-ENV C_METRICS_BUILD_DIR=/app/tools/C_metrics/build
-
-USER root
-RUN install -m 0755 /app/tools/C_metrics/build/C_metrics /usr/local/bin/C_metrics
-USER appuser 
-
+COPY --chown=${USER_ID}:${GROUP_ID} tools/parserust tools/parserust
 RUN cd /app/tools/parserust && \
     cargo install --debug --locked --path . --force
 
+COPY --chown=${USER_ID}:${GROUP_ID} tools/metrics tools/metrics
 RUN cd /app/tools/metrics && \
     cargo install --debug --locked --path . --force
+
+COPY --chown=${USER_ID}:${GROUP_ID} tools/c_metrics tools/c_metrics
+RUN cd /app/tools/c_metrics && \
+    rm -rf build && mkdir build && cd build && \
+    cmake .. && make -j4
+ENV C_METRICS_BUILD_DIR=/app/tools/c_metrics/build
 
 COPY --chown=${USER_ID}:${GROUP_ID} resources resources/
 

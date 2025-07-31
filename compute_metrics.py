@@ -4,6 +4,7 @@ import subprocess
 import re
 import json
 import prettytable
+import functools
 
 def run(command, timeout=120):
 
@@ -27,6 +28,35 @@ def run(command, timeout=120):
         raise RuntimeError(str(e))
 
     return result.stdout.decode('utf-8', errors='ignore')
+
+def parse_c_metrics_output(metrics_output):
+    metrics = {}
+    for line in metrics_output.split('\n'):
+        
+        # If the line is of the format "Unsafe spans: <num>", extract the num
+        unsafe_lines = re.match(r'unsafeLines: (\d+)', line)
+        if unsafe_lines:
+            metrics['c_lines'] = int(unsafe_lines.group(1))
+
+        c_calls = re.match(r'calls: (\d+)', line)
+        if c_calls:
+            metrics['c_calls'] = int(c_calls.group(1))
+
+        c_casts = re.match(r'casts: (\d+)', line)
+        if c_casts:
+            metrics['c_casts'] = int(c_casts.group(1))
+
+        # If the line is of the format "Raw pointer dereferences: <num>", extract the num
+        c_pointer_derefs = re.match(r'pointerDerefs: (\d+)', line)
+        if c_pointer_derefs:
+            metrics['c_pointer_derefs'] = int(c_pointer_derefs.group(1))
+
+        # If the line is of the format "Raw pointer declarations: <num>", extract the num
+        c_pointer_decls = re.match(r'pointerDecls: (\d+)', line)
+        if c_pointer_decls:
+            metrics['c_pointer_decls'] = int(c_pointer_decls.group(1))
+
+    return metrics
 
 def parse_metrics_output(metrics_output):
     metrics = {}
@@ -72,6 +102,69 @@ def parse_metrics_output(metrics_output):
         
     return metrics
 
+def run_c_metrics_for_path(c_code_path, covered_funcs_path=None):
+    """
+    Run c_metrics for the given C code path and covered functions path.
+    """
+    cwd = os.getcwd()
+    if not c_code_path.exists():
+        print(f"Error: {c_code_path} does not exist")
+        return None
+    # Delete compile_commands.json if it exists
+    compile_commands_json = c_code_path / "compile_commands.json"
+    if compile_commands_json.exists():
+        compile_commands_json.unlink()
+    os.chdir(c_code_path)
+    try:
+        bear_version = run("bear --version")
+    except RuntimeError as e:
+        print(f"Error: Unable to get bear version. {e}")
+        os.chdir(cwd)
+        return None
+    version = bear_version.split()[1]
+    major, _, _ = version.split('.')
+    if int(major) >= 3:
+        cmd = 'make clean && bear -- make'
+    else:
+        cmd = "make clean && bear make"
+    try:
+        run(cmd)
+    except RuntimeError as e:
+        print(f"Error: Unable to run bear. {e}")
+    finally:
+        os.chdir(cwd)
+    
+    if not compile_commands_json.exists():
+        print(f"Error: {compile_commands_json} does not exist after running bear. Something wrong.")
+        os.chdir(cwd)
+        return None
+
+    if covered_funcs_path and not covered_funcs_path.exists():
+        print(f"Error: {covered_funcs_path} does not exist")
+        os.chdir(cwd)
+        return None
+    
+    cwd = os.getcwd()
+    # Check if C_METRICS_BUILD_DIR is set
+    c_metrics_build_dir = os.environ.get('C_METRICS_BUILD_DIR')
+    if c_metrics_build_dir is None:
+        print("Error: $C_METRICS_BUILD_DIR not set.")
+        os.chdir(cwd)
+        return None
+    try:
+        os.chdir(c_code_path)
+        covered_funcs_arg = f"--covered-functions {covered_funcs_path} " if covered_funcs_path else ""
+        c_metrics_output = run(f'{c_metrics_build_dir}/c_metrics {covered_funcs_arg}*.c')
+    except RuntimeError as e:
+        print(f"Error running c_metrics: {e}")
+        os.chdir(cwd)
+        return None
+    finally:
+        print(f"Ran c_metrics in {c_code_path}")
+        os.chdir(cwd)
+    
+    return parse_c_metrics_output(c_metrics_output)
+
 if __name__ == "__main__":
 
     all_metrics = {}
@@ -82,87 +175,72 @@ if __name__ == "__main__":
         filter_arg = ' -- -Zselected-fns-file="../covered_funcs.txt"'
     else:
         filter_arg = ''
+    
+    dataset_json_path = Path('data/datasets.json')
+    if not dataset_json_path.exists():
+        print(f"Error: {dataset_json_path} does not exist")
+        exit(1)
+    dataset_json = json.loads(dataset_json_path.read_text())
 
     # Go to each directory in output/{}
     for dir in Path('output').glob('*'):
         if not dir.is_file():
             dir = dir.name
             print(f"Processing {dir}...")
+            dataset_name = dir.split('_')[0]
+            if dataset_name not in dataset_json:
+                print(f"Error: {dataset_name} not found in datasets.json")
+                continue
             os.chdir(root_dir)
+            if dataset_name not in all_metrics:
+                print("Running C metrics in the original directory to get 'before' metrics...")
+                c_code_path = root_dir / "data" / dataset_json[dataset_name]['code_dir']
+                if dataset_json[dataset_name]['covered_fn_list'] is None:
+                    covered_funcs_path = None
+                else:
+                    covered_funcs_path = (root_dir / "data" / dataset_json[dataset_name]['covered_fn_list']).absolute()
+                metrics_output = run_c_metrics_for_path(c_code_path, covered_funcs_path)
+                if metrics_output is None:
+                    print(f"Error running C metrics in {c_code_path}")
+                else:
+                    all_metrics[dataset_name] = metrics_output
+
             subdir = Path('output/{}'.format(dir)).absolute()
             os.chdir(subdir)
             c_build_path = subdir / "source"
-            if not c_build_path.exists():
-                print(f"Error: {c_build_path} does not exist")
-                continue
 
-            compile_commands_json = c_build_path / "compile_commands.json"
-            if not compile_commands_json.exists():
-                cwd = os.getcwd()
-                # Generate compile_commands.json using bear
-                os.chdir(c_build_path)
-                # Get the output of bear --version
-                try:
-                    bear_version = run("bear --version")
-                except RuntimeError as e:
-                    print(f"Error: Unable to get bear version. {e}")
-                    continue
-                version = bear_version.split()[1]
-                major, _, _ = version.split('.')
-                if int(major) >= 3:
-                    cmd = 'make clean && bear -- make'
-                else:
-                    cmd = "make clean && bear make"
-                try:
-                    run(cmd)
-                except RuntimeError as e:
-                    print(f"Error: Unable to run bear. {e}")
-                finally:
-                    os.chdir(cwd)
-
-            if not compile_commands_json.exists():
-                print(f"Error: {compile_commands_json} does not exist after running bear. Something wrong.")
+            if dataset_json[dataset_name]['covered_fn_list'] is None:
+                covered_funcs_path = None
+            else:
+                covered_funcs_path = (root_dir / "data" / dataset_json[dataset_name]['covered_fn_list']).absolute()
+            metrics_output = run_c_metrics_for_path(c_build_path, covered_funcs_path)
+            if metrics_output is None:
+                print(f"Error running C metrics in {c_build_path}")
                 continue
+            all_metrics[dir] = metrics_output
             
-            print("Generated compile_commands.json")
-
-            # Next, compile the C code
-            cwd = os.getcwd()
-            # Check if PARSEC_BUILD_DIR is set
-            parsec_build_dir = os.environ.get('PARSEC_BUILD_DIR')
-            if parsec_build_dir is None:
-                print("Error: $PARSEC_BUILD_DIR not set.")
-                continue
-            try:
-                os.chdir(c_build_path)
-                run(f'{parsec_build_dir}/parsec --rename-main=true --add-instr=False *.c', timeout=60)
-            except RuntimeError as e:
-                print(f"Error compiling C code: {e}")
-                continue
-            finally:
-                print("Compiled C code")
-                os.chdir(cwd)
-
             try:
                 cmd = f'C_BUILD_PATH="$(pwd)/source" RUSTFLAGS="-Awarnings" cargo metrics{filter_arg}'
                 metrics_output = run(cmd)
             except RuntimeError as e:
                 print(f"Error running cargo metrics for {subdir}: \n{e}")
                 continue
-            os.chdir(root_dir)
+            finally:
+                print(f"Ran Rust metrics in {subdir}")
+                os.chdir(root_dir)
 
-            all_metrics[dir] = parse_metrics_output(metrics_output)
+            all_metrics[dir].update(parse_metrics_output(metrics_output))
             
     # Write this dict to json
-    with open('metrics.json', 'w') as f:
+    with open((root_dir / "output" / "metrics.json"), 'w') as f:
         json.dump(all_metrics, f, indent=4)
-
+    
     # Print the metrics in a table format
     table = prettytable.PrettyTable()
-    value = next(iter(all_metrics.values()))
-    keys = list(value.keys())
+    value = functools.reduce(lambda a, b: a | b, [set(values.keys()) for values in all_metrics.values()])
+    keys = sorted(list(value))
     table.field_names = ["Folder"] + keys
     for dir, metrics in all_metrics.items():
-        table.add_row([dir] + [metrics[key] for key in keys])
+        table.add_row([dir] + [metrics.get(key, "-") for key in keys])
 
     print(table)
