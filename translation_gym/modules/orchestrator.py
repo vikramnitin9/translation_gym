@@ -50,6 +50,8 @@ class DefaultOrchestrator(Orchestrator):
         # But to make it more robust, we might want to detect the name from `translation`.
         if unit['type'] in ['functions', 'structs']:
             self.translation_map[unit['name']] = unit['name'] + "_rust"
+        elif unit['type'] == 'enums':
+            self.translation_map[unit['name']] = unit['name'].capitalize() + "_rust"
         elif unit['type'] == 'globals':
             self.translation_map[unit['name']] = f"{''.join([s.capitalize() for s in unit['name'].split('_')])}Wrapper"
         else:
@@ -120,13 +122,13 @@ class DefaultOrchestrator(Orchestrator):
                 return None
             unit['binding'] = self.target_manager.extract_source(binding)
 
-        # The remaining steps are only relevant for functions
-        if unit['type'] != 'functions':
+        # The remaining steps are only relevant for functions or structs
+        if unit['type'] not in ['functions', 'structs']:
             return unit
         
         # Reset all the attributes that we will fill in later
-        unit['functions'], unit['structs'], unit['globals'] = [], [], []
-        
+        unit['functions'], unit['structs'], unit['globals'], unit['enums'] = [], [], [], []
+
         # Get all the neighboring nodes in the dependency graph
         for dep_name in self.dep_graph.neighbors(unit_name):
             dep = self.dep_graph.nodes[dep_name]
@@ -164,11 +166,11 @@ class DefaultOrchestrator(Orchestrator):
 
         self.dep_graph = nx.DiGraph()
         
-        for unit_type in ['functions', 'structs', 'globals']:
+        for unit_type in ['functions', 'structs', 'globals', 'enums']:
             for unit in self.source_static_analysis[unit_type]:
                 self.dep_graph.add_node(unit['name'], type=unit_type, language='source')
 
-        for unit_type in ['functions', 'structs', 'globals']:
+        for unit_type in ['functions', 'structs', 'globals', 'enums']:
             for unit in self.target_static_analysis[unit_type]:
                 # Skip foreign units, as they represent bindings to the source language
                 if unit['foreign']:
@@ -180,12 +182,27 @@ class DefaultOrchestrator(Orchestrator):
                 continue
             qname = func['name']
             func_node = self.dep_graph.nodes[qname]
-            for dep_type in ['functions', 'globals', 'structs']:
+            for dep_type in ['functions', 'globals', 'structs', 'enums']:
                 for dep in func[dep_type]:
                     qdep = dep['name']
                     if qdep not in self.dep_graph:
                         # If the dependency is not in the graph, add it
                         self.dep_graph.add_node(qdep, type=dep_type, language=func_node['language'])
+                    self.dep_graph.add_edge(qname, qdep)
+        
+        for struct in self.source_static_analysis['structs'] + self.target_static_analysis['structs']:
+            if 'foreign' in struct and struct['foreign']:
+                continue
+            qname = struct['name']
+            struct_node = self.dep_graph.nodes[qname]
+            for dep_type in ['structs', 'enums']:
+                if dep_type not in struct:
+                    continue
+                for dep in struct[dep_type]:
+                    qdep = dep['name']
+                    if qdep not in self.dep_graph:
+                        # If the dependency is not in the graph, add it
+                        self.dep_graph.add_node(qdep, type=dep_type, language=struct_node['language'])
                     self.dep_graph.add_edge(qname, qdep)
         
         

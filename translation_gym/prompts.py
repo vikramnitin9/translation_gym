@@ -11,8 +11,17 @@ def construct_prompt_for_func(func):
     {'source': 'C function body',
      'name': 'function name',
      'functions': [{'name': 'called function name',
-                          'binding': 'Signature of Rust FFI binding',
-                          'translated': 'Signature of translated version of function'}],
+                    'binding': 'Signature of Rust FFI binding',
+                    'translated': 'Signature of translated version of function'}],
+     'structs': [{'name': 'struct name',
+                  'binding': 'Rust FFI binding',
+                  'translated': 'Translated version of struct'}],
+     'enums':   [{'name': 'enum name',
+                  'binding': 'Rust FFI binding',
+                  'translated': 'Translated version of enum'}],
+     'globals': [{'name': 'global variable name',
+                  'binding': 'Rust FFI binding',
+                  'translated': 'Translated version of global variable'}],
      'imports': ['import1', 'import2']}
     :return: The prompt string
     """
@@ -45,6 +54,20 @@ def construct_prompt_for_func(func):
             structDesc += f"```rust\n{struct['binding']}\n```\n"
         else:
             structDesc += f"{i+1}. {struct['name']}. This struct is not accessible to you, so you need to use a substitute.\n"
+
+    if len(func['enums']) == 0:
+        enumDesc = ""
+    else:
+        enumDesc = "This function uses the following enums:\n"
+    for i, enum in enumerate(func['enums']):
+        if 'translated' in enum:
+            enumDesc += f"{i+1}. {enum['name']}. This has a Rust reimplementation, with this definition:\n"
+            enumDesc += f"```rust\n{enum['translated']}\n```\n"
+        elif 'binding' in enum:
+            enumDesc += f"{i+1}. {enum['name']}. This has a Rust FFI binding to a C implementation, with this definition:\n"
+            enumDesc += f"```rust\n{enum['binding']}\n```\n"
+        else:
+            enumDesc += f"{i+1}. {enum['name']}. This enum is not accessible to you, so you need to use a substitute.\n"
 
     if len(func['globals']) == 0:
         globalDesc = ""
@@ -80,6 +103,7 @@ def construct_prompt_for_func(func):
 ```
 {calledFunctionDesc}
 {structDesc}
+{enumDesc}
 {globalDesc}
 As far as possible, avoid raw pointers and unsafe function calls, and use only safe Rust. Also avoid libc types and use Rust native types instead.
 Avoid using bindings to C functions and structs as far as possible, and use the Rust reimplementations if available.
@@ -130,6 +154,20 @@ def construct_prompt_for_struct(struct):
         importDesc = f"The Rust file where this struct will be inserted already has the following imports:\n```rust\n{'\n'.join(struct['imports'])}\n```\n"
         importDesc += "Do not repeat them in the <IMPORTS>...</IMPORTS> section, otherwise this will lead to duplicate imports.\n"
 
+    if len(struct['structs']) == 0 and len(struct['enums']) == 0:
+        typeDesc = ""
+    else:
+        typeDesc = "This structure uses the following subtypes:\n"
+    for i, subtype in enumerate(struct.get('structs', []) + struct.get('enums', [])):
+        if 'translated' in subtype:
+            typeDesc += f"{i+1}. {subtype['name']}. This has a Rust reimplementation, with this definition:\n"
+            typeDesc += f"```rust\n{subtype['translated']}\n```\n"
+        elif 'binding' in subtype:
+            typeDesc += f"{i+1}. {subtype['name']}. This has a Rust FFI binding to a C implementation, with this definition:\n"
+            typeDesc += f"```rust\n{subtype['binding']}\n```\n"
+        else:
+            typeDesc += f"{i+1}. {subtype['name']}. This subtype is not accessible to you, so you need to use a substitute.\n"
+
     prompt = f'''Translate the following C struct to idiomatic Rust:
 ```c
 {struct['source']}
@@ -138,6 +176,7 @@ The struct should be a `struct` in Rust, and the fields should be `pub` so that 
 The name of the Rust struct should be `{struct['name']}_rust`.
 Make sure to use idiomatic Rust types instead of C types. Avoid libc types and use Rust native types instead.
 For example, replace `int` with `i32`, `char*` with `String`, etc.
+{typeDesc}
 If you need imports, you can add them in the <IMPORTS>...</IMPORTS> section. Do not provide them along with the struct source.
 {importDesc}
 
@@ -196,5 +235,42 @@ impl {''.join([s.capitalize() for s in glob['name'].split('_')])}Wrapper {{
 ...
 }}
 </STRUCT>
+'''
+    return prompt
+
+
+def construct_prompt_for_enum(enum):
+    """
+    Constructs the prompt for translating a C enum to Rust.
+    :param enum: The enum to be translated
+    {'source': 'C enum body',
+     'name': 'enum name'}
+    :return: The prompt string
+    """
+
+    if len(enum['imports']) == 0:
+        importDesc = ""
+    else:
+        importDesc = f"The Rust file where this enum will be inserted already has the following imports:\n```rust\n{'\n'.join(enum['imports'])}\n```\n"
+        importDesc += "Do not repeat them in the <IMPORTS>...</IMPORTS> section, otherwise this will lead to duplicate imports.\n"
+
+    prompt = f'''Translate the following C enum to idiomatic Rust:
+```c
+{enum['source']}
+```
+The name of the Rust enum should be `{enum['name'].capitalize()}_rust`. The names of the variants should be the same as the C enum variants, except with the first letter capitalized (if it is not already).
+Make sure to use idiomatic Rust types instead of C types. Avoid libc types and use Rust native types instead.
+For example, replace `int` with `i32`, `char*` with `String`, etc.
+If you need imports, you can add them in the <IMPORTS>...</IMPORTS> section. Do not provide them along with the enum source.
+{importDesc}
+
+Follow this format:
+<IMPORTS>
+Any imports you need for {enum['name'].capitalize()}_rust. Can be empty.
+</IMPORTS>
+<ENUM>
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum {enum['name'].capitalize()}_rust ...
+</ENUM>
 '''
     return prompt

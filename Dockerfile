@@ -67,15 +67,6 @@ RUN rustup component add llvm-tools rustc-dev
 COPY --chown=${USER_ID}:${GROUP_ID} requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY --chown=${USER_ID}:${GROUP_ID} tools/parsec tools/parsec
-RUN cd /app/tools/parsec && \
-    rm -rf build && \
-    mkdir build && \
-    cd build && \
-    cmake .. && \
-    make -j 4
-ENV PARSEC_BUILD_DIR=/app/tools/parsec/build
-
 COPY --chown=${USER_ID}:${GROUP_ID} tools/parserust tools/parserust
 RUN cd /app/tools/parserust && \
     cargo install --debug --locked --path . --force
@@ -89,6 +80,15 @@ RUN cd /app/tools/c_metrics && \
     rm -rf build && mkdir build && cd build && \
     cmake .. && make -j4
 ENV C_METRICS_BUILD_DIR=/app/tools/c_metrics/build
+
+COPY --chown=${USER_ID}:${GROUP_ID} tools/parsec tools/parsec
+RUN cd /app/tools/parsec && \
+    rm -rf build && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    make -j 4
+ENV PARSEC_BUILD_DIR=/app/tools/parsec/build
 
 COPY --chown=${USER_ID}:${GROUP_ID} resources resources/
 

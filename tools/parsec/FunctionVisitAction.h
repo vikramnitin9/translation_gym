@@ -23,10 +23,11 @@ class FunctionVisitAction : public EmitLLVMOnlyAction {
             : EmitLLVMOnlyAction(), config(config) {
                 
             data = {
-                {"files", json::array()},
-                {"functions", json::array()},
-                {"structures", json::array()},
-                {"globals",    json::array()}
+                {"files",       json::array()},
+                {"functions",   json::array()},
+                {"structs",     json::array()},
+                {"globals",    json::array()},
+                {"enums",      json::array()}
             };
         }
             

@@ -98,6 +98,7 @@ pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
     let mut funcs_json: Vec<serde_json::Value> = vec![];
     let mut globals_json: Vec<serde_json::Value> = vec![];
     let mut structs_json: Vec<serde_json::Value> = vec![];
+    let mut enums_json: Vec<serde_json::Value> = vec![];
 
     for file in visitor.files.iter() {
         let fname = file.to_str().unwrap_or("<unknown>").to_string();
@@ -135,6 +136,7 @@ pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
             "functions": [],
             "globals": [],
             "structs": [],
+            "enums": [],
             "foreign": func_info.foreign,
         });
 
@@ -164,6 +166,12 @@ pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
                 "name": tcx.item_name(*struct_defid).to_string(),
             });
             this_func_json["structs"].as_array_mut().unwrap().push(struct_json);
+        }
+        for (enum_defid, enum_span) in func_info.enums.iter() {
+            let enum_json = json!({
+                "name": tcx.item_name(*enum_defid).to_string(),
+            });
+            this_func_json["enums"].as_array_mut().unwrap().push(enum_json);
         }
         funcs_json.push(this_func_json);
     }
@@ -197,12 +205,28 @@ pub fn analyze(&tcx: &TyCtxt<'_>, config: ParseConfig) {
         });
         structs_json.push(struct_json);
     }
+
+    for (enum_defid, enum_span) in visitor.enums.iter() {
+        let ((fname, start_line, start_col), (_, end_line, end_col)) = span_to_data(tcx, &enum_span);
+        let foreign = fname.ends_with("bindings.rs"); // This is a quick fix for now but needs a better solution
+        let enum_json = json!({
+            "name": tcx.item_name(*enum_defid).to_string(),
+            "filename": fname,
+            "startLine": start_line,
+            "startCol": start_col,
+            "endLine": end_line,
+            "endCol": end_col,
+            "foreign": foreign,
+        });
+        enums_json.push(enum_json);
+    }
     
     let json_output = json!({
         "files": files_json,
         "functions": funcs_json,
         "globals": globals_json,
         "structs": structs_json,
+        "enums": enums_json,
     });
     // Write the json to a file
     let stringified_json = serde_json::to_string_pretty(&json_output).unwrap();

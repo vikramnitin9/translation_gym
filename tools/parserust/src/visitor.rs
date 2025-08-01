@@ -48,6 +48,7 @@ pub struct FnInfo {
     pub foreign: bool,
     pub globals: HashMap<DefId, Span>,
     pub structs: HashMap<DefId, Span>,
+    pub enums: HashMap<DefId, Span>,
     pub impl_id: Option<DefId>, // the impl id if this is a method
 }
 
@@ -61,6 +62,8 @@ pub struct CallgraphVisitor<'tcx> {
     pub globals: HashMap<DefId, Span>,
     // structs
     pub structs: HashMap<DefId, Span>,
+    // enums
+    pub enums: HashMap<DefId, Span>,
     // trait method declarations without default implementation
     pub method_decls: HashSet<DefId>,
     // map decls to impls
@@ -86,6 +89,7 @@ impl<'tcx> CallgraphVisitor<'tcx> {
             functions: HashMap::new(),
             globals: HashMap::new(),
             structs: HashMap::new(),
+            enums: HashMap::new(),
             method_decls: HashSet::new(),
             method_impls: HashMap::new(),
             static_calls: HashSet::new(),
@@ -263,7 +267,13 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
         match item.kind {
             rustc_hir::ItemKind::Fn(fn_sig, _, _) => {
                 let def_id = hir_id.owner.to_def_id();
-                self.functions.insert(def_id, FnInfo{span: item.span, sig_span: fn_sig.span, foreign: false, globals: HashMap::new(), structs: HashMap::new(), impl_id: None});
+                self.functions.insert(def_id, FnInfo{span: item.span,
+                                                     sig_span: fn_sig.span,
+                                                     foreign: false,
+                                                     globals: HashMap::new(),
+                                                     structs: HashMap::new(),
+                                                     enums: HashMap::new(),
+                                                     impl_id: None});
                 push_walk_pop!(self, def_id, intravisit::walk_item(self, item));
                 return;
             },
@@ -289,7 +299,7 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
             rustc_hir::ItemKind::Enum(..) => {
                 // enums
                 let def_id = hir_id.owner.to_def_id();
-                self.structs.insert(def_id, item.span);
+                self.enums.insert(def_id, item.span);
             },
             _ => {}
         }
@@ -312,7 +322,13 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
             rustc_hir::TraitItemKind::Fn(fn_sig, rustc_hir::TraitFn::Provided(_)) => {
                 // a method decl and def
                 self.method_decls.insert(def_id);
-                self.functions.insert(def_id, FnInfo{span: ti.span, sig_span: fn_sig.span, foreign: false, globals: HashMap::new(), structs: HashMap::new(), impl_id: None});
+                self.functions.insert(def_id, FnInfo{span: ti.span,
+                                                     sig_span: fn_sig.span,
+                                                     foreign: false,
+                                                     globals: HashMap::new(),
+                                                     structs: HashMap::new(),
+                                                     enums: HashMap::new(),
+                                                     impl_id: None});
                 self.method_impls.entry(def_id).or_default().push(def_id);
 
                 push_walk_pop!(self, def_id, intravisit::walk_trait_item(self, ti));
@@ -345,7 +361,13 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
                 }
             }
 
-            self.functions.insert(def_id, FnInfo{span: ii.span, sig_span: fn_sig.span, foreign: false, globals: HashMap::new(), structs: HashMap::new(), impl_id: decl_id});
+            self.functions.insert(def_id, FnInfo{span: ii.span,
+                                                 sig_span: fn_sig.span,
+                                                 foreign: false,
+                                                 globals: HashMap::new(),
+                                                 structs: HashMap::new(),
+                                                 enums: HashMap::new(),
+                                                 impl_id: decl_id});
 
             push_walk_pop!(self, def_id, intravisit::walk_impl_item(self, ii));
 
@@ -365,7 +387,13 @@ impl<'tcx> intravisit::Visitor<'tcx> for CallgraphVisitor<'tcx> {
         match fi.kind {
             rustc_hir::ForeignItemKind::Fn(..) => {
                 // The signature is the same as the function because there is no body
-                self.functions.insert(def_id, FnInfo{span: fi.span, sig_span: fi.span, foreign: true, globals: HashMap::new(), structs: HashMap::new(), impl_id: None});
+                self.functions.insert(def_id, FnInfo{span: fi.span,
+                                                     sig_span: fi.span,
+                                                     foreign: true,
+                                                     globals: HashMap::new(),
+                                                     structs: HashMap::new(),
+                                                     enums: HashMap::new(),
+                                                     impl_id: None});
                 push_walk_pop!(self, def_id, intravisit::walk_foreign_item(self, fi));
                 return;
             }

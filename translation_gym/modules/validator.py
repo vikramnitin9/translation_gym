@@ -50,6 +50,9 @@ class DefaultValidator(Validator):
         elif unit['type'] == 'structs' or unit['type'] == 'globals':
             target_manager.insert_translation(unit, translation['struct'])
             target_manager.insert_imports(unit, translation['imports'])
+        elif unit['type'] == 'enums':
+            target_manager.insert_translation(unit, translation['enum'])
+            target_manager.insert_imports(unit, translation['imports'])
         else:
             raise NotImplementedError(f"Translation not implemented for {unit['type']}")
         

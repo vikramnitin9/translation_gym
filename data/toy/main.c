@@ -32,8 +32,8 @@ int main(void) {
     // Check the counter
     check_counter();
 
-    struct Point p = {5, 3};
-    struct Point q = {9, 1};
+    struct Point p = {5, 3, RED};
+    struct Point q = {9, 1, GREEN};
     struct Point mid = midpoint(p, q);
 
     printf("Sum: %d\n", add( p.x, p.y ));

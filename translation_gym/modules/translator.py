@@ -76,6 +76,8 @@ class DefaultTranslator(Translator):
             translation_prompt = construct_prompt_for_struct(unit)
         elif unit['type'] == 'globals':
             translation_prompt = construct_prompt_for_global(unit)
+        elif unit['type'] == 'enums':
+            translation_prompt = construct_prompt_for_enum(unit)
         else:
             raise NotImplementedError("Translation not implemented for this unit type")
 
@@ -128,6 +130,17 @@ class DefaultTranslator(Translator):
                     struct_trans = struct_trans.replace('```rust', '').replace('```', '').strip()
                     return {
                         'struct': struct_trans,
+                        'imports': imports,
+                    }
+                elif unit['type'] == 'enums':
+                    if '<ENUM>\n' not in response:
+                        self.logger.log_failure("Response does not contain <ENUM> tag. Trying again.")
+                        continue
+                    enum_trans = response.split('<ENUM>\n')[1].split('</ENUM>')[0]
+                    # Remove any ```rust and ``` tags
+                    enum_trans = enum_trans.replace('```rust', '').replace('```', '').strip()
+                    return {
+                        'enum': enum_trans,
                         'imports': imports,
                     }
 

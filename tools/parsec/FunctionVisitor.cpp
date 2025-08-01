@@ -18,9 +18,19 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
     // Clear last-function’s deps
     currentGlobals.clear();
     currentStructs.clear();
+    currentEnums.clear();
+
 
     // Traverse the function body to collect calls, globals, structs
     RecursiveASTVisitor<FunctionVisitor>::TraverseStmt(function->getBody());
+
+    // Print currentStructs, currentEnums, and currentGlobals
+    for (const auto &s : currentStructs) {
+    }
+    for (const auto &e : currentEnums) {
+    }
+    for (const auto &g : currentGlobals) {
+    }
     
     if (config.renameMainFunction && functionName == "main") {
         // Here we are assuming that `main` is not called by any other functions
@@ -103,18 +113,18 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
 
         // Add this info to the json data
         json functionData = {
-                {"name", functionName},
-                {"signature", signature},
-                {"num_args", function->getNumParams()},
-                {"argTypes", argTypes},
-                {"argNames", argNames},
-                {"returnType", returnType},
-                {"filename", fileName},
-                {"startLine", startLine},
-                {"endLine", endLine},
-                {"startCol", startCol},
-                {"endCol", endCol},
-                {"functions", json::array()}
+                {"name",        functionName},
+                {"signature",   signature},
+                {"num_args",    function->getNumParams()},
+                {"argTypes",    argTypes},
+                {"argNames",    argNames},
+                {"returnType",  returnType},
+                {"filename",    fileName},
+                {"startLine",   startLine},
+                {"endLine",     endLine},
+                {"startCol",    startCol},
+                {"endCol",      endCol},
+                {"functions",   json::array()}
         };
     
         json global_arr = json::array();
@@ -133,21 +143,41 @@ bool FunctionVisitor::VisitFunctionDecl(FunctionDecl *function) {
         }
         functionData["structs"] = std::move(struct_arr);
 
+        json enum_arr = json::array();
+        for (auto &n : currentEnums) {
+            json obj;
+            obj["name"] = n;
+            enum_arr.push_back(std::move(obj));
+        }
+        functionData["enums"] = std::move(enum_arr);
+
         this->data["functions"].push_back(functionData);
     }
     return true;
 }
 
-bool FunctionVisitor::VisitRecordDecl(RecordDecl *record) {
+bool FunctionVisitor::VisitTagDecl(TagDecl *tag) {
 
-    if (!(record->isStruct() || record->isEnum()) || !record->isThisDeclarationADefinition()) {
+    if (!(tag->isStruct() || tag->isEnum()) || !tag->isThisDeclarationADefinition()) {
         return true;
+    }
+    
+    // Struct declarations can depend on other structs and enums
+    if (tag->isStruct()) {
+        currentStructs.clear();
+        currentEnums.clear();
+        // Traverse this declaration's fields to collect referenced enums and structs
+        if (const auto *RD = dyn_cast<RecordDecl>(tag)) {
+            for (FieldDecl *FD : RD->fields()) {
+                FunctionVisitor::TraverseDecl(FD); // This triggers VisitTypeLoc()
+            }
+        }
     }
 
     SourceManager &SM = context->getSourceManager();
-    SourceLocation startLocation = SM.getFileLoc(record->getBeginLoc());
+    SourceLocation startLocation = SM.getFileLoc(tag->getBeginLoc());
     FullSourceLoc startLoc = context->getFullLoc(startLocation);
-    FullSourceLoc endLoc = context->getFullLoc(SM.getFileLoc(record->getEndLoc()));
+    FullSourceLoc endLoc = context->getFullLoc(SM.getFileLoc(tag->getEndLoc()));
 
     if (!startLoc.isValid() || !endLoc.isValid() || SM.isInSystemHeader(startLoc)) {
         return true;
@@ -164,16 +194,32 @@ bool FunctionVisitor::VisitRecordDecl(RecordDecl *record) {
     int endCol = endLoc.getSpellingColumnNumber();
 
     json recordData = {
-        {"name", record->getNameAsString()},
+        {"name", tag->getNameAsString()},
         {"filename", fileName},
         {"startLine", startLine},
         {"endLine", endLine},
         {"startCol", startCol},
         {"endCol", endCol}
     };
-    if (record->isStruct())
+    if (tag->isStruct()) {
+        json struct_arr = json::array();
+        for (auto &n : currentStructs) {
+            json obj;
+            obj["name"] = n;
+            struct_arr.push_back(std::move(obj));
+        }
+        recordData["structs"] = std::move(struct_arr);
+        json enum_arr = json::array();
+        for (auto &n : currentEnums) {
+            json obj;
+            obj["name"] = n;
+            enum_arr.push_back(std::move(obj));
+        }
+        recordData["enums"] = std::move(enum_arr);
+    }
+    if (tag->isStruct())
         this->data["structs"].push_back(recordData);
-    else if (record->isEnum())
+    else if (tag->isEnum())
         this->data["enums"].push_back(recordData);
     return true;
 }
@@ -227,19 +273,27 @@ bool FunctionVisitor::VisitVarDecl(VarDecl *var) {
 // Record every referenced global VarDecl
 bool FunctionVisitor::VisitDeclRefExpr(DeclRefExpr *expr) {
     if (auto *vd = llvm::dyn_cast<VarDecl>(expr->getDecl())) {
-        if (vd->hasGlobalStorage() && vd->isFileVarDecl())
+        if (vd->hasGlobalStorage() && vd->isFileVarDecl()) {
             currentGlobals.insert(vd->getNameAsString());
+        }
+    }
+    else if (auto *ed = llvm::dyn_cast<EnumConstantDecl>(expr->getDecl())) {
+        if (auto *Enum = dyn_cast<EnumDecl>(ed->getDeclContext())) {
+            if (Enum->getIdentifier())
+                currentEnums.insert(Enum->getName());
+        }
     }
     return true;
 }
 
 // Record every struct name mentioned in a type
 bool FunctionVisitor::VisitTypeLoc(TypeLoc typeLoc) {
-    if (auto *rt = typeLoc.getType()->getAs<RecordType>()) {
-        RecordDecl *rd = rt->getDecl();
-        if (rd->isStruct() && rd->isThisDeclarationADefinition())
-            currentStructs.insert(rd->getNameAsString());
+    if (auto *tt = typeLoc.getType()->getAs<TagType>()) {
+        TagDecl *td = tt->getDecl();
+        if (td->isStruct() && td->isThisDeclarationADefinition())
+            currentStructs.insert(td->getNameAsString());
+        else if (td->isEnum() && td->isThisDeclarationADefinition())
+            currentEnums.insert(td->getNameAsString());
     }
     return true;
 }
-

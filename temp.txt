@@ -1,0 +1,1157 @@
+ [fix_globals] Fixed global test in math_functions.c
+ Running command: cd /app/output/toy_UOSXvhgV5Y/source && /app/tools/parsec/build/parsec --rename-main=true --add-instr=true *.c
+ Visiting TypeLoc: unsigned long
+Visiting TypeLoc: __builtin_va_list
+Visiting TypeLoc: __builtin_va_list
+Visiting TypeLoc: unsigned char
+Visiting TypeLoc: unsigned short
+Visiting TypeLoc: unsigned int
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: signed char
+Visiting TypeLoc: unsigned char
+Visiting TypeLoc: short
+Visiting TypeLoc: unsigned short
+Visiting TypeLoc: int
+Visiting TypeLoc: unsigned int
+Visiting TypeLoc: long
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: __int8_t
+Visiting TypeLoc: __uint8_t
+Visiting TypeLoc: __int16_t
+Visiting TypeLoc: __uint16_t
+Visiting TypeLoc: __int32_t
+Visiting TypeLoc: __uint32_t
+Visiting TypeLoc: __int64_t
+Visiting TypeLoc: __uint64_t
+Visiting TypeLoc: long
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: long
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: unsigned int
+Visiting TypeLoc: unsigned int
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: unsigned int
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: long
+Visiting TypeLoc: long
+Visiting TypeLoc: int
+Visiting TypeLoc: int [2]
+Visiting TypeLoc: int
+Visiting TypeLoc: struct __fsid_t
+Found struct:
+Visiting TypeLoc: __fsid_t
+Found struct:
+Visiting TypeLoc: long
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: unsigned int
+Visiting TypeLoc: long
+Visiting TypeLoc: unsigned int
+Visiting TypeLoc: long
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: long
+Visiting TypeLoc: long
+Visiting TypeLoc: long
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: long
+Visiting TypeLoc: long
+Visiting TypeLoc: long
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: __off64_t
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: long
+Visiting TypeLoc: unsigned int
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: unsigned int
+Visiting TypeLoc: char [4]
+Visiting TypeLoc: char
+Visiting TypeLoc: union (anonymous union at main.c:1000:3)
+Skipping other tag:
+Visiting TypeLoc: union __mbstate_t::(anonymous at main.c:1000:3)
+Skipping other tag:
+Visiting TypeLoc: struct __mbstate_t
+Found struct:
+Visiting TypeLoc: __mbstate_t
+Found struct:
+Visiting TypeLoc: __off_t
+Visiting TypeLoc: __mbstate_t
+Found struct:
+Visiting TypeLoc: struct _G_fpos_t
+Found struct: _G_fpos_t
+Visiting TypeLoc: struct _G_fpos_t
+Found struct: _G_fpos_t
+Visiting TypeLoc: __off64_t
+Visiting TypeLoc: __mbstate_t
+Found struct:
+Visiting TypeLoc: struct _G_fpos64_t
+Found struct: _G_fpos64_t
+Visiting TypeLoc: struct _G_fpos64_t
+Found struct: _G_fpos64_t
+Visiting TypeLoc: struct _IO_FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: struct _IO_FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: struct _IO_FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: struct _IO_FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: void
+Visiting TypeLoc: int
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: struct _IO_marker *
+Visiting TypeLoc: struct _IO_marker
+Skipping other tag: _IO_marker
+Visiting TypeLoc: struct _IO_marker
+Skipping other tag: _IO_marker
+Visiting TypeLoc: struct _IO_FILE *
+Visiting TypeLoc: struct _IO_FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: struct _IO_FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: __off_t
+Visiting TypeLoc: unsigned short
+Visiting TypeLoc: signed char
+Visiting TypeLoc: char [1]
+Visiting TypeLoc: char
+Visiting TypeLoc: _IO_lock_t *
+Visiting TypeLoc: _IO_lock_t
+Visiting TypeLoc: __off64_t
+Visiting TypeLoc: struct _IO_codecvt *
+Visiting TypeLoc: struct _IO_codecvt
+Skipping other tag: _IO_codecvt
+Visiting TypeLoc: struct _IO_codecvt
+Skipping other tag: _IO_codecvt
+Visiting TypeLoc: struct _IO_wide_data *
+Visiting TypeLoc: struct _IO_wide_data
+Skipping other tag: _IO_wide_data
+Visiting TypeLoc: struct _IO_wide_data
+Skipping other tag: _IO_wide_data
+Visiting TypeLoc: struct _IO_FILE *
+Visiting TypeLoc: struct _IO_FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: struct _IO_FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: size_t
+Visiting TypeLoc: int
+Visiting TypeLoc: char [20]
+Visiting TypeLoc: char
+Visiting TypeLoc: int
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: size_t
+Visiting TypeLoc: __fpos_t
+Found struct: _G_fpos_t
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: int (const char *)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (const char *, const char *)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: FILE *(void)
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: char *(char *)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (FILE *)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: int (FILE *)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: FILE *(const char *__restrict, const char *__restrict)
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: FILE *(const char *__restrict, const char *__restrict, FILE *__restrict)
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: void (FILE *__restrict, char *__restrict)
+Visiting TypeLoc: void
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (FILE *__restrict, char *__restrict, int, size_t)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int
+Visiting TypeLoc: size_t
+Visiting TypeLoc: int (FILE *__restrict, const char *__restrict, ...)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (const char *__restrict, ...)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (char *__restrict, const char *__restrict, ...)
+Visiting TypeLoc: int
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (FILE *__restrict, const char *__restrict, struct __va_list_tag *)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: __gnuc_va_list
+Visiting TypeLoc: int (const char *__restrict, struct __va_list_tag *)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: __gnuc_va_list
+Visiting TypeLoc: int (char *__restrict, const char *__restrict, struct __va_list_tag *)
+Visiting TypeLoc: int
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: __gnuc_va_list
+Visiting TypeLoc: int (char *__restrict, size_t, const char *__restrict, ...)
+Visiting TypeLoc: int
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: size_t
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (char *__restrict, size_t, const char *__restrict, struct __va_list_tag *)
+Visiting TypeLoc: int
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: size_t
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: __gnuc_va_list
+Visiting TypeLoc: int (FILE *__restrict, const char *__restrict, ...)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (const char *__restrict, ...)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (const char *__restrict, const char *__restrict, ...)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (FILE *__restrict, const char *__restrict, ...)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (const char *__restrict, ...)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (const char *__restrict, const char *__restrict, ...)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (FILE *__restrict, const char *__restrict, struct __va_list_tag *)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: __gnuc_va_list
+Visiting TypeLoc: int (const char *__restrict, struct __va_list_tag *)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: __gnuc_va_list
+Visiting TypeLoc: int (const char *__restrict, const char *__restrict, struct __va_list_tag *)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: __gnuc_va_list
+Visiting TypeLoc: int (FILE *__restrict, const char *__restrict, struct __va_list_tag *)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: __gnuc_va_list
+Visiting TypeLoc: int (const char *__restrict, struct __va_list_tag *)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: __gnuc_va_list
+Visiting TypeLoc: int (const char *__restrict, const char *__restrict, struct __va_list_tag *)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: __gnuc_va_list
+Visiting TypeLoc: int (FILE *)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: int (FILE *)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: int (void)
+Visiting TypeLoc: int
+Visiting TypeLoc: int (int, FILE *)
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: int (int, FILE *)
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: int (int)
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: char *(char *__restrict, int, FILE *__restrict)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: int (const char *__restrict, FILE *__restrict)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: int (const char *)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (int, FILE *)
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: size_t (void *__restrict, size_t, size_t, FILE *__restrict)
+Visiting TypeLoc: size_t
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: size_t
+Visiting TypeLoc: size_t
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: size_t (const void *__restrict, size_t, size_t, FILE *__restrict)
+Visiting TypeLoc: size_t
+Visiting TypeLoc: const void *
+Visiting TypeLoc: void
+Visiting TypeLoc: size_t
+Visiting TypeLoc: size_t
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: int (FILE *, long, int)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: long
+Visiting TypeLoc: int
+Visiting TypeLoc: long (FILE *)
+Visiting TypeLoc: long
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: void (FILE *)
+Visiting TypeLoc: void
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: int (FILE *__restrict, fpos_t *__restrict)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: fpos_t *
+Visiting TypeLoc: fpos_t
+Found struct: _G_fpos_t
+Visiting TypeLoc: int (FILE *, const fpos_t *)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: const fpos_t *
+Visiting TypeLoc: fpos_t
+Found struct: _G_fpos_t
+Visiting TypeLoc: void (FILE *)
+Visiting TypeLoc: void
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: int (FILE *)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: int (FILE *)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: void (const char *)
+Visiting TypeLoc: void
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (FILE *)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: int (FILE *, int)
+Visiting TypeLoc: int
+Visiting TypeLoc: FILE *
+Visiting TypeLoc: FILE
+Found struct: _IO_FILE
+Visiting TypeLoc: int
+Visiting TypeLoc: enum Color
+Found enum: Color
+Visiting TypeLoc: enum Color
+Found enum: Color
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: Color
+Found enum: Color
+Visiting TypeLoc: int (int, int)
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: int (int, int)
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: struct Point (struct Point, struct Point)
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: char *(const char *, const char *)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting function: reset_counter
+Visiting TypeLoc: int
+Current Structs:
+Current Enums:
+Current Globals: global_counter
+Visiting TypeLoc: int (void)
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting function: increment_counter
+Current Structs:
+Current Enums:
+Current Globals: global_counter
+Visiting TypeLoc: int (void)
+Visiting TypeLoc: int
+Visiting function: check_counter
+Visiting TypeLoc: void
+Visiting TypeLoc: void
+Current Structs:
+Current Enums:
+Current Globals: global_counter
+Visiting TypeLoc: void (void)
+Visiting TypeLoc: void
+Visiting TypeLoc: void
+Visiting TypeLoc: void
+Visiting function: main
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Current Structs: Point
+Current Enums:
+Current Globals:
+Visiting TypeLoc: int (void)
+Visiting TypeLoc: int
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: enum Color
+Found enum: Color
+Visiting TypeLoc: enum Color
+Found enum: Color
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: Color
+Found enum: Color
+Visiting TypeLoc: int (int, int)
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: int (int, int)
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: struct Point (struct Point, struct Point)
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting function: add
+Current Structs:
+Current Enums:
+Current Globals:
+Visiting TypeLoc: int (int, int)
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting function: subtract
+Current Structs:
+Current Enums:
+Current Globals:
+Visiting TypeLoc: int (int, int)
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting function: midpoint
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Current Structs: Point
+Current Enums:
+Current Globals:
+Visiting TypeLoc: struct Point (struct Point, struct Point)
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: struct Point
+Found struct: Point
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: int
+Visiting TypeLoc: float
+Visiting TypeLoc: double
+Visiting TypeLoc: double
+Visiting TypeLoc: long double
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: struct div_t
+Found struct:
+Visiting TypeLoc: div_t
+Found struct:
+Visiting TypeLoc: long
+Visiting TypeLoc: long
+Visiting TypeLoc: struct ldiv_t
+Found struct:
+Visiting TypeLoc: ldiv_t
+Found struct:
+Visiting TypeLoc: long long
+Visiting TypeLoc: long long
+Visiting TypeLoc: struct lldiv_t
+Found struct:
+Visiting TypeLoc: lldiv_t
+Found struct:
+Visiting TypeLoc: size_t (void)
+Visiting TypeLoc: size_t
+Visiting TypeLoc: double (const char *)
+Visiting TypeLoc: double
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (const char *)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: long (const char *)
+Visiting TypeLoc: long
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: long long (const char *)
+Visiting TypeLoc: long long
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: double (const char *__restrict, char **__restrict)
+Visiting TypeLoc: double
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char **
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: float (const char *__restrict, char **__restrict)
+Visiting TypeLoc: float
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char **
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: long double (const char *__restrict, char **__restrict)
+Visiting TypeLoc: long double
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char **
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: long (const char *__restrict, char **__restrict, int)
+Visiting TypeLoc: long
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char **
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int
+Visiting TypeLoc: unsigned long (const char *__restrict, char **__restrict, int)
+Visiting TypeLoc: unsigned long
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char **
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int
+Visiting TypeLoc: long long (const char *__restrict, char **__restrict, int)
+Visiting TypeLoc: long long
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char **
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int
+Visiting TypeLoc: unsigned long long (const char *__restrict, char **__restrict, int)
+Visiting TypeLoc: unsigned long long
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char **
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int
+Visiting TypeLoc: int (void)
+Visiting TypeLoc: int
+Visiting TypeLoc: void (unsigned int)
+Visiting TypeLoc: void
+Visiting TypeLoc: unsigned int
+Visiting TypeLoc: void *(size_t)
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: size_t
+Visiting TypeLoc: void *(size_t, size_t)
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: size_t
+Visiting TypeLoc: size_t
+Visiting TypeLoc: void *(void *, size_t)
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: size_t
+Visiting TypeLoc: void (void *)
+Visiting TypeLoc: void
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: void *(size_t, size_t)
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: size_t
+Visiting TypeLoc: size_t
+Visiting TypeLoc: void (void) __attribute__((noreturn))
+Visiting TypeLoc: void
+Visiting TypeLoc: int (void (*)(void))
+Visiting TypeLoc: int
+Visiting TypeLoc: void (*)(void)
+Visiting TypeLoc: void (void)
+Visiting TypeLoc: void (void)
+Visiting TypeLoc: void
+Visiting TypeLoc: int (void (*)(void))
+Visiting TypeLoc: int
+Visiting TypeLoc: void (*)(void)
+Visiting TypeLoc: void (void)
+Visiting TypeLoc: void (void)
+Visiting TypeLoc: void
+Visiting TypeLoc: void (int) __attribute__((noreturn))
+Visiting TypeLoc: void
+Visiting TypeLoc: int
+Visiting TypeLoc: void (int) __attribute__((noreturn))
+Visiting TypeLoc: void
+Visiting TypeLoc: int
+Visiting TypeLoc: void (int) __attribute__((noreturn))
+Visiting TypeLoc: void
+Visiting TypeLoc: int
+Visiting TypeLoc: char *(const char *)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (const char *)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (*)(const void *, const void *)
+Visiting TypeLoc: int (const void *, const void *)
+Visiting TypeLoc: int (const void *, const void *)
+Visiting TypeLoc: int
+Visiting TypeLoc: const void *
+Visiting TypeLoc: void
+Visiting TypeLoc: const void *
+Visiting TypeLoc: void
+Visiting TypeLoc: void *(const void *, const void *, size_t, size_t, __compar_fn_t)
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: const void *
+Visiting TypeLoc: void
+Visiting TypeLoc: const void *
+Visiting TypeLoc: void
+Visiting TypeLoc: size_t
+Visiting TypeLoc: size_t
+Visiting TypeLoc: __compar_fn_t
+Visiting TypeLoc: void (void *, size_t, size_t, __compar_fn_t)
+Visiting TypeLoc: void
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: size_t
+Visiting TypeLoc: size_t
+Visiting TypeLoc: __compar_fn_t
+Visiting TypeLoc: int (int)
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: long (long)
+Visiting TypeLoc: long
+Visiting TypeLoc: long
+Visiting TypeLoc: long long (long long)
+Visiting TypeLoc: long long
+Visiting TypeLoc: long long
+Visiting TypeLoc: div_t (int, int)
+Visiting TypeLoc: div_t
+Found struct:
+Visiting TypeLoc: int
+Visiting TypeLoc: int
+Visiting TypeLoc: ldiv_t (long, long)
+Visiting TypeLoc: ldiv_t
+Found struct:
+Visiting TypeLoc: long
+Visiting TypeLoc: long
+Visiting TypeLoc: lldiv_t (long long, long long)
+Visiting TypeLoc: lldiv_t
+Found struct:
+Visiting TypeLoc: long long
+Visiting TypeLoc: long long
+Visiting TypeLoc: int (const char *, size_t)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: size_t
+Visiting TypeLoc: int (wchar_t *__restrict, const char *__restrict, size_t)
+Visiting TypeLoc: int
+Visiting TypeLoc: wchar_t *
+Visiting TypeLoc: wchar_t
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: size_t
+Visiting TypeLoc: int (char *, wchar_t)
+Visiting TypeLoc: int
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: wchar_t
+Visiting TypeLoc: size_t (wchar_t *__restrict, const char *__restrict, size_t)
+Visiting TypeLoc: size_t
+Visiting TypeLoc: wchar_t *
+Visiting TypeLoc: wchar_t
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: size_t
+Visiting TypeLoc: size_t (char *__restrict, const wchar_t *__restrict, size_t)
+Visiting TypeLoc: size_t
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const wchar_t *
+Visiting TypeLoc: wchar_t
+Visiting TypeLoc: size_t
+Visiting TypeLoc: void *(void *__restrict, const void *__restrict, size_t)
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: const void *
+Visiting TypeLoc: void
+Visiting TypeLoc: size_t
+Visiting TypeLoc: void *(void *, const void *, size_t)
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: const void *
+Visiting TypeLoc: void
+Visiting TypeLoc: size_t
+Visiting TypeLoc: void *(void *, int, size_t)
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: int
+Visiting TypeLoc: size_t
+Visiting TypeLoc: int (const void *, const void *, size_t)
+Visiting TypeLoc: int
+Visiting TypeLoc: const void *
+Visiting TypeLoc: void
+Visiting TypeLoc: const void *
+Visiting TypeLoc: void
+Visiting TypeLoc: size_t
+Visiting TypeLoc: void *(const void *, int, size_t)
+Visiting TypeLoc: void *
+Visiting TypeLoc: void
+Visiting TypeLoc: const void *
+Visiting TypeLoc: void
+Visiting TypeLoc: int
+Visiting TypeLoc: size_t
+Visiting TypeLoc: char *(char *__restrict, const char *__restrict)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *(char *__restrict, const char *__restrict, size_t)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: size_t
+Visiting TypeLoc: char *(char *__restrict, const char *__restrict)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *(char *__restrict, const char *__restrict, size_t)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: size_t
+Visiting TypeLoc: int (const char *, const char *)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int (const char *, const char *, size_t)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: size_t
+Visiting TypeLoc: int (const char *, const char *)
+Visiting TypeLoc: int
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: size_t (char *__restrict, const char *__restrict, size_t)
+Visiting TypeLoc: size_t
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: size_t
+Visiting TypeLoc: char *(const char *, int)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int
+Visiting TypeLoc: char *(const char *, int)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int
+Visiting TypeLoc: size_t (const char *, const char *)
+Visiting TypeLoc: size_t
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: size_t (const char *, const char *)
+Visiting TypeLoc: size_t
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *(const char *, const char *)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *(const char *, const char *)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *(char *__restrict, const char *__restrict)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *(char *__restrict, const char *__restrict, char **__restrict)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char **
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: size_t (const char *)
+Visiting TypeLoc: size_t
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *(int)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int
+Visiting TypeLoc: char *(const char *, const char *)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting function: concatenate
+Visiting TypeLoc: size_t
+Visiting TypeLoc: size_t
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Current Structs:
+Current Enums:
+Current Globals:
+Visiting TypeLoc: char *(const char *, const char *)
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: size_t
+Visiting TypeLoc: size_t
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting function: json_escape
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int
+Visiting TypeLoc: unsigned char
+Current Structs:
+Current Enums:
+Current Globals:
+Visiting TypeLoc: void (const char *, char *)
+Visiting TypeLoc: void
+Visiting TypeLoc: const char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: char *
+Visiting TypeLoc: char
+Visiting TypeLoc: int
+Visiting TypeLoc: unsigned char
+Renamed function: main -> main_0
+Data written to analysis.json
+Adding instrumentation to the module
+Static library created: libfoo.a
+
+ Compilation succeeded
+ Found executable target: toy
+ Running command: cd /app/output/toy_UOSXvhgV5Y && RUSTFLAGS="-Awarnings" C_BUILD_PATH="/app/output/toy_UOSXvhgV5Y/source" cargo parse
+^CTraceback (most recent call last):
+  File "/app/main.py", line 31, in <module>
+    engine = TranslationEngine(dataset=dataset,
+                               output_dir=args.output_dir,
+                               num_attempts=args.num_attempts,
+                               logger=logger)
+  File "/app/translation_gym/core/translation_engine.py", line 20, in __init__
+    self.setup() # Sets up source_manager and target_manager
+    ~~~~~~~~~~^^
+  File "/app/translation_gym/core/translation_engine.py", line 65, in setup
+    self.target_manager.compile(timeout=120) # Increase time for first compile
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/app/translation_gym/core/target_manager.py", line 149, in compile
+    run(cmd, timeout=timeout, logger=self.logger)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/translation_gym/helpers.py", line 102, in run
+    result = subprocess.run(
+        command,
+    ...<3 lines>...
+        stdout=subprocess.PIPE,
+    )
+  File "/opt/miniconda3/lib/python3.13/subprocess.py", line 558, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda3/lib/python3.13/subprocess.py", line 1221, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/miniconda3/lib/python3.13/subprocess.py", line 2130, in _communicate
+    ready = selector.select(timeout)
+  File "/opt/miniconda3/lib/python3.13/selectors.py", line 398, in select
+    fd_event_list = self._selector.poll(timeout)
+KeyboardInterrupt
+(base) vikram.nitin@kubrick:/proj/arise/arise/vikram.nitin/translation_gym$

@@ -2,10 +2,19 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-// Move your struct here so both files see the same definition:
+enum Color {
+    RED,
+    GREEN,
+    BLUE
+};
+
+typedef enum Color Color;
+
 struct Point {
     int x;
     int y;
+    Color color;
 };
+
 
 #endif // COMMON_H

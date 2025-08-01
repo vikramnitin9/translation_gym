@@ -9,6 +9,7 @@
 
 #include "nlohmann/json.hpp"
 #include <unordered_set>
+#include <iostream>
 #include "helpers.h"
 
 using namespace clang;
@@ -22,17 +23,17 @@ class FunctionVisitor : public RecursiveASTVisitor<FunctionVisitor> {
             data = {
                 {"files", json::array()},
                 {"functions", json::array()},
-                {"structures", json::array()},
-                {"globals", json::array()}
+                {"structs", json::array()},
+                {"globals", json::array()},
+                {"enums", json::array()}
             };
         }
 
         bool VisitFunctionDecl(FunctionDecl *function);
-        bool VisitRecordDecl(RecordDecl *record);
+        bool VisitTagDecl(TagDecl *tag);
         bool VisitVarDecl(VarDecl *var);
-        bool VisitDeclRefExpr(DeclRefExpr  *expr);
-        bool VisitTypeLoc    (TypeLoc        typeLoc);
-
+        bool VisitDeclRefExpr(DeclRefExpr *expr);
+        bool VisitTypeLoc(TypeLoc typeLoc);
 
         json getData() {
             return data;
@@ -44,6 +45,7 @@ class FunctionVisitor : public RecursiveASTVisitor<FunctionVisitor> {
         CompilerInstance &compiler;
         std::unordered_set<std::string> currentGlobals;
         std::unordered_set<std::string> currentStructs;
+        std::unordered_set<std::string> currentEnums;
         json data;
 };
 #endif // FUNCTION_VISITOR_H
