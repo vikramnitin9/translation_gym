@@ -16,6 +16,7 @@ if __name__ == '__main__':
     parser.add_argument('--num_attempts',   type=int,   default=5,              help='Number of attempts to translate each function')
     parser.add_argument('--output_dir',     type=str,   default='output/translation', help='Directory to write the output')
     parser.add_argument('--verbose',        action='store_true',                help='Enable verbose output')
+    parser.add_argument('--prune', action='store_true', help='skip translation, run only pruning')
     args = parser.parse_args()
 
     datasets = json.loads(open('data/datasets.json').read())
@@ -39,6 +40,37 @@ if __name__ == '__main__':
     orchestrator = DefaultOrchestrator(source_manager, target_manager, logger)
     translator = DefaultTranslator(args.model, logger)
     validator = DefaultValidator(compile_attempts=2, logger=logger) # In case compilation times out, how many times to retry
+
+
+    if args.prune:
+        test_manager = engine.get_test_manager() 
+        logger.log_status("🔍 Running prune-only pass")
+        _orig_rebuild = orchestrator._DefaultOrchestrator__rebuild_dependency_graph
+        def _safe_rebuild():
+            for analysis in (
+                orchestrator.source_static_analysis,
+                orchestrator.target_static_analysis,
+            ):
+                for key in ("functions", "structs", "globals", "enums"):
+                    analysis.setdefault(key, [])
+                for func in analysis["functions"]:
+                    for k in ("functions", "globals", "structs", "enums"):
+                        func.setdefault(k, [])
+                for struct in analysis["structs"]:
+                    for k in ("structs", "enums"):
+                        struct.setdefault(k, [])
+            _orig_rebuild()
+
+        orchestrator._DefaultOrchestrator__rebuild_dependency_graph = _safe_rebuild
+        orchestrator.source_static_analysis = source_manager.get_static_analysis_results()
+        orchestrator.target_static_analysis = target_manager.get_static_analysis_results()
+        orchestrator._DefaultOrchestrator__rebuild_dependency_graph()
+        orchestrator.prune(validator, test_manager)
+
+        logger.log_status("✅ Pruning complete")
+        exit(0)
+
+
 
     engine.run(translator=translator,
                orchestrator=orchestrator,
