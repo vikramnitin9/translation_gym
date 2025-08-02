@@ -70,4 +70,8 @@ full_write
 cwrite
 rpl_fflush
 quote_n
+<<<<<<< HEAD
 closeout
+=======
+closeout
+>>>>>>> 96d7d55 (All metric tools work)

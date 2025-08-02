@@ -42,4 +42,8 @@ elseek
 elide_tail_lines_pipe
 rpl_fflush
 copy_fd
+<<<<<<< HEAD
 full_read
+=======
+full_read
+>>>>>>> 96d7d55 (All metric tools work)

@@ -73,4 +73,8 @@ ignore_fifo_and_pipe
 rpl_fflush
 tail
 any_live_files
+<<<<<<< HEAD
 is_local_fs_type
+=======
+is_local_fs_type
+>>>>>>> 96d7d55 (All metric tools work)

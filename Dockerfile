@@ -90,6 +90,23 @@ RUN cd /app/tools/parsec && \
     make -j 4
 ENV PARSEC_BUILD_DIR=/app/tools/parsec/build
 
+RUN cd /app/tools/C_metrics && \
+    rm -rf build && mkdir build && cd build && \
+    cmake .. && make -j4
+ENV C_METRICS_BUILD_DIR=/app/tools/C_metrics/build
+
+USER root
+RUN install -m 0755 /app/tools/C_metrics/build/C_metrics /usr/local/bin/C_metrics
+USER appuser 
+
+
+RUN cd /app/tools/parserust && \
+    cargo install --debug --locked --path . --force
+
+
+RUN cd /app/tools/metrics && \
+    cargo install --debug --locked --path . --force
+
 COPY --chown=${USER_ID}:${GROUP_ID} resources resources/
 
 USER appuser

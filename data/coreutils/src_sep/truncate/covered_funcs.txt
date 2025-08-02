@@ -30,4 +30,8 @@ set_program_name
 quotearg_style
 xdectoimax
 rpl_fflush
+<<<<<<< HEAD
 quote_n
+=======
+quote_n
+>>>>>>> 96d7d55 (All metric tools work)
