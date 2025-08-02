@@ -16,7 +16,8 @@ if __name__ == '__main__':
     parser.add_argument('--num_attempts',   type=int,   default=5,              help='Number of attempts to translate each function')
     parser.add_argument('--output_dir',     type=str,   default='output/translation', help='Directory to write the output')
     parser.add_argument('--verbose',        action='store_true',                help='Enable verbose output')
-    parser.add_argument('--prune', action='store_true', help='skip translation, run only pruning')
+    parser.add_argument('--prune_only', action='store_true', help='Run pruning on an existing output_dir that already contains translated code; do not translate anything.')
+
     args = parser.parse_args()
 
     datasets = json.loads(open('data/datasets.json').read())
@@ -24,8 +25,57 @@ if __name__ == '__main__':
     dataset = datasets[args.dataset]
     assert 'code_dir' in dataset, f"Code directory not specified for dataset {args.dataset}"
 
-    if Path(args.output_dir).exists():
-        raise FileExistsError(f"Directory {args.output_dir} already exists. Please remove it before running the script.")
+
+    if args.prune_only:
+        if not Path(args.output_dir).exists():
+            raise FileNotFoundError(f"{args.output_dir} does not exist – nothing to prune.")
+    else:
+        if Path(args.output_dir).exists():
+            raise FileExistsError(
+                f"Directory {args.output_dir} already exists. "
+                "Remove it, choose a new one, or use --prune_only."
+            )
+    if args.prune_only:
+        out_path = Path(args.output_dir)
+        logger = Logger(out_path, args, verbose=args.verbose)
+
+        # --- managers that point to EXISTING trees -------------------------------
+        from translation_gym.core.source_manager import CSourceManager
+        from translation_gym.core.target_manager import RustTargetManager
+        from translation_gym.core.test_manager   import TestManager
+
+
+        src_mgr = src_mgr = CSourceManager(out_path / "source", logger)
+
+        tgt_mgr = RustTargetManager(
+            out_path,  
+            out_path / "source", 
+            logger
+        )
+
+        src_mgr.setup()
+        src_mgr.compile()
+
+        tgt_mgr.cargo_bin_target = args.dataset 
+        tgt_mgr.bindgen_blocklist = (out_path / "bindgen_blocklist.txt")
+        tgt_mgr.bindgen_blocklist.touch(exist_ok=True)
+
+        orchestrator = DefaultOrchestrator(src_mgr, tgt_mgr, logger)
+        validator    = DefaultValidator(compile_attempts=2, logger=logger)
+
+        test_manager = TestManager(test_docker=f"{args.dataset}:latest", logger=logger)
+
+
+        orchestrator.source_static_analysis = src_mgr.get_static_analysis_results()
+        orchestrator.target_static_analysis = tgt_mgr.get_static_analysis_results()
+        orchestrator._DefaultOrchestrator__rebuild_dependency_graph()
+
+
+        logger.log_status("Pruning translated code ...")
+        orchestrator.prune(validator, test_manager)
+        logger.log_status("Pruning complete")
+        exit(0)
+
 
     logger = Logger(args.output_dir, args, verbose=args.verbose)
 
@@ -40,35 +90,6 @@ if __name__ == '__main__':
     orchestrator = DefaultOrchestrator(source_manager, target_manager, logger)
     translator = DefaultTranslator(args.model, logger)
     validator = DefaultValidator(compile_attempts=2, logger=logger) # In case compilation times out, how many times to retry
-
-
-    if args.prune:
-        test_manager = engine.get_test_manager() 
-        logger.log_status("🔍 Running prune-only pass")
-        _orig_rebuild = orchestrator._DefaultOrchestrator__rebuild_dependency_graph
-        def _safe_rebuild():
-            for analysis in (
-                orchestrator.source_static_analysis,
-                orchestrator.target_static_analysis,
-            ):
-                for key in ("functions", "structs", "globals", "enums"):
-                    analysis.setdefault(key, [])
-                for func in analysis["functions"]:
-                    for k in ("functions", "globals", "structs", "enums"):
-                        func.setdefault(k, [])
-                for struct in analysis["structs"]:
-                    for k in ("structs", "enums"):
-                        struct.setdefault(k, [])
-            _orig_rebuild()
-
-        orchestrator._DefaultOrchestrator__rebuild_dependency_graph = _safe_rebuild
-        orchestrator.source_static_analysis = source_manager.get_static_analysis_results()
-        orchestrator.target_static_analysis = target_manager.get_static_analysis_results()
-        orchestrator._DefaultOrchestrator__rebuild_dependency_graph()
-        orchestrator.prune(validator, test_manager)
-
-        logger.log_status("✅ Pruning complete")
-        exit(0)
 
 
 

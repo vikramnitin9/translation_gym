@@ -90,13 +90,13 @@ RUN cd /app/tools/parsec && \
     make -j 4
 ENV PARSEC_BUILD_DIR=/app/tools/parsec/build
 
-RUN cd /app/tools/C_metrics && \
+RUN cd /app/tools/c_metrics && \
     rm -rf build && mkdir build && cd build && \
     cmake .. && make -j4
-ENV C_METRICS_BUILD_DIR=/app/tools/C_metrics/build
+ENV C_METRICS_BUILD_DIR=/app/tools/c_metrics/build
 
 USER root
-RUN install -m 0755 /app/tools/C_metrics/build/C_metrics /usr/local/bin/C_metrics
+RUN install -m 0755 /app/tools/c_metrics/build/c_metrics /usr/local/bin/c_metrics
 USER appuser 
 
 
