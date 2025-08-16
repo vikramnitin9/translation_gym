@@ -1,0 +1,459 @@
+{
+    "enums": [
+        {
+            "endCol": 1,
+            "endLine": 2319,
+            "filename": "url.c",
+            "name": "Category",
+            "startCol": 1,
+            "startLine": 2307
+        }
+    ],
+    "files": [],
+    "functions": [
+        {
+            "argNames": [
+                "url"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 66,
+            "endLine": 2309,
+            "enums": [],
+            "filename": "test.c",
+            "functions": [],
+            "globals": [],
+            "name": "url_get_protocol",
+            "num_args": 1,
+            "returnType": "char *",
+            "signature": "inline char * url_get_protocol ( const char * url ) ",
+            "startCol": 1,
+            "startLine": 2307,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "url"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 64,
+            "endLine": 2342,
+            "enums": [],
+            "filename": "test.c",
+            "functions": [],
+            "globals": [],
+            "name": "url_get_hash",
+            "num_args": 1,
+            "returnType": "char *",
+            "signature": "inline char * url_get_hash ( const char * url ) ",
+            "startCol": 1,
+            "startLine": 2340,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "argc",
+                "argv"
+            ],
+            "argTypes": [
+                "int",
+                "char **"
+            ],
+            "endCol": 37,
+            "endLine": 2429,
+            "enums": [],
+            "filename": "test.c",
+            "functions": [],
+            "globals": [],
+            "name": "main_0",
+            "num_args": 2,
+            "returnType": "int",
+            "signature": "int main ( int argc , char * * argv ) ;  ",
+            "startCol": 1,
+            "startLine": 2429,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "start",
+                "category",
+                "delimiter1",
+                "delimiter2"
+            ],
+            "argTypes": [
+                "char *",
+                "enum Category",
+                "char",
+                "char"
+            ],
+            "endCol": 1,
+            "endLine": 2400,
+            "enums": [],
+            "filename": "url.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "char_cat"
+                }
+            ],
+            "name": "scan_part",
+            "num_args": 4,
+            "returnType": "char *",
+            "signature": "static char * scan_part ( char * start , enum Category category , char delimiter1 , char delimiter2 ) ",
+            "startCol": 1,
+            "startLine": 2386,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "url"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 2543,
+            "enums": [
+                {
+                    "name": "Category"
+                }
+            ],
+            "filename": "url.c",
+            "functions": [
+                {
+                    "name": "calloc"
+                },
+                {
+                    "name": "strdup"
+                },
+                {
+                    "name": "fprintf"
+                },
+                {
+                    "name": "strlen"
+                },
+                {
+                    "name": "scan_part"
+                },
+                {
+                    "name": "url_is_ssh"
+                },
+                {
+                    "name": "scan_decimal_number"
+                },
+                {
+                    "name": "decode_percent"
+                },
+                {
+                    "name": "parse_query_string"
+                },
+                {
+                    "name": "url_free"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "stderr"
+                }
+            ],
+            "name": "url_parse",
+            "num_args": 1,
+            "returnType": "url_data_t *",
+            "signature": "url_data_t * url_parse ( const char * url ) ",
+            "startCol": 1,
+            "startLine": 2409,
+            "structs": [
+                {
+                    "name": "url_data"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "url"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 2560,
+            "enums": [],
+            "filename": "url.c",
+            "functions": [
+                {
+                    "name": "malloc"
+                },
+                {
+                    "name": "__isoc99_sscanf"
+                },
+                {
+                    "name": "url_is_protocol"
+                },
+                {
+                    "name": "free"
+                }
+            ],
+            "globals": [],
+            "name": "url_get_scheme",
+            "num_args": 1,
+            "returnType": "char *",
+            "signature": "char * url_get_scheme ( const char * url ) ",
+            "startCol": 1,
+            "startLine": 2552,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "url"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 2572,
+            "enums": [],
+            "filename": "url.c",
+            "functions": [
+                {
+                    "name": "url_parse"
+                },
+                {
+                    "name": "strdup"
+                },
+                {
+                    "name": "url_free"
+                }
+            ],
+            "globals": [],
+            "name": "url_get_host",
+            "num_args": 1,
+            "returnType": "char *",
+            "signature": "char * url_get_host ( const char * url ) ",
+            "startCol": 1,
+            "startLine": 2569,
+            "structs": [
+                {
+                    "name": "url_data"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "url"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 2576,
+            "enums": [],
+            "filename": "url.c",
+            "functions": [
+                {
+                    "name": "url_parse"
+                },
+                {
+                    "name": "strdup"
+                },
+                {
+                    "name": "url_free"
+                }
+            ],
+            "globals": [],
+            "name": "url_get_pathname",
+            "num_args": 1,
+            "returnType": "char *",
+            "signature": "char * url_get_pathname ( const char * url ) ",
+            "startCol": 1,
+            "startLine": 2573,
+            "structs": [
+                {
+                    "name": "url_data"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "url",
+                "key"
+            ],
+            "argTypes": [
+                "const url_data_t *",
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 2592,
+            "enums": [],
+            "filename": "url.c",
+            "functions": [
+                {
+                    "name": "strcmp"
+                }
+            ],
+            "globals": [],
+            "name": "url_get_query_value",
+            "num_args": 2,
+            "returnType": "const char *",
+            "signature": "const char * url_get_query_value ( const url_data_t * url , const char * key ) ",
+            "startCol": 1,
+            "startLine": 2581,
+            "structs": [
+                {
+                    "name": "url_key_value"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "url"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 2604,
+            "enums": [],
+            "filename": "url.c",
+            "functions": [
+                {
+                    "name": "url_parse"
+                },
+                {
+                    "name": "url_data_inspect"
+                }
+            ],
+            "globals": [],
+            "name": "url_inspect",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "void url_inspect ( const char * url ) ",
+            "startCol": 1,
+            "startLine": 2601,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "data"
+            ],
+            "argTypes": [
+                "const url_data_t *"
+            ],
+            "endCol": 1,
+            "endLine": 2626,
+            "enums": [],
+            "filename": "url.c",
+            "functions": [
+                {
+                    "name": "printf"
+                }
+            ],
+            "globals": [],
+            "name": "url_data_inspect",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "void url_data_inspect ( const url_data_t * data ) ",
+            "startCol": 1,
+            "startLine": 2605,
+            "structs": []
+        }
+    ],
+    "globals": [
+        {
+            "endCol": 2,
+            "endLine": 2340,
+            "filename": "url.c",
+            "isStatic": false,
+            "name": "char_cat",
+            "startCol": 1,
+            "startLine": 2322,
+            "type": "const unsigned short [256]"
+        },
+        {
+            "endCol": 2,
+            "endLine": 2365,
+            "filename": "url.c",
+            "isStatic": false,
+            "name": "URL_SCHEMES",
+            "startCol": 1,
+            "startLine": 2346,
+            "type": "const char *[177]"
+        }
+    ],
+    "structs": [
+        {
+            "endCol": 3,
+            "endLine": 1099,
+            "enums": [],
+            "filename": "test.c",
+            "name": "",
+            "startCol": 9,
+            "startLine": 1095,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 1755,
+            "enums": [],
+            "filename": "test.c",
+            "name": "_G_fpos_t",
+            "startCol": 9,
+            "startLine": 1751,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 1769,
+            "enums": [],
+            "filename": "test.c",
+            "name": "_G_fpos64_t",
+            "startCol": 9,
+            "startLine": 1765,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 1869,
+            "enums": [],
+            "filename": "test.c",
+            "name": "_IO_FILE",
+            "startCol": 1,
+            "startLine": 1819,
+            "structs": [
+                {
+                    "name": "_IO_FILE"
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 2287,
+            "enums": [],
+            "filename": "test.c",
+            "name": "url_data",
+            "startCol": 9,
+            "startLine": 2278,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 2375,
+            "enums": [],
+            "filename": "url.c",
+            "name": "url_key_value",
+            "startCol": 1,
+            "startLine": 2371,
+            "structs": []
+        }
+    ]
+}

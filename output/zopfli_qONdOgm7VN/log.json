@@ -1,0 +1,666 @@
+{
+    "date": "2025-08-01 15:44:44.192371",
+    "args": {
+        "dataset": "zopfli",
+        "model": "claude37",
+        "num_attempts": 5,
+        "output_dir": "/app/output/zopfli_qONdOgm7VN",
+        "verbose": true
+    },
+    "results": [
+        {
+            "unit": "getchar",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "read_stdin_to_bytes",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "AddBit",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "AddNonCompressedBlock",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliInitLZ77Store",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "ZopfliInitCache",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "ZopfliLongestMatchCache",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliInitBlockState",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "ZopfliAllocHash",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "GetCostModelMinCost",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "ZopfliResetHash",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "UpdateHashValue",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "ZopfliWarmupHash",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliUpdateHash",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "ZopfliMaxCachedSublen",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "ZopfliCacheToSublen",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "TryGetFromLongestMatchCache",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "GetMatch",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliSublenToCache",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 5
+        },
+        {
+            "unit": "StoreInLongestMatchCache",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "ZopfliFindLongestMatch",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "zopfli_min",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "GetBestLengths",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "TraceBackwards",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "ZopfliVerifyLenDist",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliGetLengthSymbol",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliGetDistSymbol",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliStoreLitLenDist",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "FollowPath",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "LZ77OptimalRun",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "ZopfliCleanHash",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "ZopfliHash",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliLZ77OptimalFixed",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "ZopfliLZ77GetByteRange",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "GetFixedTree",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliLZ77GetHistogramAt",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "ZopfliLZ77GetHistogram",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "InitNode",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "Node",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "InitLists",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "BoundaryPM",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "BoundaryPMFinal",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 5
+        },
+        {
+            "unit": "ExtractBitLengths",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "NodePool",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliLengthLimitedCodeLengths",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "ZopfliCalculateBitLengths",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "PatchDistanceCodesForBuggyDecoders",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliLengthsToSymbols",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "AddBits",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "AddHuffmanBits",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "EncodeTree",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "CalculateTreeSize",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "ZopfliGetLengthSymbolExtraBits",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliGetDistSymbolExtraBits",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "CalculateBlockSymbolSizeSmall",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "CalculateBlockSymbolSizeGivenCounts",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "AbsDiff",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "OptimizeHuffmanForRle",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "TryOptimizeHuffmanForRle",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "GetDynamicLengths",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "AddDynamicTree",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliGetLengthExtraBitsValue",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliGetLengthExtraBits",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliGetDistExtraBitsValue",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliGetDistExtraBits",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "AddLZ77Data",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 5
+        },
+        {
+            "unit": "AddLZ77Block",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "ZopfliCleanCache",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliCleanBlockState",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "ZopfliCleanLZ77Store",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "GetLengthScore",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliLZ77Greedy",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "FindMinimum",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "CalculateBlockSymbolSize",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliCalculateBlockSize",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "ZopfliCalculateBlockSizeAutoType",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "EstimateCost",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "AddSorted",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "FindLargestSplittableBlock",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "PrintBlockSplitPoints",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "ZopfliLZ77Store",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "SplitCostContext",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliBlockSplitLZ77",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "ZopfliOptions",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliBlockState",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliBlockSplit",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "InitRanState",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "InitStats",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "ZopfliCalculateEntropy",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "CalculateStatistics",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "GetStatistics",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "CeilDiv",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliCopyLZ77Store",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "CopyStats",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ClearStatFreqs",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "AddWeighedStatFreqs",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "Ran",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "RandomizeFreqs",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "RandomizeStatFreqs",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "RanState",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "SymbolStats",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ZopfliLZ77Optimal",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "ZopfliAppendLZ77Store",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "AddLZ77BlockAutoType",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "ZopfliDeflatePart",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "ZopfliDeflate",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "single_test",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "run_all_tests",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "main_0",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        }
+    ]
+}

@@ -1,0 +1,5886 @@
+/*===---- stddef.h - Basic type definitions --------------------------------===
+ *
+ * Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ * See https://llvm.org/LICENSE.txt for license information.
+ * SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+ *
+ *===-----------------------------------------------------------------------===
+ */
+/* Always define miscellaneous pieces when modules are available. */
+/* __need_wint_t is intentionally not defined here. */
+
+
+
+
+/* Always define ptrdiff_t when modules are available. */
+
+
+
+typedef long int ptrdiff_t;
+
+
+
+
+
+
+/* Always define size_t when modules are available. */
+
+
+
+typedef long unsigned int size_t;
+
+
+
+
+
+/* ISO9899:2011 7.20 (C11 Annex K): Define rsize_t if __STDC_WANT_LIB_EXT1__ is
+ * enabled. */
+/* Always define wchar_t when modules are available. */
+
+
+
+
+
+
+
+typedef int wchar_t;
+/*===---- __stddef_max_align_t.h - Definition of max_align_t for modules ---===
+ *
+ * Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ * See https://llvm.org/LICENSE.txt for license information.
+ * SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+ *
+ *===-----------------------------------------------------------------------===
+ */
+// Define 'max_align_t' to match the GCC definition.
+typedef struct {
+  long long __clang_max_align_nonce1
+      __attribute__((__aligned__(__alignof__(long long))));
+  long double __clang_max_align_nonce2
+      __attribute__((__aligned__(__alignof__(long double))));
+} max_align_t;
+
+
+
+
+
+/* Some C libraries expect to see a wint_t here. Others (notably MinGW) will use
+__WINT_TYPE__ directly; accommodate both by requiring __need_wint_t */
+/* Copyright (C) 1991-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/*
+ *	ISO C99 Standard: 7.20 General utilities	<stdlib.h>
+ */
+
+
+
+
+
+/* Handle feature test macros at the start of a header.
+   Copyright (C) 2016-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/* This header is internal to glibc and should not be included outside
+   of glibc headers.  Headers including it must define
+   __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION first.  This header
+   cannot have multiple include guards because ISO C feature test
+   macros depend on the definition of the macro when an affected
+   header is included, not when the first system header is
+   included.  */
+
+
+
+
+
+
+
+
+/* Copyright (C) 1991-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+
+
+/* These are defined by the user (or the compiler)
+   to specify the desired environment:
+
+   __STRICT_ANSI__	ISO Standard C.
+   _ISOC99_SOURCE	Extensions to ISO C89 from ISO C99.
+   _ISOC11_SOURCE	Extensions to ISO C99 from ISO C11.
+   _ISOC2X_SOURCE	Extensions to ISO C99 from ISO C2X.
+   __STDC_WANT_LIB_EXT2__
+			Extensions to ISO C99 from TR 27431-2:2010.
+   __STDC_WANT_IEC_60559_BFP_EXT__
+			Extensions to ISO C11 from TS 18661-1:2014.
+   __STDC_WANT_IEC_60559_FUNCS_EXT__
+			Extensions to ISO C11 from TS 18661-4:2015.
+   __STDC_WANT_IEC_60559_TYPES_EXT__
+			Extensions to ISO C11 from TS 18661-3:2015.
+
+   _POSIX_SOURCE	IEEE Std 1003.1.
+   _POSIX_C_SOURCE	If ==1, like _POSIX_SOURCE; if >=2 add IEEE Std 1003.2;
+			if >=199309L, add IEEE Std 1003.1b-1993;
+			if >=199506L, add IEEE Std 1003.1c-1995;
+			if >=200112L, all of IEEE 1003.1-2004
+			if >=200809L, all of IEEE 1003.1-2008
+   _XOPEN_SOURCE	Includes POSIX and XPG things.  Set to 500 if
+			Single Unix conformance is wanted, to 600 for the
+			sixth revision, to 700 for the seventh revision.
+   _XOPEN_SOURCE_EXTENDED XPG things and X/Open Unix extensions.
+   _LARGEFILE_SOURCE	Some more functions for correct standard I/O.
+   _LARGEFILE64_SOURCE	Additional functionality from LFS for large files.
+   _FILE_OFFSET_BITS=N	Select default filesystem interface.
+   _ATFILE_SOURCE	Additional *at interfaces.
+   _GNU_SOURCE		All of the above, plus GNU extensions.
+   _DEFAULT_SOURCE	The default set of features (taking precedence over
+			__STRICT_ANSI__).
+
+   _FORTIFY_SOURCE	Add security hardening to many library functions.
+			Set to 1 or 2; 2 performs stricter checks than 1.
+
+   _REENTRANT, _THREAD_SAFE
+			Obsolete; equivalent to _POSIX_C_SOURCE=199506L.
+
+   The `-ansi' switch to the GNU C compiler, and standards conformance
+   options such as `-std=c99', define __STRICT_ANSI__.  If none of
+   these are defined, or if _DEFAULT_SOURCE is defined, the default is
+   to have _POSIX_SOURCE set to one and _POSIX_C_SOURCE set to
+   200809L, as well as enabling miscellaneous functions from BSD and
+   SVID.  If more than one of these are defined, they accumulate.  For
+   example __STRICT_ANSI__, _POSIX_SOURCE and _POSIX_C_SOURCE together
+   give you ISO C, 1003.1, and 1003.2, but nothing else.
+
+   These are defined by this file and are used by the
+   header files to decide what to declare or define:
+
+   __GLIBC_USE (F)	Define things from feature set F.  This is defined
+			to 1 or 0; the subsequent macros are either defined
+			or undefined, and those tests should be moved to
+			__GLIBC_USE.
+   __USE_ISOC11		Define ISO C11 things.
+   __USE_ISOC99		Define ISO C99 things.
+   __USE_ISOC95		Define ISO C90 AMD1 (C95) things.
+   __USE_ISOCXX11	Define ISO C++11 things.
+   __USE_POSIX		Define IEEE Std 1003.1 things.
+   __USE_POSIX2		Define IEEE Std 1003.2 things.
+   __USE_POSIX199309	Define IEEE Std 1003.1, and .1b things.
+   __USE_POSIX199506	Define IEEE Std 1003.1, .1b, .1c and .1i things.
+   __USE_XOPEN		Define XPG things.
+   __USE_XOPEN_EXTENDED	Define X/Open Unix things.
+   __USE_UNIX98		Define Single Unix V2 things.
+   __USE_XOPEN2K        Define XPG6 things.
+   __USE_XOPEN2KXSI     Define XPG6 XSI things.
+   __USE_XOPEN2K8       Define XPG7 things.
+   __USE_XOPEN2K8XSI    Define XPG7 XSI things.
+   __USE_LARGEFILE	Define correct standard I/O things.
+   __USE_LARGEFILE64	Define LFS things with separate names.
+   __USE_FILE_OFFSET64	Define 64bit interface as default.
+   __USE_MISC		Define things from 4.3BSD or System V Unix.
+   __USE_ATFILE		Define *at interfaces and AT_* constants for them.
+   __USE_GNU		Define GNU extensions.
+   __USE_FORTIFY_LEVEL	Additional security measures used, according to level.
+
+   The macros `__GNU_LIBRARY__', `__GLIBC__', and `__GLIBC_MINOR__' are
+   defined by this file unconditionally.  `__GNU_LIBRARY__' is provided
+   only for compatibility.  All new code should use the other symbols
+   to test for features.
+
+   All macros listed above as possibly being defined by this file are
+   explicitly undefined if they are not explicitly defined.
+   Feature-test macros that are not defined by the user or compiler
+   but are implied by the other feature-test macros defined (or by the
+   lack of any definitions) are defined by the file.
+
+   ISO C feature test macros depend on the definition of the macro
+   when an affected header is included, not when the first system
+   header is included, and so they are handled in
+   <bits/libc-header-start.h>, which does not have a multiple include
+   guard.  Feature test macros that can be handled from the first
+   system header included are handled here.  */
+
+
+/* Undefine everything, so we get a clean slate.  */
+/* Suppress kernel-name space pollution unless user expressedly asks
+   for it.  */
+
+
+
+
+/* Convenience macro to test the version of gcc.
+   Use like this:
+   #if __GNUC_PREREQ (2,8)
+   ... code requiring gcc 2.8 or later ...
+   #endif
+   Note: only works for GCC 2.0 and later, because __GNUC_MINOR__ was
+   added in 2.0.  */
+
+
+
+
+
+
+
+/* Similarly for clang.  Features added to GCC after version 4.2 may
+   or may not also be available in clang, and clang's definitions of
+   __GNUC(_MINOR)__ are fixed at 4 and 2 respectively.  Not all such
+   features can be queried via __has_extension/__has_feature.  */
+
+
+
+
+
+
+
+/* Whether to use feature set F.  */
+
+
+/* _BSD_SOURCE and _SVID_SOURCE are deprecated aliases for
+   _DEFAULT_SOURCE.  If _DEFAULT_SOURCE is present we do not
+   issue a warning; the expectation is that the source is being
+   transitioned to use the new macro.  */
+
+
+
+
+
+
+
+/* If _GNU_SOURCE was defined by the user, turn on all the other features.  */
+/* If nothing (other than _GNU_SOURCE and _DEFAULT_SOURCE) is defined,
+   define _DEFAULT_SOURCE.  */
+/* This is to enable the ISO C2X extension.  */
+
+
+
+
+
+
+
+/* This is to enable the ISO C11 extension.  */
+
+
+
+
+
+/* This is to enable the ISO C99 extension.  */
+
+
+
+
+
+
+/* This is to enable the ISO C90 Amendment 1:1995 extension.  */
+/* If none of the ANSI/POSIX macros are defined, or if _DEFAULT_SOURCE
+   is defined, use POSIX.1-2008 (or another version depending on
+   _XOPEN_SOURCE).  */
+/* Some C libraries once required _REENTRANT and/or _THREAD_SAFE to be
+   defined in all multithreaded code.  GNU libc has not required this
+   for many years.  We now treat them as compatibility synonyms for
+   _POSIX_C_SOURCE=199506L, which is the earliest level of POSIX with
+   comprehensive support for multithreaded code.  Using them never
+   lowers the selected level of POSIX conformance, only raises it.  */
+/* The function 'gets' existed in C89, but is impossible to use
+   safely.  It has been removed from ISO C11 and ISO C++14.  Note: for
+   compatibility with various implementations of <cstdio>, this test
+   must consider only the value of __cplusplus when compiling C++.  */
+
+
+
+
+
+
+/* GNU formerly extended the scanf functions with modified format
+   specifiers %as, %aS, and %a[...] that allocate a buffer for the
+   input using malloc.  This extension conflicts with ISO C99, which
+   defines %a as a standalone format specifier that reads a floating-
+   point number; moreover, POSIX.1-2008 provides the same feature
+   using the modifier letter 'm' instead (%ms, %mS, %m[...]).
+
+   We now follow C99 unless GNU extensions are active and the compiler
+   is specifically in C89 or C++98 mode (strict or not).  For
+   instance, with GCC, -std=gnu11 will have C99-compliant scanf with
+   or without -D_GNU_SOURCE, but -std=c89 -D_GNU_SOURCE will have the
+   old extension.  */
+/* Get definitions of __STDC_* predefined macros, if the compiler has
+   not preincluded this header automatically.  */
+
+/* Copyright (C) 1991-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+
+
+/* This header is separate from features.h so that the compiler can
+   include it implicitly at the start of every compilation.  It must
+   not itself include <features.h> or any other header that includes
+   <features.h> because the implicit include comes before any feature
+   test macros that may be defined in a source file before it first
+   explicitly includes a system header.  GCC knows the name of this
+   header in order to preinclude it.  */
+
+/* glibc's intent is to support the IEC 559 math functionality, real
+   and complex.  If the GCC (4.9 and later) predefined macros
+   specifying compiler intent are available, use them to determine
+   whether the overall intent is to support these features; otherwise,
+   presume an older compiler has intent to support these features and
+   define these macros by default.  */
+/* wchar_t uses Unicode 10.0.0.  Version 10.0 of the Unicode Standard is
+   synchronized with ISO/IEC 10646:2017, fifth edition, plus
+   the following additions from Amendment 1 to the fifth edition:
+   - 56 emoji characters
+   - 285 hentaigana
+   - 3 additional Zanabazar Square characters */
+
+/* This macro indicates that the installed library is the GNU C Library.
+   For historic reasons the value now is 6 and this will stay from now
+   on.  The use of this variable is deprecated.  Use __GLIBC__ and
+   __GLIBC_MINOR__ now (see below) when you want to test for a specific
+   GNU C library version and use the values in <gnu/lib-names.h> to get
+   the sonames of the shared libraries.  */
+
+
+
+/* Major and minor version number of the GNU C library package.  Use
+   these macros to test for features in specific releases.  */
+
+
+
+
+
+
+/* This is here only because every header file already includes this one.  */
+
+
+
+/* Copyright (C) 1992-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+
+
+/* We are almost always included from features.h. */
+
+
+
+
+/* The GNU libc does not support any K&R compilers or the traditional mode
+   of ISO C compilers anymore.  Check for some of the combinations not
+   anymore supported.  */
+
+
+
+
+/* Some user header file might have defined this before.  */
+
+
+
+
+
+/* All functions, except those with callbacks or those that
+   synchronize memory, are leaf functions.  */
+/* GCC can always grok prototypes.  For C++ programs we add throw()
+   to help it optimize the function calls.  But this works only with
+   gcc 2.8.x and egcs.  For gcc 3.2 and up we even mark C functions
+   as non-throwing using a function attribute since programs can use
+   the -fexceptions options for C code as well.  */
+/* Compilers that are not clang may object to
+       #if defined __clang__ && __has_extension(...)
+   even though they do not need to evaluate the right-hand side of the &&.  */
+
+
+
+
+
+
+/* These two macros are not used in glibc anymore.  They are kept here
+   only because some other projects expect the macros to be defined.  */
+
+
+
+/* For these things, GCC behaves the ANSI way normally,
+   and the non-ANSI way under -traditional.  */
+
+
+
+
+/* This is not a typedef so `const __ptr_t' does the right thing.  */
+
+
+
+/* C++ needs to know that types and declarations are C, not C++.  */
+/* Fortify support.  */
+/* Support for flexible arrays.
+   Headers that should use flexible arrays only if they're "real"
+   (e.g. only if they won't affect sizeof()) should test
+   #if __glibc_c99_flexarr_available.  */
+/* __asm__ ("xyz") is used throughout the headers to rename functions
+   at the assembly language level.  This is wrapped by the __REDIRECT
+   macro, in order to support compilers that can do this some other
+   way.  When compilers don't support asm-names at all, we have to do
+   preprocessor tricks instead (which don't have exactly the right
+   semantics, but it's the best we can do).
+
+   Example:
+   int __REDIRECT(setpgrp, (__pid_t pid, __pid_t pgrp), setpgid); */
+/*
+#elif __SOME_OTHER_COMPILER__
+
+# define __REDIRECT(name, proto, alias) name proto; \
+	_Pragma("let " #name " = " #alias)
+*/
+
+
+/* GCC has various useful declarations that can be made with the
+   `__attribute__' syntax.  All of the ways we use this do fine if
+   they are omitted for compilers that don't understand it. */
+
+
+
+
+/* At some point during the gcc 2.96 development the `malloc' attribute
+   for functions was introduced.  We don't want to use it unconditionally
+   (although this would be possible) since it generates warnings.  */
+
+
+
+
+
+
+/* Tell the compiler which arguments to an allocation function
+   indicate the size of the allocation.  */
+
+
+
+
+
+
+
+/* At some point during the gcc 2.96 development the `pure' attribute
+   for functions was introduced.  We don't want to use it unconditionally
+   (although this would be possible) since it generates warnings.  */
+
+
+
+
+
+
+/* This declaration tells the compiler that the value is constant.  */
+
+
+
+
+
+
+/* At some point during the gcc 3.1 development the `used' attribute
+   for functions was introduced.  We don't want to use it unconditionally
+   (although this would be possible) since it generates warnings.  */
+/* Since version 3.2, gcc allows marking deprecated functions.  */
+
+
+
+
+
+
+/* Since version 4.5, gcc also allows one to specify the message printed
+   when a deprecated function is used.  clang claims to be gcc 4.2, but
+   may also support this feature.  */
+/* At some point during the gcc 2.8 development the `format_arg' attribute
+   for functions was introduced.  We don't want to use it unconditionally
+   (although this would be possible) since it generates warnings.
+   If several `format_arg' attributes are given for the same function, in
+   gcc-3.0 and older, all but the last one are ignored.  In newer gccs,
+   all designated arguments are considered.  */
+
+
+
+
+
+
+/* At some point during the gcc 2.97 development the `strfmon' format
+   attribute for functions was introduced.  We don't want to use it
+   unconditionally (although this would be possible) since it
+   generates warnings.  */
+
+
+
+
+
+
+
+/* The nonull function attribute allows to mark pointer parameters which
+   must not be NULL.  */
+
+
+
+
+
+
+/* If fortification mode, we warn about unused results of certain
+   function calls which can lead to problems.  */
+/* Forces a function to be always inlined.  */
+
+/* The Linux kernel defines __always_inline in stddef.h (283d7573), and
+   it conflicts with this definition.  Therefore undefine it first to
+   allow either header to be included first.  */
+
+
+
+
+
+
+
+/* Associate error messages with the source location of the call site rather
+   than with the source location inside the function.  */
+
+
+
+
+
+
+/* GCC 4.3 and above with -std=c99 or -std=gnu99 implements ISO C99
+   inline semantics, unless -fgnu89-inline is used.  Using __GNUC_STDC_INLINE__
+   or __GNUC_GNU_INLINE is not a good enough check for gcc because gcc versions
+   older than 4.3 may define these macros and still not guarantee GNU inlining
+   semantics.
+
+   clang++ identifies itself as gcc-4.2, but has support for GNU inlining
+   semantics, that can be checked for by using the __GNUC_STDC_INLINE_ and
+   __GNUC_GNU_INLINE__ macro definitions.  */
+/* GCC 4.3 and above allow passing all anonymous arguments of an
+   __extern_always_inline function to some other vararg function.  */
+
+
+
+
+
+/* It is possible to compile containing GCC extensions even if GCC is
+   run in pedantic mode if the uses are carefully marked using the
+   `__extension__' keyword.  But this is not generally available before
+   version 2.8.  */
+
+
+
+
+/* __restrict is known in EGCS 1.2 and above. */
+/* ISO C99 also allows to declare arrays as non-overlapping.  The syntax is
+     array_name[restrict]
+   GCC 3.1 supports this.  */
+/* Undefine (also defined in libc-symbols.h).  */
+/* Determine the wordsize from the preprocessor defines.  */
+/* Both x86-64 and x32 use the 64-bit system call interface.  */
+/* Properties of long double type.  ldbl-96 version.
+   Copyright (C) 2016-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License  published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/* long double is distinct from double, so there is nothing to
+   define here.  */
+/* __glibc_macro_warning (MESSAGE) issues warning MESSAGE.  This is
+   intended for use in preprocessor macros.
+
+   Note: MESSAGE must be a _single_ string; concatenation of string
+   literals is not supported.  */
+/* Generic selection (ISO C11) is a C-only feature, available in GCC
+   since version 4.9.  Previous versions do not provide generic
+   selection, even though they might set __STDC_VERSION__ to 201112L,
+   when in -std=c11 mode.  Thus, we must check for !defined __GNUC__
+   when testing __STDC_VERSION__ for generic selection support.
+   On the other hand, Clang also defines __GNUC__, so a clang-specific
+   check is required to enable the use of generic selection.  */
+
+
+/* If we don't have __REDIRECT, prototypes will be missing if
+   __USE_FILE_OFFSET64 but not __USE_LARGEFILE[64]. */
+
+
+
+
+
+
+
+/* Decide whether we can define 'extern inline' functions in headers.  */
+
+
+
+
+
+
+
+/* This is here only because every header file already includes this one.
+   Get the definitions of all the appropriate `__stub_FUNCTION' symbols.
+   <gnu/stubs.h> contains `#define __stub_FUNCTION' when FUNCTION is a stub
+   that will always return failure (and set errno to ENOSYS).  */
+
+/* This file is automatically generated.
+   This file selects the right generated file of `__stub_FUNCTION' macros
+   based on the architecture being compiled for.  */
+
+
+
+
+
+
+
+/* This file is automatically generated.
+   It defines a symbol `__stub_FUNCTION' for each function
+   in the C library which is a stub, meaning it will fail
+   every time called, usually setting errno to ENOSYS.  */
+
+/* ISO/IEC TR 24731-2:2010 defines the __STDC_WANT_LIB_EXT2__
+   macro.  */
+/* ISO/IEC TS 18661-1:2014 defines the __STDC_WANT_IEC_60559_BFP_EXT__
+   macro.  Most but not all symbols enabled by that macro in TS
+   18661-1 are enabled unconditionally in C2X; the symbols in Annex F
+   still require that macro in C2X.  */
+/* ISO/IEC TS 18661-4:2015 defines the
+   __STDC_WANT_IEC_60559_FUNCS_EXT__ macro.  Other than the reduction
+   functions, the symbols from this TS are enabled unconditionally in
+   C2X.  */
+/* ISO/IEC TS 18661-3:2015 defines the
+   __STDC_WANT_IEC_60559_TYPES_EXT__ macro.  */
+
+/* Get size_t, wchar_t and NULL from <stddef.h>.  */
+
+
+
+
+/*===---- stddef.h - Basic type definitions --------------------------------===
+ *
+ * Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ * See https://llvm.org/LICENSE.txt for license information.
+ * SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+ *
+ *===-----------------------------------------------------------------------===
+ */
+/* Always define wchar_t when modules are available. */
+/* Some C libraries expect to see a wint_t here. Others (notably MinGW) will use
+__WINT_TYPE__ directly; accommodate both by requiring __need_wint_t */
+/* _FloatN API tests for enablement.  */
+
+/* Macros to control TS 18661-3 glibc features on x86.
+   Copyright (C) 2017-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+
+
+
+
+/* Defined to 1 if the current compiler invocation provides a
+   floating-point type with the IEEE 754 binary128 format, and this
+   glibc includes corresponding *f128 interfaces for it.  The required
+   libgcc support was added some time after the basic compiler
+   support, for x86_64 and x86.  */
+/* Defined to 1 if __HAVE_FLOAT128 is 1 and the type is ABI-distinct
+   from the default float, double and long double types in this glibc.  */
+
+
+
+
+
+
+/* Defined to 1 if the current compiler invocation provides a
+   floating-point type with the right format for _Float64x, and this
+   glibc includes corresponding *f64x interfaces for it.  */
+
+
+/* Defined to 1 if __HAVE_FLOAT64X is 1 and _Float64x has the format
+   of long double.  Otherwise, if __HAVE_FLOAT64X is 1, _Float64x has
+   the format of _Float128, which must be different from that of long
+   double.  */
+
+
+
+
+/* Defined to concatenate the literal suffix to be used with _Float128
+   types, if __HAVE_FLOAT128 is 1. */
+/* Defined to a complex binary128 type if __HAVE_FLOAT128 is 1.  */
+/* The remaining of this file provides support for older compilers.  */
+/* Macros to control TS 18661-3 glibc features where the same
+   definitions are appropriate for all platforms.
+   Copyright (C) 2017-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+
+
+
+
+/* Properties of long double type.  ldbl-96 version.
+   Copyright (C) 2016-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License  published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/* long double is distinct from double, so there is nothing to
+   define here.  */
+
+/* This header should be included at the bottom of each bits/floatn.h.
+   It defines the following macros for each _FloatN and _FloatNx type,
+   where the same definitions, or definitions based only on the macros
+   in bits/floatn.h, are appropriate for all glibc configurations.  */
+
+/* Defined to 1 if the current compiler invocation provides a
+   floating-point type with the right format for this type, and this
+   glibc includes corresponding *fN or *fNx interfaces for it.  */
+
+
+
+
+
+
+/* Defined to 1 if the corresponding __HAVE_<type> macro is 1 and the
+   type is the first with its format in the sequence of (the default
+   choices for) float, double, long double, _Float16, _Float32,
+   _Float64, _Float128, _Float32x, _Float64x, _Float128x for this
+   glibc; that is, if functions present once per floating-point format
+   rather than once per type are present for this type.
+
+   All configurations supported by glibc have _Float32 the same format
+   as float, _Float64 and _Float32x the same format as double, the
+   _Float64x the same format as either long double or _Float128.  No
+   configurations support _Float128x or, as of GCC 7, have compiler
+   support for a type meeting the requirements for _Float128x.  */
+
+
+
+
+
+
+
+/* Defined to 1 if the corresponding _FloatN type is not binary compatible
+   with the corresponding ISO C type in the current compilation unit as
+   opposed to __HAVE_DISTINCT_FLOATN, which indicates the default types built
+   in glibc.  */
+
+
+
+/* Defined to 1 if any _FloatN or _FloatNx types that are not
+   ABI-distinct are however distinct types at the C language level (so
+   for the purposes of __builtin_types_compatible_p and _Generic).  */
+/* Defined to concatenate the literal suffix to be used with _FloatN
+   or _FloatNx types, if __HAVE_<type> is 1.  The corresponding
+   literal suffixes exist since GCC 7, for C only.  */
+/* Defined to a complex type if __HAVE_<type> is 1.  */
+/* The remaining of this file provides support for older compilers.  */
+typedef float _Float32;
+/* If double, long double and _Float64 all have the same set of
+   values, TS 18661-3 requires the usual arithmetic conversions on
+   long double and _Float64 to produce _Float64.  For this to be the
+   case when building with a compiler without a distinct _Float64
+   type, _Float64 must be a typedef for long double, not for
+   double.  */
+typedef double _Float64;
+typedef double _Float32x;
+typedef long double _Float64x;
+
+/* Returned by `div'.  */
+typedef struct
+  {
+    int quot; /* Quotient.  */
+    int rem; /* Remainder.  */
+  } div_t;
+
+/* Returned by `ldiv'.  */
+
+typedef struct
+  {
+    long int quot; /* Quotient.  */
+    long int rem; /* Remainder.  */
+  } ldiv_t;
+
+
+
+
+/* Returned by `lldiv'.  */
+__extension__ typedef struct
+  {
+    long long int quot; /* Quotient.  */
+    long long int rem; /* Remainder.  */
+  } lldiv_t;
+
+
+
+
+/* The largest number rand will return (same as INT_MAX).  */
+
+
+
+/* We define these the same for all machines.
+   Changes from this to the outside world should be done in `_exit'.  */
+
+
+
+
+/* Maximum length of a multibyte character in the current locale.  */
+
+extern size_t __ctype_get_mb_cur_max (void) __attribute__ ((__nothrow__ )) /* Ignore */;
+
+
+/* Convert a string to a floating-point number.  */
+extern double atof (const char *__nptr)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1))) /* Ignore */;
+/* Convert a string to an integer.  */
+extern int atoi (const char *__nptr)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1))) /* Ignore */;
+/* Convert a string to a long integer.  */
+extern long int atol (const char *__nptr)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1))) /* Ignore */;
+
+
+/* Convert a string to a long long integer.  */
+__extension__ extern long long int atoll (const char *__nptr)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1))) /* Ignore */;
+
+
+/* Convert a string to a floating-point number.  */
+extern double strtod (const char *__restrict __nptr,
+        char **__restrict __endptr)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+
+
+/* Likewise for `float' and `long double' sizes of floating-point numbers.  */
+extern float strtof (const char *__restrict __nptr,
+       char **__restrict __endptr) __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+
+extern long double strtold (const char *__restrict __nptr,
+       char **__restrict __endptr)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+
+
+/* Likewise for '_FloatN' and '_FloatNx'.  */
+/* Convert a string to a long integer.  */
+extern long int strtol (const char *__restrict __nptr,
+   char **__restrict __endptr, int __base)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+/* Convert a string to an unsigned long integer.  */
+extern unsigned long int strtoul (const char *__restrict __nptr,
+      char **__restrict __endptr, int __base)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+/* Convert a string to a quadword integer.  */
+__extension__
+extern long long int strtoll (const char *__restrict __nptr,
+         char **__restrict __endptr, int __base)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+/* Convert a string to an unsigned quadword integer.  */
+__extension__
+extern unsigned long long int strtoull (const char *__restrict __nptr,
+     char **__restrict __endptr, int __base)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+
+
+/* Convert a floating-point number to a string.  */
+extern __inline __attribute__ ((__gnu_inline__)) int
+__attribute__ ((__nothrow__ )) atoi (const char *__nptr)
+{
+  return (int) strtol (__nptr, (char **) ((void*)0), 10);
+}
+extern __inline __attribute__ ((__gnu_inline__)) long int
+__attribute__ ((__nothrow__ )) atol (const char *__nptr)
+{
+  return strtol (__nptr, (char **) ((void*)0), 10);
+}
+
+
+__extension__ extern __inline __attribute__ ((__gnu_inline__)) long long int
+__attribute__ ((__nothrow__ )) atoll (const char *__nptr)
+{
+  return strtoll (__nptr, (char **) ((void*)0), 10);
+}
+/* Return a random integer between 0 and RAND_MAX inclusive.  */
+extern int rand (void) __attribute__ ((__nothrow__ ));
+/* Seed the random number generator with the given number.  */
+extern void srand (unsigned int __seed) __attribute__ ((__nothrow__ ));
+/* Allocate SIZE bytes of memory.  */
+extern void *malloc (size_t __size) __attribute__ ((__nothrow__ )) __attribute__ ((__malloc__))
+     /* Ignore.  */ /* Ignore */;
+/* Allocate NMEMB elements of SIZE bytes each, all initialized to 0.  */
+extern void *calloc (size_t __nmemb, size_t __size)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__malloc__)) /* Ignore.  */ /* Ignore */;
+
+/* Re-allocate the previously allocated block
+   in PTR, making the new block SIZE bytes long.  */
+/* __attribute_malloc__ is not used, because if realloc returns
+   the same pointer that was passed to it, aliasing needs to be allowed
+   between objects pointed by the old and new pointers.  */
+extern void *realloc (void *__ptr, size_t __size)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__warn_unused_result__)) /* Ignore.  */;
+/* Free a block allocated by `malloc', `realloc' or `calloc'.  */
+extern void free (void *__ptr) __attribute__ ((__nothrow__ ));
+/* ISO C variant of aligned allocation.  */
+extern void *aligned_alloc (size_t __alignment, size_t __size)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__malloc__)) /* Ignore.  */ /* Ignore */;
+
+
+/* Abort execution and generate a core-dump.  */
+extern void abort (void) __attribute__ ((__nothrow__ )) __attribute__ ((__noreturn__));
+
+
+/* Register a function to be called when `exit' is called.  */
+extern int atexit (void (*__func) (void)) __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+
+
+/* Register a function to be called when `quick_exit' is called.  */
+
+
+
+
+extern int at_quick_exit (void (*__func) (void)) __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+/* Call all functions registered with `atexit' and `on_exit',
+   in the reverse of the order in which they were registered,
+   perform stdio cleanup, and terminate program execution with STATUS.  */
+extern void exit (int __status) __attribute__ ((__nothrow__ )) __attribute__ ((__noreturn__));
+
+
+/* Call all functions registered with `at_quick_exit' in the reverse
+   of the order in which they were registered and terminate program
+   execution with STATUS.  */
+extern void quick_exit (int __status) __attribute__ ((__nothrow__ )) __attribute__ ((__noreturn__));
+
+
+
+/* Terminate the program with STATUS without calling any of the
+   functions registered with `atexit' or `on_exit'.  */
+extern void _Exit (int __status) __attribute__ ((__nothrow__ )) __attribute__ ((__noreturn__));
+
+
+
+/* Return the value of envariable NAME, or NULL if it doesn't exist.  */
+extern char *getenv (const char *__name) __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1))) /* Ignore */;
+/* Execute the given line as a shell command.
+
+   This function is a cancellation point and therefore not marked with
+   __THROW.  */
+extern int system (const char *__command) /* Ignore */;
+/* Shorthand for type of comparison functions.  */
+
+
+typedef int (*__compar_fn_t) (const void *, const void *);
+/* Do a binary search for KEY in BASE, which consists of NMEMB elements
+   of SIZE bytes each, using COMPAR to perform the comparisons.  */
+extern void *bsearch (const void *__key, const void *__base,
+        size_t __nmemb, size_t __size, __compar_fn_t __compar)
+     __attribute__ ((__nonnull__ (1, 2, 5))) /* Ignore */;
+
+
+
+/* Perform binary search - inline version.
+   Copyright (C) 1991-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+extern __inline __attribute__ ((__gnu_inline__)) void *
+bsearch (const void *__key, const void *__base, size_t __nmemb, size_t __size,
+  __compar_fn_t __compar)
+{
+  size_t __l, __u, __idx;
+  const void *__p;
+  int __comparison;
+
+  __l = 0;
+  __u = __nmemb;
+  while (__l < __u)
+    {
+      __idx = (__l + __u) / 2;
+      __p = (void *) (((const char *) __base) + (__idx * __size));
+      __comparison = (*__compar) (__key, __p);
+      if (__comparison < 0)
+ __u = __idx;
+      else if (__comparison > 0)
+ __l = __idx + 1;
+      else
+ return (void *) __p;
+    }
+
+  return ((void*)0);
+}
+
+
+/* Sort NMEMB elements of BASE, of SIZE bytes each,
+   using COMPAR to perform the comparisons.  */
+extern void qsort (void *__base, size_t __nmemb, size_t __size,
+     __compar_fn_t __compar) __attribute__ ((__nonnull__ (1, 4)));
+
+
+
+
+
+
+
+/* Return the absolute value of X.  */
+extern int abs (int __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)) /* Ignore */;
+extern long int labs (long int __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)) /* Ignore */;
+
+
+__extension__ extern long long int llabs (long long int __x)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__const__)) /* Ignore */;
+
+
+
+/* Return the `div_t', `ldiv_t' or `lldiv_t' representation
+   of the value of NUMER over DENOM. */
+/* GCC may have built-ins for these someday.  */
+extern div_t div (int __numer, int __denom)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__const__)) /* Ignore */;
+extern ldiv_t ldiv (long int __numer, long int __denom)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__const__)) /* Ignore */;
+
+
+__extension__ extern lldiv_t lldiv (long long int __numer,
+        long long int __denom)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__const__)) /* Ignore */;
+/* Return the length of the multibyte character
+   in S, which is no longer than N.  */
+extern int mblen (const char *__s, size_t __n) __attribute__ ((__nothrow__ ));
+/* Return the length of the given multibyte character,
+   putting its `wchar_t' representation in *PWC.  */
+extern int mbtowc (wchar_t *__restrict __pwc,
+     const char *__restrict __s, size_t __n) __attribute__ ((__nothrow__ ));
+/* Put the multibyte character represented
+   by WCHAR in S, returning its length.  */
+extern int wctomb (char *__s, wchar_t __wchar) __attribute__ ((__nothrow__ ));
+
+
+/* Convert a multibyte string to a wide char string.  */
+extern size_t mbstowcs (wchar_t *__restrict __pwcs,
+   const char *__restrict __s, size_t __n) __attribute__ ((__nothrow__ ));
+/* Convert a wide char string to multibyte string.  */
+extern size_t wcstombs (char *__restrict __s,
+   const wchar_t *__restrict __pwcs, size_t __n)
+     __attribute__ ((__nothrow__ ));
+/* X/Open pseudo terminal handling.  */
+/* Floating-point inline functions for stdlib.h.
+   Copyright (C) 2012-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+
+
+
+
+extern __inline __attribute__ ((__gnu_inline__)) double
+__attribute__ ((__nothrow__ )) atof (const char *__nptr)
+{
+  return strtod (__nptr, (char **) ((void*)0));
+}
+
+/* Define some macros helping to catch buffer overflows.  */
+/* Copyright (C) 1991-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/*
+ *	ISO C99 Standard: 7.2 Diagnostics	<assert.h>
+ */
+/* void assert (int expression);
+
+   If NDEBUG is defined, do nothing.
+   If not, and EXPRESSION is zero, print an error message and abort.  */
+/* This prints an "Assertion failed" message and aborts.  */
+extern void __assert_fail (const char *__assertion, const char *__file,
+      unsigned int __line, const char *__function)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__noreturn__));
+
+/* Likewise, but prints the error text for ERRNUM.  */
+extern void __assert_perror_fail (int __errnum, const char *__file,
+      unsigned int __line, const char *__function)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__noreturn__));
+
+
+/* The following is not at all used here but needed for standard
+   compliance.  */
+extern void __assert (const char *__assertion, const char *__file, int __line)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__noreturn__));
+
+
+
+
+
+/* When possible, define assert so that it does not add extra
+   parentheses around EXPR.  Otherwise, those added parentheses would
+   suppress warnings we'd expect to be detected by gcc's -Wparentheses.  */
+/* Version 2.4 and later of GCC define a magical variable `__PRETTY_FUNCTION__'
+   which contains the name of the function currently being defined.
+   This is broken in G++ before version 2.6.
+   C9x has a similar variable called __func__, but prefer the GCC one since
+   it demangles C++ function names.  */
+/*===---- limits.h - Standard header for integer sizes --------------------===*\
+ *
+ * Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ * See https://llvm.org/LICENSE.txt for license information.
+ * SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+ *
+\*===----------------------------------------------------------------------===*/
+
+
+
+
+/* The system's limits.h may, in turn, try to #include_next GCC's limits.h.
+   Avert this #include_next madness. */
+
+
+
+
+/* System headers include a number of constants from POSIX in <limits.h>.
+   Include it if we're hosted. */
+
+
+/* Copyright (C) 1991-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/*
+ *	ISO C99 Standard: 7.10/5.2.4.2.1 Sizes of integer types	<limits.h>
+ */
+
+
+
+
+
+
+/* Handle feature test macros at the start of a header.
+   Copyright (C) 2016-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/* This header is internal to glibc and should not be included outside
+   of glibc headers.  Headers including it must define
+   __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION first.  This header
+   cannot have multiple include guards because ISO C feature test
+   macros depend on the definition of the macro when an affected
+   header is included, not when the first system header is
+   included.  */
+/* ISO/IEC TR 24731-2:2010 defines the __STDC_WANT_LIB_EXT2__
+   macro.  */
+/* ISO/IEC TS 18661-1:2014 defines the __STDC_WANT_IEC_60559_BFP_EXT__
+   macro.  Most but not all symbols enabled by that macro in TS
+   18661-1 are enabled unconditionally in C2X; the symbols in Annex F
+   still require that macro in C2X.  */
+/* ISO/IEC TS 18661-4:2015 defines the
+   __STDC_WANT_IEC_60559_FUNCS_EXT__ macro.  Other than the reduction
+   functions, the symbols from this TS are enabled unconditionally in
+   C2X.  */
+/* ISO/IEC TS 18661-3:2015 defines the
+   __STDC_WANT_IEC_60559_TYPES_EXT__ macro.  */
+
+
+/* Maximum length of any multibyte character in any locale.
+   We define this value here since the gcc header does not define
+   the correct value.  */
+
+
+
+/* If we are not using GNU CC we have to define all the symbols ourself.
+   Otherwise use gcc's definitions (see below).  */
+ /* Get the compiler's limits.h, which defines almost all the ISO constants.
+
+    We put this #include_next outside the double inclusion check because
+    it should be possible to include this file more than once and still get
+    the definitions from gcc's header.  */
+
+
+
+
+
+/* The <limits.h> files in some gcc versions don't define LLONG_MIN,
+   LLONG_MAX, and ULLONG_MAX.  Instead only the values gcc defined for
+   ages are available.  */
+/* The integer width macros are not defined by GCC's <limits.h> before
+   GCC 7, or if _GNU_SOURCE rather than
+   __STDC_WANT_IEC_60559_BFP_EXT__ is used to enable this feature.  */
+
+
+/* Many system headers try to "help us out" by defining these.  No really, we
+   know how big each datatype is. */
+/* C90/99 5.2.4.2.1 */
+/* C99 5.2.4.2.1: Added long long.
+   C++11 18.3.3.2: same contents as the Standard C Library header <limits.h>.
+ */
+/* LONG_LONG_MIN/LONG_LONG_MAX/ULONG_LONG_MAX are a GNU extension.  It's too bad
+   that we don't have something like #pragma poison that could be used to
+   deprecate a macro - the code should just use LLONG_MAX and friends.
+ */
+/* Copyright (C) 1991-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/*
+ *	ISO C99 Standard: 7.21 String handling	<string.h>
+ */
+
+
+
+
+
+
+/* Handle feature test macros at the start of a header.
+   Copyright (C) 2016-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/* This header is internal to glibc and should not be included outside
+   of glibc headers.  Headers including it must define
+   __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION first.  This header
+   cannot have multiple include guards because ISO C feature test
+   macros depend on the definition of the macro when an affected
+   header is included, not when the first system header is
+   included.  */
+/* ISO/IEC TR 24731-2:2010 defines the __STDC_WANT_LIB_EXT2__
+   macro.  */
+/* ISO/IEC TS 18661-1:2014 defines the __STDC_WANT_IEC_60559_BFP_EXT__
+   macro.  Most but not all symbols enabled by that macro in TS
+   18661-1 are enabled unconditionally in C2X; the symbols in Annex F
+   still require that macro in C2X.  */
+/* ISO/IEC TS 18661-4:2015 defines the
+   __STDC_WANT_IEC_60559_FUNCS_EXT__ macro.  Other than the reduction
+   functions, the symbols from this TS are enabled unconditionally in
+   C2X.  */
+/* ISO/IEC TS 18661-3:2015 defines the
+   __STDC_WANT_IEC_60559_TYPES_EXT__ macro.  */
+
+
+
+/* Get size_t and NULL from <stddef.h>.  */
+
+
+
+/*===---- stddef.h - Basic type definitions --------------------------------===
+ *
+ * Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ * See https://llvm.org/LICENSE.txt for license information.
+ * SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+ *
+ *===-----------------------------------------------------------------------===
+ */
+/* Some C libraries expect to see a wint_t here. Others (notably MinGW) will use
+__WINT_TYPE__ directly; accommodate both by requiring __need_wint_t */
+
+/* Tell the caller that we provide correct C++ prototypes.  */
+
+
+
+
+
+
+/* Copy N bytes of SRC to DEST.  */
+extern void *memcpy (void *__restrict __dest, const void *__restrict __src,
+       size_t __n) __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+/* Copy N bytes of SRC to DEST, guaranteeing
+   correct behavior for overlapping strings.  */
+extern void *memmove (void *__dest, const void *__src, size_t __n)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+
+/* Copy no more than N bytes of SRC to DEST, stopping when C is found.
+   Return the position in DEST one byte past where C was copied,
+   or NULL if C was not found in the first N bytes of SRC.  */
+
+
+
+
+
+
+
+/* Set N bytes of S to C.  */
+extern void *memset (void *__s, int __c, size_t __n) __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+
+/* Compare N bytes of S1 and S2.  */
+extern int memcmp (const void *__s1, const void *__s2, size_t __n)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+
+/* Search N bytes of S for C.  */
+extern void *memchr (const void *__s, int __c, size_t __n)
+      __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1)));
+/* Copy SRC to DEST.  */
+extern char *strcpy (char *__restrict __dest, const char *__restrict __src)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+/* Copy no more than N characters of SRC to DEST.  */
+extern char *strncpy (char *__restrict __dest,
+        const char *__restrict __src, size_t __n)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+
+/* Append SRC onto DEST.  */
+extern char *strcat (char *__restrict __dest, const char *__restrict __src)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+/* Append no more than N characters from SRC onto DEST.  */
+extern char *strncat (char *__restrict __dest, const char *__restrict __src,
+        size_t __n) __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+
+/* Compare S1 and S2.  */
+extern int strcmp (const char *__s1, const char *__s2)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+/* Compare N characters of S1 and S2.  */
+extern int strncmp (const char *__s1, const char *__s2, size_t __n)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+
+/* Compare the collated forms of S1 and S2.  */
+extern int strcoll (const char *__s1, const char *__s2)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+/* Put a transformation of SRC into no more than N bytes of DEST.  */
+extern size_t strxfrm (char *__restrict __dest,
+         const char *__restrict __src, size_t __n)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (2)));
+/* Return a malloc'd copy of at most N bytes of STRING.  The
+   resultant string is terminated even if no null terminator
+   appears before STRING[N].  */
+/* Find the first occurrence of C in S.  */
+extern char *strchr (const char *__s, int __c)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1)));
+
+/* Find the last occurrence of C in S.  */
+extern char *strrchr (const char *__s, int __c)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1)));
+/* Return the length of the initial segment of S which
+   consists entirely of characters not in REJECT.  */
+extern size_t strcspn (const char *__s, const char *__reject)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+/* Return the length of the initial segment of S which
+   consists entirely of characters in ACCEPT.  */
+extern size_t strspn (const char *__s, const char *__accept)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+/* Find the first occurrence in S of any character in ACCEPT.  */
+extern char *strpbrk (const char *__s, const char *__accept)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+
+/* Find the first occurrence of NEEDLE in HAYSTACK.  */
+extern char *strstr (const char *__haystack, const char *__needle)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1, 2)));
+
+
+
+/* Divide S into tokens separated by characters in DELIM.  */
+extern char *strtok (char *__restrict __s, const char *__restrict __delim)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (2)));
+
+/* Divide S into tokens separated by characters in DELIM.  Information
+   passed between calls are stored in SAVE_PTR.  */
+extern char *__strtok_r (char *__restrict __s,
+    const char *__restrict __delim,
+    char **__restrict __save_ptr)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (2, 3)));
+/* Return the length of S.  */
+extern size_t strlen (const char *__s)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1)));
+/* Return a string describing the meaning of the `errno' code in ERRNUM.  */
+extern char *strerror (int __errnum) __attribute__ ((__nothrow__ ));
+/* Define ISO C stdio on top of C++ iostreams.
+   Copyright (C) 1991-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/*
+ *	ISO C99 Standard: 7.19 Input/output	<stdio.h>
+ */
+
+
+
+
+
+
+/* Handle feature test macros at the start of a header.
+   Copyright (C) 2016-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/* This header is internal to glibc and should not be included outside
+   of glibc headers.  Headers including it must define
+   __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION first.  This header
+   cannot have multiple include guards because ISO C feature test
+   macros depend on the definition of the macro when an affected
+   header is included, not when the first system header is
+   included.  */
+/* ISO/IEC TR 24731-2:2010 defines the __STDC_WANT_LIB_EXT2__
+   macro.  */
+/* ISO/IEC TS 18661-1:2014 defines the __STDC_WANT_IEC_60559_BFP_EXT__
+   macro.  Most but not all symbols enabled by that macro in TS
+   18661-1 are enabled unconditionally in C2X; the symbols in Annex F
+   still require that macro in C2X.  */
+/* ISO/IEC TS 18661-4:2015 defines the
+   __STDC_WANT_IEC_60559_FUNCS_EXT__ macro.  Other than the reduction
+   functions, the symbols from this TS are enabled unconditionally in
+   C2X.  */
+/* ISO/IEC TS 18661-3:2015 defines the
+   __STDC_WANT_IEC_60559_TYPES_EXT__ macro.  */
+
+
+
+
+
+/*===---- stddef.h - Basic type definitions --------------------------------===
+ *
+ * Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ * See https://llvm.org/LICENSE.txt for license information.
+ * SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+ *
+ *===-----------------------------------------------------------------------===
+ */
+/* Some C libraries expect to see a wint_t here. Others (notably MinGW) will use
+__WINT_TYPE__ directly; accommodate both by requiring __need_wint_t */
+
+
+/*===---- stdarg.h - Variable argument handling ----------------------------===
+ *
+ * Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ * See https://llvm.org/LICENSE.txt for license information.
+ * SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+ *
+ *===-----------------------------------------------------------------------===
+ */
+
+
+
+
+
+typedef __builtin_va_list va_list;
+
+
+
+
+
+
+/* GCC always defines __va_copy, but does not define va_copy unless in c99 mode
+ * or -ansi is not specified, since it was not part of C90.
+ */
+typedef __builtin_va_list __gnuc_va_list;
+
+/* bits/types.h -- definitions of __*_t types underlying *_t types.
+   Copyright (C) 2002-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/*
+ * Never include this file directly; use <sys/types.h> instead.
+ */
+
+
+
+
+
+
+/* Determine the wordsize from the preprocessor defines.  */
+/* Both x86-64 and x32 use the 64-bit system call interface.  */
+/* Bit size of the time_t type at glibc build time, x86-64 and x32 case.
+   Copyright (C) 2018-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+
+
+
+/* For others, time size is word size.  */
+
+/* Convenience types.  */
+typedef unsigned char __u_char;
+typedef unsigned short int __u_short;
+typedef unsigned int __u_int;
+typedef unsigned long int __u_long;
+
+/* Fixed-size types, underlying types depend on word size and compiler.  */
+typedef signed char __int8_t;
+typedef unsigned char __uint8_t;
+typedef signed short int __int16_t;
+typedef unsigned short int __uint16_t;
+typedef signed int __int32_t;
+typedef unsigned int __uint32_t;
+
+typedef signed long int __int64_t;
+typedef unsigned long int __uint64_t;
+
+
+
+
+
+/* Smallest types with at least a given width.  */
+typedef __int8_t __int_least8_t;
+typedef __uint8_t __uint_least8_t;
+typedef __int16_t __int_least16_t;
+typedef __uint16_t __uint_least16_t;
+typedef __int32_t __int_least32_t;
+typedef __uint32_t __uint_least32_t;
+typedef __int64_t __int_least64_t;
+typedef __uint64_t __uint_least64_t;
+
+/* quad_t is also 64 bits.  */
+
+typedef long int __quad_t;
+typedef unsigned long int __u_quad_t;
+
+
+
+
+
+/* Largest integral types.  */
+
+typedef long int __intmax_t;
+typedef unsigned long int __uintmax_t;
+
+
+
+
+
+
+/* The machine-dependent file <bits/typesizes.h> defines __*_T_TYPE
+   macros for each of the OS types we define below.  The definitions
+   of those macros must use the following macros for underlying types.
+   We define __S<SIZE>_TYPE and __U<SIZE>_TYPE for the signed and unsigned
+   variants of each of the following integer types on this machine.
+
+	16		-- "natural" 16-bit type (always short)
+	32		-- "natural" 32-bit type (always int)
+	64		-- "natural" 64-bit type (long or long long)
+	LONG32		-- 32-bit type, traditionally long
+	QUAD		-- 64-bit type, traditionally long long
+	WORD		-- natural type of __WORDSIZE bits (int or long)
+	LONGWORD	-- type of __WORDSIZE bits, traditionally long
+
+   We distinguish WORD/LONGWORD, 32/LONG32, and 64/QUAD so that the
+   conventional uses of `long' or `long long' type modifiers match the
+   types we define, even when a less-adorned type would be the same size.
+   This matters for (somewhat) portably writing printf/scanf formats for
+   these types, where using the appropriate l or ll format modifiers can
+   make the typedefs and the formats match up across all GNU platforms.  If
+   we used `long' when it's 64 bits where `long long' is expected, then the
+   compiler would warn about the formats not matching the argument types,
+   and the programmer changing them to shut up the compiler would break the
+   program's portability.
+
+   Here we assume what is presently the case in all the GCC configurations
+   we support: long long is always 64 bits, long is always word/address size,
+   and int is always 32 bits.  */
+/* No need to mark the typedef with __extension__.   */
+
+
+
+
+
+/* bits/typesizes.h -- underlying types for *_t.  Linux/x86-64 version.
+   Copyright (C) 2012-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+/* See <bits/types.h> for the meaning of these macros.  This file exists so
+   that <bits/types.h> need not vary across different GNU platforms.  */
+
+/* X32 kernel interface is 64-bit.  */
+/* Tell the libc code that off_t and off64_t are actually the same type
+   for all ABI purposes, even if possibly expressed as different base types
+   for C type-checking purposes.  */
+
+
+/* Same for ino_t and ino64_t.  */
+
+
+/* And for __rlim_t and __rlim64_t.  */
+
+
+/* And for fsblkcnt_t, fsblkcnt64_t, fsfilcnt_t and fsfilcnt64_t.  */
+
+
+
+
+
+
+
+/* Number of descriptors that can fit in an `fd_set'.  */
+/* bits/time64.h -- underlying types for __time64_t.  Generic version.
+   Copyright (C) 2018-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+/* Define __TIME64_T_TYPE so that it is always a 64-bit type.  */
+
+
+/* If we already have 64-bit time type then use it.  */
+
+
+typedef unsigned long int __dev_t; /* Type of device numbers.  */
+typedef unsigned int __uid_t; /* Type of user identifications.  */
+typedef unsigned int __gid_t; /* Type of group identifications.  */
+typedef unsigned long int __ino_t; /* Type of file serial numbers.  */
+typedef unsigned long int __ino64_t; /* Type of file serial numbers (LFS).*/
+typedef unsigned int __mode_t; /* Type of file attribute bitmasks.  */
+typedef unsigned long int __nlink_t; /* Type of file link counts.  */
+typedef long int __off_t; /* Type of file sizes and offsets.  */
+typedef long int __off64_t; /* Type of file sizes and offsets (LFS).  */
+typedef int __pid_t; /* Type of process identifications.  */
+typedef struct { int __val[2]; } __fsid_t; /* Type of file system IDs.  */
+typedef long int __clock_t; /* Type of CPU usage counts.  */
+typedef unsigned long int __rlim_t; /* Type for resource measurement.  */
+typedef unsigned long int __rlim64_t; /* Type for resource measurement (LFS).  */
+typedef unsigned int __id_t; /* General type for IDs.  */
+typedef long int __time_t; /* Seconds since the Epoch.  */
+typedef unsigned int __useconds_t; /* Count of microseconds.  */
+typedef long int __suseconds_t; /* Signed count of microseconds.  */
+
+typedef int __daddr_t; /* The type of a disk address.  */
+typedef int __key_t; /* Type of an IPC key.  */
+
+/* Clock ID used in clock and timer functions.  */
+typedef int __clockid_t;
+
+/* Timer ID returned by `timer_create'.  */
+typedef void * __timer_t;
+
+/* Type to represent block size.  */
+typedef long int __blksize_t;
+
+/* Types from the Large File Support interface.  */
+
+/* Type to count number of disk blocks.  */
+typedef long int __blkcnt_t;
+typedef long int __blkcnt64_t;
+
+/* Type to count file system blocks.  */
+typedef unsigned long int __fsblkcnt_t;
+typedef unsigned long int __fsblkcnt64_t;
+
+/* Type to count file system nodes.  */
+typedef unsigned long int __fsfilcnt_t;
+typedef unsigned long int __fsfilcnt64_t;
+
+/* Type of miscellaneous file system fields.  */
+typedef long int __fsword_t;
+
+typedef long int __ssize_t; /* Type of a byte count, or error.  */
+
+/* Signed long type used in system calls.  */
+typedef long int __syscall_slong_t;
+/* Unsigned long type used in system calls.  */
+typedef unsigned long int __syscall_ulong_t;
+
+/* These few don't really vary by system, they always correspond
+   to one of the other defined types.  */
+typedef __off64_t __loff_t; /* Type of file sizes and offsets (LFS).  */
+typedef char *__caddr_t;
+
+/* Duplicates info from stdint.h but this is used in unistd.h.  */
+typedef long int __intptr_t;
+
+/* Duplicate info from sys/socket.h.  */
+typedef unsigned int __socklen_t;
+
+/* C99: An integer type that can be accessed as an atomic entity,
+   even in the presence of asynchronous interrupts.
+   It is not currently necessary for this to be machine-specific.  */
+typedef int __sig_atomic_t;
+
+/* Seconds since the Epoch, visible to user code when time_t is too
+   narrow only for consistency with the old way of widening too-narrow
+   types.  User code should never use __time64_t.  */
+
+
+
+
+
+
+
+/* Integral type unchanged by default argument promotions that can
+   hold any value corresponding to members of the extended character
+   set, as well as at least one value that does not correspond to any
+   member of the extended character set.  */
+
+
+
+
+/* Conversion state information.  */
+typedef struct
+{
+  int __count;
+  union
+  {
+    unsigned int __wch;
+    char __wchb[4];
+  } __value; /* Value so far.  */
+} __mbstate_t;
+
+/* The tag name of this struct is _G_fpos_t to preserve historic
+   C++ mangled names for functions taking fpos_t arguments.
+   That name should not be used in new code.  */
+typedef struct _G_fpos_t
+{
+  __off_t __pos;
+  __mbstate_t __state;
+} __fpos_t;
+
+
+
+
+
+
+/* The tag name of this struct is _G_fpos64_t to preserve historic
+   C++ mangled names for functions taking fpos_t and/or fpos64_t
+   arguments.  That name should not be used in new code.  */
+typedef struct _G_fpos64_t
+{
+  __off64_t __pos;
+  __mbstate_t __state;
+} __fpos64_t;
+
+
+
+struct _IO_FILE;
+typedef struct _IO_FILE __FILE;
+
+
+
+struct _IO_FILE;
+
+/* The opaque type of streams.  This is the definition used elsewhere.  */
+typedef struct _IO_FILE FILE;
+/* Copyright (C) 1991-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+
+
+/* Caution: The contents of this file are not part of the official
+   stdio.h API.  However, much of it is part of the official *binary*
+   interface, and therefore cannot be changed.  */
+struct _IO_FILE;
+struct _IO_marker;
+struct _IO_codecvt;
+struct _IO_wide_data;
+
+/* During the build of glibc itself, _IO_lock_t will already have been
+   defined by internal headers.  */
+
+typedef void _IO_lock_t;
+
+
+/* The tag name of this struct is _IO_FILE to preserve historic
+   C++ mangled names for functions taking FILE* arguments.
+   That name should not be used in new code.  */
+struct _IO_FILE
+{
+  int _flags; /* High-order word is _IO_MAGIC; rest is flags. */
+
+  /* The following pointers correspond to the C++ streambuf protocol. */
+  char *_IO_read_ptr; /* Current read pointer */
+  char *_IO_read_end; /* End of get area. */
+  char *_IO_read_base; /* Start of putback+get area. */
+  char *_IO_write_base; /* Start of put area. */
+  char *_IO_write_ptr; /* Current put pointer. */
+  char *_IO_write_end; /* End of put area. */
+  char *_IO_buf_base; /* Start of reserve area. */
+  char *_IO_buf_end; /* End of reserve area. */
+
+  /* The following fields are used to support backing up and undo. */
+  char *_IO_save_base; /* Pointer to start of non-current get area. */
+  char *_IO_backup_base; /* Pointer to first valid character of backup area */
+  char *_IO_save_end; /* Pointer to end of non-current get area. */
+
+  struct _IO_marker *_markers;
+
+  struct _IO_FILE *_chain;
+
+  int _fileno;
+  int _flags2;
+  __off_t _old_offset; /* This used to be _offset but it's too small.  */
+
+  /* 1+column number of pbase(); 0 is unknown. */
+  unsigned short _cur_column;
+  signed char _vtable_offset;
+  char _shortbuf[1];
+
+  _IO_lock_t *_lock;
+
+
+
+
+
+
+
+  __off64_t _offset;
+  /* Wide character stream stuff.  */
+  struct _IO_codecvt *_codecvt;
+  struct _IO_wide_data *_wide_data;
+  struct _IO_FILE *_freeres_list;
+  void *_freeres_buf;
+  size_t __pad5;
+  int _mode;
+  /* Make sure we don't get into trouble again.  */
+  char _unused2[15 * sizeof (int) - 4 * sizeof (void *) - sizeof (size_t)];
+};
+
+/* These macros are used by bits/stdio.h and internal headers.  */
+/* Many more flag bits are defined internally.  */
+/* The type of the second argument to `fgetpos' and `fsetpos'.  */
+
+typedef __fpos_t fpos_t;
+
+
+
+
+
+
+
+/* The possibilities for the third argument to `setvbuf'.  */
+
+
+
+
+
+/* Default buffer size.  */
+
+
+
+/* The value returned by fgetc and similar functions to indicate the
+   end of the file.  */
+
+
+
+/* The possibilities for the third argument to `fseek'.
+   These values should not be changed.  */
+/* Get the values:
+   L_tmpnam	How long an array of chars must be to be passed to `tmpnam'.
+   TMP_MAX	The minimum number of unique filenames generated by tmpnam
+		(and tempnam when it uses tmpnam's name space),
+		or tempnam (the two are separate).
+   L_ctermid	How long an array to pass to `ctermid'.
+   L_cuserid	How long an array to pass to `cuserid'.
+   FOPEN_MAX	Minimum number of files that can be open at once.
+   FILENAME_MAX	Maximum length of a filename.  */
+
+/* Copyright (C) 1994-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+/* Standard streams.  */
+extern FILE *stdin; /* Standard input stream.  */
+extern FILE *stdout; /* Standard output stream.  */
+extern FILE *stderr; /* Standard error output stream.  */
+/* C89/C99 say they're macros.  Make them happy.  */
+
+
+
+
+/* Remove file FILENAME.  */
+extern int remove (const char *__filename) __attribute__ ((__nothrow__ ));
+/* Rename file OLD to NEW.  */
+extern int rename (const char *__old, const char *__new) __attribute__ ((__nothrow__ ));
+/* Create a temporary file and open it read/write.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+
+extern FILE *tmpfile (void) /* Ignore */;
+/* Generate a temporary filename.  */
+extern char *tmpnam (char *__s) __attribute__ ((__nothrow__ )) /* Ignore */;
+/* Close STREAM.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int fclose (FILE *__stream);
+/* Flush STREAM, or all streams if STREAM is NULL.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int fflush (FILE *__stream);
+/* Open a file and create a new stream for it.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern FILE *fopen (const char *__restrict __filename,
+      const char *__restrict __modes) /* Ignore */;
+/* Open a file, replacing an existing stream with it.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern FILE *freopen (const char *__restrict __filename,
+        const char *__restrict __modes,
+        FILE *__restrict __stream) /* Ignore */;
+/* If BUF is NULL, make STREAM unbuffered.
+   Else make it use buffer BUF, of size BUFSIZ.  */
+extern void setbuf (FILE *__restrict __stream, char *__restrict __buf) __attribute__ ((__nothrow__ ));
+/* Make STREAM use buffering mode MODE.
+   If BUF is not NULL, use N bytes of it for buffering;
+   else allocate an internal buffer N bytes long.  */
+extern int setvbuf (FILE *__restrict __stream, char *__restrict __buf,
+      int __modes, size_t __n) __attribute__ ((__nothrow__ ));
+/* Write formatted output to STREAM.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int fprintf (FILE *__restrict __stream,
+      const char *__restrict __format, ...);
+/* Write formatted output to stdout.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int printf (const char *__restrict __format, ...);
+/* Write formatted output to S.  */
+extern int sprintf (char *__restrict __s,
+      const char *__restrict __format, ...) __attribute__ ((__nothrow__));
+
+/* Write formatted output to S from argument list ARG.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int vfprintf (FILE *__restrict __s, const char *__restrict __format,
+       __gnuc_va_list __arg);
+/* Write formatted output to stdout from argument list ARG.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int vprintf (const char *__restrict __format, __gnuc_va_list __arg);
+/* Write formatted output to S from argument list ARG.  */
+extern int vsprintf (char *__restrict __s, const char *__restrict __format,
+       __gnuc_va_list __arg) __attribute__ ((__nothrow__));
+
+
+/* Maximum chars of output to write in MAXLEN.  */
+extern int snprintf (char *__restrict __s, size_t __maxlen,
+       const char *__restrict __format, ...)
+     __attribute__ ((__nothrow__)) __attribute__ ((__format__ (__printf__, 3, 4)));
+
+extern int vsnprintf (char *__restrict __s, size_t __maxlen,
+        const char *__restrict __format, __gnuc_va_list __arg)
+     __attribute__ ((__nothrow__)) __attribute__ ((__format__ (__printf__, 3, 0)));
+/* Read formatted input from STREAM.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int fscanf (FILE *__restrict __stream,
+     const char *__restrict __format, ...) /* Ignore */;
+/* Read formatted input from stdin.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int scanf (const char *__restrict __format, ...) /* Ignore */;
+/* Read formatted input from S.  */
+extern int sscanf (const char *__restrict __s,
+     const char *__restrict __format, ...) __attribute__ ((__nothrow__ ));
+
+/* For historical reasons, the C99-compliant versions of the scanf
+   functions are at alternative names.  When __LDBL_COMPAT is in
+   effect, this is handled in bits/stdio-ldbl.h.  */
+
+
+extern int fscanf (FILE *__restrict __stream, const char *__restrict __format, ...) __asm__ ("" "__isoc99_fscanf") /* Ignore */;
+
+
+extern int scanf (const char *__restrict __format, ...) __asm__ ("" "__isoc99_scanf") /* Ignore */;
+
+extern int sscanf (const char *__restrict __s, const char *__restrict __format, ...) __asm__ ("" "__isoc99_sscanf") __attribute__ ((__nothrow__ ));
+/* Read formatted input from S into argument list ARG.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int vfscanf (FILE *__restrict __s, const char *__restrict __format,
+      __gnuc_va_list __arg)
+     __attribute__ ((__format__ (__scanf__, 2, 0))) /* Ignore */;
+
+/* Read formatted input from stdin into argument list ARG.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int vscanf (const char *__restrict __format, __gnuc_va_list __arg)
+     __attribute__ ((__format__ (__scanf__, 1, 0))) /* Ignore */;
+
+/* Read formatted input from S into argument list ARG.  */
+extern int vsscanf (const char *__restrict __s,
+      const char *__restrict __format, __gnuc_va_list __arg)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__format__ (__scanf__, 2, 0)));
+
+/* Same redirection as above for the v*scanf family.  */
+
+
+extern int vfscanf (FILE *__restrict __s, const char *__restrict __format, __gnuc_va_list __arg) __asm__ ("" "__isoc99_vfscanf")
+
+
+
+     __attribute__ ((__format__ (__scanf__, 2, 0))) /* Ignore */;
+extern int vscanf (const char *__restrict __format, __gnuc_va_list __arg) __asm__ ("" "__isoc99_vscanf")
+
+     __attribute__ ((__format__ (__scanf__, 1, 0))) /* Ignore */;
+extern int vsscanf (const char *__restrict __s, const char *__restrict __format, __gnuc_va_list __arg) __asm__ ("" "__isoc99_vsscanf") __attribute__ ((__nothrow__ ))
+
+
+
+     __attribute__ ((__format__ (__scanf__, 2, 0)));
+/* Read a character from STREAM.
+
+   These functions are possible cancellation points and therefore not
+   marked with __THROW.  */
+extern int fgetc (FILE *__stream);
+extern int getc (FILE *__stream);
+
+/* Read a character from stdin.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int getchar (void);
+/* Write a character to STREAM.
+
+   These functions are possible cancellation points and therefore not
+   marked with __THROW.
+
+   These functions is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int fputc (int __c, FILE *__stream);
+extern int putc (int __c, FILE *__stream);
+
+/* Write a character to stdout.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int putchar (int __c);
+/* Get a newline-terminated string of finite length from STREAM.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern char *fgets (char *__restrict __s, int __n, FILE *__restrict __stream)
+     /* Ignore */;
+/* Write a string to STREAM.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int fputs (const char *__restrict __s, FILE *__restrict __stream);
+
+/* Write a string, followed by a newline, to stdout.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int puts (const char *__s);
+
+
+/* Push a character back onto the input buffer of STREAM.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int ungetc (int __c, FILE *__stream);
+
+
+/* Read chunks of generic data from STREAM.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern size_t fread (void *__restrict __ptr, size_t __size,
+       size_t __n, FILE *__restrict __stream) /* Ignore */;
+/* Write chunks of generic data to STREAM.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern size_t fwrite (const void *__restrict __ptr, size_t __size,
+        size_t __n, FILE *__restrict __s);
+/* Seek to a certain position on STREAM.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int fseek (FILE *__stream, long int __off, int __whence);
+/* Return the current position of STREAM.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern long int ftell (FILE *__stream) /* Ignore */;
+/* Rewind to the beginning of STREAM.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern void rewind (FILE *__stream);
+
+/* The Single Unix Specification, Version 2, specifies an alternative,
+   more adequate interface for the two functions above which deal with
+   file offset.  `long int' is not the right type.  These definitions
+   are originally defined in the Large File Support API.  */
+/* Get STREAM's position.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int fgetpos (FILE *__restrict __stream, fpos_t *__restrict __pos);
+/* Set STREAM's position.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern int fsetpos (FILE *__stream, const fpos_t *__pos);
+/* Clear the error and EOF indicators for STREAM.  */
+extern void clearerr (FILE *__stream) __attribute__ ((__nothrow__ ));
+/* Return the EOF indicator for STREAM.  */
+extern int feof (FILE *__stream) __attribute__ ((__nothrow__ )) /* Ignore */;
+/* Return the error indicator for STREAM.  */
+extern int ferror (FILE *__stream) __attribute__ ((__nothrow__ )) /* Ignore */;
+/* Print a message describing the meaning of the value of errno.
+
+   This function is a possible cancellation point and therefore not
+   marked with __THROW.  */
+extern void perror (const char *__s);
+
+/* Provide the declarations for `sys_errlist' and `sys_nerr' if they
+   are available on this system.  Even if available, these variables
+   should not be used directly.  The `strerror' function provides
+   all the necessary functionality.  */
+
+/* Declare sys_errlist and sys_nerr, or don't.  Compatibility (do) version.
+   Copyright (C) 2002-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+
+
+
+/* sys_errlist and sys_nerr are deprecated.  Use strerror instead.  */
+/* Slow-path routines used by the optimized inline functions in
+   bits/stdio.h.  */
+extern int __uflow (FILE *);
+extern int __overflow (FILE *, int);
+
+/* If we are compiling with optimizing read this file.  It contains
+   several optimizing inline functions and macros.  */
+
+
+/* Optimizing macros and inline functions for stdio functions.
+   Copyright (C) 1998-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+/* For -D_FORTIFY_SOURCE{,=2} bits/stdio2.h will define a different
+   inline.  */
+
+/* Write formatted output to stdout from argument list ARG.  */
+extern __inline __attribute__ ((__gnu_inline__)) int
+vprintf (const char *__restrict __fmt, __gnuc_va_list __arg)
+{
+  return vfprintf (stdout, __fmt, __arg);
+}
+
+
+/* Read a character from stdin.  */
+
+extern __inline __attribute__ ( ( __gnu_inline__ ) ) int getchar ( void ) ;
+
+
+/* Write a character to stdout.  */
+extern __inline __attribute__ ((__gnu_inline__)) int
+putchar (int __c)
+{
+  return putc (__c, stdout);
+}
+/* Define helper macro.  */
+/* Declarations for math functions.
+   Copyright (C) 1991-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/*
+ *	ISO C99 Standard: 7.12 Mathematics	<math.h>
+ */
+
+
+
+
+
+
+/* Handle feature test macros at the start of a header.
+   Copyright (C) 2016-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/* This header is internal to glibc and should not be included outside
+   of glibc headers.  Headers including it must define
+   __GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION first.  This header
+   cannot have multiple include guards because ISO C feature test
+   macros depend on the definition of the macro when an affected
+   header is included, not when the first system header is
+   included.  */
+/* ISO/IEC TR 24731-2:2010 defines the __STDC_WANT_LIB_EXT2__
+   macro.  */
+/* ISO/IEC TS 18661-1:2014 defines the __STDC_WANT_IEC_60559_BFP_EXT__
+   macro.  Most but not all symbols enabled by that macro in TS
+   18661-1 are enabled unconditionally in C2X; the symbols in Annex F
+   still require that macro in C2X.  */
+/* ISO/IEC TS 18661-4:2015 defines the
+   __STDC_WANT_IEC_60559_FUNCS_EXT__ macro.  Other than the reduction
+   functions, the symbols from this TS are enabled unconditionally in
+   C2X.  */
+/* ISO/IEC TS 18661-3:2015 defines the
+   __STDC_WANT_IEC_60559_TYPES_EXT__ macro.  */
+
+
+
+
+
+
+
+
+/* Get definitions of __intmax_t and __uintmax_t.  */
+
+
+/* Get machine-dependent vector math functions declarations.  */
+
+/* Platform-specific SIMD declarations of math functions.
+   Copyright (C) 2014-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+
+
+
+
+/* Get default empty definitions for simd declarations.  */
+
+/* Empty definitions required for __MATHCALL_VEC unfolding in mathcalls.h.
+   Copyright (C) 2014-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+
+
+
+
+/* Needed definitions could be generated with:
+   for func in $(grep __MATHCALL_VEC math/bits/mathcalls.h |\
+		 sed -r "s|__MATHCALL_VEC.?\(||; s|,.*||"); do
+     echo "#define __DECL_SIMD_${func}";
+     echo "#define __DECL_SIMD_${func}f";
+     echo "#define __DECL_SIMD_${func}l";
+   done
+ */
+
+/* Gather machine dependent type support.  */
+
+
+/* Value returned on overflow.  With IEEE 754 floating point, this is
+   +Infinity, otherwise the largest representable positive value.  */
+/* IEEE positive infinity.  */
+
+
+
+
+
+
+/* IEEE Not A Number.  */
+/* Get __GLIBC_FLT_EVAL_METHOD.  */
+
+/* Define __GLIBC_FLT_EVAL_METHOD.  x86 version.
+   Copyright (C) 2016-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+/* Define the following typedefs.
+
+    float_t	floating-point type at least as wide as `float' used
+		to evaluate `float' expressions
+    double_t	floating-point type at least as wide as `double' used
+		to evaluate `double' expressions
+*/
+
+typedef float float_t;
+typedef double double_t;
+/* Define macros for the return values of ilogb and llogb, based on
+   __FP_LOGB0_IS_MIN and __FP_LOGBNAN_IS_MIN.
+
+    FP_ILOGB0	Expands to a value returned by `ilogb (0.0)'.
+    FP_ILOGBNAN	Expands to a value returned by `ilogb (NAN)'.
+    FP_LLOGB0	Expands to a value returned by `llogb (0.0)'.
+    FP_LLOGBNAN	Expands to a value returned by `llogb (NAN)'.
+
+*/
+
+
+/* Define __FP_LOGB0_IS_MIN and __FP_LOGBNAN_IS_MIN.  x86 version.
+   Copyright (C) 2016-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+/* Get the architecture specific values describing the floating-point
+   evaluation.  The following symbols will get defined:
+
+    FP_FAST_FMA
+    FP_FAST_FMAF
+    FP_FAST_FMAL
+		If defined it indicates that the `fma' function
+		generally executes about as fast as a multiply and an add.
+		This macro is defined only iff the `fma' function is
+		implemented directly with a hardware multiply-add instructions.
+*/
+
+
+/* Define FP_FAST_* macros.
+   Copyright (C) 2016-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+
+
+
+
+
+/* The GCC 4.6 compiler will define __FP_FAST_FMA{,F,L} if the fma{,f,l}
+   builtins are supported.  */
+/* The file <bits/mathcalls.h> contains the prototypes for all the
+   actual math functions.  These macros are used for those prototypes,
+   so we can easily declare each function as both `name' and `__name',
+   and can declare the float versions `namef' and `__namef'.  */
+/* Prototype declarations for math classification macros helpers.
+   Copyright (C) 2017-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+/* Classify given number.  */
+extern int __fpclassify (double __value) __attribute__ ((__nothrow__ ))
+     __attribute__ ((__const__));
+
+/* Test for negative number.  */
+extern int __signbit (double __value) __attribute__ ((__nothrow__ ))
+     __attribute__ ((__const__));
+
+/* Return 0 if VALUE is finite or NaN, +1 if it
+   is +Infinity, -1 if it is -Infinity.  */
+extern int __isinf (double __value) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Return nonzero if VALUE is finite and not NaN.  Used by isfinite macro.  */
+extern int __finite (double __value) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Return nonzero if VALUE is not a number.  */
+extern int __isnan (double __value) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Test equality.  */
+extern int __iseqsig (double __x, double __y) __attribute__ ((__nothrow__ ));
+
+/* Test for signaling NaN.  */
+extern int __issignaling (double __value) __attribute__ ((__nothrow__ ))
+     __attribute__ ((__const__));
+/* Prototype declarations for math functions; helper file for <math.h>.
+   Copyright (C) 1996-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/* NOTE: Because of the special way this file is used by <math.h>, this
+   file must NOT be protected from multiple inclusion as header files
+   usually are.
+
+   This file provides prototype declarations for the math functions.
+   Most functions are declared using the macro:
+
+   __MATHCALL (NAME,[_r], (ARGS...));
+
+   This means there is a function `NAME' returning `double' and a function
+   `NAMEf' returning `float'.  Each place `_Mdouble_' appears in the
+   prototype, that is actually `double' in the prototype for `NAME' and
+   `float' in the prototype for `NAMEf'.  Reentrant variant functions are
+   called `NAME_r' and `NAMEf_r'.
+
+   Functions returning other types like `int' are declared using the macro:
+
+   __MATHDECL (TYPE, NAME,[_r], (ARGS...));
+
+   This is just like __MATHCALL but for a function returning `TYPE'
+   instead of `_Mdouble_'.  In all of these cases, there is still
+   both a `NAME' and a `NAMEf' that takes `float' arguments.
+
+   Note that there must be no whitespace before the argument passed for
+   NAME, to make token pasting work with -traditional.  */
+
+
+
+
+
+
+/* Trigonometric functions.  */
+
+/* Arc cosine of X.  */
+extern double acos (double __x) __attribute__ ((__nothrow__ )); extern double __acos (double __x) __attribute__ ((__nothrow__ ));
+/* Arc sine of X.  */
+extern double asin (double __x) __attribute__ ((__nothrow__ )); extern double __asin (double __x) __attribute__ ((__nothrow__ ));
+/* Arc tangent of X.  */
+extern double atan (double __x) __attribute__ ((__nothrow__ )); extern double __atan (double __x) __attribute__ ((__nothrow__ ));
+/* Arc tangent of Y/X.  */
+extern double atan2 (double __y, double __x) __attribute__ ((__nothrow__ )); extern double __atan2 (double __y, double __x) __attribute__ ((__nothrow__ ));
+
+/* Cosine of X.  */
+ extern double cos (double __x) __attribute__ ((__nothrow__ )); extern double __cos (double __x) __attribute__ ((__nothrow__ ));
+/* Sine of X.  */
+ extern double sin (double __x) __attribute__ ((__nothrow__ )); extern double __sin (double __x) __attribute__ ((__nothrow__ ));
+/* Tangent of X.  */
+extern double tan (double __x) __attribute__ ((__nothrow__ )); extern double __tan (double __x) __attribute__ ((__nothrow__ ));
+
+/* Hyperbolic functions.  */
+
+/* Hyperbolic cosine of X.  */
+extern double cosh (double __x) __attribute__ ((__nothrow__ )); extern double __cosh (double __x) __attribute__ ((__nothrow__ ));
+/* Hyperbolic sine of X.  */
+extern double sinh (double __x) __attribute__ ((__nothrow__ )); extern double __sinh (double __x) __attribute__ ((__nothrow__ ));
+/* Hyperbolic tangent of X.  */
+extern double tanh (double __x) __attribute__ ((__nothrow__ )); extern double __tanh (double __x) __attribute__ ((__nothrow__ ));
+/* Hyperbolic arc cosine of X.  */
+extern double acosh (double __x) __attribute__ ((__nothrow__ )); extern double __acosh (double __x) __attribute__ ((__nothrow__ ));
+/* Hyperbolic arc sine of X.  */
+extern double asinh (double __x) __attribute__ ((__nothrow__ )); extern double __asinh (double __x) __attribute__ ((__nothrow__ ));
+/* Hyperbolic arc tangent of X.  */
+extern double atanh (double __x) __attribute__ ((__nothrow__ )); extern double __atanh (double __x) __attribute__ ((__nothrow__ ));
+
+
+/* Exponential and logarithmic functions.  */
+
+/* Exponential function of X.  */
+ extern double exp (double __x) __attribute__ ((__nothrow__ )); extern double __exp (double __x) __attribute__ ((__nothrow__ ));
+
+/* Break VALUE into a normalized fraction and an integral power of 2.  */
+extern double frexp (double __x, int *__exponent) __attribute__ ((__nothrow__ )); extern double __frexp (double __x, int *__exponent) __attribute__ ((__nothrow__ ));
+
+/* X times (two to the EXP power).  */
+extern double ldexp (double __x, int __exponent) __attribute__ ((__nothrow__ )); extern double __ldexp (double __x, int __exponent) __attribute__ ((__nothrow__ ));
+
+/* Natural logarithm of X.  */
+ extern double log (double __x) __attribute__ ((__nothrow__ )); extern double __log (double __x) __attribute__ ((__nothrow__ ));
+
+/* Base-ten logarithm of X.  */
+extern double log10 (double __x) __attribute__ ((__nothrow__ )); extern double __log10 (double __x) __attribute__ ((__nothrow__ ));
+
+/* Break VALUE into integral and fractional parts.  */
+extern double modf (double __x, double *__iptr) __attribute__ ((__nothrow__ )); extern double __modf (double __x, double *__iptr) __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (2)));
+
+
+
+
+
+
+
+/* Return exp(X) - 1.  */
+extern double expm1 (double __x) __attribute__ ((__nothrow__ )); extern double __expm1 (double __x) __attribute__ ((__nothrow__ ));
+
+/* Return log(1 + X).  */
+extern double log1p (double __x) __attribute__ ((__nothrow__ )); extern double __log1p (double __x) __attribute__ ((__nothrow__ ));
+
+/* Return the base 2 signed integral exponent of X.  */
+extern double logb (double __x) __attribute__ ((__nothrow__ )); extern double __logb (double __x) __attribute__ ((__nothrow__ ));
+
+
+
+/* Compute base-2 exponential of X.  */
+extern double exp2 (double __x) __attribute__ ((__nothrow__ )); extern double __exp2 (double __x) __attribute__ ((__nothrow__ ));
+
+/* Compute base-2 logarithm of X.  */
+extern double log2 (double __x) __attribute__ ((__nothrow__ )); extern double __log2 (double __x) __attribute__ ((__nothrow__ ));
+
+
+
+/* Power functions.  */
+
+/* Return X to the Y power.  */
+ extern double pow (double __x, double __y) __attribute__ ((__nothrow__ )); extern double __pow (double __x, double __y) __attribute__ ((__nothrow__ ));
+
+/* Return the square root of X.  */
+extern double sqrt (double __x) __attribute__ ((__nothrow__ )); extern double __sqrt (double __x) __attribute__ ((__nothrow__ ));
+
+
+/* Return `sqrt(X*X + Y*Y)'.  */
+extern double hypot (double __x, double __y) __attribute__ ((__nothrow__ )); extern double __hypot (double __x, double __y) __attribute__ ((__nothrow__ ));
+
+
+
+/* Return the cube root of X.  */
+extern double cbrt (double __x) __attribute__ ((__nothrow__ )); extern double __cbrt (double __x) __attribute__ ((__nothrow__ ));
+
+
+
+/* Nearest integer, absolute value, and remainder functions.  */
+
+/* Smallest integral value not less than X.  */
+extern double ceil (double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern double __ceil (double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Absolute value of X.  */
+extern double fabs (double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern double __fabs (double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Largest integer not greater than X.  */
+extern double floor (double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern double __floor (double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Floating-point modulo remainder of X/Y.  */
+extern double fmod (double __x, double __y) __attribute__ ((__nothrow__ )); extern double __fmod (double __x, double __y) __attribute__ ((__nothrow__ ));
+/* Return X with its signed changed to Y's.  */
+extern double copysign (double __x, double __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern double __copysign (double __x, double __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+
+
+/* Return representation of qNaN for double type.  */
+extern double nan (const char *__tagb) __attribute__ ((__nothrow__ )); extern double __nan (const char *__tagb) __attribute__ ((__nothrow__ ));
+/* Error and gamma functions.  */
+extern double erf (double) __attribute__ ((__nothrow__ )); extern double __erf (double) __attribute__ ((__nothrow__ ));
+extern double erfc (double) __attribute__ ((__nothrow__ )); extern double __erfc (double) __attribute__ ((__nothrow__ ));
+extern double lgamma (double) __attribute__ ((__nothrow__ )); extern double __lgamma (double) __attribute__ ((__nothrow__ ));
+
+
+
+/* True gamma function.  */
+extern double tgamma (double) __attribute__ ((__nothrow__ )); extern double __tgamma (double) __attribute__ ((__nothrow__ ));
+/* Return the integer nearest X in the direction of the
+   prevailing rounding mode.  */
+extern double rint (double __x) __attribute__ ((__nothrow__ )); extern double __rint (double __x) __attribute__ ((__nothrow__ ));
+
+/* Return X + epsilon if X < Y, X - epsilon if X > Y.  */
+extern double nextafter (double __x, double __y) __attribute__ ((__nothrow__ )); extern double __nextafter (double __x, double __y) __attribute__ ((__nothrow__ ));
+
+extern double nexttoward (double __x, long double __y) __attribute__ ((__nothrow__ )); extern double __nexttoward (double __x, long double __y) __attribute__ ((__nothrow__ ));
+/* Return the remainder of integer divison X / Y with infinite precision.  */
+extern double remainder (double __x, double __y) __attribute__ ((__nothrow__ )); extern double __remainder (double __x, double __y) __attribute__ ((__nothrow__ ));
+
+
+/* Return X times (2 to the Nth power).  */
+extern double scalbn (double __x, int __n) __attribute__ ((__nothrow__ )); extern double __scalbn (double __x, int __n) __attribute__ ((__nothrow__ ));
+
+
+/* Return the binary exponent of X, which must be nonzero.  */
+extern int ilogb (double __x) __attribute__ ((__nothrow__ )); extern int __ilogb (double __x) __attribute__ ((__nothrow__ ));
+/* Return X times (2 to the Nth power).  */
+extern double scalbln (double __x, long int __n) __attribute__ ((__nothrow__ )); extern double __scalbln (double __x, long int __n) __attribute__ ((__nothrow__ ));
+
+/* Round X to integral value in floating-point format using current
+   rounding direction, but do not raise inexact exception.  */
+extern double nearbyint (double __x) __attribute__ ((__nothrow__ )); extern double __nearbyint (double __x) __attribute__ ((__nothrow__ ));
+
+/* Round X to nearest integral value, rounding halfway cases away from
+   zero.  */
+extern double round (double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern double __round (double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Round X to the integral value in floating-point format nearest but
+   not larger in magnitude.  */
+extern double trunc (double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern double __trunc (double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Compute remainder of X and Y and put in *QUO a value with sign of x/y
+   and magnitude congruent `mod 2^n' to the magnitude of the integral
+   quotient x/y, with n >= 3.  */
+extern double remquo (double __x, double __y, int *__quo) __attribute__ ((__nothrow__ )); extern double __remquo (double __x, double __y, int *__quo) __attribute__ ((__nothrow__ ));
+
+
+/* Conversion functions.  */
+
+/* Round X to nearest integral value according to current rounding
+   direction.  */
+extern long int lrint (double __x) __attribute__ ((__nothrow__ )); extern long int __lrint (double __x) __attribute__ ((__nothrow__ ));
+__extension__
+extern long long int llrint (double __x) __attribute__ ((__nothrow__ )); extern long long int __llrint (double __x) __attribute__ ((__nothrow__ ));
+
+/* Round X to nearest integral value, rounding halfway cases away from
+   zero.  */
+extern long int lround (double __x) __attribute__ ((__nothrow__ )); extern long int __lround (double __x) __attribute__ ((__nothrow__ ));
+__extension__
+extern long long int llround (double __x) __attribute__ ((__nothrow__ )); extern long long int __llround (double __x) __attribute__ ((__nothrow__ ));
+
+
+/* Return positive difference between X and Y.  */
+extern double fdim (double __x, double __y) __attribute__ ((__nothrow__ )); extern double __fdim (double __x, double __y) __attribute__ ((__nothrow__ ));
+
+/* Return maximum numeric value from X and Y.  */
+extern double fmax (double __x, double __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern double __fmax (double __x, double __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Return minimum numeric value from X and Y.  */
+extern double fmin (double __x, double __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern double __fmin (double __x, double __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Multiply-add function computed as a ternary operation.  */
+extern double fma (double __x, double __y, double __z) __attribute__ ((__nothrow__ )); extern double __fma (double __x, double __y, double __z) __attribute__ ((__nothrow__ ));
+
+
+
+
+
+
+
+
+/* Include the file of declarations again, this time using `float'
+   instead of `double' and appending f to each function name.  */
+
+
+
+
+
+
+/* Prototype declarations for math classification macros helpers.
+   Copyright (C) 2017-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+/* Classify given number.  */
+extern int __fpclassifyf (float __value) __attribute__ ((__nothrow__ ))
+     __attribute__ ((__const__));
+
+/* Test for negative number.  */
+extern int __signbitf (float __value) __attribute__ ((__nothrow__ ))
+     __attribute__ ((__const__));
+
+/* Return 0 if VALUE is finite or NaN, +1 if it
+   is +Infinity, -1 if it is -Infinity.  */
+extern int __isinff (float __value) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Return nonzero if VALUE is finite and not NaN.  Used by isfinite macro.  */
+extern int __finitef (float __value) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Return nonzero if VALUE is not a number.  */
+extern int __isnanf (float __value) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Test equality.  */
+extern int __iseqsigf (float __x, float __y) __attribute__ ((__nothrow__ ));
+
+/* Test for signaling NaN.  */
+extern int __issignalingf (float __value) __attribute__ ((__nothrow__ ))
+     __attribute__ ((__const__));
+/* Prototype declarations for math functions; helper file for <math.h>.
+   Copyright (C) 1996-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/* NOTE: Because of the special way this file is used by <math.h>, this
+   file must NOT be protected from multiple inclusion as header files
+   usually are.
+
+   This file provides prototype declarations for the math functions.
+   Most functions are declared using the macro:
+
+   __MATHCALL (NAME,[_r], (ARGS...));
+
+   This means there is a function `NAME' returning `double' and a function
+   `NAMEf' returning `float'.  Each place `_Mdouble_' appears in the
+   prototype, that is actually `double' in the prototype for `NAME' and
+   `float' in the prototype for `NAMEf'.  Reentrant variant functions are
+   called `NAME_r' and `NAMEf_r'.
+
+   Functions returning other types like `int' are declared using the macro:
+
+   __MATHDECL (TYPE, NAME,[_r], (ARGS...));
+
+   This is just like __MATHCALL but for a function returning `TYPE'
+   instead of `_Mdouble_'.  In all of these cases, there is still
+   both a `NAME' and a `NAMEf' that takes `float' arguments.
+
+   Note that there must be no whitespace before the argument passed for
+   NAME, to make token pasting work with -traditional.  */
+
+
+
+
+
+
+/* Trigonometric functions.  */
+
+/* Arc cosine of X.  */
+extern float acosf (float __x) __attribute__ ((__nothrow__ )); extern float __acosf (float __x) __attribute__ ((__nothrow__ ));
+/* Arc sine of X.  */
+extern float asinf (float __x) __attribute__ ((__nothrow__ )); extern float __asinf (float __x) __attribute__ ((__nothrow__ ));
+/* Arc tangent of X.  */
+extern float atanf (float __x) __attribute__ ((__nothrow__ )); extern float __atanf (float __x) __attribute__ ((__nothrow__ ));
+/* Arc tangent of Y/X.  */
+extern float atan2f (float __y, float __x) __attribute__ ((__nothrow__ )); extern float __atan2f (float __y, float __x) __attribute__ ((__nothrow__ ));
+
+/* Cosine of X.  */
+ extern float cosf (float __x) __attribute__ ((__nothrow__ )); extern float __cosf (float __x) __attribute__ ((__nothrow__ ));
+/* Sine of X.  */
+ extern float sinf (float __x) __attribute__ ((__nothrow__ )); extern float __sinf (float __x) __attribute__ ((__nothrow__ ));
+/* Tangent of X.  */
+extern float tanf (float __x) __attribute__ ((__nothrow__ )); extern float __tanf (float __x) __attribute__ ((__nothrow__ ));
+
+/* Hyperbolic functions.  */
+
+/* Hyperbolic cosine of X.  */
+extern float coshf (float __x) __attribute__ ((__nothrow__ )); extern float __coshf (float __x) __attribute__ ((__nothrow__ ));
+/* Hyperbolic sine of X.  */
+extern float sinhf (float __x) __attribute__ ((__nothrow__ )); extern float __sinhf (float __x) __attribute__ ((__nothrow__ ));
+/* Hyperbolic tangent of X.  */
+extern float tanhf (float __x) __attribute__ ((__nothrow__ )); extern float __tanhf (float __x) __attribute__ ((__nothrow__ ));
+/* Hyperbolic arc cosine of X.  */
+extern float acoshf (float __x) __attribute__ ((__nothrow__ )); extern float __acoshf (float __x) __attribute__ ((__nothrow__ ));
+/* Hyperbolic arc sine of X.  */
+extern float asinhf (float __x) __attribute__ ((__nothrow__ )); extern float __asinhf (float __x) __attribute__ ((__nothrow__ ));
+/* Hyperbolic arc tangent of X.  */
+extern float atanhf (float __x) __attribute__ ((__nothrow__ )); extern float __atanhf (float __x) __attribute__ ((__nothrow__ ));
+
+
+/* Exponential and logarithmic functions.  */
+
+/* Exponential function of X.  */
+ extern float expf (float __x) __attribute__ ((__nothrow__ )); extern float __expf (float __x) __attribute__ ((__nothrow__ ));
+
+/* Break VALUE into a normalized fraction and an integral power of 2.  */
+extern float frexpf (float __x, int *__exponent) __attribute__ ((__nothrow__ )); extern float __frexpf (float __x, int *__exponent) __attribute__ ((__nothrow__ ));
+
+/* X times (two to the EXP power).  */
+extern float ldexpf (float __x, int __exponent) __attribute__ ((__nothrow__ )); extern float __ldexpf (float __x, int __exponent) __attribute__ ((__nothrow__ ));
+
+/* Natural logarithm of X.  */
+ extern float logf (float __x) __attribute__ ((__nothrow__ )); extern float __logf (float __x) __attribute__ ((__nothrow__ ));
+
+/* Base-ten logarithm of X.  */
+extern float log10f (float __x) __attribute__ ((__nothrow__ )); extern float __log10f (float __x) __attribute__ ((__nothrow__ ));
+
+/* Break VALUE into integral and fractional parts.  */
+extern float modff (float __x, float *__iptr) __attribute__ ((__nothrow__ )); extern float __modff (float __x, float *__iptr) __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (2)));
+
+
+
+
+
+
+
+/* Return exp(X) - 1.  */
+extern float expm1f (float __x) __attribute__ ((__nothrow__ )); extern float __expm1f (float __x) __attribute__ ((__nothrow__ ));
+
+/* Return log(1 + X).  */
+extern float log1pf (float __x) __attribute__ ((__nothrow__ )); extern float __log1pf (float __x) __attribute__ ((__nothrow__ ));
+
+/* Return the base 2 signed integral exponent of X.  */
+extern float logbf (float __x) __attribute__ ((__nothrow__ )); extern float __logbf (float __x) __attribute__ ((__nothrow__ ));
+
+
+
+/* Compute base-2 exponential of X.  */
+extern float exp2f (float __x) __attribute__ ((__nothrow__ )); extern float __exp2f (float __x) __attribute__ ((__nothrow__ ));
+
+/* Compute base-2 logarithm of X.  */
+extern float log2f (float __x) __attribute__ ((__nothrow__ )); extern float __log2f (float __x) __attribute__ ((__nothrow__ ));
+
+
+
+/* Power functions.  */
+
+/* Return X to the Y power.  */
+ extern float powf (float __x, float __y) __attribute__ ((__nothrow__ )); extern float __powf (float __x, float __y) __attribute__ ((__nothrow__ ));
+
+/* Return the square root of X.  */
+extern float sqrtf (float __x) __attribute__ ((__nothrow__ )); extern float __sqrtf (float __x) __attribute__ ((__nothrow__ ));
+
+
+/* Return `sqrt(X*X + Y*Y)'.  */
+extern float hypotf (float __x, float __y) __attribute__ ((__nothrow__ )); extern float __hypotf (float __x, float __y) __attribute__ ((__nothrow__ ));
+
+
+
+/* Return the cube root of X.  */
+extern float cbrtf (float __x) __attribute__ ((__nothrow__ )); extern float __cbrtf (float __x) __attribute__ ((__nothrow__ ));
+
+
+
+/* Nearest integer, absolute value, and remainder functions.  */
+
+/* Smallest integral value not less than X.  */
+extern float ceilf (float __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern float __ceilf (float __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Absolute value of X.  */
+extern float fabsf (float __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern float __fabsf (float __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Largest integer not greater than X.  */
+extern float floorf (float __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern float __floorf (float __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Floating-point modulo remainder of X/Y.  */
+extern float fmodf (float __x, float __y) __attribute__ ((__nothrow__ )); extern float __fmodf (float __x, float __y) __attribute__ ((__nothrow__ ));
+/* Return X with its signed changed to Y's.  */
+extern float copysignf (float __x, float __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern float __copysignf (float __x, float __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+
+
+/* Return representation of qNaN for double type.  */
+extern float nanf (const char *__tagb) __attribute__ ((__nothrow__ )); extern float __nanf (const char *__tagb) __attribute__ ((__nothrow__ ));
+/* Error and gamma functions.  */
+extern float erff (float) __attribute__ ((__nothrow__ )); extern float __erff (float) __attribute__ ((__nothrow__ ));
+extern float erfcf (float) __attribute__ ((__nothrow__ )); extern float __erfcf (float) __attribute__ ((__nothrow__ ));
+extern float lgammaf (float) __attribute__ ((__nothrow__ )); extern float __lgammaf (float) __attribute__ ((__nothrow__ ));
+
+
+
+/* True gamma function.  */
+extern float tgammaf (float) __attribute__ ((__nothrow__ )); extern float __tgammaf (float) __attribute__ ((__nothrow__ ));
+/* Return the integer nearest X in the direction of the
+   prevailing rounding mode.  */
+extern float rintf (float __x) __attribute__ ((__nothrow__ )); extern float __rintf (float __x) __attribute__ ((__nothrow__ ));
+
+/* Return X + epsilon if X < Y, X - epsilon if X > Y.  */
+extern float nextafterf (float __x, float __y) __attribute__ ((__nothrow__ )); extern float __nextafterf (float __x, float __y) __attribute__ ((__nothrow__ ));
+
+extern float nexttowardf (float __x, long double __y) __attribute__ ((__nothrow__ )); extern float __nexttowardf (float __x, long double __y) __attribute__ ((__nothrow__ ));
+/* Return the remainder of integer divison X / Y with infinite precision.  */
+extern float remainderf (float __x, float __y) __attribute__ ((__nothrow__ )); extern float __remainderf (float __x, float __y) __attribute__ ((__nothrow__ ));
+
+
+/* Return X times (2 to the Nth power).  */
+extern float scalbnf (float __x, int __n) __attribute__ ((__nothrow__ )); extern float __scalbnf (float __x, int __n) __attribute__ ((__nothrow__ ));
+
+
+/* Return the binary exponent of X, which must be nonzero.  */
+extern int ilogbf (float __x) __attribute__ ((__nothrow__ )); extern int __ilogbf (float __x) __attribute__ ((__nothrow__ ));
+/* Return X times (2 to the Nth power).  */
+extern float scalblnf (float __x, long int __n) __attribute__ ((__nothrow__ )); extern float __scalblnf (float __x, long int __n) __attribute__ ((__nothrow__ ));
+
+/* Round X to integral value in floating-point format using current
+   rounding direction, but do not raise inexact exception.  */
+extern float nearbyintf (float __x) __attribute__ ((__nothrow__ )); extern float __nearbyintf (float __x) __attribute__ ((__nothrow__ ));
+
+/* Round X to nearest integral value, rounding halfway cases away from
+   zero.  */
+extern float roundf (float __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern float __roundf (float __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Round X to the integral value in floating-point format nearest but
+   not larger in magnitude.  */
+extern float truncf (float __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern float __truncf (float __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Compute remainder of X and Y and put in *QUO a value with sign of x/y
+   and magnitude congruent `mod 2^n' to the magnitude of the integral
+   quotient x/y, with n >= 3.  */
+extern float remquof (float __x, float __y, int *__quo) __attribute__ ((__nothrow__ )); extern float __remquof (float __x, float __y, int *__quo) __attribute__ ((__nothrow__ ));
+
+
+/* Conversion functions.  */
+
+/* Round X to nearest integral value according to current rounding
+   direction.  */
+extern long int lrintf (float __x) __attribute__ ((__nothrow__ )); extern long int __lrintf (float __x) __attribute__ ((__nothrow__ ));
+__extension__
+extern long long int llrintf (float __x) __attribute__ ((__nothrow__ )); extern long long int __llrintf (float __x) __attribute__ ((__nothrow__ ));
+
+/* Round X to nearest integral value, rounding halfway cases away from
+   zero.  */
+extern long int lroundf (float __x) __attribute__ ((__nothrow__ )); extern long int __lroundf (float __x) __attribute__ ((__nothrow__ ));
+__extension__
+extern long long int llroundf (float __x) __attribute__ ((__nothrow__ )); extern long long int __llroundf (float __x) __attribute__ ((__nothrow__ ));
+
+
+/* Return positive difference between X and Y.  */
+extern float fdimf (float __x, float __y) __attribute__ ((__nothrow__ )); extern float __fdimf (float __x, float __y) __attribute__ ((__nothrow__ ));
+
+/* Return maximum numeric value from X and Y.  */
+extern float fmaxf (float __x, float __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern float __fmaxf (float __x, float __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Return minimum numeric value from X and Y.  */
+extern float fminf (float __x, float __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern float __fminf (float __x, float __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Multiply-add function computed as a ternary operation.  */
+extern float fmaf (float __x, float __y, float __z) __attribute__ ((__nothrow__ )); extern float __fmaf (float __x, float __y, float __z) __attribute__ ((__nothrow__ ));
+/* Include the file of declarations again, this time using `long double'
+   instead of `double' and appending l to each function name.  */
+
+
+
+
+
+
+
+/* Prototype declarations for math classification macros helpers.
+   Copyright (C) 2017-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+
+/* Classify given number.  */
+extern int __fpclassifyl (long double __value) __attribute__ ((__nothrow__ ))
+     __attribute__ ((__const__));
+
+/* Test for negative number.  */
+extern int __signbitl (long double __value) __attribute__ ((__nothrow__ ))
+     __attribute__ ((__const__));
+
+/* Return 0 if VALUE is finite or NaN, +1 if it
+   is +Infinity, -1 if it is -Infinity.  */
+extern int __isinfl (long double __value) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Return nonzero if VALUE is finite and not NaN.  Used by isfinite macro.  */
+extern int __finitel (long double __value) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Return nonzero if VALUE is not a number.  */
+extern int __isnanl (long double __value) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Test equality.  */
+extern int __iseqsigl (long double __x, long double __y) __attribute__ ((__nothrow__ ));
+
+/* Test for signaling NaN.  */
+extern int __issignalingl (long double __value) __attribute__ ((__nothrow__ ))
+     __attribute__ ((__const__));
+/* Prototype declarations for math functions; helper file for <math.h>.
+   Copyright (C) 1996-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/* NOTE: Because of the special way this file is used by <math.h>, this
+   file must NOT be protected from multiple inclusion as header files
+   usually are.
+
+   This file provides prototype declarations for the math functions.
+   Most functions are declared using the macro:
+
+   __MATHCALL (NAME,[_r], (ARGS...));
+
+   This means there is a function `NAME' returning `double' and a function
+   `NAMEf' returning `float'.  Each place `_Mdouble_' appears in the
+   prototype, that is actually `double' in the prototype for `NAME' and
+   `float' in the prototype for `NAMEf'.  Reentrant variant functions are
+   called `NAME_r' and `NAMEf_r'.
+
+   Functions returning other types like `int' are declared using the macro:
+
+   __MATHDECL (TYPE, NAME,[_r], (ARGS...));
+
+   This is just like __MATHCALL but for a function returning `TYPE'
+   instead of `_Mdouble_'.  In all of these cases, there is still
+   both a `NAME' and a `NAMEf' that takes `float' arguments.
+
+   Note that there must be no whitespace before the argument passed for
+   NAME, to make token pasting work with -traditional.  */
+
+
+
+
+
+
+/* Trigonometric functions.  */
+
+/* Arc cosine of X.  */
+extern long double acosl (long double __x) __attribute__ ((__nothrow__ )); extern long double __acosl (long double __x) __attribute__ ((__nothrow__ ));
+/* Arc sine of X.  */
+extern long double asinl (long double __x) __attribute__ ((__nothrow__ )); extern long double __asinl (long double __x) __attribute__ ((__nothrow__ ));
+/* Arc tangent of X.  */
+extern long double atanl (long double __x) __attribute__ ((__nothrow__ )); extern long double __atanl (long double __x) __attribute__ ((__nothrow__ ));
+/* Arc tangent of Y/X.  */
+extern long double atan2l (long double __y, long double __x) __attribute__ ((__nothrow__ )); extern long double __atan2l (long double __y, long double __x) __attribute__ ((__nothrow__ ));
+
+/* Cosine of X.  */
+ extern long double cosl (long double __x) __attribute__ ((__nothrow__ )); extern long double __cosl (long double __x) __attribute__ ((__nothrow__ ));
+/* Sine of X.  */
+ extern long double sinl (long double __x) __attribute__ ((__nothrow__ )); extern long double __sinl (long double __x) __attribute__ ((__nothrow__ ));
+/* Tangent of X.  */
+extern long double tanl (long double __x) __attribute__ ((__nothrow__ )); extern long double __tanl (long double __x) __attribute__ ((__nothrow__ ));
+
+/* Hyperbolic functions.  */
+
+/* Hyperbolic cosine of X.  */
+extern long double coshl (long double __x) __attribute__ ((__nothrow__ )); extern long double __coshl (long double __x) __attribute__ ((__nothrow__ ));
+/* Hyperbolic sine of X.  */
+extern long double sinhl (long double __x) __attribute__ ((__nothrow__ )); extern long double __sinhl (long double __x) __attribute__ ((__nothrow__ ));
+/* Hyperbolic tangent of X.  */
+extern long double tanhl (long double __x) __attribute__ ((__nothrow__ )); extern long double __tanhl (long double __x) __attribute__ ((__nothrow__ ));
+/* Hyperbolic arc cosine of X.  */
+extern long double acoshl (long double __x) __attribute__ ((__nothrow__ )); extern long double __acoshl (long double __x) __attribute__ ((__nothrow__ ));
+/* Hyperbolic arc sine of X.  */
+extern long double asinhl (long double __x) __attribute__ ((__nothrow__ )); extern long double __asinhl (long double __x) __attribute__ ((__nothrow__ ));
+/* Hyperbolic arc tangent of X.  */
+extern long double atanhl (long double __x) __attribute__ ((__nothrow__ )); extern long double __atanhl (long double __x) __attribute__ ((__nothrow__ ));
+
+
+/* Exponential and logarithmic functions.  */
+
+/* Exponential function of X.  */
+ extern long double expl (long double __x) __attribute__ ((__nothrow__ )); extern long double __expl (long double __x) __attribute__ ((__nothrow__ ));
+
+/* Break VALUE into a normalized fraction and an integral power of 2.  */
+extern long double frexpl (long double __x, int *__exponent) __attribute__ ((__nothrow__ )); extern long double __frexpl (long double __x, int *__exponent) __attribute__ ((__nothrow__ ));
+
+/* X times (two to the EXP power).  */
+extern long double ldexpl (long double __x, int __exponent) __attribute__ ((__nothrow__ )); extern long double __ldexpl (long double __x, int __exponent) __attribute__ ((__nothrow__ ));
+
+/* Natural logarithm of X.  */
+ extern long double logl (long double __x) __attribute__ ((__nothrow__ )); extern long double __logl (long double __x) __attribute__ ((__nothrow__ ));
+
+/* Base-ten logarithm of X.  */
+extern long double log10l (long double __x) __attribute__ ((__nothrow__ )); extern long double __log10l (long double __x) __attribute__ ((__nothrow__ ));
+
+/* Break VALUE into integral and fractional parts.  */
+extern long double modfl (long double __x, long double *__iptr) __attribute__ ((__nothrow__ )); extern long double __modfl (long double __x, long double *__iptr) __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (2)));
+
+
+
+
+
+
+
+/* Return exp(X) - 1.  */
+extern long double expm1l (long double __x) __attribute__ ((__nothrow__ )); extern long double __expm1l (long double __x) __attribute__ ((__nothrow__ ));
+
+/* Return log(1 + X).  */
+extern long double log1pl (long double __x) __attribute__ ((__nothrow__ )); extern long double __log1pl (long double __x) __attribute__ ((__nothrow__ ));
+
+/* Return the base 2 signed integral exponent of X.  */
+extern long double logbl (long double __x) __attribute__ ((__nothrow__ )); extern long double __logbl (long double __x) __attribute__ ((__nothrow__ ));
+
+
+
+/* Compute base-2 exponential of X.  */
+extern long double exp2l (long double __x) __attribute__ ((__nothrow__ )); extern long double __exp2l (long double __x) __attribute__ ((__nothrow__ ));
+
+/* Compute base-2 logarithm of X.  */
+extern long double log2l (long double __x) __attribute__ ((__nothrow__ )); extern long double __log2l (long double __x) __attribute__ ((__nothrow__ ));
+
+
+
+/* Power functions.  */
+
+/* Return X to the Y power.  */
+ extern long double powl (long double __x, long double __y) __attribute__ ((__nothrow__ )); extern long double __powl (long double __x, long double __y) __attribute__ ((__nothrow__ ));
+
+/* Return the square root of X.  */
+extern long double sqrtl (long double __x) __attribute__ ((__nothrow__ )); extern long double __sqrtl (long double __x) __attribute__ ((__nothrow__ ));
+
+
+/* Return `sqrt(X*X + Y*Y)'.  */
+extern long double hypotl (long double __x, long double __y) __attribute__ ((__nothrow__ )); extern long double __hypotl (long double __x, long double __y) __attribute__ ((__nothrow__ ));
+
+
+
+/* Return the cube root of X.  */
+extern long double cbrtl (long double __x) __attribute__ ((__nothrow__ )); extern long double __cbrtl (long double __x) __attribute__ ((__nothrow__ ));
+
+
+
+/* Nearest integer, absolute value, and remainder functions.  */
+
+/* Smallest integral value not less than X.  */
+extern long double ceill (long double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern long double __ceill (long double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Absolute value of X.  */
+extern long double fabsl (long double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern long double __fabsl (long double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Largest integer not greater than X.  */
+extern long double floorl (long double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern long double __floorl (long double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Floating-point modulo remainder of X/Y.  */
+extern long double fmodl (long double __x, long double __y) __attribute__ ((__nothrow__ )); extern long double __fmodl (long double __x, long double __y) __attribute__ ((__nothrow__ ));
+/* Return X with its signed changed to Y's.  */
+extern long double copysignl (long double __x, long double __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern long double __copysignl (long double __x, long double __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+
+
+/* Return representation of qNaN for double type.  */
+extern long double nanl (const char *__tagb) __attribute__ ((__nothrow__ )); extern long double __nanl (const char *__tagb) __attribute__ ((__nothrow__ ));
+/* Error and gamma functions.  */
+extern long double erfl (long double) __attribute__ ((__nothrow__ )); extern long double __erfl (long double) __attribute__ ((__nothrow__ ));
+extern long double erfcl (long double) __attribute__ ((__nothrow__ )); extern long double __erfcl (long double) __attribute__ ((__nothrow__ ));
+extern long double lgammal (long double) __attribute__ ((__nothrow__ )); extern long double __lgammal (long double) __attribute__ ((__nothrow__ ));
+
+
+
+/* True gamma function.  */
+extern long double tgammal (long double) __attribute__ ((__nothrow__ )); extern long double __tgammal (long double) __attribute__ ((__nothrow__ ));
+/* Return the integer nearest X in the direction of the
+   prevailing rounding mode.  */
+extern long double rintl (long double __x) __attribute__ ((__nothrow__ )); extern long double __rintl (long double __x) __attribute__ ((__nothrow__ ));
+
+/* Return X + epsilon if X < Y, X - epsilon if X > Y.  */
+extern long double nextafterl (long double __x, long double __y) __attribute__ ((__nothrow__ )); extern long double __nextafterl (long double __x, long double __y) __attribute__ ((__nothrow__ ));
+
+extern long double nexttowardl (long double __x, long double __y) __attribute__ ((__nothrow__ )); extern long double __nexttowardl (long double __x, long double __y) __attribute__ ((__nothrow__ ));
+/* Return the remainder of integer divison X / Y with infinite precision.  */
+extern long double remainderl (long double __x, long double __y) __attribute__ ((__nothrow__ )); extern long double __remainderl (long double __x, long double __y) __attribute__ ((__nothrow__ ));
+
+
+/* Return X times (2 to the Nth power).  */
+extern long double scalbnl (long double __x, int __n) __attribute__ ((__nothrow__ )); extern long double __scalbnl (long double __x, int __n) __attribute__ ((__nothrow__ ));
+
+
+/* Return the binary exponent of X, which must be nonzero.  */
+extern int ilogbl (long double __x) __attribute__ ((__nothrow__ )); extern int __ilogbl (long double __x) __attribute__ ((__nothrow__ ));
+/* Return X times (2 to the Nth power).  */
+extern long double scalblnl (long double __x, long int __n) __attribute__ ((__nothrow__ )); extern long double __scalblnl (long double __x, long int __n) __attribute__ ((__nothrow__ ));
+
+/* Round X to integral value in floating-point format using current
+   rounding direction, but do not raise inexact exception.  */
+extern long double nearbyintl (long double __x) __attribute__ ((__nothrow__ )); extern long double __nearbyintl (long double __x) __attribute__ ((__nothrow__ ));
+
+/* Round X to nearest integral value, rounding halfway cases away from
+   zero.  */
+extern long double roundl (long double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern long double __roundl (long double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Round X to the integral value in floating-point format nearest but
+   not larger in magnitude.  */
+extern long double truncl (long double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern long double __truncl (long double __x) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Compute remainder of X and Y and put in *QUO a value with sign of x/y
+   and magnitude congruent `mod 2^n' to the magnitude of the integral
+   quotient x/y, with n >= 3.  */
+extern long double remquol (long double __x, long double __y, int *__quo) __attribute__ ((__nothrow__ )); extern long double __remquol (long double __x, long double __y, int *__quo) __attribute__ ((__nothrow__ ));
+
+
+/* Conversion functions.  */
+
+/* Round X to nearest integral value according to current rounding
+   direction.  */
+extern long int lrintl (long double __x) __attribute__ ((__nothrow__ )); extern long int __lrintl (long double __x) __attribute__ ((__nothrow__ ));
+__extension__
+extern long long int llrintl (long double __x) __attribute__ ((__nothrow__ )); extern long long int __llrintl (long double __x) __attribute__ ((__nothrow__ ));
+
+/* Round X to nearest integral value, rounding halfway cases away from
+   zero.  */
+extern long int lroundl (long double __x) __attribute__ ((__nothrow__ )); extern long int __lroundl (long double __x) __attribute__ ((__nothrow__ ));
+__extension__
+extern long long int llroundl (long double __x) __attribute__ ((__nothrow__ )); extern long long int __llroundl (long double __x) __attribute__ ((__nothrow__ ));
+
+
+/* Return positive difference between X and Y.  */
+extern long double fdiml (long double __x, long double __y) __attribute__ ((__nothrow__ )); extern long double __fdiml (long double __x, long double __y) __attribute__ ((__nothrow__ ));
+
+/* Return maximum numeric value from X and Y.  */
+extern long double fmaxl (long double __x, long double __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern long double __fmaxl (long double __x, long double __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Return minimum numeric value from X and Y.  */
+extern long double fminl (long double __x, long double __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__)); extern long double __fminl (long double __x, long double __y) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
+
+/* Multiply-add function computed as a ternary operation.  */
+extern long double fmal (long double __x, long double __y, long double __z) __attribute__ ((__nothrow__ )); extern long double __fmal (long double __x, long double __y, long double __z) __attribute__ ((__nothrow__ ));
+/* Include the file of declarations for _FloatN and _FloatNx
+   types.  */
+/* Declare functions returning a narrower type.  */
+/* Depending on the type of TG_ARG, call an appropriately suffixed
+   version of FUNC with arguments (including parentheses) ARGS.
+   Suffixed functions may not exist for long double if it has the same
+   format as double, or for other types with the same format as float,
+   double or long double.  The behavior is undefined if the argument
+   does not have a real floating type.  The definition may use a
+   conditional expression, so all suffixed versions of FUNC must
+   return the same type (FUNC may include a cast if necessary rather
+   than being a single identifier).  */
+/* ISO C99 defines some generic macros which work on any data type.  */
+
+
+/* All floating-point numbers can be put in one of these categories.  */
+enum
+  {
+    FP_NAN =
+
+      0,
+    FP_INFINITE =
+
+      1,
+    FP_ZERO =
+
+      2,
+    FP_SUBNORMAL =
+
+      3,
+    FP_NORMAL =
+
+      4
+  };
+
+/* GCC bug 66462 means we cannot use the math builtins with -fsignaling-nan,
+   so disable builtins if this is enabled.  When fixed in a newer GCC,
+   the __SUPPORT_SNAN__ check may be skipped for those versions.  */
+
+/* Return number of classification appropriate for X.  */
+
+
+
+     /* The check for __cplusplus allows the use of the builtin, even
+	when optimization for size is on.  This is provided for
+	libstdc++, only to let its configure test work when it is built
+	with -Os.  No further use of this definition of fpclassify is
+	expected in C++ mode, since libstdc++ provides its own version
+	of fpclassify in cmath (which undefines fpclassify).  */
+
+
+
+
+
+
+/* Return nonzero value if sign of X is negative.  */
+/* Return nonzero value if X is not +-Inf or NaN.  */
+
+
+
+
+
+
+
+/* Return nonzero value if X is neither zero, subnormal, Inf, nor NaN.  */
+
+
+
+
+
+
+
+/* Return nonzero value if X is a NaN.  We could use `fpclassify' but
+   we already have this functions `__isnan' and it is faster.  */
+
+
+
+
+
+
+
+/* Return nonzero value if X is positive or negative infinity.  */
+/* Bitmasks for the math_errhandling macro.  */
+
+
+
+/* By default all math functions support both errno and exception handling
+   (except for soft floating point implementations which may only support
+   errno handling).  If errno handling is disabled, exceptions are still
+   supported by GLIBC.  Set math_errhandling to 0 with -ffast-math (this is
+   nonconforming but it is more useful than leaving it undefined).  */
+/* Some useful constants.  */
+/* The above constants are not adequate for computation using `long double's.
+   Therefore we provide as an extension constants with similar names as a
+   GNU extension.  Provide enough digits for the 128-bit IEEE quad.  */
+/* When compiling in strict ISO C compatible mode we must not use the
+   inline functions since they, among other things, do not set the
+   `errno' variable correctly.  */
+
+
+
+
+
+
+/* ISO C99 defines some macros to compare number while taking care for
+   unordered numbers.  Many FPUs provide special instructions to support
+   these operations.  Generic support in GCC for these as builtins went
+   in 2.97, but not all cpus added their patterns until 3.1.  Therefore
+   we enable the builtins from 3.1 onwards and use a generic implementation
+   othwerwise.  */
+/* Get machine-dependent inline versions (if there are any).  */
+
+
+/* This file should provide inline versions of math functions.
+
+   Surround GCC-specific parts with #ifdef __GNUC__, and use `__extern_inline'.
+
+   This file should define __MATH_INLINES if functions are actually defined as
+   inlines.  */
+
+
+
+
+/*
+The "f" for the FindMinimum function below.
+i: the current parameter of f(i)
+context: for your implementation
+
+Instance: `SplitCost` using `SplitCostContext` as context
+*/
+typedef double FindMinimumFun(size_t i, void *context);
+
+/*
+Stores lit/length and dist pairs for LZ77.
+Parameter litlens: Contains the literal symbols or length values.
+Parameter dists: Contains the distances. A value is 0 to indicate that there is
+no dist and the corresponding litlens value is a literal instead of a length.
+Parameter size: The size of both the litlens and dists arrays.
+The memory can best be managed by using ZopfliInitLZ77Store to initialize it,
+ZopfliCleanLZ77Store to destroy it, and ZopfliStoreLitLenDist to append values.
+
+*/
+typedef struct ZopfliLZ77Store
+{
+    unsigned short *litlens; /* Lit or len. */
+    unsigned short *dists; /* If 0: indicates literal in corresponding litlens,
+         if > 0: length in corresponding litlens, this is the distance. */
+    size_t size;
+
+    const unsigned char *data; /* original data */
+    size_t *pos; /* position in data where this LZ77 command begins */
+
+    unsigned short *ll_symbol;
+    unsigned short *d_symbol;
+
+    /* Cumulative histograms wrapping around per chunk. Each chunk has the amount
+    of distinct symbols as length, so using 1 value per LZ77 symbol, we have a
+    precise histogram at every N symbols, and the rest can be calculated by
+    looping through the actual symbols of this chunk. */
+    size_t *ll_counts;
+    size_t *d_counts;
+} ZopfliLZ77Store;
+
+typedef struct SplitCostContext
+{
+    const ZopfliLZ77Store *lz77;
+    size_t start;
+    size_t end;
+} SplitCostContext;
+
+/* Number of distinct literal/length and distance symbols in DEFLATE */
+
+
+
+
+typedef struct SymbolStats
+{
+    /* The literal and length symbols. */
+    size_t litlens[288];
+    /* The 32 unique dist symbols, not the 32768 possible dists. */
+    size_t dists[32];
+
+    /* Length of each lit/len symbol in bits. */
+    double ll_symbols[288];
+    /* Length of each dist symbol in bits. */
+    double d_symbols[32];
+} SymbolStats;
+
+typedef struct RanState
+{
+    unsigned int m_w, m_z;
+} RanState;
+
+/*
+Function that calculates a cost based on a model for the given LZ77 symbol.
+litlen: means literal symbol if dist is 0, length otherwise.
+
+Instance: `GetCostFixed` using NULL as context
+Instance: `GetCostStat` using `SymbolStats` as context
+*/
+typedef double CostModelFun(unsigned litlen, unsigned dist, void *context);
+
+typedef struct ZopfliHash
+{
+    int *head; /* Hash value to index of its most recent occurrence. */
+    unsigned short *prev; /* Index to index of prev. occurrence of same hash. */
+    int *hashval; /* Index to hash value at this index. */
+    int val; /* Current hash value. */
+
+    /* Fields with similar purpose as the above hash, but for the second hash with
+    a value that is calculated differently.  */
+    int *head2; /* Hash value to index of its most recent occurrence. */
+    unsigned short *prev2; /* Index to index of prev. occurrence of same hash. */
+    int *hashval2; /* Index to hash value at this index. */
+    int val2; /* Current hash value. */
+
+    unsigned short *same; /* Amount of repetitions of same byte after this .*/
+} ZopfliHash;
+
+typedef struct Node Node;
+
+/*
+Nodes forming chains. Also used to represent leaves.
+*/
+struct Node
+{
+    size_t weight; /* Total weight (symbol count) of this chain. */
+    Node *tail; /* Previous node(s) of this chain, or 0 if none. */
+    int count; /* Leaf symbol index, or number of leaves before this chain. */
+};
+
+/*
+Memory pool for nodes.
+*/
+typedef struct NodePool
+{
+    Node *next; /* Pointer to a free node in the pool. */
+} NodePool;
+
+/*
+Cache used by ZopfliFindLongestMatch to remember previously found length/dist
+values.
+This is needed because the squeeze runs will ask these values multiple times for
+the same position.
+Uses large amounts of memory, since it has to remember the distance belonging
+to every possible shorter-than-the-best length (the so called "sublen" array).
+*/
+typedef struct ZopfliLongestMatchCache
+{
+    unsigned short *length;
+    unsigned short *dist;
+    unsigned char *sublen;
+} ZopfliLongestMatchCache;
+
+/* for size_t */
+/*
+Options used throughout the program.
+*/
+typedef struct ZopfliOptions
+{
+    /* Whether to print output */
+    int verbose;
+
+    /* Whether to print more detailed output */
+    int verbose_more;
+
+    /*
+    Maximum amount of times to rerun forward and backward pass to optimize LZ77
+    compression cost. Good values: 10, 15 for small files, 5 for files over
+    several MB in size or it will be too slow.
+    */
+    int numiterations;
+
+    /*
+    If true, splits the data in multiple deflate blocks with optimal choice
+    for the block boundaries. Block splitting gives better compression. Default:
+    true (1).
+    */
+    int blocksplitting;
+
+    /*
+    No longer used, left for compatibility.
+    */
+    int blocksplittinglast;
+
+    /*
+    Maximum amount of blocks to split into (0 for unlimited, but this can give
+    extreme results that hurt compression on some files). Default value: 15.
+    */
+    int blocksplittingmax;
+} ZopfliOptions;
+
+/*
+Some state information for compressing a block.
+This is currently a bit under-used (with mainly only the longest match cache),
+but is kept for easy future expansion.
+*/
+typedef struct ZopfliBlockState
+{
+    const ZopfliOptions *options;
+
+    /* Cache for length/distance pairs found so far. */
+    ZopfliLongestMatchCache *lmc;
+
+    /* The start (inclusive) and end (not inclusive) of the current block. */
+    size_t blockstart;
+    size_t blockend;
+} ZopfliBlockState;
+
+/*
+Appends value to dynamically allocated memory, doubling its allocation size
+whenever needed.
+
+value: the value to append, type T
+data: pointer to the dynamic array to append to, type T**
+size: pointer to the size of the array to append to, type size_t*. This is the
+size that you consider the array to be, not the internal allocation size.
+Precondition: allocated size of data is at least a power of two greater than or
+equal than *size.
+*/
+/*
+Outputs minimum-redundancy length-limited code bitlengths for symbols with the
+given counts. The bitlengths are limited by maxbits.
+
+The output is tailored for DEFLATE: symbols that never occur, get a bit length
+of 0, and if only a single symbol occurs at least once, its bitlength will be 1,
+and not 0 as would theoretically be needed for a single symbol.
+
+frequencies: The amount of occurrences of each symbol.
+n: The amount of symbols.
+maxbits: Maximum bit length, inclusive.
+bitlengths: Output, the bitlengths for the symbol prefix codes.
+return: 0 for OK, non-0 for error.
+*/
+int ZopfliLengthLimitedCodeLengths(
+    const size_t *frequencies, int n, int maxbits, unsigned *bitlengths);
+
+/*
+Calculates the bitlengths for the Huffman tree, based on the counts of each
+symbol.
+*/
+void ZopfliCalculateBitLengths(const size_t *count, size_t n, int maxbits,
+                               unsigned *bitlengths);
+
+/*
+Converts a series of Huffman tree bitlengths, to the bit values of the symbols.
+*/
+void ZopfliLengthsToSymbols(const unsigned *lengths, size_t n, unsigned maxbits,
+                            unsigned *symbols);
+
+/* Gets the histogram of lit/len and dist symbols in the given range, using the
+cumulative histograms, so faster than adding one by one for large range. Does
+not add the one end symbol of value 256. */
+void ZopfliLZ77GetHistogram(const ZopfliLZ77Store *lz77,
+                            size_t lstart, size_t lend,
+                            size_t *ll_counts, size_t *d_counts);
+
+/* Gets the amount of raw bytes that this range of LZ77 symbols spans. */
+size_t ZopfliLZ77GetByteRange(const ZopfliLZ77Store *lz77,
+                              size_t lstart, size_t lend);
+
+/*
+Calculates block size in bits.
+litlens: lz77 lit/lengths
+dists: ll77 distances
+lstart: start of block
+lend: end of block (not inclusive)
+*/
+double ZopfliCalculateBlockSize(const ZopfliLZ77Store *lz77,
+                                size_t lstart, size_t lend, int btype);
+
+/*
+For longest match cache. max 256. Uses huge amounts of memory but makes it
+faster. Uses this many times three bytes per single byte of the input data.
+This is so because longest match finding has to find the exact distance
+that belongs to each length for the best lz77 strategy.
+Good values: e.g. 5, 8.
+*/
+
+
+/* Returns the length up to which could be stored in the cache. */
+unsigned ZopfliMaxCachedSublen(const ZopfliLongestMatchCache *lmc,
+                               size_t pos, size_t length);
+
+/* Stores sublen array in the cache. */
+void ZopfliSublenToCache(const unsigned short *sublen,
+                         size_t pos, size_t length,
+                         ZopfliLongestMatchCache *lmc);
+
+
+
+/* Minimum and maximum length that can be encoded in deflate. */
+
+
+/* Extracts sublen array from the cache. */
+void ZopfliCacheToSublen(const ZopfliLongestMatchCache *lmc,
+                         size_t pos, size_t length,
+                         unsigned short *sublen);
+
+/*
+Finds the longest match (length and corresponding distance) for LZ77
+compression.
+Even when not using "sublen", it can be more efficient to provide an array,
+because only then the caching is used.
+array: the data
+pos: position in the data to find the match for
+size: size of the data
+limit: limit length to maximum this value (default should be 258). This allows
+finding a shorter dist for that length (= less extra bits). Must be
+in the range [ZOPFLI_MIN_MATCH, ZOPFLI_MAX_MATCH].
+sublen: output array of 259 elements, or null. Has, for each length, the
+smallest distance required to reach this length. Only 256 of its 259 values
+are used, the first 3 are ignored (the shortest length is 3. It is purely
+for convenience that the array is made 3 longer).
+*/
+void ZopfliFindLongestMatch(
+    ZopfliBlockState *s, const ZopfliHash *h, const unsigned char *array,
+    size_t pos, size_t size, size_t limit,
+    unsigned short *sublen, unsigned short *distance, unsigned short *length);
+
+/*
+limit the max hash chain hits for this hash value. This has an effect only
+on files where the hash value is the same very often. On these files, this
+gives worse compression (the value should ideally be 32768, which is the
+ZOPFLI_WINDOW_SIZE, while zlib uses 4096 even for best level), but makes it
+faster on some specific files.
+Good value: e.g. 8192.
+*/
+
+
+/*
+The window size for deflate. Must be a power of two. This should be 32768, the
+maximum possible by the deflate spec. Anything less hurts compression more than
+speed.
+*/
+
+
+/*
+The window mask used to wrap indices into the window. This is why the
+window size must be a power of two.
+*/
+
+
+/*
+Verifies if length and dist are indeed valid, only used for assertion.
+*/
+void ZopfliVerifyLenDist(const unsigned char *data, size_t datasize, size_t pos,
+                         unsigned short dist, unsigned short length);
+
+/*
+Prepopulates hash:
+Fills in the initial values in the hash, before ZopfliUpdateHash can be used
+correctly.
+*/
+void ZopfliWarmupHash(const unsigned char *array, size_t pos, size_t end,
+                      ZopfliHash *h);
+
+void ZopfliStoreLitLenDist(unsigned short length, unsigned short dist,
+                           size_t pos, ZopfliLZ77Store *store);
+
+/*
+Updates the hash values based on the current position in the array. All calls
+to this must be made for consecutive bytes.
+*/
+void ZopfliUpdateHash(const unsigned char *array, size_t pos, size_t end,
+                      ZopfliHash *h);
+
+/* Resets all fields of ZopfliHash. */
+void ZopfliResetHash(size_t window_size, ZopfliHash *h);
+
+/*
+Used to initialize costs for example
+*/
+
+
+/* Frees ZopfliHash memory. */
+void ZopfliCleanHash(ZopfliHash *h);
+
+/*
+Does the same as ZopfliLZ77Optimal, but optimized for the fixed tree of the
+deflate standard.
+The fixed tree never gives the best compression. But this gives the best
+possible LZ77 encoding possible with the fixed tree.
+This does not create or output any fixed tree, only LZ77 data optimized for
+using with a fixed tree.
+If instart is larger than 0, it uses values before instart as starting
+dictionary.
+*/
+void ZopfliLZ77OptimalFixed(ZopfliBlockState *s,
+                            const unsigned char *in,
+                            size_t instart, size_t inend,
+                            ZopfliLZ77Store *store);
+
+/* Allocates ZopfliHash memory. */
+void ZopfliAllocHash(size_t window_size, ZopfliHash *h);
+
+void ZopfliCleanBlockState(ZopfliBlockState *s);
+
+/* Frees up the memory of the ZopfliLongestMatchCache. */
+void ZopfliCleanCache(ZopfliLongestMatchCache *lmc);
+
+void ZopfliInitBlockState(const ZopfliOptions *options,
+                          size_t blockstart, size_t blockend, int add_lmc,
+                          ZopfliBlockState *s);
+
+/* Initializes the ZopfliLongestMatchCache. */
+void ZopfliInitCache(size_t blocksize, ZopfliLongestMatchCache *lmc);
+
+void ZopfliCleanLZ77Store(ZopfliLZ77Store *store);
+
+void ZopfliInitLZ77Store(const unsigned char *data, ZopfliLZ77Store *store);
+
+/*
+Calculates block size in bits, automatically using the best btype.
+*/
+double ZopfliCalculateBlockSizeAutoType(const ZopfliLZ77Store *lz77,
+                                        size_t lstart, size_t lend);
+
+/*
+Does LZ77 using an algorithm similar to gzip, with lazy matching, rather than
+with the slow but better "squeeze" implementation.
+The result is placed in the ZopfliLZ77Store.
+If instart is larger than 0, it uses values before instart as starting
+dictionary.
+*/
+void ZopfliLZ77Greedy(ZopfliBlockState *s, const unsigned char *in,
+                      size_t instart, size_t inend,
+                      ZopfliLZ77Store *store, ZopfliHash *h);
+
+/*
+Calculates the entropy of each symbol, based on the counts of each symbol. The
+result is similar to the result of ZopfliCalculateBitLengths, but with the
+actual theoritical bit lengths according to the entropy. Since the resulting
+values are fractional, they cannot be used to encode the tree specified by
+DEFLATE.
+*/
+void ZopfliCalculateEntropy(const size_t *count, size_t n, double *bitlengths);
+
+void ZopfliCopyLZ77Store(const ZopfliLZ77Store *source, ZopfliLZ77Store *dest);
+
+/*
+Calculates lit/len and dist pairs for given data.
+If instart is larger than 0, it uses values before instart as starting
+dictionary.
+*/
+void ZopfliLZ77Optimal(ZopfliBlockState *s,
+                       const unsigned char *in, size_t instart, size_t inend,
+                       int numiterations,
+                       ZopfliLZ77Store *store);
+
+/*
+Does blocksplitting on LZ77 data.
+The output splitpoints are indices in the LZ77 data.
+maxblocks: set a limit to the amount of blocks. Set to 0 to mean no limit.
+*/
+void ZopfliBlockSplitLZ77(const ZopfliOptions *options,
+                          const ZopfliLZ77Store *lz77, size_t maxblocks,
+                          size_t **splitpoints, size_t *npoints);
+
+/*
+Does blocksplitting on uncompressed data.
+The output splitpoints are indices in the uncompressed bytes.
+
+options: general program options.
+in: uncompressed input data
+instart: where to start splitting
+inend: where to end splitting (not inclusive)
+maxblocks: maximum amount of blocks to split into, or 0 for no limit
+splitpoints: dynamic array to put the resulting split point coordinates into.
+The coordinates are indices in the input array.
+npoints: pointer to amount of splitpoints, for the dynamic array. The amount of
+blocks is the amount of splitpoitns + 1.
+*/
+void ZopfliBlockSplit(const ZopfliOptions *options,
+                      const unsigned char *in, size_t instart, size_t inend,
+                      size_t maxblocks, size_t **splitpoints, size_t *npoints);
+
+void ZopfliAppendLZ77Store(const ZopfliLZ77Store *store,
+                           ZopfliLZ77Store *target);
+
+/*
+Like ZopfliDeflate, but allows to specify start and end byte with instart and
+inend. Only that part is compressed, but earlier bytes are still used for the
+back window.
+*/
+void ZopfliDeflatePart(const ZopfliOptions *options, int btype, int final,
+                       const unsigned char *in, size_t instart, size_t inend,
+                       unsigned char *bp, unsigned char **out,
+                       size_t *outsize);
+
+/*
+A block structure of huge, non-smart, blocks to divide the input into, to allow
+operating on huge files without exceeding memory, such as the 1GB wiki9 corpus.
+The whole compression algorithm, including the smarter block splitting, will
+be executed independently on each huge block.
+Dividing into huge blocks hurts compression, but not much relative to the size.
+Set it to 0 to disable master blocks.
+*/
+
+
+/*
+Compresses according to the deflate specification and append the compressed
+result to the output.
+This function will usually output multiple deflate blocks. If final is 1, then
+the final bit will be set on the last block.
+
+options: global program options
+btype: the deflate block type. Use 2 for best compression.
+-0: non compressed blocks (00)
+-1: blocks with fixed tree (01)
+-2: blocks with dynamic tree (10)
+final: whether this is the last section of the input, sets the final bit to the
+last deflate block.
+in: the input bytes
+insize: number of input bytes
+bp: bit pointer for the output array. This must initially be 0, and for
+consecutive calls must be reused (it can have values from 0-7). This is
+because deflate appends blocks as bit-based data, rather than on byte
+boundaries.
+out: pointer to the dynamic output array to which the result is appended. Must
+be freed after use.
+outsize: pointer to the dynamic output array size.
+*/
+void ZopfliDeflate(const ZopfliOptions *options, int btype, int final,
+                   const unsigned char *in, size_t insize,
+                   unsigned char *bp, unsigned char **out, size_t *outsize);
+
+/*===---- stddef.h - Basic type definitions --------------------------------===
+ *
+ * Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ * See https://llvm.org/LICENSE.txt for license information.
+ * SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+ *
+ *===-----------------------------------------------------------------------===
+ */
+
+
+/* Copyright (C) 1991-2020 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/*
+ *	ISO C99 Standard: 7.2 Diagnostics	<assert.h>
+ */
+/* void assert (int expression);
+
+   If NDEBUG is defined, do nothing.
+   If not, and EXPRESSION is zero, print an error message and abort.  */
+/* When possible, define assert so that it does not add extra
+   parentheses around EXPR.  Otherwise, those added parentheses would
+   suppress warnings we'd expect to be detected by gcc's -Wparentheses.  */
+/* Version 2.4 and later of GCC define a magical variable `__PRETTY_FUNCTION__'
+   which contains the name of the function currently being defined.
+   This is broken in G++ before version 2.6.
+   C9x has a similar variable called __func__, but prefer the GCC one since
+   it demangles C++ function names.  */
+
+/*===---- limits.h - Standard header for integer sizes --------------------===*\
+ *
+ * Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+ * See https://llvm.org/LICENSE.txt for license information.
+ * SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+ *
+\*===----------------------------------------------------------------------===*/
+
+
+
+/*
+Gets the symbol for the given length, cfr. the DEFLATE spec.
+Returns the symbol in the range [257-285] (inclusive)
+*/
+
+static int ZopfliGetLengthSymbol ( int l ) ;
+
+
+
+/* Gets the symbol for the given dist, cfr. the DEFLATE spec. */
+
+static int ZopfliGetDistSymbol ( int dist ) ;
+
+
+
+
+static size_t AbsDiff ( size_t x , size_t y ) ;
+
+
+
+/*
+Changes the population counts in a way that the consequent Huffman tree
+compression, especially its rle-part, will be more likely to compress this data
+more efficiently. length contains the size of the histogram.
+*/
+
+void OptimizeHuffmanForRle ( int length , size_t * counts ) ;
+
+
+
+/* Gets the amount of extra bits for the given distance symbol. */
+
+static int ZopfliGetDistSymbolExtraBits ( int s ) ;
+
+
+
+/* Gets the amount of extra bits for the given length symbol. */
+
+static int ZopfliGetLengthSymbolExtraBits ( int s ) ;
+
+
+
+/*
+Same as CalculateBlockSymbolSize, but for block size smaller than histogram
+size.
+*/
+
+static size_t CalculateBlockSymbolSizeSmall ( const unsigned * ll_lengths , const unsigned * d_lengths , const ZopfliLZ77Store * lz77 , size_t lstart , size_t lend ) ;
+
+
+
+/*
+Same as CalculateBlockSymbolSize, but with the histogram provided by the caller.
+*/
+
+static size_t CalculateBlockSymbolSizeGivenCounts ( const size_t * ll_counts , const size_t * d_counts , const unsigned * ll_lengths , const unsigned * d_lengths , const ZopfliLZ77Store * lz77 , size_t lstart , size_t lend ) ;
+
+
+
+/*
+Comparator for sorting the leaves. Has the function signature for qsort.
+*/
+static int LeafComparator(const void *a, const void *b)
+{
+    return ((const Node *)a)->weight - ((const Node *)b)->weight;
+}
+
+/*
+Converts result of boundary package-merge to the bitlengths. The result in the
+last chain of the last list contains the amount of active leaves in each list.
+chain: Chain to extract the bit length from (last chain from last list).
+*/
+static void ExtractBitLengths(Node *chain, Node *leaves, unsigned *bitlengths)
+{
+    int counts[16] = {0};
+    unsigned end = 16;
+    unsigned ptr = 15;
+    unsigned value = 1;
+    Node *node;
+    int val;
+
+    for (node = chain; node; node = node->tail)
+    {
+        counts[--end] = node->count;
+    }
+
+    val = counts[15];
+    while (ptr >= end)
+    {
+        for (; val > counts[ptr - 1]; val--)
+        {
+            bitlengths[leaves[val - 1].count] = value;
+        }
+        ptr--;
+        value++;
+    }
+}
+
+/*
+Initializes a chain node with the given values and marks it as in use.
+*/
+
+static void InitNode ( size_t weight , int count , Node * tail , Node * node ) ;
+
+
+
+/*
+Initializes each list with as lookahead chains the two leaves with lowest
+weights.
+*/
+
+static void InitLists ( NodePool * pool , const Node * leaves , int maxbits , Node * ( * lists ) [ 2 ] ) ;
+
+
+
+
+static void BoundaryPMFinal ( Node * ( * lists ) [ 2 ] , Node * leaves , int numsymbols , NodePool * pool , int index ) ;
+
+
+
+/*
+Performs a Boundary Package-Merge step. Puts a new chain in the given list. The
+new chain is, depending on the weights, a leaf or a combination of two chains
+from the previous list.
+lists: The lists of chains.
+maxbits: Number of lists.
+leaves: The leaves, one per symbol.
+numsymbols: Number of leaves.
+pool: the node memory pool.
+index: The index of the list in which a new chain or leaf is required.
+*/
+
+static void BoundaryPM ( Node * ( * lists ) [ 2 ] , Node * leaves , int numsymbols , NodePool * pool , int index ) ;
+
+
+
+/*
+Outputs minimum-redundancy length-limited code bitlengths for symbols with the
+given counts. The bitlengths are limited by maxbits.
+
+The output is tailored for DEFLATE: symbols that never occur, get a bit length
+of 0, and if only a single symbol occurs at least once, its bitlength will be 1,
+and not 0 as would theoretically be needed for a single symbol.
+
+frequencies: The amount of occurrences of each symbol.
+n: The amount of symbols.
+maxbits: Maximum bit length, inclusive.
+bitlengths: Output, the bitlengths for the symbol prefix codes.
+return: 0 for OK, non-0 for error.
+*/
+int ZopfliLengthLimitedCodeLengths(
+    const size_t *frequencies, int n, int maxbits, unsigned *bitlengths)
+{
+    NodePool pool;
+    int i;
+    int numsymbols = 0; /* Amount of symbols with frequency > 0. */
+    int numBoundaryPMRuns;
+    Node *nodes;
+
+    /* Array of lists of chains. Each list requires only two lookahead chains at
+    a time, so each list is a array of two Node*'s. */
+    Node *(*lists)[2];
+
+    /* One leaf per symbol. Only numsymbols leaves will be used. */
+    Node *leaves = (Node *)malloc(n * sizeof(*leaves));
+
+    /* Initialize all bitlengths at 0. */
+    for (i = 0; i < n; i++)
+    {
+        bitlengths[i] = 0;
+    }
+
+    /* Count used symbols and place them in the leaves. */
+    for (i = 0; i < n; i++)
+    {
+        if (frequencies[i])
+        {
+            leaves[numsymbols].weight = frequencies[i];
+            leaves[numsymbols].count = i; /* Index of symbol this leaf represents. */
+            numsymbols++;
+        }
+    }
+
+    /* Check special cases and error conditions. */
+    if ((1 << maxbits) < numsymbols)
+    {
+        free(leaves);
+        return 1; /* Error, too few maxbits to represent symbols. */
+    }
+    if (numsymbols == 0)
+    {
+        free(leaves);
+        return 0; /* No symbols at all. OK. */
+    }
+    if (numsymbols == 1)
+    {
+        bitlengths[leaves[0].count] = 1;
+        free(leaves);
+        return 0; /* Only one symbol, give it bitlength 1, not 0. OK. */
+    }
+    if (numsymbols == 2)
+    {
+        bitlengths[leaves[0].count]++;
+        bitlengths[leaves[1].count]++;
+        free(leaves);
+        return 0;
+    }
+
+    /* Sort the leaves from lightest to heaviest. Add count into the same
+    variable for stable sorting. */
+    for (i = 0; i < numsymbols; i++)
+    {
+        if (leaves[i].weight >=
+            ((size_t)1 << (sizeof(leaves[0].weight) * 8 - 9)))
+        {
+            free(leaves);
+            return 1; /* Error, we need 9 bits for the count. */
+        }
+        leaves[i].weight = (leaves[i].weight << 9) | leaves[i].count;
+    }
+    qsort(leaves, numsymbols, sizeof(Node), LeafComparator);
+    for (i = 0; i < numsymbols; i++)
+    {
+        leaves[i].weight >>= 9;
+    }
+
+    if (numsymbols - 1 < maxbits)
+    {
+        maxbits = numsymbols - 1;
+    }
+
+    /* Initialize node memory pool. */
+    nodes = (Node *)malloc(maxbits * 2 * numsymbols * sizeof(Node));
+    pool.next = nodes;
+
+    lists = (Node * (*)[2]) malloc(maxbits * sizeof(*lists));
+    InitLists(&pool, leaves, maxbits, lists);
+
+    /* In the last list, 2 * numsymbols - 2 active chains need to be created. Two
+    are already created in the initialization. Each BoundaryPM run creates one. */
+    numBoundaryPMRuns = 2 * numsymbols - 4;
+    for (i = 0; i < numBoundaryPMRuns - 1; i++)
+    {
+        BoundaryPM(lists, leaves, numsymbols, &pool, maxbits - 1);
+    }
+    BoundaryPMFinal(lists, leaves, numsymbols, &pool, maxbits - 1);
+
+    ExtractBitLengths(lists[maxbits - 1][1], leaves, bitlengths);
+
+    free(lists);
+    free(leaves);
+    free(nodes);
+    return 0; /* OK. */
+}
+
+/*
+Calculates the bitlengths for the Huffman tree, based on the counts of each
+symbol.
+*/
+
+void ZopfliCalculateBitLengths ( const size_t * count , size_t n , int maxbits , unsigned * bitlengths ) ;
+
+
+
+/*
+Adds bits, like AddBits, but the order is inverted. The deflate specification
+uses both orders in one standard.
+*/
+
+static void AddHuffmanBits ( unsigned symbol , unsigned length , unsigned char * bp , unsigned char * * out , size_t * outsize ) ;
+
+
+
+
+static void AddBits ( unsigned symbol , unsigned length , unsigned char * bp , unsigned char * * out , size_t * outsize ) ;
+
+
+
+/*
+Converts a series of Huffman tree bitlengths, to the bit values of the symbols.
+*/
+
+void ZopfliLengthsToSymbols ( const unsigned * lengths , size_t n , unsigned maxbits , unsigned * symbols ) ;
+
+
+
+/*
+Encodes the Huffman tree and returns how many bits its encoding takes. If out
+is a null pointer, only returns the size and runs faster.
+*/
+
+static size_t EncodeTree ( const unsigned * ll_lengths , const unsigned * d_lengths , int use_16 , int use_17 , int use_18 , unsigned char * bp , unsigned char * * out , size_t * outsize ) ;
+
+
+
+/*
+Gives the exact size of the tree, in bits, as it will be encoded in DEFLATE.
+*/
+
+static size_t CalculateTreeSize ( const unsigned * ll_lengths , const unsigned * d_lengths ) ;
+
+
+
+/*
+Ensures there are at least 2 distance codes to support buggy decoders.
+Zlib 1.2.1 and below have a bug where it fails if there isn't at least 1
+distance code (with length > 0), even though it's valid according to the
+deflate spec to have 0 distance codes. On top of that, some mobile phones
+require at least two distance codes. To support these decoders too (but
+potentially at the cost of a few bytes), add dummy code lengths of 1.
+References to this bug can be found in the changelog of
+Zlib 1.2.2 and here: http://www.jonof.id.au/forum/index.php?topic=515.0.
+
+d_lengths: the 32 lengths of the distance codes.
+*/
+
+static void PatchDistanceCodesForBuggyDecoders ( unsigned * d_lengths ) ;
+
+
+
+/*
+Tries out OptimizeHuffmanForRle for this block, if the result is smaller,
+uses it, otherwise keeps the original. Returns size of encoded tree and data in
+bits, not including the 3-bit block header.
+*/
+
+static double TryOptimizeHuffmanForRle ( const ZopfliLZ77Store * lz77 , size_t lstart , size_t lend , const size_t * ll_counts , const size_t * d_counts , unsigned * ll_lengths , unsigned * d_lengths ) ;
+
+
+
+/* Gets the histogram of lit/len and dist symbols in the given range, using the
+cumulative histograms, so faster than adding one by one for large range. Does
+not add the one end symbol of value 256. */
+
+static void ZopfliLZ77GetHistogramAt ( const ZopfliLZ77Store * lz77 , size_t lpos , size_t * ll_counts , size_t * d_counts ) ;
+
+
+
+
+void ZopfliLZ77GetHistogram ( const ZopfliLZ77Store * lz77 , size_t lstart , size_t lend , size_t * ll_counts , size_t * d_counts ) ;
+
+
+
+/*
+Calculates the bit lengths for the symbols for dynamic blocks. Chooses bit
+lengths that give the smallest size of tree encoding + encoding of all the
+symbols to have smallest output size. This are not necessarily the ideal Huffman
+bit lengths. Returns size of encoded tree and data in bits, not including the
+3-bit block header.
+*/
+
+static double GetDynamicLengths ( const ZopfliLZ77Store * lz77 , size_t lstart , size_t lend , unsigned * ll_lengths , unsigned * d_lengths ) ;
+
+
+
+
+static void GetFixedTree ( unsigned * ll_lengths , unsigned * d_lengths ) ;
+
+
+
+
+size_t ZopfliLZ77GetByteRange ( const ZopfliLZ77Store * lz77 , size_t lstart , size_t lend ) ;
+
+
+
+/*
+Calculates size of the part after the header and tree of an LZ77 block, in bits.
+*/
+
+static size_t CalculateBlockSymbolSize ( const unsigned * ll_lengths , const unsigned * d_lengths , const ZopfliLZ77Store * lz77 , size_t lstart , size_t lend ) ;
+
+
+
+/*
+Calculates block size in bits.
+litlens: lz77 lit/lengths
+dists: ll77 distances
+lstart: start of block
+lend: end of block (not inclusive)
+*/
+
+double ZopfliCalculateBlockSize ( const ZopfliLZ77Store * lz77 , size_t lstart , size_t lend , int btype ) ;
+
+
+
+/*
+Calculates block size in bits, automatically using the best btype.
+*/
+
+double ZopfliCalculateBlockSizeAutoType ( const ZopfliLZ77Store * lz77 , size_t lstart , size_t lend ) ;
+
+
+
+/*
+Returns estimated cost of a block in bits.  It includes the size to encode the
+tree and the size to encode all literal, length and distance symbols and their
+extra bits.
+
+litlens: lz77 lit/lengths
+dists: ll77 distances
+lstart: start of block
+lend: end of block (not inclusive)
+*/
+
+static double EstimateCost ( const ZopfliLZ77Store * lz77 , size_t lstart , size_t lend ) ;
+
+
+
+/*
+Gets the cost which is the sum of the cost of the left and the right section
+of the data.
+type: FindMinimumFun
+*/
+static double SplitCost(size_t i, void *context)
+{
+    SplitCostContext *c = (SplitCostContext *)context;
+    return EstimateCost(c->lz77, c->start, i) + EstimateCost(c->lz77, i, c->end);
+}
+
+/* Gets the amount of extra bits for the given length, cfr. the DEFLATE spec. */
+
+static int ZopfliGetLengthExtraBits ( int l ) ;
+
+
+
+/* Gets the amount of extra bits for the given dist, cfr. the DEFLATE spec. */
+
+static int ZopfliGetDistExtraBits ( int dist ) ;
+
+
+
+/*
+Cost model based on symbol statistics.
+type: CostModelFun
+*/
+static double GetCostStat(unsigned litlen, unsigned dist, void *context)
+{
+    SymbolStats *stats = (SymbolStats *)context;
+    if (dist == 0)
+    {
+        return stats->ll_symbols[litlen];
+    }
+    else
+    {
+        int lsym = ZopfliGetLengthSymbol(litlen);
+        int lbits = ZopfliGetLengthExtraBits(litlen);
+        int dsym = ZopfliGetDistSymbol(dist);
+        int dbits = ZopfliGetDistExtraBits(dist);
+        return lbits + dbits + stats->ll_symbols[lsym] + stats->d_symbols[dsym];
+    }
+}
+
+/*
+Cost model which should exactly match fixed tree.
+type: CostModelFun
+*/
+static double GetCostFixed(unsigned litlen, unsigned dist, void *unused)
+{
+    (void)unused;
+    if (dist == 0)
+    {
+        if (litlen <= 143)
+            return 8;
+        else
+            return 9;
+    }
+    else
+    {
+        int dbits = ZopfliGetDistExtraBits(dist);
+        int lbits = ZopfliGetLengthExtraBits(litlen);
+        int lsym = ZopfliGetLengthSymbol(litlen);
+        int cost = 0;
+        if (lsym <= 279)
+            cost += 7;
+        else
+            cost += 8;
+        cost += 5; /* Every dist symbol has length 5. */
+        return cost + dbits + lbits;
+    }
+}
+
+/*
+bp = bitpointer, always in range [0, 7].
+The outsize is number of necessary bytes to encode the bits.
+Given the value of bp and the amount of bytes, the amount of bits represented
+is not simply bytesize * 8 + bp because even representing one bit requires a
+whole byte. It is: (bp == 0) ? (bytesize * 8) : ((bytesize - 1) * 8 + bp)
+*/
+
+static void AddBit ( int bit , unsigned char * bp , unsigned char * * out , size_t * outsize ) ;
+
+
+
+/* Since an uncompressed block can be max 65535 in size, it actually adds
+multible blocks if needed. */
+
+static void AddNonCompressedBlock ( const ZopfliOptions * options , int final , const unsigned char * in , size_t instart , size_t inend , unsigned char * bp , unsigned char * * out , size_t * outsize ) ;
+
+
+
+/* Gets value of the extra bits for the given length, cfr. the DEFLATE spec. */
+
+static int ZopfliGetLengthExtraBitsValue ( int l ) ;
+
+
+
+/* Gets value of the extra bits for the given dist, cfr. the DEFLATE spec. */
+
+static int ZopfliGetDistExtraBitsValue ( int dist ) ;
+
+
+
+/*
+Adds all lit/len and dist codes from the lists as huffman symbols. Does not add
+end code 256. expected_data_size is the uncompressed block size, used for
+assert, but you can set it to 0 to not do the assertion.
+*/
+
+static void AddLZ77Data ( const ZopfliLZ77Store * lz77 , size_t lstart , size_t lend , size_t expected_data_size , const unsigned * ll_symbols , const unsigned * ll_lengths , const unsigned * d_symbols , const unsigned * d_lengths , unsigned char * bp , unsigned char * * out , size_t * outsize ) ;
+
+
+
+
+static void AddDynamicTree ( const unsigned * ll_lengths , const unsigned * d_lengths , unsigned char * bp , unsigned char * * out , size_t * outsize ) ;
+
+
+
+/*
+Adds a deflate block with the given LZ77 data to the output.
+options: global program options
+btype: the block type, must be 1 or 2
+final: whether to set the "final" bit on this block, must be the last block
+litlens: literal/length array of the LZ77 data, in the same format as in
+ZopfliLZ77Store.
+dists: distance array of the LZ77 data, in the same format as in
+ZopfliLZ77Store.
+lstart: where to start in the LZ77 data
+lend: where to end in the LZ77 data (not inclusive)
+expected_data_size: the uncompressed block size, used for assert, but you can
+set it to 0 to not do the assertion.
+bp: output bit pointer
+out: dynamic output array to append to
+outsize: dynamic output array size
+*/
+
+static void AddLZ77Block ( const ZopfliOptions * options , int btype , int final , const ZopfliLZ77Store * lz77 , size_t lstart , size_t lend , size_t expected_data_size , unsigned char * bp , unsigned char * * out , size_t * outsize ) ;
+
+
+
+/*
+Returns the length up to which could be stored in the cache.
+*/
+
+unsigned ZopfliMaxCachedSublen ( const ZopfliLongestMatchCache * lmc , size_t pos , size_t length ) ;
+
+
+
+
+void ZopfliSublenToCache ( const unsigned short * sublen , size_t pos , size_t length , ZopfliLongestMatchCache * lmc ) ;
+
+
+
+/*
+Stores the found sublen, distance and length in the longest match cache, if
+possible.
+*/
+
+static void StoreInLongestMatchCache ( ZopfliBlockState * s , size_t pos , size_t limit , const unsigned short * sublen , unsigned short distance , unsigned short length ) ;
+
+
+
+
+void ZopfliCacheToSublen ( const ZopfliLongestMatchCache * lmc , size_t pos , size_t length , unsigned short * sublen ) ;
+
+
+
+/*
+Gets distance, length and sublen values from the cache if possible.
+Returns 1 if it got the values from the cache, 0 if not.
+Updates the limit value to a smaller one if possible with more limited
+information from the cache.
+*/
+
+static int TryGetFromLongestMatchCache ( ZopfliBlockState * s , size_t pos , size_t * limit , unsigned short * sublen , unsigned short * distance , unsigned short * length ) ;
+
+
+
+/*
+Finds how long the match of scan and match is. Can be used to find how many
+bytes starting from scan, and from match, are equal. Returns the last byte
+after scan, which is still equal to the correspondinb byte after match.
+scan is the position to compare
+match is the earlier position to compare.
+end is the last possible byte, beyond which to stop looking.
+safe_end is a few (8) bytes before end, for comparing multiple bytes at once.
+*/
+
+static const unsigned char * GetMatch ( const unsigned char * scan , const unsigned char * match , const unsigned char * end , const unsigned char * safe_end ) ;
+
+
+
+/*
+Finds the longest match (length and corresponding distance) for LZ77
+compression.
+Even when not using "sublen", it can be more efficient to provide an array,
+because only then the caching is used.
+array: the data
+pos: position in the data to find the match for
+size: size of the data
+limit: limit length to maximum this value (default should be 258). This allows
+finding a shorter dist for that length (= less extra bits). Must be
+in the range [ZOPFLI_MIN_MATCH, ZOPFLI_MAX_MATCH].
+sublen: output array of 259 elements, or null. Has, for each length, the
+smallest distance required to reach this length. Only 256 of its 259 values
+are used, the first 3 are ignored (the shortest length is 3. It is purely
+for convenience that the array is made 3 longer).
+*/
+void ZopfliFindLongestMatch(ZopfliBlockState *s, const ZopfliHash *h,
+                            const unsigned char *array,
+                            size_t pos, size_t size, size_t limit,
+                            unsigned short *sublen, unsigned short *distance, unsigned short *length)
+{
+    unsigned short hpos = pos & (32768 - 1), p, pp;
+    unsigned short bestdist = 0;
+    unsigned short bestlength = 1;
+    const unsigned char *scan;
+    const unsigned char *match;
+    const unsigned char *arrayend;
+    const unsigned char *arrayend_safe;
+    int chain_counter = 8192; /* For quitting early. */
+
+    unsigned dist = 0; /* Not unsigned short on purpose. */
+
+    int *hhead = h->head;
+    unsigned short *hprev = h->prev;
+    int *hhashval = h->hashval;
+    int hval = h->val;
+
+    if (TryGetFromLongestMatchCache(s, pos, &limit, sublen, distance, length))
+    {
+        ((pos + *length <= size) ? (void) (0) : __assert_fail ("pos + *length <= size", "zopfli.c", 1731, __extension__ __PRETTY_FUNCTION__));
+        return;
+    }
+
+    ((limit <= 258) ? (void) (0) : __assert_fail ("limit <= ZOPFLI_MAX_MATCH", "zopfli.c", 1735, __extension__ __PRETTY_FUNCTION__));
+    ((limit >= 3) ? (void) (0) : __assert_fail ("limit >= ZOPFLI_MIN_MATCH", "zopfli.c", 1736, __extension__ __PRETTY_FUNCTION__));
+    ((pos < size) ? (void) (0) : __assert_fail ("pos < size", "zopfli.c", 1737, __extension__ __PRETTY_FUNCTION__));
+
+    if (size - pos < 3)
+    {
+        /* The rest of the code assumes there are at least ZOPFLI_MIN_MATCH bytes to
+           try. */
+        *length = 0;
+        *distance = 0;
+        return;
+    }
+
+    if (pos + limit > size)
+    {
+        limit = size - pos;
+    }
+    arrayend = &array[pos] + limit;
+    arrayend_safe = arrayend - 8;
+
+    ((hval < 65536) ? (void) (0) : __assert_fail ("hval < 65536", "zopfli.c", 1755, __extension__ __PRETTY_FUNCTION__));
+
+    pp = hhead[hval]; /* During the whole loop, p == hprev[pp]. */
+    p = hprev[pp];
+
+    ((pp == hpos) ? (void) (0) : __assert_fail ("pp == hpos", "zopfli.c", 1760, __extension__ __PRETTY_FUNCTION__));
+
+    dist = p < pp ? pp - p : ((32768 - p) + pp);
+
+    /* Go through all distances. */
+    while (dist < 32768)
+    {
+        unsigned short currentlength = 0;
+
+        ((p < 32768) ? (void) (0) : __assert_fail ("p < ZOPFLI_WINDOW_SIZE", "zopfli.c", 1769, __extension__ __PRETTY_FUNCTION__));
+        ((p == hprev[pp]) ? (void) (0) : __assert_fail ("p == hprev[pp]", "zopfli.c", 1770, __extension__ __PRETTY_FUNCTION__));
+        ((hhashval[p] == hval) ? (void) (0) : __assert_fail ("hhashval[p] == hval", "zopfli.c", 1771, __extension__ __PRETTY_FUNCTION__));
+
+        if (dist > 0)
+        {
+            ((pos < size) ? (void) (0) : __assert_fail ("pos < size", "zopfli.c", 1775, __extension__ __PRETTY_FUNCTION__));
+            ((dist <= pos) ? (void) (0) : __assert_fail ("dist <= pos", "zopfli.c", 1776, __extension__ __PRETTY_FUNCTION__));
+            scan = &array[pos];
+            match = &array[pos - dist];
+
+            /* Testing the byte at position bestlength first, goes slightly faster. */
+            if (pos + bestlength >= size || *(scan + bestlength) == *(match + bestlength))
+            {
+
+                unsigned short same0 = h->same[pos & (32768 - 1)];
+                if (same0 > 2 && *scan == *match)
+                {
+                    unsigned short same1 = h->same[(pos - dist) & (32768 - 1)];
+                    unsigned short same = same0 < same1 ? same0 : same1;
+                    if (same > limit)
+                        same = limit;
+                    scan += same;
+                    match += same;
+                }
+                scan = GetMatch(scan, match, arrayend, arrayend_safe);
+                currentlength = scan - &array[pos]; /* The found length. */
+            }
+
+            if (currentlength > bestlength)
+            {
+                if (sublen)
+                {
+                    unsigned short j;
+                    for (j = bestlength + 1; j <= currentlength; j++)
+                    {
+                        sublen[j] = dist;
+                    }
+                }
+                bestdist = dist;
+                bestlength = currentlength;
+                if (currentlength >= limit)
+                    break;
+            }
+        }
+
+        /* Switch to the other hash once this will be more efficient. */
+        if (hhead != h->head2 && bestlength >= h->same[hpos] &&
+            h->val2 == h->hashval2[p])
+        {
+            /* Now use the hash that encodes the length and first byte. */
+            hhead = h->head2;
+            hprev = h->prev2;
+            hhashval = h->hashval2;
+            hval = h->val2;
+        }
+
+        pp = p;
+        p = hprev[p];
+        if (p == pp)
+            break; /* Uninited prev value. */
+
+        dist += p < pp ? pp - p : ((32768 - p) + pp);
+
+        chain_counter--;
+        if (chain_counter <= 0)
+            break;
+    }
+
+    StoreInLongestMatchCache(s, pos, limit, sublen, bestdist, bestlength);
+
+    ((bestlength <= limit) ? (void) (0) : __assert_fail ("bestlength <= limit", "zopfli.c", 1840, __extension__ __PRETTY_FUNCTION__));
+
+    *distance = bestdist;
+    *length = bestlength;
+    ((pos + *length <= size) ? (void) (0) : __assert_fail ("pos + *length <= size", "zopfli.c", 1844, __extension__ __PRETTY_FUNCTION__));
+}
+
+/*
+Verifies if length and dist are indeed valid, only used for assertion.
+*/
+
+void ZopfliVerifyLenDist ( const unsigned char * data , size_t datasize , size_t pos , unsigned short dist , unsigned short length ) ;
+
+
+
+
+
+
+
+/*
+Update the sliding hash value with the given byte. All calls to this function
+must be made on consecutive input characters. Since the hash value exists out
+of multiple input bytes, a few warmups with this function are needed initially.
+*/
+
+static void UpdateHashValue ( ZopfliHash * h , unsigned char c ) ;
+
+
+
+/*
+Prepopulates hash:
+Fills in the initial values in the hash, before ZopfliUpdateHash can be used
+correctly.
+*/
+
+void ZopfliWarmupHash ( const unsigned char * array , size_t pos , size_t end , ZopfliHash * h ) ;
+
+
+
+/*
+Appends the length and distance to the LZ77 arrays of the ZopfliLZ77Store.
+context must be a ZopfliLZ77Store*.
+*/
+void ZopfliStoreLitLenDist(unsigned short length, unsigned short dist,
+                           size_t pos, ZopfliLZ77Store *store)
+{
+    size_t i;
+    /* Needed for using ZOPFLI_APPEND_DATA multiple times. */
+    size_t origsize = store->size;
+    size_t llstart = 288 * (origsize / 288);
+    size_t dstart = 32 * (origsize / 32);
+
+    /* Everytime the index wraps around, a new cumulative histogram is made: we're
+    keeping one histogram value per LZ77 symbol rather than a full histogram for
+    each to save memory. */
+    if (origsize % 288 == 0)
+    {
+        size_t llsize = origsize;
+        for (i = 0; i < 288; i++)
+        {
+            { if (!((*&llsize) & ((*&llsize) - 1))) { /*double alloc size if it's a power of two*/ (*&store->ll_counts) = (*&llsize) == 0 ? malloc(sizeof(**&store->ll_counts)) : realloc((*&store->ll_counts), (*&llsize) * 2 * sizeof(**&store->ll_counts)); memset((*&store->ll_counts) + (*&llsize), 0, (*&llsize) * sizeof(**&store->ll_counts)); } (*&store->ll_counts)[(*&llsize)] = (origsize == 0 ? 0 : store->ll_counts[origsize - 288 + i]); (*&llsize)++; };
+
+
+        }
+    }
+    if (origsize % 32 == 0)
+    {
+        size_t dsize = origsize;
+        for (i = 0; i < 32; i++)
+        {
+            { if (!((*&dsize) & ((*&dsize) - 1))) { /*double alloc size if it's a power of two*/ (*&store->d_counts) = (*&dsize) == 0 ? malloc(sizeof(**&store->d_counts)) : realloc((*&store->d_counts), (*&dsize) * 2 * sizeof(**&store->d_counts)); memset((*&store->d_counts) + (*&dsize), 0, (*&dsize) * sizeof(**&store->d_counts)); } (*&store->d_counts)[(*&dsize)] = (origsize == 0 ? 0 : store->d_counts[origsize - 32 + i]); (*&dsize)++; };
+
+
+        }
+    }
+
+    { if (!((*&store->size) & ((*&store->size) - 1))) { /*double alloc size if it's a power of two*/ (*&store->litlens) = (*&store->size) == 0 ? malloc(sizeof(**&store->litlens)) : realloc((*&store->litlens), (*&store->size) * 2 * sizeof(**&store->litlens)); memset((*&store->litlens) + (*&store->size), 0, (*&store->size) * sizeof(**&store->litlens)); } (*&store->litlens)[(*&store->size)] = (length); (*&store->size)++; };
+    store->size = origsize;
+    { if (!((*&store->size) & ((*&store->size) - 1))) { /*double alloc size if it's a power of two*/ (*&store->dists) = (*&store->size) == 0 ? malloc(sizeof(**&store->dists)) : realloc((*&store->dists), (*&store->size) * 2 * sizeof(**&store->dists)); memset((*&store->dists) + (*&store->size), 0, (*&store->size) * sizeof(**&store->dists)); } (*&store->dists)[(*&store->size)] = (dist); (*&store->size)++; };
+    store->size = origsize;
+    { if (!((*&store->size) & ((*&store->size) - 1))) { /*double alloc size if it's a power of two*/ (*&store->pos) = (*&store->size) == 0 ? malloc(sizeof(**&store->pos)) : realloc((*&store->pos), (*&store->size) * 2 * sizeof(**&store->pos)); memset((*&store->pos) + (*&store->size), 0, (*&store->size) * sizeof(**&store->pos)); } (*&store->pos)[(*&store->size)] = (pos); (*&store->size)++; };
+    ((length < 259) ? (void) (0) : __assert_fail ("length < 259", "zopfli.c", 1937, __extension__ __PRETTY_FUNCTION__));
+
+    if (dist == 0)
+    {
+        store->size = origsize;
+        { if (!((*&store->size) & ((*&store->size) - 1))) { /*double alloc size if it's a power of two*/ (*&store->ll_symbol) = (*&store->size) == 0 ? malloc(sizeof(**&store->ll_symbol)) : realloc((*&store->ll_symbol), (*&store->size) * 2 * sizeof(**&store->ll_symbol)); memset((*&store->ll_symbol) + (*&store->size), 0, (*&store->size) * sizeof(**&store->ll_symbol)); } (*&store->ll_symbol)[(*&store->size)] = (length); (*&store->size)++; };
+        store->size = origsize;
+        { if (!((*&store->size) & ((*&store->size) - 1))) { /*double alloc size if it's a power of two*/ (*&store->d_symbol) = (*&store->size) == 0 ? malloc(sizeof(**&store->d_symbol)) : realloc((*&store->d_symbol), (*&store->size) * 2 * sizeof(**&store->d_symbol)); memset((*&store->d_symbol) + (*&store->size), 0, (*&store->size) * sizeof(**&store->d_symbol)); } (*&store->d_symbol)[(*&store->size)] = (0); (*&store->size)++; };
+        store->ll_counts[llstart + length]++;
+    }
+    else
+    {
+        store->size = origsize;
+        { if (!((*&store->size) & ((*&store->size) - 1))) { /*double alloc size if it's a power of two*/ (*&store->ll_symbol) = (*&store->size) == 0 ? malloc(sizeof(**&store->ll_symbol)) : realloc((*&store->ll_symbol), (*&store->size) * 2 * sizeof(**&store->ll_symbol)); memset((*&store->ll_symbol) + (*&store->size), 0, (*&store->size) * sizeof(**&store->ll_symbol)); } (*&store->ll_symbol)[(*&store->size)] = (ZopfliGetLengthSymbol(length)); (*&store->size)++; };
+
+        store->size = origsize;
+        { if (!((*&store->size) & ((*&store->size) - 1))) { /*double alloc size if it's a power of two*/ (*&store->d_symbol) = (*&store->size) == 0 ? malloc(sizeof(**&store->d_symbol)) : realloc((*&store->d_symbol), (*&store->size) * 2 * sizeof(**&store->d_symbol)); memset((*&store->d_symbol) + (*&store->size), 0, (*&store->size) * sizeof(**&store->d_symbol)); } (*&store->d_symbol)[(*&store->size)] = (ZopfliGetDistSymbol(dist)); (*&store->size)++; };
+
+        store->ll_counts[llstart + ZopfliGetLengthSymbol(length)]++;
+        store->d_counts[dstart + ZopfliGetDistSymbol(dist)]++;
+    }
+}
+
+void ZopfliUpdateHash(const unsigned char *array, size_t pos, size_t end,
+                      ZopfliHash *h)
+{
+    unsigned short hpos = pos & (32768 - 1);
+    size_t amount = 0;
+
+    UpdateHashValue(h, pos + 3 <= end ? array[pos + 3 - 1] : 0);
+    h->hashval[hpos] = h->val;
+    if (h->head[h->val] != -1 && h->hashval[h->head[h->val]] == h->val)
+    {
+        h->prev[hpos] = h->head[h->val];
+    }
+    else
+        h->prev[hpos] = hpos;
+    h->head[h->val] = hpos;
+
+    /* Update "same". */
+    if (h->same[(pos - 1) & (32768 - 1)] > 1)
+    {
+        amount = h->same[(pos - 1) & (32768 - 1)] - 1;
+    }
+    while (pos + amount + 1 < end &&
+           array[pos] == array[pos + amount + 1] && amount < (unsigned short)(-1))
+    {
+        amount++;
+    }
+    h->same[hpos] = amount;
+
+    h->val2 = ((h->same[hpos] - 3) & 255) ^ h->val;
+    h->hashval2[hpos] = h->val2;
+    if (h->head2[h->val2] != -1 && h->hashval2[h->head2[h->val2]] == h->val2)
+    {
+        h->prev2[hpos] = h->head2[h->val2];
+    }
+    else
+        h->prev2[hpos] = hpos;
+    h->head2[h->val2] = hpos;
+}
+
+
+void ZopfliResetHash ( size_t window_size , ZopfliHash * h ) ;
+
+
+
+
+static void FollowPath ( ZopfliBlockState * s , const unsigned char * in , size_t instart , size_t inend , unsigned short * path , size_t pathsize , ZopfliLZ77Store * store , ZopfliHash * h ) ;
+
+
+
+/*
+Calculates the optimal path of lz77 lengths to use, from the calculated
+length_array. The length_array must contain the optimal length to reach that
+byte. The path will be filled with the lengths to use, so its data size will be
+the amount of lz77 symbols.
+*/
+
+static void TraceBackwards ( size_t size , const unsigned short * length_array , unsigned short * * path , size_t * pathsize ) ;
+
+
+
+
+static size_t zopfli_min ( size_t a , size_t b ) ;
+
+
+
+/*
+Finds the minimum possible cost this cost model can return for valid length and
+distance symbols.
+*/
+
+static double GetCostModelMinCost ( CostModelFun * costmodel , void * costcontext ) ;
+
+
+
+/*
+Performs the forward pass for "squeeze". Gets the most optimal length to reach
+every byte from a previous byte, using cost calculations.
+s: the ZopfliBlockState
+in: the input data array
+instart: where to start
+inend: where to stop (not inclusive)
+costmodel: function to calculate the cost of some lit/len/dist pair.
+costcontext: abstract context for the costmodel function
+length_array: output array of size (inend - instart) which will receive the best
+length to reach this byte from a previous byte.
+returns the cost that was, according to the costmodel, needed to get to the end.
+*/
+static double GetBestLengths(ZopfliBlockState *s,
+                             const unsigned char *in,
+                             size_t instart, size_t inend,
+                             CostModelFun *costmodel, void *costcontext,
+                             unsigned short *length_array,
+                             ZopfliHash *h, float *costs)
+{
+    /* Best cost to get here so far. */
+    size_t blocksize = inend - instart;
+    size_t i = 0, k, kend;
+    unsigned short leng;
+    unsigned short dist;
+    unsigned short sublen[259];
+    size_t windowstart = instart > 32768
+                             ? instart - 32768
+                             : 0;
+    double result;
+    double mincost = GetCostModelMinCost(costmodel, costcontext);
+    double mincostaddcostj;
+
+    if (instart == inend)
+        return 0;
+
+    ZopfliResetHash(32768, h);
+    ZopfliWarmupHash(in, windowstart, inend, h);
+    for (i = windowstart; i < instart; i++)
+    {
+        ZopfliUpdateHash(in, i, inend, h);
+    }
+
+    for (i = 1; i < blocksize + 1; i++)
+        costs[i] = 1e30;
+    costs[0] = 0; /* Because it's the start. */
+    length_array[0] = 0;
+
+    for (i = instart; i < inend; i++)
+    {
+        size_t j = i - instart; /* Index in the costs array and length_array. */
+        ZopfliUpdateHash(in, i, inend, h);
+
+        /* If we're in a long repetition of the same character and have more than
+        ZOPFLI_MAX_MATCH characters before and after our position. */
+        if (h->same[i & (32768 - 1)] > 258 * 2 && i > instart + 258 + 1 && i + 258 * 2 + 1 < inend && h->same[(i - 258) & (32768 - 1)] > 258)
+        {
+            double symbolcost = costmodel(258, 1, costcontext);
+            /* Set the length to reach each one to ZOPFLI_MAX_MATCH, and the cost to
+            the cost corresponding to that length. Doing this, we skip
+            ZOPFLI_MAX_MATCH values to avoid calling ZopfliFindLongestMatch. */
+            for (k = 0; k < 258; k++)
+            {
+                costs[j + 258] = costs[j] + symbolcost;
+                length_array[j + 258] = 258;
+                i++;
+                j++;
+                ZopfliUpdateHash(in, i, inend, h);
+            }
+        }
+
+        ZopfliFindLongestMatch(s, h, in, i, inend, 258, sublen,
+                               &dist, &leng);
+
+        /* Literal. */
+        if (i + 1 <= inend)
+        {
+            double newCost = costmodel(in[i], 0, costcontext) + costs[j];
+            ((newCost >= 0) ? (void) (0) : __assert_fail ("newCost >= 0", "zopfli.c", 2252, __extension__ __PRETTY_FUNCTION__));
+            if (newCost < costs[j + 1])
+            {
+                costs[j + 1] = newCost;
+                length_array[j + 1] = 1;
+            }
+        }
+        /* Lengths. */
+        kend = zopfli_min(leng, inend - i);
+        mincostaddcostj = mincost + costs[j];
+        for (k = 3; k <= kend; k++)
+        {
+            double newCost;
+
+            /* Calling the cost model is expensive, avoid this if we are already at
+            the minimum possible cost that it can return. */
+            if (costs[j + k] <= mincostaddcostj)
+                continue;
+
+            newCost = costmodel(k, sublen[k], costcontext) + costs[j];
+            ((newCost >= 0) ? (void) (0) : __assert_fail ("newCost >= 0", "zopfli.c", 2272, __extension__ __PRETTY_FUNCTION__));
+            if (newCost < costs[j + k])
+            {
+                ((k <= 258) ? (void) (0) : __assert_fail ("k <= ZOPFLI_MAX_MATCH", "zopfli.c", 2275, __extension__ __PRETTY_FUNCTION__));
+                costs[j + k] = newCost;
+                length_array[j + k] = k;
+            }
+        }
+    }
+
+    ((costs[blocksize] >= 0) ? (void) (0) : __assert_fail ("costs[blocksize] >= 0", "zopfli.c", 2282, __extension__ __PRETTY_FUNCTION__));
+    result = costs[blocksize];
+
+    return result;
+}
+
+/*
+Does a single run for ZopfliLZ77Optimal. For good compression, repeated runs
+with updated statistics should be performed.
+s: the block state
+in: the input data array
+instart: where to start
+inend: where to stop (not inclusive)
+path: pointer to dynamically allocated memory to store the path
+pathsize: pointer to the size of the dynamic path array
+length_array: array of size (inend - instart) used to store lengths
+costmodel: function to use as the cost model for this squeeze run
+costcontext: abstract context for the costmodel function
+store: place to output the LZ77 data
+returns the cost that was, according to the costmodel, needed to get to the end.
+This is not the actual cost.
+*/
+static double LZ77OptimalRun(ZopfliBlockState *s,
+                             const unsigned char *in, size_t instart, size_t inend,
+                             unsigned short **path, size_t *pathsize,
+                             unsigned short *length_array, CostModelFun *costmodel,
+                             void *costcontext, ZopfliLZ77Store *store,
+                             ZopfliHash *h, float *costs)
+{
+    double cost = GetBestLengths(s, in, instart, inend, costmodel,
+                                 costcontext, length_array, h, costs);
+    free(*path);
+    *path = 0;
+    *pathsize = 0;
+    TraceBackwards(inend - instart, length_array, path, pathsize);
+    FollowPath(s, in, instart, inend, *path, *pathsize, store, h);
+    ((cost < 1e30) ? (void) (0) : __assert_fail ("cost < ZOPFLI_LARGE_FLOAT", "zopfli.c", 2318, __extension__ __PRETTY_FUNCTION__));
+    return cost;
+}
+
+
+void ZopfliCleanHash ( ZopfliHash * h ) ;
+
+
+
+
+void ZopfliAllocHash ( size_t window_size , ZopfliHash * h ) ;
+
+
+
+/*
+Does the same as ZopfliLZ77Optimal, but optimized for the fixed tree of the
+deflate standard.
+The fixed tree never gives the best compression. But this gives the best
+possible LZ77 encoding possible with the fixed tree.
+This does not create or output any fixed tree, only LZ77 data optimized for
+using with a fixed tree.
+If instart is larger than 0, it uses values before instart as starting
+dictionary.
+*/
+void ZopfliLZ77OptimalFixed(ZopfliBlockState *s,
+                            const unsigned char *in,
+                            size_t instart, size_t inend,
+                            ZopfliLZ77Store *store)
+{
+    /* Dist to get to here with smallest cost. */
+    size_t blocksize = inend - instart;
+    unsigned short *length_array =
+        (unsigned short *)malloc(sizeof(unsigned short) * (blocksize + 1));
+    unsigned short *path = 0;
+    size_t pathsize = 0;
+    ZopfliHash hash;
+    ZopfliHash *h = &hash;
+    float *costs = (float *)malloc(sizeof(float) * (blocksize + 1));
+
+    if (!costs)
+        exit(-1); /* Allocation failed. */
+    if (!length_array)
+        exit(-1); /* Allocation failed. */
+
+    ZopfliAllocHash(32768, h);
+
+    s->blockstart = instart;
+    s->blockend = inend;
+
+    /* Shortest path for fixed tree This one should give the shortest possible
+    result for fixed tree, no repeated runs are needed since the tree is known. */
+    LZ77OptimalRun(s, in, instart, inend, &path, &pathsize,
+                   length_array, GetCostFixed, 0, store, h, costs);
+
+    free(length_array);
+    free(path);
+    free(costs);
+    ZopfliCleanHash(h);
+}
+
+
+void ZopfliCleanCache ( ZopfliLongestMatchCache * lmc ) ;
+
+
+
+
+void ZopfliCleanBlockState ( ZopfliBlockState * s ) ;
+
+
+
+
+void ZopfliInitCache ( size_t blocksize , ZopfliLongestMatchCache * lmc ) ;
+
+
+
+
+void ZopfliInitBlockState ( const ZopfliOptions * options , size_t blockstart , size_t blockend , int add_lmc , ZopfliBlockState * s ) ;
+
+
+
+
+void ZopfliCleanLZ77Store ( ZopfliLZ77Store * store ) ;
+
+
+
+
+void ZopfliInitLZ77Store ( const unsigned char * data , ZopfliLZ77Store * store ) ;
+
+
+
+static void AddLZ77BlockAutoType(const ZopfliOptions *options, int final,
+                                 const ZopfliLZ77Store *lz77,
+                                 size_t lstart, size_t lend,
+                                 size_t expected_data_size,
+                                 unsigned char *bp,
+                                 unsigned char **out, size_t *outsize)
+{
+    double uncompressedcost = ZopfliCalculateBlockSize(lz77, lstart, lend, 0);
+    double fixedcost = ZopfliCalculateBlockSize(lz77, lstart, lend, 1);
+    double dyncost = ZopfliCalculateBlockSize(lz77, lstart, lend, 2);
+
+    /* Whether to perform the expensive calculation of creating an optimal block
+    with fixed huffman tree to check if smaller. Only do this for small blocks or
+    blocks which already are pretty good with fixed huffman tree. */
+    int expensivefixed = (lz77->size < 1000) || fixedcost <= dyncost * 1.1;
+
+    ZopfliLZ77Store fixedstore;
+    if (lstart == lend)
+    {
+        /* Smallest empty block is represented by fixed block */
+        AddBits(final, 1, bp, out, outsize);
+        AddBits(1, 2, bp, out, outsize); /* btype 01 */
+        AddBits(0, 7, bp, out, outsize); /* end symbol has code 0000000 */
+        return;
+    }
+    ZopfliInitLZ77Store(lz77->data, &fixedstore);
+    if (expensivefixed)
+    {
+        /* Recalculate the LZ77 with ZopfliLZ77OptimalFixed */
+        size_t instart = lz77->pos[lstart];
+        size_t inend = instart + ZopfliLZ77GetByteRange(lz77, lstart, lend);
+
+        ZopfliBlockState s;
+        ZopfliInitBlockState(options, instart, inend, 1, &s);
+        ZopfliLZ77OptimalFixed(&s, lz77->data, instart, inend, &fixedstore);
+        fixedcost = ZopfliCalculateBlockSize(&fixedstore, 0, fixedstore.size, 1);
+        ZopfliCleanBlockState(&s);
+    }
+
+    if (uncompressedcost < fixedcost && uncompressedcost < dyncost)
+    {
+        AddLZ77Block(options, 0, final, lz77, lstart, lend,
+                     expected_data_size, bp, out, outsize);
+    }
+    else if (fixedcost < dyncost)
+    {
+        if (expensivefixed)
+        {
+            AddLZ77Block(options, 1, final, &fixedstore, 0, fixedstore.size,
+                         expected_data_size, bp, out, outsize);
+        }
+        else
+        {
+            AddLZ77Block(options, 1, final, lz77, lstart, lend,
+                         expected_data_size, bp, out, outsize);
+        }
+    }
+    else
+    {
+        AddLZ77Block(options, 2, final, lz77, lstart, lend,
+                     expected_data_size, bp, out, outsize);
+    }
+
+    ZopfliCleanLZ77Store(&fixedstore);
+}
+
+/*
+Gets a score of the length given the distance. Typically, the score of the
+length is the length itself, but if the distance is very long, decrease the
+score of the length a bit to make up for the fact that long distances use large
+amounts of extra bits.
+
+This is not an accurate score, it is a heuristic only for the greedy LZ77
+implementation. More accurate cost models are employed later. Making this
+heuristic more accurate may hurt rather than improve compression.
+
+The two direct uses of this heuristic are:
+-avoid using a length of 3 in combination with a long distance. This only has
+an effect if length == 3.
+-make a slightly better choice between the two options of the lazy matching.
+
+Indirectly, this affects:
+-the block split points if the default of block splitting first is used, in a
+rather unpredictable way
+-the first zopfli run, so it affects the chance of the first run being closer
+to the optimal output
+*/
+
+static int GetLengthScore ( int length , int distance ) ;
+
+
+
+/*
+Does LZ77 using an algorithm similar to gzip, with lazy matching, rather than
+with the slow but better "squeeze" implementation.
+The result is placed in the ZopfliLZ77Store.
+If instart is larger than 0, it uses values before instart as starting
+dictionary.
+*/
+
+void ZopfliLZ77Greedy ( ZopfliBlockState * s , const unsigned char * in , size_t instart , size_t inend , ZopfliLZ77Store * store , ZopfliHash * h ) ;
+
+
+
+/*
+Calculates the entropy of each symbol, based on the counts of each symbol. The
+result is similar to the result of ZopfliCalculateBitLengths, but with the
+actual theoritical bit lengths according to the entropy. Since the resulting
+values are fractional, they cannot be used to encode the tree specified by
+DEFLATE.
+*/
+
+void ZopfliCalculateEntropy ( const size_t * count , size_t n , double * bitlengths ) ;
+
+
+
+/* Calculates the entropy of the statistics */
+
+static void CalculateStatistics ( SymbolStats * stats ) ;
+
+
+
+/* Appends the symbol statistics from the store. */
+
+static void GetStatistics ( const ZopfliLZ77Store * store , SymbolStats * stats ) ;
+
+
+
+
+static void ClearStatFreqs ( SymbolStats * stats ) ;
+
+
+
+/* Get random number: "Multiply-With-Carry" generator of G. Marsaglia */
+
+static unsigned int Ran ( RanState * state ) ;
+
+
+
+
+static void RandomizeFreqs ( RanState * state , size_t * freqs , int n ) ;
+
+
+
+
+static void RandomizeStatFreqs ( RanState * state , SymbolStats * stats ) ;
+
+
+
+
+static void InitRanState ( RanState * state ) ;
+
+
+
+/* Adds the bit lengths. */
+
+static void AddWeighedStatFreqs ( const SymbolStats * stats1 , double w1 , const SymbolStats * stats2 , double w2 , SymbolStats * result ) ;
+
+
+
+
+static size_t CeilDiv ( size_t a , size_t b ) ;
+
+
+
+
+void ZopfliCopyLZ77Store ( const ZopfliLZ77Store * source , ZopfliLZ77Store * dest ) ;
+
+
+
+
+static void CopyStats ( SymbolStats * source , SymbolStats * dest ) ;
+
+
+
+/* Sets everything to 0. */
+
+static void InitStats ( SymbolStats * stats ) ;
+
+
+
+/*
+Calculates lit/len and dist pairs for given data.
+If instart is larger than 0, it uses values before instart as starting
+dictionary.
+*/
+void ZopfliLZ77Optimal(ZopfliBlockState *s,
+                       const unsigned char *in, size_t instart, size_t inend,
+                       int numiterations,
+                       ZopfliLZ77Store *store)
+{
+    /* Dist to get to here with smallest cost. */
+    size_t blocksize = inend - instart;
+    unsigned short *length_array =
+        (unsigned short *)malloc(sizeof(unsigned short) * (blocksize + 1));
+    unsigned short *path = 0;
+    size_t pathsize = 0;
+    ZopfliLZ77Store currentstore;
+    ZopfliHash hash;
+    ZopfliHash *h = &hash;
+    SymbolStats stats, beststats, laststats;
+    int i;
+    float *costs = (float *)malloc(sizeof(float) * (blocksize + 1));
+    double cost;
+    double bestcost = 1e30;
+    double lastcost = 0;
+    /* Try randomizing the costs a bit once the size stabilizes. */
+    RanState ran_state;
+    int lastrandomstep = -1;
+
+    if (!costs)
+        exit(-1); /* Allocation failed. */
+    if (!length_array)
+        exit(-1); /* Allocation failed. */
+
+    InitRanState(&ran_state);
+    InitStats(&stats);
+    ZopfliInitLZ77Store(in, &currentstore);
+    ZopfliAllocHash(32768, h);
+
+    /* Do regular deflate, then loop multiple shortest path runs, each time using
+    the statistics of the previous run. */
+
+    /* Initial run. */
+    ZopfliLZ77Greedy(s, in, instart, inend, &currentstore, h);
+    GetStatistics(&currentstore, &stats);
+
+    /* Repeat statistics with each time the cost model from the previous stat
+    run. */
+    for (i = 0; i < numiterations; i++)
+    {
+        ZopfliCleanLZ77Store(&currentstore);
+        ZopfliInitLZ77Store(in, &currentstore);
+        LZ77OptimalRun(s, in, instart, inend, &path, &pathsize,
+                       length_array, GetCostStat, (void *)&stats,
+                       &currentstore, h, costs);
+        cost = ZopfliCalculateBlockSize(&currentstore, 0, currentstore.size, 2);
+        if (s->options->verbose_more || (s->options->verbose && cost < bestcost))
+        {
+            fprintf(stderr, "Iteration %d: %d bit\n", i, (int)cost);
+        }
+        if (cost < bestcost)
+        {
+            /* Copy to the output store. */
+            ZopfliCopyLZ77Store(&currentstore, store);
+            CopyStats(&stats, &beststats);
+            bestcost = cost;
+        }
+        CopyStats(&stats, &laststats);
+        ClearStatFreqs(&stats);
+        GetStatistics(&currentstore, &stats);
+        if (lastrandomstep != -1)
+        {
+            /* This makes it converge slower but better. Do it only once the
+            randomness kicks in so that if the user does few iterations, it gives a
+            better result sooner. */
+            AddWeighedStatFreqs(&stats, 1.0, &laststats, 0.5, &stats);
+            CalculateStatistics(&stats);
+        }
+        if (i > 5 && cost == lastcost)
+        {
+            CopyStats(&beststats, &stats);
+            RandomizeStatFreqs(&ran_state, &stats);
+            CalculateStatistics(&stats);
+            lastrandomstep = i;
+        }
+        lastcost = cost;
+    }
+
+    free(length_array);
+    free(path);
+    free(costs);
+    ZopfliCleanLZ77Store(&currentstore);
+    ZopfliCleanHash(h);
+}
+
+/*
+Finds next block to try to split, the largest of the available ones.
+The largest is chosen to make sure that if only a limited amount of blocks is
+requested, their sizes are spread evenly.
+lz77size: the size of the LL77 data, which is the size of the done array here.
+done: array indicating which blocks starting at that position are no longer
+splittable (splitting them increases rather than decreases cost).
+splitpoints: the splitpoints found so far.
+npoints: the amount of splitpoints found so far.
+lstart: output variable, giving start of block.
+lend: output variable, giving end of block.
+returns 1 if a block was found, 0 if no block found (all are done).
+*/
+
+static int FindLargestSplittableBlock ( size_t lz77size , const unsigned char * done , const size_t * splitpoints , size_t npoints , size_t * lstart , size_t * lend ) ;
+
+
+
+/*
+Prints the block split points as decimal and hex values in the terminal.
+*/
+
+static void PrintBlockSplitPoints ( const ZopfliLZ77Store * lz77 , const size_t * lz77splitpoints , size_t nlz77points ) ;
+
+
+
+
+static void AddSorted ( size_t value , size_t * * out , size_t * outsize ) ;
+
+
+
+/* Try to find minimum faster by recursively checking multiple points. */
+
+
+/*
+Finds minimum of function f(i) where is is of type size_t, f(i) is of type
+double, i is in range start-end (excluding end).
+Outputs the minimum value in *smallest and returns the index of this value.
+*/
+
+static size_t FindMinimum ( FindMinimumFun f , void * context , size_t start , size_t end , double * smallest ) ;
+
+
+
+/*
+Does blocksplitting on LZ77 data.
+The output splitpoints are indices in the LZ77 data.
+maxblocks: set a limit to the amount of blocks. Set to 0 to mean no limit.
+*/
+
+void ZopfliBlockSplitLZ77 ( const ZopfliOptions * options , const ZopfliLZ77Store * lz77 , size_t maxblocks , size_t * * splitpoints , size_t * npoints ) ;
+
+
+
+/*
+Does blocksplitting on uncompressed data.
+The output splitpoints are indices in the uncompressed bytes.
+
+options: general program options.
+in: uncompressed input data
+instart: where to start splitting
+inend: where to end splitting (not inclusive)
+maxblocks: maximum amount of blocks to split into, or 0 for no limit
+splitpoints: dynamic array to put the resulting split point coordinates into.
+The coordinates are indices in the input array.
+npoints: pointer to amount of splitpoints, for the dynamic array. The amount of
+blocks is the amount of splitpoitns + 1.
+*/
+
+void ZopfliBlockSplit ( const ZopfliOptions * options , const unsigned char * in , size_t instart , size_t inend , size_t maxblocks , size_t * * splitpoints , size_t * npoints ) ;
+
+
+
+
+void ZopfliAppendLZ77Store ( const ZopfliLZ77Store * store , ZopfliLZ77Store * target ) ;
+
+
+
+/*
+Deflate a part, to allow ZopfliDeflate() to use multiple master blocks if
+needed.
+It is possible to call this function multiple times in a row, shifting
+instart and inend to next bytes of the data. If instart is larger than 0, then
+previous bytes are used as the initial dictionary for LZ77.
+This function will usually output multiple deflate blocks. If final is 1, then
+the final bit will be set on the last block.
+*/
+
+void ZopfliDeflatePart ( const ZopfliOptions * options , int btype , int final , const unsigned char * in , size_t instart , size_t inend , unsigned char * bp , unsigned char * * out , size_t * outsize ) ;
+
+
+
+/*
+Compresses according to the deflate specification and append the compressed
+result to the output.
+This function will usually output multiple deflate blocks. If final is 1, then
+the final bit will be set on the last block.
+
+options: global program options
+btype: the deflate block type. Use 2 for best compression.
+-0: non compressed blocks (00)
+-1: blocks with fixed tree (01)
+-2: blocks with dynamic tree (10)
+final: whether this is the last section of the input, sets the final bit to the
+last deflate block.
+in: the input bytes
+insize: number of input bytes
+bp: bit pointer for the output array. This must initially be 0, and for
+consecutive calls must be reused (it can have values from 0-7). This is
+because deflate appends blocks as bit-based data, rather than on byte
+boundaries.
+out: pointer to the dynamic output array to which the result is appended. Must
+be freed after use.
+outsize: pointer to the dynamic output array size.
+*/
+
+void ZopfliDeflate ( const ZopfliOptions * options , int btype , int final , const unsigned char * in , size_t insize , unsigned char * bp , unsigned char * * out , size_t * outsize ) ;
+
+
+
+
+void single_test ( const unsigned char * in , int btype , int blocksplitting , int blocksplittingmax ) ;
+
+
+
+
+void run_all_tests ( const unsigned char * in ) ;
+
+
+
+
+unsigned char * read_stdin_to_bytes ( size_t * out_size ) ;
+
+
+
+
+int main ( ) ;
+
+

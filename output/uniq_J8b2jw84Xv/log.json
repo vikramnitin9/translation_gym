@@ -1,0 +1,378 @@
+{
+    "date": "2025-08-13 16:10:08.611780",
+    "args": {
+        "dataset": "uniq",
+        "model": "claude37",
+        "num_attempts": 5,
+        "output_dir": "/app/output/uniq_J8b2jw84Xv",
+        "verbose": true
+    },
+    "results": [
+        {
+            "unit": "program_name",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "set_program_name",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "exit_failure",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "xrealloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "xpalloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "locale_charset",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "c_tolower",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "c_strcasecmp",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "quoting_style",
+            "type": "enums",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "",
+            "type": "enums",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "quoting_flags",
+            "type": "enums",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "quote_quoting_options",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "infomap",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "strtol_error",
+            "type": "enums",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "xstrtoimax",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "quoting_options",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "size_opt",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "proper_name_lite",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "version_etc_copyright",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "version_etc_arn",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "version_etc_va",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "version_etc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "freopen_safer",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "fdadvise",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "fadvise",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "initbuffer",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "readlinebuffer_delim",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "mcel_isbasic",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "mcel_ch",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "mcel_scan",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "skip_buf_matching",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "check_chars",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "skip_chars",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "skip_fields",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "find_field",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "ignore_case",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "different",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "linebuffer",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "swap_lines",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "count_occurrences",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "output_later_repeated",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "output_first_repeated",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "output_unique",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "writeline",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 5
+        },
+        {
+            "unit": "clear_ungetc_buffer_preserving_position",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "rpl_fflush",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "rpl_fclose",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 5
+        },
+        {
+            "unit": "delimit_groups",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "grouping",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "delimit_method",
+            "type": "enums",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "grouping_method",
+            "type": "enums",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "check_file",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "Version",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "grouping_method_string",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "grouping_method_map",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "delimit_method_map",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "longopts",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "delimit_method_string",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "argmatch_die",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "Skip_field_option_type",
+            "type": "enums",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "main_0",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        }
+    ]
+}

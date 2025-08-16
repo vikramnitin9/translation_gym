@@ -1,0 +1,4522 @@
+{
+  "files": [
+    {
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "imports": []
+    },
+    {
+      "filename": "src/main_func.rs",
+      "imports": []
+    },
+    {
+      "filename": "src/main.rs",
+      "imports": [
+        {
+          "span": "src/main.rs:6:1: 16:3 (#0)",
+          "source": "use std::{\n    boxed::Box,\n    ffi::{c_void, CStr},\n    io::{self, Write},\n    mem, ptr,\n    ptr::{null, null_mut, NonNull},\n    sync::{\n        atomic::{AtomicI32, Ordering},\n        Once,\n    },\n};"
+        },
+        {
+          "span": "src/main.rs:5:1: 5:10 (#0)",
+          "source": "use libc;"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "strncat",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strncat(\n        __dest: *mut ::std::os::raw::c_char,\n        __src: *const ::std::os::raw::c_char,\n        __n: ::std::os::raw::c_ulong,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 630,
+      "startCol": 5,
+      "endLine": 634,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "memmove",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn memmove(\n        __dest: *mut ::std::os::raw::c_void,\n        __src: *const ::std::os::raw::c_void,\n        __n: ::std::os::raw::c_ulong,\n    ) -> *mut ::std::os::raw::c_void;",
+      "startLine": 576,
+      "startCol": 5,
+      "endLine": 580,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fflush",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fflush(__stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 279,
+      "startCol": 5,
+      "endLine": 279,
+      "endCol": 65,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "permute_rust",
+      "filename": "src/main.rs",
+      "signature": "fn permute_rust<F>(a: &mut [char], start: usize, end: usize, mut func: F)\nwhere\n    F: FnMut(&[char]),",
+      "startLine": 774,
+      "startCol": 1,
+      "endLine": 779,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "do_permute"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "strtoull",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strtoull(\n        __nptr: *const ::std::os::raw::c_char,\n        __endptr: *mut *mut ::std::os::raw::c_char,\n        __base: ::std::os::raw::c_int,\n    ) -> ::std::os::raw::c_ulonglong;",
+      "startLine": 842,
+      "startCol": 5,
+      "endLine": 846,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "malloc",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn malloc(__size: ::std::os::raw::c_ulong) -> *mut ::std::os::raw::c_void;",
+      "startLine": 858,
+      "startCol": 5,
+      "endLine": 858,
+      "endCol": 83,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "getc",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn getc(__stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 462,
+      "startCol": 5,
+      "endLine": 462,
+      "endCol": 63,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "at_quick_exit",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn at_quick_exit(\n        __func: ::std::option::Option<unsafe extern \"C\" fn()>,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 892,
+      "startCol": 5,
+      "endLine": 894,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "quick_exit",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn quick_exit(__status: ::std::os::raw::c_int) -> !;",
+      "startLine": 902,
+      "startCol": 5,
+      "endLine": 902,
+      "endCol": 61,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "getenv",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn getenv(__name: *const ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char;",
+      "startLine": 910,
+      "startCol": 5,
+      "endLine": 910,
+      "endCol": 89,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "PermutationErrorWrapper::new",
+      "filename": "src/main.rs",
+      "signature": "pub fn new() -> Self",
+      "startLine": 787,
+      "startCol": 5,
+      "endLine": 790,
+      "endCol": 6,
+      "functions": [],
+      "globals": [
+        {
+          "name": "permutation_error"
+        }
+      ],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "putchar",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn putchar(__c: ::std::os::raw::c_int) -> ::std::os::raw::c_int;",
+      "startLine": 478,
+      "startCol": 5,
+      "endLine": 478,
+      "endCol": 73,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "main_0",
+      "filename": "src/main.rs",
+      "signature": "pub unsafe extern \"C\" fn main_0(argc: libc::c_int, argv: *mut *mut libc::c_char) -> libc::c_int",
+      "startLine": 1285,
+      "startCol": 1,
+      "endLine": 1293,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "MuTestsWrapper::new"
+        },
+        {
+          "name": "PermutationErrorWrapper::new"
+        },
+        {
+          "name": "main_0_rust"
+        },
+        {
+          "name": "MuFailsWrapper::new"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "MuFailsWrapper"
+        },
+        {
+          "name": "PermutationErrorWrapper"
+        },
+        {
+          "name": "MuTestsWrapper"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "lldiv",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn lldiv(\n        __numer: ::std::os::raw::c_longlong,\n        __denom: ::std::os::raw::c_longlong,\n    ) -> lldiv_t;",
+      "startLine": 963,
+      "startCol": 5,
+      "endLine": 966,
+      "endCol": 18,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "lldiv_t"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "wctomb",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn wctomb(__s: *mut ::std::os::raw::c_char, __wchar: wchar_t) -> ::std::os::raw::c_int;",
+      "startLine": 982,
+      "startCol": 5,
+      "endLine": 982,
+      "endCol": 96,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strtoll",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strtoll(\n        __nptr: *const ::std::os::raw::c_char,\n        __endptr: *mut *mut ::std::os::raw::c_char,\n        __base: ::std::os::raw::c_int,\n    ) -> ::std::os::raw::c_longlong;",
+      "startLine": 834,
+      "startCol": 5,
+      "endLine": 838,
+      "endCol": 37,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "PermutationErrorWrapper::get",
+      "filename": "src/main.rs",
+      "signature": "pub fn get(&self) -> i32",
+      "startLine": 792,
+      "startCol": 5,
+      "endLine": 794,
+      "endCol": 6,
+      "functions": [],
+      "globals": [
+        {
+          "name": "permutation_error"
+        }
+      ],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "vsscanf1",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vsscanf1(\n        __s: *const ::std::os::raw::c_char,\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 450,
+      "startCol": 5,
+      "endLine": 454,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "ungetc",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn ungetc(__c: ::std::os::raw::c_int, __stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 498,
+      "startCol": 5,
+      "endLine": 498,
+      "endCol": 93,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "vscanf",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vscanf(\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 420,
+      "startCol": 5,
+      "endLine": 423,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "atoll",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn atoll(__nptr: *const ::std::os::raw::c_char) -> ::std::os::raw::c_longlong;",
+      "startLine": 793,
+      "startCol": 5,
+      "endLine": 793,
+      "endCol": 87,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "vfprintf",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vfprintf(\n        __s: *mut FILE,\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 331,
+      "startCol": 5,
+      "endLine": 335,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "abort",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn abort() -> !;",
+      "startLine": 884,
+      "startCol": 5,
+      "endLine": 884,
+      "endCol": 25,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "avl_insert",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn avl_insert(avlt: *mut avltree, data: *mut ::std::os::raw::c_void) -> *mut avlnode;",
+      "startLine": 1197,
+      "startCol": 5,
+      "endLine": 1197,
+      "endCol": 94,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avlnode"
+        },
+        {
+          "name": "avltree"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "_Exit",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn _Exit(__status: ::std::os::raw::c_int) -> !;",
+      "startLine": 906,
+      "startCol": 5,
+      "endLine": 906,
+      "endCol": 56,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "tree_create_rust",
+      "filename": "src/main.rs",
+      "signature": "fn tree_create_rust() -> *mut avltree",
+      "startLine": 24,
+      "startCol": 1,
+      "endLine": 33,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "Some"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "avl_create"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avltree"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "vsnprintf",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vsnprintf(\n        __s: *mut ::std::os::raw::c_char,\n        __maxlen: ::std::os::raw::c_ulong,\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 363,
+      "startCol": 5,
+      "endLine": 368,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "vsscanf",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vsscanf(\n        __s: *const ::std::os::raw::c_char,\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 427,
+      "startCol": 5,
+      "endLine": 431,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "__uflow",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn __uflow(arg1: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 560,
+      "startCol": 5,
+      "endLine": 560,
+      "endCol": 62,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "MuFailsWrapper::get",
+      "filename": "src/main.rs",
+      "signature": "pub fn get(&self) -> i32",
+      "startLine": 1104,
+      "startCol": 5,
+      "endLine": 1106,
+      "endCol": 6,
+      "functions": [],
+      "globals": [
+        {
+          "name": "mu_fails"
+        }
+      ],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "avl_find",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn avl_find(avlt: *mut avltree, data: *mut ::std::os::raw::c_void) -> *mut avlnode;",
+      "startLine": 1167,
+      "startCol": 5,
+      "endLine": 1167,
+      "endCol": 92,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avlnode"
+        },
+        {
+          "name": "avltree"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strstr",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strstr(\n        __haystack: *const ::std::os::raw::c_char,\n        __needle: *const ::std::os::raw::c_char,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 703,
+      "startCol": 5,
+      "endLine": 706,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "sprintf",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn sprintf(\n        __s: *mut ::std::os::raw::c_char,\n        __format: *const ::std::os::raw::c_char,\n        ...\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 323,
+      "startCol": 5,
+      "endLine": 327,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "rewind",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn rewind(__stream: *mut FILE);",
+      "startLine": 532,
+      "startCol": 5,
+      "endLine": 532,
+      "endCol": 40,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "mblen",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn mblen(__s: *const ::std::os::raw::c_char, __n: usize) -> ::std::os::raw::c_int;",
+      "startLine": 970,
+      "startCol": 5,
+      "endLine": 970,
+      "endCol": 91,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "destroy_func",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn destroy_func(d: *mut ::std::os::raw::c_void);",
+      "startLine": 1231,
+      "startCol": 5,
+      "endLine": 1231,
+      "endCol": 57,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "unit_test_successor_rust",
+      "filename": "src/main.rs",
+      "signature": "fn unit_test_successor_rust() -> i32",
+      "startLine": 331,
+      "startCol": 1,
+      "endLine": 412,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "tree_delete_rust"
+        },
+        {
+          "name": "avl_successor"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "avl_successor"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "tree_create_rust"
+        },
+        {
+          "name": "avl_successor"
+        },
+        {
+          "name": "avl_successor"
+        },
+        {
+          "name": "avl_successor"
+        },
+        {
+          "name": "avl_successor"
+        },
+        {
+          "name": "avl_successor"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "avl_successor"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "avl_successor"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avlnode"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "unit_test_permutation_deletion_rust",
+      "filename": "src/main.rs",
+      "signature": "fn unit_test_permutation_deletion_rust(error_wrapper: &mut PermutationErrorWrapper) -> bool",
+      "startLine": 832,
+      "startCol": 1,
+      "endLine": 852,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "process_permutation"
+        },
+        {
+          "name": "PermutationErrorWrapper::get"
+        },
+        {
+          "name": "permute_rust"
+        },
+        {
+          "name": "PermutationErrorWrapper::set"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "PermutationErrorWrapper"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "run_test",
+      "filename": "src/main.rs",
+      "signature": "fn run_test<F>(\n        name: &str,\n        test_fn: F,\n        tests_wrapper: &mut MuTestsWrapper,\n        fails_wrapper: &mut MuFailsWrapper,\n    ) where\n        F: FnOnce() -> bool,",
+      "startLine": 1144,
+      "startCol": 5,
+      "endLine": 1161,
+      "endCol": 6,
+      "functions": [
+        {
+          "name": "MuTestsWrapper::get"
+        },
+        {
+          "name": "MuTestsWrapper::set"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "MuFailsWrapper::get"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "MuFailsWrapper::set"
+        },
+        {
+          "name": "new_v1_formatted"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "Is"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "MuTestsWrapper::get"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "_print"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "MuTestsWrapper"
+        },
+        {
+          "name": "MuFailsWrapper"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "srand",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn srand(__seed: ::std::os::raw::c_uint);",
+      "startLine": 854,
+      "startCol": 5,
+      "endLine": 854,
+      "endCol": 50,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "avl_destroy_rust",
+      "filename": "src/main.rs",
+      "signature": "fn avl_destroy_rust(avlt: &mut avltree)",
+      "startLine": 56,
+      "startCol": 1,
+      "endLine": 62,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "destroy_rust"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avltree"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "memcpy",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn memcpy(\n        __dest: *mut ::std::os::raw::c_void,\n        __src: *const ::std::os::raw::c_void,\n        __n: ::std::os::raw::c_ulong,\n    ) -> *mut ::std::os::raw::c_void;",
+      "startLine": 568,
+      "startCol": 5,
+      "endLine": 572,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "calloc",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn calloc(\n        __nmemb: ::std::os::raw::c_ulong,\n        __size: ::std::os::raw::c_ulong,\n    ) -> *mut ::std::os::raw::c_void;",
+      "startLine": 862,
+      "startCol": 5,
+      "endLine": 865,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "vsprintf",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vsprintf(\n        __s: *mut ::std::os::raw::c_char,\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 346,
+      "startCol": 5,
+      "endLine": 350,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "qsort",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn qsort(\n        __base: *mut ::std::os::raw::c_void,\n        __nmemb: usize,\n        __size: usize,\n        __compar: __compar_fn_t,\n    );",
+      "startLine": 934,
+      "startCol": 5,
+      "endLine": 939,
+      "endCol": 7,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fwrite",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fwrite(\n        __ptr: *const ::std::os::raw::c_void,\n        __size: ::std::os::raw::c_ulong,\n        __n: ::std::os::raw::c_ulong,\n        __s: *mut FILE,\n    ) -> ::std::os::raw::c_ulong;",
+      "startLine": 511,
+      "startCol": 5,
+      "endLine": 516,
+      "endCol": 34,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "unit_test_find_rust",
+      "filename": "src/main.rs",
+      "signature": "fn unit_test_find_rust() -> bool",
+      "startLine": 165,
+      "startCol": 1,
+      "endLine": 254,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "avl_find"
+        },
+        {
+          "name": "avl_find"
+        },
+        {
+          "name": "avl_find"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "avl_find"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "avl_find"
+        },
+        {
+          "name": "avl_find"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "avl_find"
+        },
+        {
+          "name": "tree_create_rust"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "avl_find"
+        },
+        {
+          "name": "avl_find"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "avl_find"
+        },
+        {
+          "name": "tree_insert_rust"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avltree"
+        },
+        {
+          "name": "avlnode"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "fseek",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fseek(\n        __stream: *mut FILE,\n        __off: ::std::os::raw::c_long,\n        __whence: ::std::os::raw::c_int,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 520,
+      "startCol": 5,
+      "endLine": 524,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "compare_func",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn compare_func(\n        d1: *const ::std::os::raw::c_void,\n        d2: *const ::std::os::raw::c_void,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 1224,
+      "startCol": 5,
+      "endLine": 1227,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fputc",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fputc(__c: ::std::os::raw::c_int, __stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 470,
+      "startCol": 5,
+      "endLine": 470,
+      "endCol": 92,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "ferror",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn ferror(__stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 552,
+      "startCol": 5,
+      "endLine": 552,
+      "endCol": 65,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "exit",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn exit(__status: ::std::os::raw::c_int) -> !;",
+      "startLine": 898,
+      "startCol": 5,
+      "endLine": 898,
+      "endCol": 55,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strcpy",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strcpy(\n        __dest: *mut ::std::os::raw::c_char,\n        __src: *const ::std::os::raw::c_char,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 608,
+      "startCol": 5,
+      "endLine": 611,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "process_permutation",
+      "filename": "src/main.rs",
+      "signature": "fn process_permutation(chars: &[char], error_wrapper: &mut PermutationErrorWrapper)",
+      "startLine": 856,
+      "startCol": 1,
+      "endLine": 859,
+      "endCol": 2,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "PermutationErrorWrapper"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "aligned_alloc",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn aligned_alloc(__alignment: usize, __size: usize) -> *mut ::std::os::raw::c_void;",
+      "startLine": 880,
+      "startCol": 5,
+      "endLine": 880,
+      "endCol": 92,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "bsearch",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn bsearch(\n        __key: *const ::std::os::raw::c_void,\n        __base: *const ::std::os::raw::c_void,\n        __nmemb: usize,\n        __size: usize,\n        __compar: __compar_fn_t,\n    ) -> *mut ::std::os::raw::c_void;",
+      "startLine": 924,
+      "startCol": 5,
+      "endLine": 930,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "setbuf",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn setbuf(__stream: *mut FILE, __buf: *mut ::std::os::raw::c_char);",
+      "startLine": 298,
+      "startCol": 5,
+      "endLine": 298,
+      "endCol": 76,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "main_0_rust",
+      "filename": "src/main.rs",
+      "signature": "fn main_0_rust(\n    tests_wrapper: &mut MuTestsWrapper,\n    fails_wrapper: &mut MuFailsWrapper,\n    error_wrapper: &mut PermutationErrorWrapper,\n) -> i32",
+      "startLine": 1262,
+      "startCol": 1,
+      "endLine": 1283,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "MuFailsWrapper::get"
+        },
+        {
+          "name": "all_tests_rust"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "MuFailsWrapper::get"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "MuTestsWrapper::get"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "MuTestsWrapper"
+        },
+        {
+          "name": "MuFailsWrapper"
+        },
+        {
+          "name": "PermutationErrorWrapper"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "fgetc",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fgetc(__stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 458,
+      "startCol": 5,
+      "endLine": 458,
+      "endCol": 64,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strcmp",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strcmp(\n        __s1: *const ::std::os::raw::c_char,\n        __s2: *const ::std::os::raw::c_char,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 638,
+      "startCol": 5,
+      "endLine": 641,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "all_tests_rust",
+      "filename": "src/main.rs",
+      "signature": "fn all_tests_rust(\n    tests_wrapper: &mut MuTestsWrapper,\n    fails_wrapper: &mut MuFailsWrapper,\n    error_wrapper: &mut PermutationErrorWrapper,\n)",
+      "startLine": 1138,
+      "startCol": 1,
+      "endLine": 1259,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "run_test"
+        },
+        {
+          "name": "unit_test_atomic_deletion_rust"
+        },
+        {
+          "name": "unit_test_chain_insertion_rust"
+        },
+        {
+          "name": "run_test_i32"
+        },
+        {
+          "name": "unit_test_successor_rust"
+        },
+        {
+          "name": "run_test"
+        },
+        {
+          "name": "run_test"
+        },
+        {
+          "name": "unit_test_find_rust"
+        },
+        {
+          "name": "run_test"
+        },
+        {
+          "name": "unit_test_permutation_insertion_rust"
+        },
+        {
+          "name": "unit_test_min_rust"
+        },
+        {
+          "name": "unit_test_dup_rust"
+        },
+        {
+          "name": "run_test"
+        },
+        {
+          "name": "unit_test_permutation_deletion_rust"
+        },
+        {
+          "name": "run_test_i32"
+        },
+        {
+          "name": "run_test"
+        },
+        {
+          "name": "run_test_i32"
+        },
+        {
+          "name": "unit_test_chain_deletion_rust"
+        },
+        {
+          "name": "unit_test_atomic_insertion_rust"
+        },
+        {
+          "name": "run_test"
+        },
+        {
+          "name": "unit_test_create_rust"
+        },
+        {
+          "name": "run_test"
+        },
+        {
+          "name": "run_test_i32"
+        },
+        {
+          "name": "unit_test_random_insertion_deletion_rust"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "PermutationErrorWrapper"
+        },
+        {
+          "name": "MuFailsWrapper"
+        },
+        {
+          "name": "MuTestsWrapper"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "strtof",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strtof(\n        __nptr: *const ::std::os::raw::c_char,\n        __endptr: *mut *mut ::std::os::raw::c_char,\n    ) -> f32;",
+      "startLine": 804,
+      "startCol": 5,
+      "endLine": 807,
+      "endCol": 14,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strtold",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strtold(\n        __nptr: *const ::std::os::raw::c_char,\n        __endptr: *mut *mut ::std::os::raw::c_char,\n    ) -> u128;",
+      "startLine": 811,
+      "startCol": 5,
+      "endLine": 814,
+      "endCol": 15,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "timespec_get",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn timespec_get(\n        __ts: *mut timespec,\n        __base: ::std::os::raw::c_int,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 1093,
+      "startCol": 5,
+      "endLine": 1096,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "timespec"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "swap_rust",
+      "filename": "src/main.rs",
+      "signature": "fn swap_rust(x: &mut char, y: &mut char)",
+      "startLine": 732,
+      "startCol": 1,
+      "endLine": 734,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "swap"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "atof",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn atof(__nptr: *const ::std::os::raw::c_char) -> f64;",
+      "startLine": 781,
+      "startCol": 5,
+      "endLine": 781,
+      "endCol": 63,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "unit_test_chain_insertion_rust",
+      "filename": "src/main.rs",
+      "signature": "fn unit_test_chain_insertion_rust() -> bool",
+      "startLine": 637,
+      "startCol": 1,
+      "endLine": 668,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "_print"
+        },
+        {
+          "name": "tree_create_rust"
+        },
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "next"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "next"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "new_v1"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "mbtowc",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn mbtowc(\n        __pwc: *mut wchar_t,\n        __s: *const ::std::os::raw::c_char,\n        __n: usize,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 974,
+      "startCol": 5,
+      "endLine": 978,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "avl_apply",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn avl_apply(\n        avlt: *mut avltree,\n        node: *mut avlnode,\n        func: ::std::option::Option<\n            unsafe extern \"C\" fn(\n                arg1: *mut ::std::os::raw::c_void,\n                arg2: *mut ::std::os::raw::c_void,\n            ) -> ::std::os::raw::c_int,\n        >,\n        cookie: *mut ::std::os::raw::c_void,\n        order: avltraversal,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 1175,
+      "startCol": 5,
+      "endLine": 1186,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avlnode"
+        },
+        {
+          "name": "avltree"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "print_char_func",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn print_char_func(d: *mut ::std::os::raw::c_void);",
+      "startLine": 1239,
+      "startCol": 5,
+      "endLine": 1239,
+      "endCol": 60,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "tmpfile",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn tmpfile() -> *mut FILE;",
+      "startLine": 267,
+      "startCol": 5,
+      "endLine": 267,
+      "endCol": 35,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strpbrk",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strpbrk(\n        __s: *const ::std::os::raw::c_char,\n        __accept: *const ::std::os::raw::c_char,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 696,
+      "startCol": 5,
+      "endLine": 699,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "ftell",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn ftell(__stream: *mut FILE) -> ::std::os::raw::c_long;",
+      "startLine": 528,
+      "startCol": 5,
+      "endLine": 528,
+      "endCol": 65,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strcat",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strcat(\n        __dest: *mut ::std::os::raw::c_char,\n        __src: *const ::std::os::raw::c_char,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 623,
+      "startCol": 5,
+      "endLine": 626,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strtoul",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strtoul(\n        __nptr: *const ::std::os::raw::c_char,\n        __endptr: *mut *mut ::std::os::raw::c_char,\n        __base: ::std::os::raw::c_int,\n    ) -> ::std::os::raw::c_ulong;",
+      "startLine": 826,
+      "startCol": 5,
+      "endLine": 830,
+      "endCol": 34,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "scanf1",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn scanf1(__format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;",
+      "startLine": 400,
+      "startCol": 5,
+      "endLine": 400,
+      "endCol": 90,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fgets",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fgets(\n        __s: *mut ::std::os::raw::c_char,\n        __n: ::std::os::raw::c_int,\n        __stream: *mut FILE,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 482,
+      "startCol": 5,
+      "endLine": 486,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "MuFailsWrapper::new",
+      "filename": "src/main.rs",
+      "signature": "pub fn new() -> Self",
+      "startLine": 1099,
+      "startCol": 5,
+      "endLine": 1102,
+      "endCol": 6,
+      "functions": [],
+      "globals": [
+        {
+          "name": "mu_fails"
+        }
+      ],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "setvbuf",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn setvbuf(\n        __stream: *mut FILE,\n        __buf: *mut ::std::os::raw::c_char,\n        __modes: ::std::os::raw::c_int,\n        __n: usize,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 302,
+      "startCol": 5,
+      "endLine": 307,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "freopen",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn freopen(\n        __filename: *const ::std::os::raw::c_char,\n        __modes: *const ::std::os::raw::c_char,\n        __stream: *mut FILE,\n    ) -> *mut FILE;",
+      "startLine": 290,
+      "startCol": 5,
+      "endLine": 294,
+      "endCol": 20,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strlen",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strlen(__s: *const ::std::os::raw::c_char) -> ::std::os::raw::c_ulong;",
+      "startLine": 725,
+      "startCol": 5,
+      "endLine": 725,
+      "endCol": 82,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "gmtime",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn gmtime(__timer: *const time_t) -> *mut tm;",
+      "startLine": 1065,
+      "startCol": 5,
+      "endLine": 1065,
+      "endCol": 54,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "tm"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "asctime",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn asctime(__tp: *const tm) -> *mut ::std::os::raw::c_char;",
+      "startLine": 1073,
+      "startCol": 5,
+      "endLine": 1073,
+      "endCol": 68,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "tm"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "avl_create",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn avl_create(\n        compare_func: ::std::option::Option<\n            unsafe extern \"C\" fn(\n                arg1: *const ::std::os::raw::c_void,\n                arg2: *const ::std::os::raw::c_void,\n            ) -> ::std::os::raw::c_int,\n        >,\n        destroy_func: ::std::option::Option<\n            unsafe extern \"C\" fn(arg1: *mut ::std::os::raw::c_void),\n        >,\n    ) -> *mut avltree;",
+      "startLine": 1153,
+      "startCol": 5,
+      "endLine": 1163,
+      "endCol": 23,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avltree"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fgetpos",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fgetpos(__stream: *mut FILE, __pos: *mut fpos_t) -> ::std::os::raw::c_int;",
+      "startLine": 536,
+      "startCol": 5,
+      "endLine": 536,
+      "endCol": 86,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strrchr",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strrchr(\n        __s: *const ::std::os::raw::c_char,\n        __c: ::std::os::raw::c_int,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 675,
+      "startCol": 5,
+      "endLine": 678,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "vfscanf",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vfscanf(\n        __s: *mut FILE,\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 412,
+      "startCol": 5,
+      "endLine": 416,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "puts",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn puts(__s: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;",
+      "startLine": 494,
+      "startCol": 5,
+      "endLine": 494,
+      "endCol": 78,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "unit_test_create_rust",
+      "filename": "src/main.rs",
+      "signature": "fn unit_test_create_rust() -> bool",
+      "startLine": 65,
+      "startCol": 1,
+      "endLine": 101,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "tree_create_rust"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "avl_destroy_rust"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "tree_find_rust",
+      "filename": "src/main.rs",
+      "signature": "fn tree_find_rust(avlt: Option<&mut avltree>, key: i32) -> Option<&mut avlnode>",
+      "startLine": 257,
+      "startCol": 1,
+      "endLine": 275,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "avl_find"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "branch"
+        },
+        {
+          "name": "from_residual"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avltree"
+        },
+        {
+          "name": "mydata"
+        },
+        {
+          "name": "avlnode"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "strcoll",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strcoll(\n        __s1: *const ::std::os::raw::c_char,\n        __s2: *const ::std::os::raw::c_char,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 653,
+      "startCol": 5,
+      "endLine": 656,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "feof",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn feof(__stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 548,
+      "startCol": 5,
+      "endLine": 548,
+      "endCol": 63,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "do_permute",
+      "filename": "src/main.rs",
+      "signature": "fn do_permute<F>(a: &mut [char], start: usize, end: usize, func: &mut F)\nwhere\n    F: FnMut(&[char]),",
+      "startLine": 752,
+      "startCol": 1,
+      "endLine": 771,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "do_permute"
+        },
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "next"
+        },
+        {
+          "name": "new"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "fscanf",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fscanf(\n        __stream: *mut FILE,\n        __format: *const ::std::os::raw::c_char,\n        ...\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 372,
+      "startCol": 5,
+      "endLine": 376,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "sscanf",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn sscanf(\n        __s: *const ::std::os::raw::c_char,\n        __format: *const ::std::os::raw::c_char,\n        ...\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 384,
+      "startCol": 5,
+      "endLine": 388,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fread",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fread(\n        __ptr: *mut ::std::os::raw::c_void,\n        __size: ::std::os::raw::c_ulong,\n        __n: ::std::os::raw::c_ulong,\n        __stream: *mut FILE,\n    ) -> ::std::os::raw::c_ulong;",
+      "startLine": 502,
+      "startCol": 5,
+      "endLine": 507,
+      "endCol": 34,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "mbstowcs",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn mbstowcs(__pwcs: *mut wchar_t, __s: *const ::std::os::raw::c_char, __n: usize) -> usize;",
+      "startLine": 986,
+      "startCol": 5,
+      "endLine": 986,
+      "endCol": 100,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "realloc",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn realloc(\n        __ptr: *mut ::std::os::raw::c_void,\n        __size: ::std::os::raw::c_ulong,\n    ) -> *mut ::std::os::raw::c_void;",
+      "startLine": 869,
+      "startCol": 5,
+      "endLine": 872,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "printf",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn printf(__format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;",
+      "startLine": 319,
+      "startCol": 5,
+      "endLine": 319,
+      "endCol": 90,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fclose",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fclose(__stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 275,
+      "startCol": 5,
+      "endLine": 275,
+      "endCol": 65,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fopen",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fopen(\n        __filename: *const ::std::os::raw::c_char,\n        __modes: *const ::std::os::raw::c_char,\n    ) -> *mut FILE;",
+      "startLine": 283,
+      "startCol": 5,
+      "endLine": 286,
+      "endCol": 20,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "clearerr",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn clearerr(__stream: *mut FILE);",
+      "startLine": 544,
+      "startCol": 5,
+      "endLine": 544,
+      "endCol": 42,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "run_test_i32",
+      "filename": "src/main.rs",
+      "signature": "fn run_test_i32<F>(\n        name: &str,\n        test_fn: F,\n        tests_wrapper: &mut MuTestsWrapper,\n        fails_wrapper: &mut MuFailsWrapper,\n    ) where\n        F: FnOnce() -> i32,",
+      "startLine": 1164,
+      "startCol": 5,
+      "endLine": 1181,
+      "endCol": 6,
+      "functions": [
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "MuTestsWrapper::set"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "MuTestsWrapper::get"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "MuFailsWrapper::get"
+        },
+        {
+          "name": "new_v1_formatted"
+        },
+        {
+          "name": "MuTestsWrapper::get"
+        },
+        {
+          "name": "Is"
+        },
+        {
+          "name": "MuFailsWrapper::set"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "_print"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "MuTestsWrapper"
+        },
+        {
+          "name": "MuFailsWrapper"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "getchar",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn getchar() -> ::std::os::raw::c_int;",
+      "startLine": 466,
+      "startCol": 5,
+      "endLine": 466,
+      "endCol": 47,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "rand",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn rand() -> ::std::os::raw::c_int;",
+      "startLine": 850,
+      "startCol": 5,
+      "endLine": 850,
+      "endCol": 44,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strspn",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strspn(\n        __s: *const ::std::os::raw::c_char,\n        __accept: *const ::std::os::raw::c_char,\n    ) -> ::std::os::raw::c_ulong;",
+      "startLine": 689,
+      "startCol": 5,
+      "endLine": 692,
+      "endCol": 34,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "free",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn free(__ptr: *mut ::std::os::raw::c_void);",
+      "startLine": 876,
+      "startCol": 5,
+      "endLine": 876,
+      "endCol": 53,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "memcmp",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn memcmp(\n        __s1: *const ::std::os::raw::c_void,\n        __s2: *const ::std::os::raw::c_void,\n        __n: ::std::os::raw::c_ulong,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 592,
+      "startCol": 5,
+      "endLine": 596,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strtod",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strtod(\n        __nptr: *const ::std::os::raw::c_char,\n        __endptr: *mut *mut ::std::os::raw::c_char,\n    ) -> f64;",
+      "startLine": 797,
+      "startCol": 5,
+      "endLine": 800,
+      "endCol": 14,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "localtime",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn localtime(__timer: *const time_t) -> *mut tm;",
+      "startLine": 1069,
+      "startCol": 5,
+      "endLine": 1069,
+      "endCol": 57,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "tm"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "destroy_rust",
+      "filename": "src/main.rs",
+      "signature": "fn destroy_rust(avlt: &mut avltree, n: *mut avlnode)",
+      "startLine": 36,
+      "startCol": 1,
+      "endLine": 53,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "destroy_rust"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "destroy_rust"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avltree"
+        },
+        {
+          "name": "avlnode"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "remove",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn remove(__filename: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;",
+      "startLine": 256,
+      "startCol": 5,
+      "endLine": 256,
+      "endCol": 87,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "memchr",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn memchr(\n        __s: *const ::std::os::raw::c_void,\n        __c: ::std::os::raw::c_int,\n        __n: ::std::os::raw::c_ulong,\n    ) -> *mut ::std::os::raw::c_void;",
+      "startLine": 600,
+      "startCol": 5,
+      "endLine": 604,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "clock",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn clock() -> clock_t;",
+      "startLine": 1040,
+      "startCol": 5,
+      "endLine": 1040,
+      "endCol": 31,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strtok",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strtok(\n        __s: *mut ::std::os::raw::c_char,\n        __delim: *const ::std::os::raw::c_char,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 710,
+      "startCol": 5,
+      "endLine": 713,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "labs",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn labs(__x: ::std::os::raw::c_long) -> ::std::os::raw::c_long;",
+      "startLine": 947,
+      "startCol": 5,
+      "endLine": 947,
+      "endCol": 72,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "time",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn time(__timer: *mut time_t) -> time_t;",
+      "startLine": 1044,
+      "startCol": 5,
+      "endLine": 1044,
+      "endCol": 49,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strtol",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strtol(\n        __nptr: *const ::std::os::raw::c_char,\n        __endptr: *mut *mut ::std::os::raw::c_char,\n        __base: ::std::os::raw::c_int,\n    ) -> ::std::os::raw::c_long;",
+      "startLine": 818,
+      "startCol": 5,
+      "endLine": 822,
+      "endCol": 33,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "sscanf1",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn sscanf1(\n        __s: *const ::std::os::raw::c_char,\n        __format: *const ::std::os::raw::c_char,\n        ...\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 404,
+      "startCol": 5,
+      "endLine": 408,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "avl_check_heigt",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn avl_check_heigt(avlt: *mut avltree) -> ::std::os::raw::c_int;",
+      "startLine": 1209,
+      "startCol": 5,
+      "endLine": 1209,
+      "endCol": 73,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avltree"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strftime",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strftime(\n        __s: *mut ::std::os::raw::c_char,\n        __maxsize: usize,\n        __format: *const ::std::os::raw::c_char,\n        __tp: *const tm,\n    ) -> usize;",
+      "startLine": 1056,
+      "startCol": 5,
+      "endLine": 1061,
+      "endCol": 16,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "tm"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "avl_print",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn avl_print(\n        avlt: *mut avltree,\n        print_func: ::std::option::Option<unsafe extern \"C\" fn(arg1: *mut ::std::os::raw::c_void)>,\n    );",
+      "startLine": 1190,
+      "startCol": 5,
+      "endLine": 1193,
+      "endCol": 7,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avltree"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fsetpos",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fsetpos(__stream: *mut FILE, __pos: *const fpos_t) -> ::std::os::raw::c_int;",
+      "startLine": 540,
+      "startCol": 5,
+      "endLine": 540,
+      "endCol": 88,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "avl_successor",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn avl_successor(avlt: *mut avltree, node: *mut avlnode) -> *mut avlnode;",
+      "startLine": 1171,
+      "startCol": 5,
+      "endLine": 1171,
+      "endCol": 82,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avlnode"
+        },
+        {
+          "name": "avltree"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "main",
+      "filename": "src/main_func.rs",
+      "signature": "pub fn main()",
+      "startLine": 2,
+      "startCol": 1,
+      "endLine": 18,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "exit"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "next"
+        },
+        {
+          "name": "args"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "main_0"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "unit_test_atomic_deletion_rust",
+      "filename": "src/main.rs",
+      "signature": "fn unit_test_atomic_deletion_rust() -> i32",
+      "startLine": 467,
+      "startCol": 1,
+      "endLine": 627,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "next"
+        },
+        {
+          "name": "tree_create_rust"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "tree_check"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "tree_check"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "tree_delete_rust"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "next"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "Some"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "unit_test_dup_rust",
+      "filename": "src/main.rs",
+      "signature": "fn unit_test_dup_rust() -> bool",
+      "startLine": 932,
+      "startCol": 1,
+      "endLine": 977,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "stdout"
+        },
+        {
+          "name": "tree_create_rust"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "stdout"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "stdout"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "tree_insert_rust"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "vfscanf1",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vfscanf1(\n        __s: *mut FILE,\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 435,
+      "startCol": 5,
+      "endLine": 439,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strerror",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strerror(__errnum: ::std::os::raw::c_int) -> *mut ::std::os::raw::c_char;",
+      "startLine": 729,
+      "startCol": 5,
+      "endLine": 729,
+      "endCol": 85,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "abs",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn abs(__x: ::std::os::raw::c_int) -> ::std::os::raw::c_int;",
+      "startLine": 943,
+      "startCol": 5,
+      "endLine": 943,
+      "endCol": 69,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "unit_test_chain_deletion_rust",
+      "filename": "src/main.rs",
+      "signature": "fn unit_test_chain_deletion_rust() -> bool",
+      "startLine": 671,
+      "startCol": 1,
+      "endLine": 729,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "next"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "next"
+        },
+        {
+          "name": "tree_delete_rust"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "next"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "tree_create_rust"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "new_v1"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "putc",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn putc(__c: ::std::os::raw::c_int, __stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 474,
+      "startCol": 5,
+      "endLine": 474,
+      "endCol": 91,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "unit_test_min_rust",
+      "filename": "src/main.rs",
+      "signature": "fn unit_test_min_rust() -> bool",
+      "startLine": 980,
+      "startCol": 1,
+      "endLine": 1091,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "tree_delete_rust"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "from_raw"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "tree_find_rust"
+        },
+        {
+          "name": "tree_create_rust"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "tree_find_rust"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "tree_find_rust"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "tree_find_rust"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "tree_delete_rust"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "tree_delete_rust"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "tree_find_rust"
+        },
+        {
+          "name": "tree_insert_rust"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "tmpnam",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn tmpnam(__s: *mut ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char;",
+      "startLine": 271,
+      "startCol": 5,
+      "endLine": 271,
+      "endCol": 84,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "difftime",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn difftime(__time1: time_t, __time0: time_t) -> f64;",
+      "startLine": 1048,
+      "startCol": 5,
+      "endLine": 1048,
+      "endCol": 62,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "rename",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn rename(\n        __old: *const ::std::os::raw::c_char,\n        __new: *const ::std::os::raw::c_char,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 260,
+      "startCol": 5,
+      "endLine": 263,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strncpy",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strncpy(\n        __dest: *mut ::std::os::raw::c_char,\n        __src: *const ::std::os::raw::c_char,\n        __n: ::std::os::raw::c_ulong,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 615,
+      "startCol": 5,
+      "endLine": 619,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "avl_delete",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn avl_delete(\n        avlt: *mut avltree,\n        node: *mut avlnode,\n        keep: ::std::os::raw::c_int,\n    ) -> *mut ::std::os::raw::c_void;",
+      "startLine": 1201,
+      "startCol": 5,
+      "endLine": 1205,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avlnode"
+        },
+        {
+          "name": "avltree"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "MuTestsWrapper::get",
+      "filename": "src/main.rs",
+      "signature": "pub fn get(&self) -> i32",
+      "startLine": 1126,
+      "startCol": 5,
+      "endLine": 1128,
+      "endCol": 6,
+      "functions": [],
+      "globals": [
+        {
+          "name": "mu_tests"
+        }
+      ],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "memset",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn memset(\n        __s: *mut ::std::os::raw::c_void,\n        __c: ::std::os::raw::c_int,\n        __n: ::std::os::raw::c_ulong,\n    ) -> *mut ::std::os::raw::c_void;",
+      "startLine": 584,
+      "startCol": 5,
+      "endLine": 588,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "atol",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn atol(__nptr: *const ::std::os::raw::c_char) -> ::std::os::raw::c_long;",
+      "startLine": 789,
+      "startCol": 5,
+      "endLine": 789,
+      "endCol": 82,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "makedata_rust",
+      "filename": "src/main.rs",
+      "signature": "fn makedata_rust(key: i32) -> Option<Box<_rust>>",
+      "startLine": 104,
+      "startCol": 1,
+      "endLine": 110,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "Some"
+        },
+        {
+          "name": "new"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "_rust"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "ldiv",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn ldiv(__numer: ::std::os::raw::c_long, __denom: ::std::os::raw::c_long) -> ldiv_t;",
+      "startLine": 959,
+      "startCol": 5,
+      "endLine": 959,
+      "endCol": 93,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "ldiv_t"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "perror",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn perror(__s: *const ::std::os::raw::c_char);",
+      "startLine": 556,
+      "startCol": 5,
+      "endLine": 556,
+      "endCol": 55,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "scanf",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn scanf(__format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;",
+      "startLine": 380,
+      "startCol": 5,
+      "endLine": 380,
+      "endCol": 89,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "vprintf",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vprintf(\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 339,
+      "startCol": 5,
+      "endLine": 342,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strncmp",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strncmp(\n        __s1: *const ::std::os::raw::c_char,\n        __s2: *const ::std::os::raw::c_char,\n        __n: ::std::os::raw::c_ulong,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 645,
+      "startCol": 5,
+      "endLine": 649,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strcspn",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strcspn(\n        __s: *const ::std::os::raw::c_char,\n        __reject: *const ::std::os::raw::c_char,\n    ) -> ::std::os::raw::c_ulong;",
+      "startLine": 682,
+      "startCol": 5,
+      "endLine": 685,
+      "endCol": 34,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "MuTestsWrapper::set",
+      "filename": "src/main.rs",
+      "signature": "pub fn set(&mut self, val: i32)",
+      "startLine": 1130,
+      "startCol": 5,
+      "endLine": 1135,
+      "endCol": 6,
+      "functions": [],
+      "globals": [
+        {
+          "name": "mu_tests"
+        }
+      ],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "snprintf",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn snprintf(\n        __s: *mut ::std::os::raw::c_char,\n        __maxlen: ::std::os::raw::c_ulong,\n        __format: *const ::std::os::raw::c_char,\n        ...\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 354,
+      "startCol": 5,
+      "endLine": 359,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "__overflow",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn __overflow(arg1: *mut FILE, arg2: ::std::os::raw::c_int) -> ::std::os::raw::c_int;",
+      "startLine": 564,
+      "startCol": 5,
+      "endLine": 564,
+      "endCol": 94,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "tree_insert_rust",
+      "filename": "src/main.rs",
+      "signature": "fn tree_insert_rust(avlt: *mut avltree, key: i32) -> Option<NonNull<avlnode_rust>>",
+      "startLine": 121,
+      "startCol": 1,
+      "endLine": 157,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "free"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "makedata_rust"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "into_raw"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "avl_insert"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avltree"
+        },
+        {
+          "name": "avlnode_rust"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "tree_find",
+      "filename": "src/main.rs",
+      "signature": "pub unsafe extern \"C\" fn tree_find(avlt: *mut avltree, key: libc::c_int) -> *mut avlnode",
+      "startLine": 277,
+      "startCol": 1,
+      "endLine": 290,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "tree_find_rust"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "null_mut"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avltree"
+        },
+        {
+          "name": "avlnode"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "PermutationErrorWrapper::set",
+      "filename": "src/main.rs",
+      "signature": "pub fn set(&mut self, val: i32)",
+      "startLine": 796,
+      "startCol": 5,
+      "endLine": 801,
+      "endCol": 6,
+      "functions": [],
+      "globals": [
+        {
+          "name": "permutation_error"
+        }
+      ],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "vscanf1",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vscanf1(\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 443,
+      "startCol": 5,
+      "endLine": 446,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "llabs",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn llabs(__x: ::std::os::raw::c_longlong) -> ::std::os::raw::c_longlong;",
+      "startLine": 951,
+      "startCol": 5,
+      "endLine": 951,
+      "endCol": 81,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "div",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn div(__numer: ::std::os::raw::c_int, __denom: ::std::os::raw::c_int) -> div_t;",
+      "startLine": 955,
+      "startCol": 5,
+      "endLine": 955,
+      "endCol": 89,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "div_t"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "wcstombs",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn wcstombs(__s: *mut ::std::os::raw::c_char, __pwcs: *const wchar_t, __n: usize) -> usize;",
+      "startLine": 990,
+      "startCol": 5,
+      "endLine": 990,
+      "endCol": 100,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "tree_delete_rust",
+      "filename": "src/main.rs",
+      "signature": "fn tree_delete_rust(avlt: Option<&mut avltree>, key: i32) -> i32",
+      "startLine": 292,
+      "startCol": 1,
+      "endLine": 328,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "tree_find"
+        },
+        {
+          "name": "tree_find"
+        },
+        {
+          "name": "avl_delete"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "new_display"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avltree"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "MuFailsWrapper::set",
+      "filename": "src/main.rs",
+      "signature": "pub fn set(&mut self, val: i32)",
+      "startLine": 1108,
+      "startCol": 5,
+      "endLine": 1113,
+      "endCol": 6,
+      "functions": [],
+      "globals": [
+        {
+          "name": "mu_fails"
+        }
+      ],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "tree_check",
+      "filename": "src/main.rs",
+      "signature": "unsafe fn tree_check(avlt: *mut avltree) -> i32",
+      "startLine": 630,
+      "startCol": 1,
+      "endLine": 634,
+      "endCol": 2,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "avltree"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "unit_test_atomic_insertion_rust",
+      "filename": "src/main.rs",
+      "signature": "fn unit_test_atomic_insertion_rust() -> i32",
+      "startLine": 415,
+      "startCol": 1,
+      "endLine": 464,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "next"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "tree_create_rust"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "next"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "avl_destroy_rust"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "unit_test_permutation_insertion_rust",
+      "filename": "src/main.rs",
+      "signature": "fn unit_test_permutation_insertion_rust(error_wrapper: &mut PermutationErrorWrapper) -> bool",
+      "startLine": 804,
+      "startCol": 1,
+      "endLine": 823,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "PermutationErrorWrapper::set"
+        },
+        {
+          "name": "permute_rust"
+        },
+        {
+          "name": "permutation_insert"
+        },
+        {
+          "name": "PermutationErrorWrapper::get"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "PermutationErrorWrapper"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "MuTestsWrapper::new",
+      "filename": "src/main.rs",
+      "signature": "pub fn new() -> Self",
+      "startLine": 1121,
+      "startCol": 5,
+      "endLine": 1124,
+      "endCol": 6,
+      "functions": [],
+      "globals": [
+        {
+          "name": "mu_tests"
+        }
+      ],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "atexit",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn atexit(__func: ::std::option::Option<unsafe extern \"C\" fn()>) -> ::std::os::raw::c_int;",
+      "startLine": 888,
+      "startCol": 5,
+      "endLine": 888,
+      "endCol": 99,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "__ctype_get_mb_cur_max",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn __ctype_get_mb_cur_max() -> usize;",
+      "startLine": 777,
+      "startCol": 5,
+      "endLine": 777,
+      "endCol": 46,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strchr",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strchr(\n        __s: *const ::std::os::raw::c_char,\n        __c: ::std::os::raw::c_int,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 668,
+      "startCol": 5,
+      "endLine": 671,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "mktime",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn mktime(__tp: *mut tm) -> time_t;",
+      "startLine": 1052,
+      "startCol": 5,
+      "endLine": 1052,
+      "endCol": 44,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "tm"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fprintf",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fprintf(\n        __stream: *mut FILE,\n        __format: *const ::std::os::raw::c_char,\n        ...\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 311,
+      "startCol": 5,
+      "endLine": 315,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "__strtok_r",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn __strtok_r(\n        __s: *mut ::std::os::raw::c_char,\n        __delim: *const ::std::os::raw::c_char,\n        __save_ptr: *mut *mut ::std::os::raw::c_char,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 717,
+      "startCol": 5,
+      "endLine": 721,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "swap",
+      "filename": "src/main.rs",
+      "signature": "pub unsafe extern \"C\" fn swap(x: *mut libc::c_char, y: *mut libc::c_char)",
+      "startLine": 736,
+      "startCol": 1,
+      "endLine": 749,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "swap_rust"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "ctime",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn ctime(__timer: *const time_t) -> *mut ::std::os::raw::c_char;",
+      "startLine": 1077,
+      "startCol": 5,
+      "endLine": 1077,
+      "endCol": 73,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "unit_test_random_insertion_deletion_rust",
+      "filename": "src/main.rs",
+      "signature": "fn unit_test_random_insertion_deletion_rust() -> i32",
+      "startLine": 862,
+      "startCol": 1,
+      "endLine": 929,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "tree_find_rust"
+        },
+        {
+          "name": "tree_insert_rust"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "time"
+        },
+        {
+          "name": "next"
+        },
+        {
+          "name": "tree_delete_rust"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "tree_find_rust"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "rand"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "avl_destroy_rust"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "next"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "tree_create_rust"
+        },
+        {
+          "name": "srand"
+        },
+        {
+          "name": "rand"
+        },
+        {
+          "name": "avl_destroy_rust"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "system",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn system(__command: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;",
+      "startLine": 914,
+      "startCol": 5,
+      "endLine": 914,
+      "endCol": 86,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fscanf1",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fscanf1(\n        __stream: *mut FILE,\n        __format: *const ::std::os::raw::c_char,\n        ...\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 392,
+      "startCol": 5,
+      "endLine": 396,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "permutation_insert",
+      "filename": "src/main.rs",
+      "signature": "fn permutation_insert(chars: &[char], error_wrapper: &mut PermutationErrorWrapper)",
+      "startLine": 826,
+      "startCol": 1,
+      "endLine": 829,
+      "endCol": 2,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "PermutationErrorWrapper"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "print_func",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn print_func(d: *mut ::std::os::raw::c_void);",
+      "startLine": 1235,
+      "startCol": 5,
+      "endLine": 1235,
+      "endCol": 55,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "atoi",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn atoi(__nptr: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;",
+      "startLine": 785,
+      "startCol": 5,
+      "endLine": 785,
+      "endCol": 81,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fputs",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fputs(__s: *const ::std::os::raw::c_char, __stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 490,
+      "startCol": 5,
+      "endLine": 490,
+      "endCol": 100,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strxfrm",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strxfrm(\n        __dest: *mut ::std::os::raw::c_char,\n        __src: *const ::std::os::raw::c_char,\n        __n: ::std::os::raw::c_ulong,\n    ) -> ::std::os::raw::c_ulong;",
+      "startLine": 660,
+      "startCol": 5,
+      "endLine": 664,
+      "endCol": 34,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    }
+  ],
+  "globals": [
+    {
+      "name": "mu_fails",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1247,
+      "startCol": 5,
+      "endLine": 1247,
+      "endCol": 52,
+      "foreign": true
+    },
+    {
+      "name": "stderr",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 252,
+      "startCol": 5,
+      "endLine": 252,
+      "endCol": 38,
+      "foreign": true
+    },
+    {
+      "name": "avlbf_BALANCED",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1099,
+      "startCol": 1,
+      "endLine": 1099,
+      "endCol": 37,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 743,
+      "startCol": 1,
+      "endLine": 748,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "__timezone",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1089,
+      "startCol": 5,
+      "endLine": 1089,
+      "endCol": 55,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1217,
+      "startCol": 1,
+      "endLine": 1221,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1263,
+      "startCol": 1,
+      "endLine": 1274,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "__daylight",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1085,
+      "startCol": 5,
+      "endLine": 1085,
+      "endCol": 54,
+      "foreign": true
+    },
+    {
+      "name": "stdin",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 244,
+      "startCol": 5,
+      "endLine": 244,
+      "endCol": 37,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1010,
+      "startCol": 1,
+      "endLine": 1024,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 101,
+      "startCol": 1,
+      "endLine": 108,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 756,
+      "startCol": 1,
+      "endLine": 761,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 45,
+      "startCol": 1,
+      "endLine": 49,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1032,
+      "startCol": 1,
+      "endLine": 1037,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 116,
+      "startCol": 1,
+      "endLine": 121,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 190,
+      "startCol": 1,
+      "endLine": 240,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "avlbf_LEFTHEAVY",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1098,
+      "startCol": 1,
+      "endLine": 1098,
+      "endCol": 39,
+      "foreign": true
+    },
+    {
+      "name": "avlbf_RIGHTHEAVY",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1100,
+      "startCol": 1,
+      "endLine": 1100,
+      "endCol": 39,
+      "foreign": true
+    },
+    {
+      "name": "mu_tests",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1243,
+      "startCol": 5,
+      "endLine": 1243,
+      "endCol": 52,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1116,
+      "startCol": 1,
+      "endLine": 1124,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "__tzname",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1081,
+      "startCol": 5,
+      "endLine": 1081,
+      "endCol": 68,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 769,
+      "startCol": 1,
+      "endLine": 774,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 130,
+      "startCol": 1,
+      "endLine": 136,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 90,
+      "startCol": 1,
+      "endLine": 99,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "avltraversal_PREORDER",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1102,
+      "startCol": 1,
+      "endLine": 1102,
+      "endCol": 51,
+      "foreign": true
+    },
+    {
+      "name": "avltraversal_POSTORDER",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1104,
+      "startCol": 1,
+      "endLine": 1104,
+      "endCol": 52,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1141,
+      "startCol": 1,
+      "endLine": 1150,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "avltraversal_INORDER",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1103,
+      "startCol": 1,
+      "endLine": 1103,
+      "endCol": 50,
+      "foreign": true
+    },
+    {
+      "name": "permutation_error",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1251,
+      "startCol": 5,
+      "endLine": 1251,
+      "endCol": 61,
+      "foreign": true
+    },
+    {
+      "name": "stdout",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 248,
+      "startCol": 5,
+      "endLine": 248,
+      "endCol": 38,
+      "foreign": true
+    }
+  ],
+  "structs": [
+    {
+      "name": "lldiv_t",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 764,
+      "startCol": 1,
+      "endLine": 767,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "__fsid_t",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 41,
+      "startCol": 1,
+      "endLine": 43,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "_IO_FILE",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 158,
+      "startCol": 1,
+      "endLine": 188,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "__va_list_tag",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1256,
+      "startCol": 1,
+      "endLine": 1261,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "avltree",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1127,
+      "startCol": 1,
+      "endLine": 1139,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "PermutationErrorWrapper",
+      "filename": "src/main.rs",
+      "startLine": 782,
+      "startCol": 1,
+      "endLine": 784,
+      "endCol": 2,
+      "foreign": false
+    },
+    {
+      "name": "ldiv_t",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 751,
+      "startCol": 1,
+      "endLine": 754,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "mydata",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1213,
+      "startCol": 1,
+      "endLine": 1215,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "__mbstate_t",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 79,
+      "startCol": 1,
+      "endLine": 82,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "_IO_codecvt",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 147,
+      "startCol": 1,
+      "endLine": 149,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "tm",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 996,
+      "startCol": 1,
+      "endLine": 1008,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "timespec",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1027,
+      "startCol": 1,
+      "endLine": 1030,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "avlnode",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1108,
+      "startCol": 1,
+      "endLine": 1114,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "_rust",
+      "filename": "src/main.rs",
+      "startLine": 19,
+      "startCol": 1,
+      "endLine": 21,
+      "endCol": 2,
+      "foreign": false
+    },
+    {
+      "name": "avlnode_rust",
+      "filename": "src/main.rs",
+      "startLine": 113,
+      "startCol": 1,
+      "endLine": 119,
+      "endCol": 2,
+      "foreign": false
+    },
+    {
+      "name": "MuFailsWrapper",
+      "filename": "src/main.rs",
+      "startLine": 1094,
+      "startCol": 1,
+      "endLine": 1096,
+      "endCol": 2,
+      "foreign": false
+    },
+    {
+      "name": "div_t",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 738,
+      "startCol": 1,
+      "endLine": 741,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "_G_fpos_t",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 111,
+      "startCol": 1,
+      "endLine": 114,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "__mbstate_t__bindgen_ty_1",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 85,
+      "startCol": 1,
+      "endLine": 88,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "_G_fpos64_t",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 125,
+      "startCol": 1,
+      "endLine": 128,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "_IO_marker",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 142,
+      "startCol": 1,
+      "endLine": 144,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "MuTestsWrapper",
+      "filename": "src/main.rs",
+      "startLine": 1116,
+      "startCol": 1,
+      "endLine": 1118,
+      "endCol": 2,
+      "foreign": false
+    },
+    {
+      "name": "_IO_wide_data",
+      "filename": "/app/output/avl-tree_0vXxo5bVq9/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 152,
+      "startCol": 1,
+      "endLine": 154,
+      "endCol": 2,
+      "foreign": true
+    }
+  ],
+  "enums": []
+}

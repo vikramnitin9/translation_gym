@@ -1,0 +1,264 @@
+{
+    "date": "2025-08-01 13:43:05.512406",
+    "args": {
+        "dataset": "avl-tree",
+        "model": "claude37",
+        "num_attempts": 5,
+        "output_dir": "/app/output/avl-tree_0vXxo5bVq9",
+        "verbose": true
+    },
+    "results": [
+        {
+            "unit": "",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "avl_create",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "tree_create",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "destroy",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "avl_destroy",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "unit_test_create",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "makedata",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "avlnode",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "rotate_right",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "rotate_left",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "fix_insert_leftimbalance",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "fix_insert_rightimbalance",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "avl_insert",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "tree_insert",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "check_order",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "avl_check_order",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 5
+        },
+        {
+            "unit": "tree_check",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "avl_find",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "unit_test_find",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 5
+        },
+        {
+            "unit": "tree_find",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "avl_successor",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "fix_delete_rightimbalance",
+            "type": "functions",
+            "results": "repair_failed",
+            "attempts": 1
+        },
+        {
+            "unit": "fix_delete_leftimbalance",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "avl_delete",
+            "type": "functions",
+            "results": "repair_failed",
+            "attempts": 4
+        },
+        {
+            "unit": "tree_delete",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "unit_test_successor",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "unit_test_atomic_insertion",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "unit_test_atomic_deletion",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "unit_test_chain_insertion",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "unit_test_chain_deletion",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "swap",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "permute",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 5
+        },
+        {
+            "unit": "permutation_error",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "unit_test_permutation_insertion",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "unit_test_permutation_deletion",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "unit_test_random_insertion_deletion",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "unit_test_dup",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "unit_test_min",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "mu_fails",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "mu_tests",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "all_tests",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "main_0",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        }
+    ]
+}

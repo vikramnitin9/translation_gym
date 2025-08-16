@@ -1,0 +1,5264 @@
+{
+  "files": [
+    {
+      "filename": "src/main.rs",
+      "imports": [
+        {
+          "span": "src/main.rs:11:1: 11:27 (#0)",
+          "source": "use libc::{c_char, c_int};"
+        },
+        {
+          "span": "src/main.rs:12:1: 16:3 (#0)",
+          "source": "use std::{\n    convert::TryInto,\n    ffi::{CStr, CString},\n    ptr,\n};"
+        },
+        {
+          "span": "src/main.rs:5:1: 5:25 (#0)",
+          "source": "use std::{env, process};"
+        }
+      ]
+    },
+    {
+      "filename": "src/main_func.rs",
+      "imports": []
+    },
+    {
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "imports": []
+    }
+  ],
+  "functions": [
+    {
+      "name": "strtok",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strtok(\n        __s: *mut ::std::os::raw::c_char,\n        __delim: *const ::std::os::raw::c_char,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 173,
+      "startCol": 5,
+      "endLine": 176,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strncpy",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strncpy(\n        __dest: *mut ::std::os::raw::c_char,\n        __src: *const ::std::os::raw::c_char,\n        __n: ::std::os::raw::c_ulong,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 78,
+      "startCol": 5,
+      "endLine": 82,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "realloc",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn realloc(\n        __ptr: *mut ::std::os::raw::c_void,\n        __size: ::std::os::raw::c_ulong,\n    ) -> *mut ::std::os::raw::c_void;",
+      "startLine": 332,
+      "startCol": 5,
+      "endLine": 335,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "memset",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn memset(\n        __s: *mut ::std::os::raw::c_void,\n        __c: ::std::os::raw::c_int,\n        __n: ::std::os::raw::c_ulong,\n    ) -> *mut ::std::os::raw::c_void;",
+      "startLine": 47,
+      "startCol": 5,
+      "endLine": 51,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_free",
+      "filename": "src/main.rs",
+      "signature": "pub unsafe extern \"C\" fn url_free(data: *mut url_data_t)",
+      "startLine": 128,
+      "startCol": 1,
+      "endLine": 131,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "url_free_rust"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "strtod",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strtod(\n        __nptr: *const ::std::os::raw::c_char,\n        __endptr: *mut *mut ::std::os::raw::c_char,\n    ) -> f64;",
+      "startLine": 260,
+      "startCol": 5,
+      "endLine": 263,
+      "endCol": 14,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "decode_percent_rust",
+      "filename": "src/main.rs",
+      "signature": "fn decode_percent_rust(s: &mut [u8], unhex_rust: fn(char) -> i32) -> Option<usize>",
+      "startLine": 36,
+      "startCol": 1,
+      "endLine": 75,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "Some"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "aligned_alloc",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn aligned_alloc(__alignment: usize, __size: usize) -> *mut ::std::os::raw::c_void;",
+      "startLine": 343,
+      "startCol": 5,
+      "endLine": 343,
+      "endCol": 92,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "srand",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn srand(__seed: ::std::os::raw::c_uint);",
+      "startLine": 317,
+      "startCol": 5,
+      "endLine": 317,
+      "endCol": 50,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "mblen",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn mblen(__s: *const ::std::os::raw::c_char, __n: usize) -> ::std::os::raw::c_int;",
+      "startLine": 433,
+      "startCol": 5,
+      "endLine": 433,
+      "endCol": 91,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_parse",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn url_parse(url: *const ::std::os::raw::c_char) -> *mut url_data_t;",
+      "startLine": 1055,
+      "startCol": 5,
+      "endLine": 1055,
+      "endCol": 77,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "putchar",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn putchar(__c: ::std::os::raw::c_int) -> ::std::os::raw::c_int;",
+      "startLine": 930,
+      "startCol": 5,
+      "endLine": 930,
+      "endCol": 73,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strcat",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strcat(\n        __dest: *mut ::std::os::raw::c_char,\n        __src: *const ::std::os::raw::c_char,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 86,
+      "startCol": 5,
+      "endLine": 89,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "wcstombs",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn wcstombs(__s: *mut ::std::os::raw::c_char, __pwcs: *const wchar_t, __n: usize) -> usize;",
+      "startLine": 453,
+      "startCol": 5,
+      "endLine": 453,
+      "endCol": 100,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "__assert_perror_fail",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn __assert_perror_fail(\n        __errnum: ::std::os::raw::c_int,\n        __file: *const ::std::os::raw::c_char,\n        __line: ::std::os::raw::c_uint,\n        __function: *const ::std::os::raw::c_char,\n    ) -> !;",
+      "startLine": 14,
+      "startCol": 5,
+      "endLine": 19,
+      "endCol": 12,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fflush",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fflush(__stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 731,
+      "startCol": 5,
+      "endLine": 731,
+      "endCol": 65,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_get_fragment_rust",
+      "filename": "src/main.rs",
+      "signature": "fn url_get_fragment_rust(url: &str) -> Option<String>",
+      "startLine": 645,
+      "startCol": 1,
+      "endLine": 674,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "from_residual"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "branch"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "url_free_rust"
+        },
+        {
+          "name": "strdup_rust"
+        },
+        {
+          "name": "branch"
+        },
+        {
+          "name": "url_parse"
+        },
+        {
+          "name": "from_residual"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "strtof",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strtof(\n        __nptr: *const ::std::os::raw::c_char,\n        __endptr: *mut *mut ::std::os::raw::c_char,\n    ) -> f32;",
+      "startLine": 267,
+      "startCol": 5,
+      "endLine": 270,
+      "endCol": 14,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strchr",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strchr(\n        __s: *const ::std::os::raw::c_char,\n        __c: ::std::os::raw::c_int,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 131,
+      "startCol": 5,
+      "endLine": 134,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fprintf",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fprintf(\n        __stream: *mut FILE,\n        __format: *const ::std::os::raw::c_char,\n        ...\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 763,
+      "startCol": 5,
+      "endLine": 767,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "snprintf",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn snprintf(\n        __s: *mut ::std::os::raw::c_char,\n        __maxlen: ::std::os::raw::c_ulong,\n        __format: *const ::std::os::raw::c_char,\n        ...\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 806,
+      "startCol": 5,
+      "endLine": 811,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "test4_rust",
+      "filename": "src/main.rs",
+      "signature": "fn test4_rust()",
+      "startLine": 1419,
+      "startCol": 1,
+      "endLine": 1530,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_get_hostname"
+        },
+        {
+          "name": "url_get_protocol"
+        },
+        {
+          "name": "url_get_userinfo"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "url_get_port"
+        },
+        {
+          "name": "url_get_path"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "url_data_inspect"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_parse"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "url_free"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new_const"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "strrchr",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strrchr(\n        __s: *const ::std::os::raw::c_char,\n        __c: ::std::os::raw::c_int,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 138,
+      "startCol": 5,
+      "endLine": 141,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "llabs",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn llabs(__x: ::std::os::raw::c_longlong) -> ::std::os::raw::c_longlong;",
+      "startLine": 414,
+      "startCol": 5,
+      "endLine": 414,
+      "endCol": 81,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strpbrk",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strpbrk(\n        __s: *const ::std::os::raw::c_char,\n        __accept: *const ::std::os::raw::c_char,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 159,
+      "startCol": 5,
+      "endLine": 162,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "tmpfile",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn tmpfile() -> *mut FILE;",
+      "startLine": 719,
+      "startCol": 5,
+      "endLine": 719,
+      "endCol": 35,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "__uflow",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn __uflow(arg1: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 1012,
+      "startCol": 5,
+      "endLine": 1012,
+      "endCol": 62,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "wctomb",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn wctomb(__s: *mut ::std::os::raw::c_char, __wchar: wchar_t) -> ::std::os::raw::c_int;",
+      "startLine": 445,
+      "startCol": 5,
+      "endLine": 445,
+      "endCol": 96,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fopen",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fopen(\n        __filename: *const ::std::os::raw::c_char,\n        __modes: *const ::std::os::raw::c_char,\n    ) -> *mut FILE;",
+      "startLine": 735,
+      "startCol": 5,
+      "endLine": 738,
+      "endCol": 20,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strdup",
+      "filename": "src/main.rs",
+      "signature": "pub unsafe extern \"C\" fn strdup(s: *const c_char) -> *mut c_char",
+      "startLine": 372,
+      "startCol": 1,
+      "endLine": 388,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "strdup_rust"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "new"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "system",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn system(__command: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;",
+      "startLine": 377,
+      "startCol": 5,
+      "endLine": 377,
+      "endCol": 86,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strlen",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strlen(__s: *const ::std::os::raw::c_char) -> ::std::os::raw::c_ulong;",
+      "startLine": 188,
+      "startCol": 5,
+      "endLine": 188,
+      "endCol": 82,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "getc",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn getc(__stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 914,
+      "startCol": 5,
+      "endLine": 914,
+      "endCol": 63,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "__overflow",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn __overflow(arg1: *mut FILE, arg2: ::std::os::raw::c_int) -> ::std::os::raw::c_int;",
+      "startLine": 1016,
+      "startCol": 5,
+      "endLine": 1016,
+      "endCol": 94,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "sscanf",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn sscanf(\n        __s: *const ::std::os::raw::c_char,\n        __format: *const ::std::os::raw::c_char,\n        ...\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 836,
+      "startCol": 5,
+      "endLine": 840,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "vfscanf",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vfscanf(\n        __s: *mut FILE,\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 864,
+      "startCol": 5,
+      "endLine": 868,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_get_hostname_rust",
+      "filename": "src/main.rs",
+      "signature": "fn url_get_hostname_rust(url: &str) -> Option<String>",
+      "startLine": 517,
+      "startCol": 1,
+      "endLine": 546,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "from_residual"
+        },
+        {
+          "name": "branch"
+        },
+        {
+          "name": "branch"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "DataGuard"
+        },
+        {
+          "name": "from_residual"
+        },
+        {
+          "name": "strdup_rust"
+        },
+        {
+          "name": "url_parse"
+        },
+        {
+          "name": "from_ptr"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "fgets",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fgets(\n        __s: *mut ::std::os::raw::c_char,\n        __n: ::std::os::raw::c_int,\n        __stream: *mut FILE,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 934,
+      "startCol": 5,
+      "endLine": 938,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fgetc",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fgetc(__stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 910,
+      "startCol": 5,
+      "endLine": 910,
+      "endCol": 64,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "memmove",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn memmove(\n        __dest: *mut ::std::os::raw::c_void,\n        __src: *const ::std::os::raw::c_void,\n        __n: ::std::os::raw::c_ulong,\n    ) -> *mut ::std::os::raw::c_void;",
+      "startLine": 39,
+      "startCol": 5,
+      "endLine": 43,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fsetpos",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fsetpos(__stream: *mut FILE, __pos: *const fpos_t) -> ::std::os::raw::c_int;",
+      "startLine": 992,
+      "startCol": 5,
+      "endLine": 992,
+      "endCol": 88,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strerror",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strerror(__errnum: ::std::os::raw::c_int) -> *mut ::std::os::raw::c_char;",
+      "startLine": 192,
+      "startCol": 5,
+      "endLine": 192,
+      "endCol": 85,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "atol",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn atol(__nptr: *const ::std::os::raw::c_char) -> ::std::os::raw::c_long;",
+      "startLine": 252,
+      "startCol": 5,
+      "endLine": 252,
+      "endCol": 82,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strncat",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strncat(\n        __dest: *mut ::std::os::raw::c_char,\n        __src: *const ::std::os::raw::c_char,\n        __n: ::std::os::raw::c_ulong,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 93,
+      "startCol": 5,
+      "endLine": 97,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "__assert_fail",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn __assert_fail(\n        __assertion: *const ::std::os::raw::c_char,\n        __file: *const ::std::os::raw::c_char,\n        __line: ::std::os::raw::c_uint,\n        __function: *const ::std::os::raw::c_char,\n    ) -> !;",
+      "startLine": 5,
+      "startCol": 5,
+      "endLine": 10,
+      "endCol": 12,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "run_test_rust",
+      "filename": "src/main.rs",
+      "signature": "fn run_test_rust(number: i32)",
+      "startLine": 1873,
+      "startCol": 1,
+      "endLine": 1890,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "test5_rust"
+        },
+        {
+          "name": "exit"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "_eprint"
+        },
+        {
+          "name": "test3_rust"
+        },
+        {
+          "name": "test8_rust"
+        },
+        {
+          "name": "test10_rust"
+        },
+        {
+          "name": "test4_rust"
+        },
+        {
+          "name": "test6_rust"
+        },
+        {
+          "name": "test1_rust"
+        },
+        {
+          "name": "test9_rust"
+        },
+        {
+          "name": "test7_rust"
+        },
+        {
+          "name": "test2_rust"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "fread",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fread(\n        __ptr: *mut ::std::os::raw::c_void,\n        __size: ::std::os::raw::c_ulong,\n        __n: ::std::os::raw::c_ulong,\n        __stream: *mut FILE,\n    ) -> ::std::os::raw::c_ulong;",
+      "startLine": 954,
+      "startCol": 5,
+      "endLine": 959,
+      "endCol": 34,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "ldiv",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn ldiv(__numer: ::std::os::raw::c_long, __denom: ::std::os::raw::c_long) -> ldiv_t;",
+      "startLine": 422,
+      "startCol": 5,
+      "endLine": 422,
+      "endCol": 93,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "ldiv_t"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strdup_rust",
+      "filename": "src/main.rs",
+      "signature": "fn strdup_rust(s: &str) -> Option<String>",
+      "startLine": 368,
+      "startCol": 1,
+      "endLine": 370,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "Some"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "atexit",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn atexit(__func: ::std::option::Option<unsafe extern \"C\" fn()>) -> ::std::os::raw::c_int;",
+      "startLine": 351,
+      "startCol": 5,
+      "endLine": 351,
+      "endCol": 99,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "__assert",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn __assert(\n        __assertion: *const ::std::os::raw::c_char,\n        __file: *const ::std::os::raw::c_char,\n        __line: ::std::os::raw::c_int,\n    ) -> !;",
+      "startLine": 23,
+      "startCol": 5,
+      "endLine": 27,
+      "endCol": 12,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "test6_rust",
+      "filename": "src/main.rs",
+      "signature": "fn test6_rust()",
+      "startLine": 1226,
+      "startCol": 1,
+      "endLine": 1322,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "url_get_hostname"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_get_protocol"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_get_path"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_parse"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "url_data_inspect"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_free"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "tmpnam",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn tmpnam(__s: *mut ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char;",
+      "startLine": 723,
+      "startCol": 5,
+      "endLine": 723,
+      "endCol": 84,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "freopen",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn freopen(\n        __filename: *const ::std::os::raw::c_char,\n        __modes: *const ::std::os::raw::c_char,\n        __stream: *mut FILE,\n    ) -> *mut FILE;",
+      "startLine": 742,
+      "startCol": 5,
+      "endLine": 746,
+      "endCol": 20,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "vscanf1",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vscanf1(\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 895,
+      "startCol": 5,
+      "endLine": 898,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "feof",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn feof(__stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 1000,
+      "startCol": 5,
+      "endLine": 1000,
+      "endCol": 63,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_inspect",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn url_inspect(url: *const ::std::os::raw::c_char);",
+      "startLine": 1078,
+      "startCol": 5,
+      "endLine": 1078,
+      "endCol": 60,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "vscanf",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vscanf(\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 872,
+      "startCol": 5,
+      "endLine": 875,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "main",
+      "filename": "src/main_func.rs",
+      "signature": "pub fn main()",
+      "startLine": 2,
+      "startCol": 1,
+      "endLine": 18,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "exit"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "args"
+        },
+        {
+          "name": "next"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "main_0"
+        },
+        {
+          "name": "null_mut"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "test3_rust",
+      "filename": "src/main.rs",
+      "signature": "fn test3_rust()",
+      "startLine": 1533,
+      "startCol": 1,
+      "endLine": 1686,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_get_path"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "url_get_hostname"
+        },
+        {
+          "name": "url_get_query_value"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_free"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_get_query_value"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "url_get_protocol"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "url_data_inspect"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "url_get_query_value"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_get_userinfo"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_get_query_value"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "url_parse"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_get_fragment"
+        },
+        {
+          "name": "url_get_port"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new_const"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "DataGuard::drop",
+      "filename": "src/main.rs",
+      "signature": "fn drop(&mut self)",
+      "startLine": 524,
+      "startCol": 9,
+      "endLine": 526,
+      "endCol": 10,
+      "functions": [
+        {
+          "name": "url_free_rust"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "test1_rust",
+      "filename": "src/main.rs",
+      "signature": "fn test1_rust(url_schemes: &[&str])",
+      "startLine": 1840,
+      "startCol": 1,
+      "endLine": 1870,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "url_is_protocol_rust"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_is_protocol_rust"
+        },
+        {
+          "name": "url_is_protocol_rust"
+        },
+        {
+          "name": "url_is_protocol_rust"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_is_protocol_rust"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_is_protocol_rust"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_is_protocol_rust"
+        },
+        {
+          "name": "new_const"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "atof",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn atof(__nptr: *const ::std::os::raw::c_char) -> f64;",
+      "startLine": 244,
+      "startCol": 5,
+      "endLine": 244,
+      "endCol": 63,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "parse_query_string_rust",
+      "filename": "src/main.rs",
+      "signature": "fn parse_query_string_rust(input: &[u8]) -> Option<Vec<url_key_value_rust>>",
+      "startLine": 133,
+      "startCol": 1,
+      "endLine": 193,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "from_utf8_lossy"
+        },
+        {
+          "name": "decode_percent_bytes"
+        },
+        {
+          "name": "next"
+        },
+        {
+          "name": "decode_percent_bytes"
+        },
+        {
+          "name": "from_utf8_lossy"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "with_capacity"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "url_key_value_rust"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "strncmp",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strncmp(\n        __s1: *const ::std::os::raw::c_char,\n        __s2: *const ::std::os::raw::c_char,\n        __n: ::std::os::raw::c_ulong,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 108,
+      "startCol": 5,
+      "endLine": 112,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strtold",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strtold(\n        __nptr: *const ::std::os::raw::c_char,\n        __endptr: *mut *mut ::std::os::raw::c_char,\n    ) -> u128;",
+      "startLine": 274,
+      "startCol": 5,
+      "endLine": 277,
+      "endCol": 15,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "lldiv",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn lldiv(\n        __numer: ::std::os::raw::c_longlong,\n        __denom: ::std::os::raw::c_longlong,\n    ) -> lldiv_t;",
+      "startLine": 426,
+      "startCol": 5,
+      "endLine": 429,
+      "endCol": 18,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "lldiv_t"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "rename",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn rename(\n        __old: *const ::std::os::raw::c_char,\n        __new: *const ::std::os::raw::c_char,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 712,
+      "startCol": 5,
+      "endLine": 715,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "puts",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn puts(__s: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;",
+      "startLine": 946,
+      "startCol": 5,
+      "endLine": 946,
+      "endCol": 78,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_get_hash",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn url_get_hash(url: *const ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char;",
+      "startLine": 1074,
+      "startCol": 5,
+      "endLine": 1074,
+      "endCol": 92,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_get_port",
+      "filename": "src/main.rs",
+      "signature": "pub unsafe extern \"C\" fn url_get_port(url: *const c_char) -> *mut c_char",
+      "startLine": 426,
+      "startCol": 1,
+      "endLine": 449,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "url_get_port_rust"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "null_mut"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "calloc",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn calloc(\n        __nmemb: ::std::os::raw::c_ulong,\n        __size: ::std::os::raw::c_ulong,\n    ) -> *mut ::std::os::raw::c_void;",
+      "startLine": 325,
+      "startCol": 5,
+      "endLine": 328,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "vsnprintf",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vsnprintf(\n        __s: *mut ::std::os::raw::c_char,\n        __maxlen: ::std::os::raw::c_ulong,\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 815,
+      "startCol": 5,
+      "endLine": 820,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_is_protocol_rust",
+      "filename": "src/main.rs",
+      "signature": "fn url_is_protocol_rust(str: &str, url_schemes: &[&str]) -> bool",
+      "startLine": 695,
+      "startCol": 1,
+      "endLine": 697,
+      "endCol": 2,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "rand",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn rand() -> ::std::os::raw::c_int;",
+      "startLine": 313,
+      "startCol": 5,
+      "endLine": 313,
+      "endCol": 44,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "scanf",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn scanf(__format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;",
+      "startLine": 832,
+      "startCol": 5,
+      "endLine": 832,
+      "endCol": 89,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strtoll",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strtoll(\n        __nptr: *const ::std::os::raw::c_char,\n        __endptr: *mut *mut ::std::os::raw::c_char,\n        __base: ::std::os::raw::c_int,\n    ) -> ::std::os::raw::c_longlong;",
+      "startLine": 297,
+      "startCol": 5,
+      "endLine": 301,
+      "endCol": 37,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "scanf1",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn scanf1(__format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;",
+      "startLine": 852,
+      "startCol": 5,
+      "endLine": 852,
+      "endCol": 90,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "clearerr",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn clearerr(__stream: *mut FILE);",
+      "startLine": 996,
+      "startCol": 5,
+      "endLine": 996,
+      "endCol": 42,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fscanf",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fscanf(\n        __stream: *mut FILE,\n        __format: *const ::std::os::raw::c_char,\n        ...\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 824,
+      "startCol": 5,
+      "endLine": 828,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "scan_decimal_number_rust",
+      "filename": "src/main.rs",
+      "signature": "fn scan_decimal_number_rust(s: &str) -> Option<usize>",
+      "startLine": 316,
+      "startCol": 1,
+      "endLine": 326,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "Some"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "printf",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn printf(__format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;",
+      "startLine": 771,
+      "startCol": 5,
+      "endLine": 771,
+      "endCol": 90,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "perror",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn perror(__s: *const ::std::os::raw::c_char);",
+      "startLine": 1008,
+      "startCol": 5,
+      "endLine": 1008,
+      "endCol": 55,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_get_protocol",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn url_get_protocol(url: *const ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char;",
+      "startLine": 1063,
+      "startCol": 5,
+      "endLine": 1063,
+      "endCol": 96,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "test10_rust",
+      "filename": "src/main.rs",
+      "signature": "fn test10_rust()",
+      "startLine": 748,
+      "startCol": 1,
+      "endLine": 911,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "url_get_hostname"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "url_get_userinfo"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "url_get_query_value"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_get_port"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_parse"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "url_get_protocol"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_data_inspect"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_free"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_get_path"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "url_get_query_value"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_get_query_value"
+        },
+        {
+          "name": "new_const"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "sprintf",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn sprintf(\n        __s: *mut ::std::os::raw::c_char,\n        __format: *const ::std::os::raw::c_char,\n        ...\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 775,
+      "startCol": 5,
+      "endLine": 779,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_get_query_value",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn url_get_query_value(\n        url: *const url_data_t,\n        key: *const ::std::os::raw::c_char,\n    ) -> *const ::std::os::raw::c_char;",
+      "startLine": 1067,
+      "startCol": 5,
+      "endLine": 1070,
+      "endCol": 40,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "putc",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn putc(__c: ::std::os::raw::c_int, __stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 926,
+      "startCol": 5,
+      "endLine": 926,
+      "endCol": 91,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_get_userinfo_rust",
+      "filename": "src/main.rs",
+      "signature": "fn url_get_userinfo_rust(url: &str) -> Option<String>",
+      "startLine": 581,
+      "startCol": 1,
+      "endLine": 609,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "branch"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "url_free_rust"
+        },
+        {
+          "name": "strdup_rust"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "from_residual"
+        },
+        {
+          "name": "url_parse"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "main_0_rust",
+      "filename": "src/main.rs",
+      "signature": "fn main_0_rust() -> i32",
+      "startLine": 1893,
+      "startCol": 1,
+      "endLine": 1918,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "run_test_rust"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "new_display"
+        },
+        {
+          "name": "_print"
+        },
+        {
+          "name": "args"
+        },
+        {
+          "name": "exit"
+        },
+        {
+          "name": "exit"
+        },
+        {
+          "name": "new_v1"
+        },
+        {
+          "name": "exit"
+        },
+        {
+          "name": "new_v1"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "quick_exit",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn quick_exit(__status: ::std::os::raw::c_int) -> !;",
+      "startLine": 365,
+      "startCol": 5,
+      "endLine": 365,
+      "endCol": 61,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "free",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn free(__ptr: *mut ::std::os::raw::c_void);",
+      "startLine": 339,
+      "startCol": 5,
+      "endLine": 339,
+      "endCol": 53,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_is_ssh",
+      "filename": "src/main.rs",
+      "signature": "pub unsafe extern \"C\" fn url_is_ssh(str: *const c_char) -> c_int",
+      "startLine": 351,
+      "startCol": 1,
+      "endLine": 366,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "url_is_ssh_rust"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "decode_percent",
+      "filename": "src/main.rs",
+      "signature": "pub unsafe extern \"C\" fn decode_percent(s: *mut c_char) -> *mut c_char",
+      "startLine": 77,
+      "startCol": 1,
+      "endLine": 96,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "decode_percent_rust"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "from_raw_parts_mut"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "fwrite",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fwrite(\n        __ptr: *const ::std::os::raw::c_void,\n        __size: ::std::os::raw::c_ulong,\n        __n: ::std::os::raw::c_ulong,\n        __s: *mut FILE,\n    ) -> ::std::os::raw::c_ulong;",
+      "startLine": 963,
+      "startCol": 5,
+      "endLine": 968,
+      "endCol": 34,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_is_ssh_rust",
+      "filename": "src/main.rs",
+      "signature": "fn url_is_ssh_rust(str: &str) -> bool",
+      "startLine": 347,
+      "startCol": 1,
+      "endLine": 349,
+      "endCol": 2,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "strstr",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strstr(\n        __haystack: *const ::std::os::raw::c_char,\n        __needle: *const ::std::os::raw::c_char,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 166,
+      "startCol": 5,
+      "endLine": 169,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "rewind",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn rewind(__stream: *mut FILE);",
+      "startLine": 984,
+      "startCol": 5,
+      "endLine": 984,
+      "endCol": 40,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_is_protocol",
+      "filename": "src/main.rs",
+      "signature": "pub unsafe extern \"C\" fn url_is_protocol(str: *const c_char) -> c_int",
+      "startLine": 699,
+      "startCol": 1,
+      "endLine": 746,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "url_is_protocol_rust"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "test2_rust",
+      "filename": "src/main.rs",
+      "signature": "fn test2_rust()",
+      "startLine": 1689,
+      "startCol": 1,
+      "endLine": 1837,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "strcmp"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "url_get_userinfo"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "strcmp"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "strcmp"
+        },
+        {
+          "name": "url_parse"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "url_get_path"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "url_get_hostname"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "url_data_inspect"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "strcmp"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "url_free"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "url_get_protocol"
+        },
+        {
+          "name": "new"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "test5_rust",
+      "filename": "src/main.rs",
+      "signature": "fn test5_rust()",
+      "startLine": 1325,
+      "startCol": 1,
+      "endLine": 1416,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "url_get_query_value"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "strcmp"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "strcmp"
+        },
+        {
+          "name": "strcmp"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "strcmp"
+        },
+        {
+          "name": "url_get_path"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "url_data_inspect"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_get_hostname"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_get_query_value"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_get_protocol"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "strcmp"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "url_parse"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "strcmp"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_free"
+        },
+        {
+          "name": "url_get_query_value"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "abort",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn abort() -> !;",
+      "startLine": 347,
+      "startCol": 5,
+      "endLine": 347,
+      "endCol": 25,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "setvbuf",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn setvbuf(\n        __stream: *mut FILE,\n        __buf: *mut ::std::os::raw::c_char,\n        __modes: ::std::os::raw::c_int,\n        __n: usize,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 754,
+      "startCol": 5,
+      "endLine": 759,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "mbstowcs",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn mbstowcs(__pwcs: *mut wchar_t, __s: *const ::std::os::raw::c_char, __n: usize) -> usize;",
+      "startLine": 449,
+      "startCol": 5,
+      "endLine": 449,
+      "endCol": 100,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_get_path",
+      "filename": "src/main.rs",
+      "signature": "pub unsafe extern \"C\" fn url_get_path(url: *const c_char) -> *mut c_char",
+      "startLine": 489,
+      "startCol": 1,
+      "endLine": 512,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "url_get_path_rust"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "from_ptr"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "at_quick_exit",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn at_quick_exit(\n        __func: ::std::option::Option<unsafe extern \"C\" fn()>,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 355,
+      "startCol": 5,
+      "endLine": 357,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strxfrm",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strxfrm(\n        __dest: *mut ::std::os::raw::c_char,\n        __src: *const ::std::os::raw::c_char,\n        __n: ::std::os::raw::c_ulong,\n    ) -> ::std::os::raw::c_ulong;",
+      "startLine": 123,
+      "startCol": 5,
+      "endLine": 127,
+      "endCol": 34,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "exit",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn exit(__status: ::std::os::raw::c_int) -> !;",
+      "startLine": 361,
+      "startCol": 5,
+      "endLine": 361,
+      "endCol": 55,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "vsscanf1",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vsscanf1(\n        __s: *const ::std::os::raw::c_char,\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 902,
+      "startCol": 5,
+      "endLine": 906,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strtol",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strtol(\n        __nptr: *const ::std::os::raw::c_char,\n        __endptr: *mut *mut ::std::os::raw::c_char,\n        __base: ::std::os::raw::c_int,\n    ) -> ::std::os::raw::c_long;",
+      "startLine": 281,
+      "startCol": 5,
+      "endLine": 285,
+      "endCol": 33,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "test8_rust",
+      "filename": "src/main.rs",
+      "signature": "fn test8_rust()",
+      "startLine": 1066,
+      "startCol": 1,
+      "endLine": 1155,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "free"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "url_get_query_value"
+        },
+        {
+          "name": "url_get_query_value"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_get_hostname"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_get_port"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_data_inspect"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_parse"
+        },
+        {
+          "name": "url_get_path"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_get_protocol"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "url_free"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "from_ptr"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "qsort",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn qsort(\n        __base: *mut ::std::os::raw::c_void,\n        __nmemb: usize,\n        __size: usize,\n        __compar: __compar_fn_t,\n    );",
+      "startLine": 397,
+      "startCol": 5,
+      "endLine": 402,
+      "endCol": 7,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fclose",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fclose(__stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 727,
+      "startCol": 5,
+      "endLine": 727,
+      "endCol": 65,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "vfprintf",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vfprintf(\n        __s: *mut FILE,\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 783,
+      "startCol": 5,
+      "endLine": 787,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "ungetc",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn ungetc(__c: ::std::os::raw::c_int, __stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 950,
+      "startCol": 5,
+      "endLine": 950,
+      "endCol": 93,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "vsprintf",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vsprintf(\n        __s: *mut ::std::os::raw::c_char,\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 798,
+      "startCol": 5,
+      "endLine": 802,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "ferror",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn ferror(__stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 1004,
+      "startCol": 5,
+      "endLine": 1004,
+      "endCol": 65,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strcoll",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strcoll(\n        __s1: *const ::std::os::raw::c_char,\n        __s2: *const ::std::os::raw::c_char,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 116,
+      "startCol": 5,
+      "endLine": 119,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_free_rust",
+      "filename": "src/main.rs",
+      "signature": "fn url_free_rust(data_ptr: *mut url_data_t)",
+      "startLine": 102,
+      "startCol": 1,
+      "endLine": 126,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "free"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "free"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "url_get_fragment",
+      "filename": "src/main.rs",
+      "signature": "pub unsafe extern \"C\" fn url_get_fragment(url: *const c_char) -> *mut c_char",
+      "startLine": 676,
+      "startCol": 1,
+      "endLine": 693,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "url_get_fragment_rust"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "null_mut"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "atoll",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn atoll(__nptr: *const ::std::os::raw::c_char) -> ::std::os::raw::c_longlong;",
+      "startLine": 256,
+      "startCol": 5,
+      "endLine": 256,
+      "endCol": 87,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "__ctype_get_mb_cur_max",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn __ctype_get_mb_cur_max() -> usize;",
+      "startLine": 240,
+      "startCol": 5,
+      "endLine": 240,
+      "endCol": 46,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "memcpy",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn memcpy(\n        __dest: *mut ::std::os::raw::c_void,\n        __src: *const ::std::os::raw::c_void,\n        __n: ::std::os::raw::c_ulong,\n    ) -> *mut ::std::os::raw::c_void;",
+      "startLine": 31,
+      "startCol": 5,
+      "endLine": 35,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strcpy",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strcpy(\n        __dest: *mut ::std::os::raw::c_char,\n        __src: *const ::std::os::raw::c_char,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 71,
+      "startCol": 5,
+      "endLine": 74,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "bsearch",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn bsearch(\n        __key: *const ::std::os::raw::c_void,\n        __base: *const ::std::os::raw::c_void,\n        __nmemb: usize,\n        __size: usize,\n        __compar: __compar_fn_t,\n    ) -> *mut ::std::os::raw::c_void;",
+      "startLine": 387,
+      "startCol": 5,
+      "endLine": 393,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "vprintf",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vprintf(\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 791,
+      "startCol": 5,
+      "endLine": 794,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "getenv",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn getenv(__name: *const ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char;",
+      "startLine": 373,
+      "startCol": 5,
+      "endLine": 373,
+      "endCol": 89,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "test7_rust",
+      "filename": "src/main.rs",
+      "signature": "fn test7_rust()",
+      "startLine": 1158,
+      "startCol": 1,
+      "endLine": 1223,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_get_port"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "url_get_userinfo"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "url_data_inspect"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "url_get_protocol"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_get_hostname"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "url_free"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "Some"
+        },
+        {
+          "name": "assert_failed"
+        },
+        {
+          "name": "url_parse"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "new_const"
+        },
+        {
+          "name": "panic_fmt"
+        },
+        {
+          "name": "url_get_path"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "unhex_rust",
+      "filename": "src/main.rs",
+      "signature": "fn unhex_rust(c: char) -> i32",
+      "startLine": 21,
+      "startCol": 1,
+      "endLine": 28,
+      "endCol": 2,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "url_get_hostname",
+      "filename": "src/main.rs",
+      "signature": "pub unsafe extern \"C\" fn url_get_hostname(url: *const c_char) -> *mut c_char",
+      "startLine": 548,
+      "startCol": 1,
+      "endLine": 570,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "url_get_hostname_rust"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "null_mut"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "setbuf",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn setbuf(__stream: *mut FILE, __buf: *mut ::std::os::raw::c_char);",
+      "startLine": 750,
+      "startCol": 5,
+      "endLine": 750,
+      "endCol": 76,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fputs",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fputs(__s: *const ::std::os::raw::c_char, __stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 942,
+      "startCol": 5,
+      "endLine": 942,
+      "endCol": 100,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "vfscanf1",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vfscanf1(\n        __s: *mut FILE,\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 887,
+      "startCol": 5,
+      "endLine": 891,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "vsscanf",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn vsscanf(\n        __s: *const ::std::os::raw::c_char,\n        __format: *const ::std::os::raw::c_char,\n        __arg: *mut __va_list_tag,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 879,
+      "startCol": 5,
+      "endLine": 883,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "__va_list_tag"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "_Exit",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn _Exit(__status: ::std::os::raw::c_int) -> !;",
+      "startLine": 369,
+      "startCol": 5,
+      "endLine": 369,
+      "endCol": 56,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "abs",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn abs(__x: ::std::os::raw::c_int) -> ::std::os::raw::c_int;",
+      "startLine": 406,
+      "startCol": 5,
+      "endLine": 406,
+      "endCol": 69,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "remove",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn remove(__filename: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;",
+      "startLine": 708,
+      "startCol": 5,
+      "endLine": 708,
+      "endCol": 87,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fscanf1",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fscanf1(\n        __stream: *mut FILE,\n        __format: *const ::std::os::raw::c_char,\n        ...\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 844,
+      "startCol": 5,
+      "endLine": 848,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "main_0",
+      "filename": "src/main.rs",
+      "signature": "pub unsafe extern \"C\" fn main_0(argc: c_int, argv: *mut *mut c_char) -> c_int",
+      "startLine": 1920,
+      "startCol": 1,
+      "endLine": 1923,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "main_0_rust"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "test9_rust",
+      "filename": "src/main.rs",
+      "signature": "fn test9_rust()",
+      "startLine": 914,
+      "startCol": 1,
+      "endLine": 1063,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "url_get_hostname"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "url_data_inspect"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "url_free"
+        },
+        {
+          "name": "url_get_protocol"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "url_get_query_value"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "url_get_path"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "url_parse"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "__assert_fail"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "new"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "strcmp",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strcmp(\n        __s1: *const ::std::os::raw::c_char,\n        __s2: *const ::std::os::raw::c_char,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 101,
+      "startCol": 5,
+      "endLine": 104,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fputc",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fputc(__c: ::std::os::raw::c_int, __stream: *mut FILE) -> ::std::os::raw::c_int;",
+      "startLine": 922,
+      "startCol": 5,
+      "endLine": 922,
+      "endCol": 92,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strcspn",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strcspn(\n        __s: *const ::std::os::raw::c_char,\n        __reject: *const ::std::os::raw::c_char,\n    ) -> ::std::os::raw::c_ulong;",
+      "startLine": 145,
+      "startCol": 5,
+      "endLine": 148,
+      "endCol": 34,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "hex_to_int",
+      "filename": "src/main.rs",
+      "signature": "fn hex_to_int(c: char) -> i32",
+      "startLine": 228,
+      "startCol": 1,
+      "endLine": 235,
+      "endCol": 2,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "memchr",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn memchr(\n        __s: *const ::std::os::raw::c_void,\n        __c: ::std::os::raw::c_int,\n        __n: ::std::os::raw::c_ulong,\n    ) -> *mut ::std::os::raw::c_void;",
+      "startLine": 63,
+      "startCol": 5,
+      "endLine": 67,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "scan_decimal_number",
+      "filename": "src/main.rs",
+      "signature": "pub unsafe extern \"C\" fn scan_decimal_number(start: *mut c_char) -> *mut c_char",
+      "startLine": 328,
+      "startCol": 1,
+      "endLine": 345,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "scan_decimal_number_rust"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "null_mut"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "__strtok_r",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn __strtok_r(\n        __s: *mut ::std::os::raw::c_char,\n        __delim: *const ::std::os::raw::c_char,\n        __save_ptr: *mut *mut ::std::os::raw::c_char,\n    ) -> *mut ::std::os::raw::c_char;",
+      "startLine": 180,
+      "startCol": 5,
+      "endLine": 184,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "decode_percent_bytes",
+      "filename": "src/main.rs",
+      "signature": "fn decode_percent_bytes(input: &[u8]) -> Option<String>",
+      "startLine": 196,
+      "startCol": 1,
+      "endLine": 225,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "hex_to_int"
+        },
+        {
+          "name": "from_utf8"
+        },
+        {
+          "name": "with_capacity"
+        },
+        {
+          "name": "hex_to_int"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "malloc",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn malloc(__size: ::std::os::raw::c_ulong) -> *mut ::std::os::raw::c_void;",
+      "startLine": 321,
+      "startCol": 5,
+      "endLine": 321,
+      "endCol": 83,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "mbtowc",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn mbtowc(\n        __pwc: *mut wchar_t,\n        __s: *const ::std::os::raw::c_char,\n        __n: usize,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 437,
+      "startCol": 5,
+      "endLine": 441,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "sscanf1",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn sscanf1(\n        __s: *const ::std::os::raw::c_char,\n        __format: *const ::std::os::raw::c_char,\n        ...\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 856,
+      "startCol": 5,
+      "endLine": 860,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_get_port_rust",
+      "filename": "src/main.rs",
+      "signature": "fn url_get_port_rust(url: &str) -> Option<String>",
+      "startLine": 393,
+      "startCol": 1,
+      "endLine": 424,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "url_parse"
+        },
+        {
+          "name": "from_residual"
+        },
+        {
+          "name": "branch"
+        },
+        {
+          "name": "url_free_rust"
+        },
+        {
+          "name": "branch"
+        },
+        {
+          "name": "strdup_rust"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "from_residual"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "getchar",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn getchar() -> ::std::os::raw::c_int;",
+      "startLine": 918,
+      "startCol": 5,
+      "endLine": 918,
+      "endCol": 47,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strtoull",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strtoull(\n        __nptr: *const ::std::os::raw::c_char,\n        __endptr: *mut *mut ::std::os::raw::c_char,\n        __base: ::std::os::raw::c_int,\n    ) -> ::std::os::raw::c_ulonglong;",
+      "startLine": 305,
+      "startCol": 5,
+      "endLine": 309,
+      "endCol": 38,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_get_scheme",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn url_get_scheme(url: *const ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char;",
+      "startLine": 1059,
+      "startCol": 5,
+      "endLine": 1059,
+      "endCol": 94,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strtoul",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strtoul(\n        __nptr: *const ::std::os::raw::c_char,\n        __endptr: *mut *mut ::std::os::raw::c_char,\n        __base: ::std::os::raw::c_int,\n    ) -> ::std::os::raw::c_ulong;",
+      "startLine": 289,
+      "startCol": 5,
+      "endLine": 293,
+      "endCol": 34,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_get_path_rust",
+      "filename": "src/main.rs",
+      "signature": "fn url_get_path_rust(url: &str) -> Option<String>",
+      "startLine": 458,
+      "startCol": 1,
+      "endLine": 487,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "strdup_rust"
+        },
+        {
+          "name": "url_free_rust"
+        },
+        {
+          "name": "url_parse"
+        },
+        {
+          "name": "from_ptr"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "parse_query_string",
+      "filename": "src/main.rs",
+      "signature": "pub unsafe extern \"C\" fn parse_query_string(\n    begin: *mut c_char,\n    end: *mut c_char,\n) -> *mut libc::c_void",
+      "startLine": 237,
+      "startCol": 1,
+      "endLine": 305,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "calloc"
+        },
+        {
+          "name": "parse_query_string_rust"
+        },
+        {
+          "name": "next"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "from_raw_parts"
+        },
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "size_of"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "next"
+        },
+        {
+          "name": "new"
+        },
+        {
+          "name": "into_iter"
+        },
+        {
+          "name": "free"
+        },
+        {
+          "name": "next"
+        }
+      ],
+      "globals": [],
+      "structs": [
+        {
+          "name": "C_url_key_value"
+        }
+      ],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "div",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn div(__numer: ::std::os::raw::c_int, __denom: ::std::os::raw::c_int) -> div_t;",
+      "startLine": 418,
+      "startCol": 5,
+      "endLine": 418,
+      "endCol": 89,
+      "functions": [],
+      "globals": [],
+      "structs": [
+        {
+          "name": "div_t"
+        }
+      ],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fgetpos",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fgetpos(__stream: *mut FILE, __pos: *mut fpos_t) -> ::std::os::raw::c_int;",
+      "startLine": 988,
+      "startCol": 5,
+      "endLine": 988,
+      "endCol": 86,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_data_inspect",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn url_data_inspect(data: *const url_data_t);",
+      "startLine": 1082,
+      "startCol": 5,
+      "endLine": 1082,
+      "endCol": 54,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "strspn",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn strspn(\n        __s: *const ::std::os::raw::c_char,\n        __accept: *const ::std::os::raw::c_char,\n    ) -> ::std::os::raw::c_ulong;",
+      "startLine": 152,
+      "startCol": 5,
+      "endLine": 155,
+      "endCol": 34,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "url_get_userinfo",
+      "filename": "src/main.rs",
+      "signature": "pub unsafe extern \"C\" fn url_get_userinfo(url: *const c_char) -> *mut c_char",
+      "startLine": 611,
+      "startCol": 1,
+      "endLine": 634,
+      "endCol": 2,
+      "functions": [
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "url_get_userinfo_rust"
+        },
+        {
+          "name": "from_ptr"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "null_mut"
+        },
+        {
+          "name": "new"
+        }
+      ],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": false
+    },
+    {
+      "name": "atoi",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn atoi(__nptr: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;",
+      "startLine": 248,
+      "startCol": 5,
+      "endLine": 248,
+      "endCol": 81,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "ftell",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn ftell(__stream: *mut FILE) -> ::std::os::raw::c_long;",
+      "startLine": 980,
+      "startCol": 5,
+      "endLine": 980,
+      "endCol": 65,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "labs",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn labs(__x: ::std::os::raw::c_long) -> ::std::os::raw::c_long;",
+      "startLine": 410,
+      "startCol": 5,
+      "endLine": 410,
+      "endCol": 72,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "memcmp",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn memcmp(\n        __s1: *const ::std::os::raw::c_void,\n        __s2: *const ::std::os::raw::c_void,\n        __n: ::std::os::raw::c_ulong,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 55,
+      "startCol": 5,
+      "endLine": 59,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    },
+    {
+      "name": "fseek",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "signature": "pub fn fseek(\n        __stream: *mut FILE,\n        __off: ::std::os::raw::c_long,\n        __whence: ::std::os::raw::c_int,\n    ) -> ::std::os::raw::c_int;",
+      "startLine": 972,
+      "startCol": 5,
+      "endLine": 976,
+      "endCol": 32,
+      "functions": [],
+      "globals": [],
+      "structs": [],
+      "enums": [],
+      "foreign": true
+    }
+  ],
+  "globals": [
+    {
+      "name": "_",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 219,
+      "startCol": 1,
+      "endLine": 224,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1038,
+      "startCol": 1,
+      "endLine": 1049,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "stdin",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 696,
+      "startCol": 5,
+      "endLine": 696,
+      "endCol": 37,
+      "foreign": true
+    },
+    {
+      "name": "stdout",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 700,
+      "startCol": 5,
+      "endLine": 700,
+      "endCol": 38,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 568,
+      "startCol": 1,
+      "endLine": 573,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1094,
+      "startCol": 1,
+      "endLine": 1105,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 232,
+      "startCol": 1,
+      "endLine": 237,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 497,
+      "startCol": 1,
+      "endLine": 501,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 582,
+      "startCol": 1,
+      "endLine": 588,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "stderr",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 704,
+      "startCol": 5,
+      "endLine": 704,
+      "endCol": 38,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 642,
+      "startCol": 1,
+      "endLine": 692,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 553,
+      "startCol": 1,
+      "endLine": 560,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 206,
+      "startCol": 1,
+      "endLine": 211,
+      "endCol": 3,
+      "foreign": true
+    },
+    {
+      "name": "_",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 542,
+      "startCol": 1,
+      "endLine": 551,
+      "endCol": 3,
+      "foreign": true
+    }
+  ],
+  "structs": [
+    {
+      "name": "DataGuard",
+      "filename": "src/main.rs",
+      "startLine": 522,
+      "startCol": 5,
+      "endLine": 522,
+      "endCol": 39,
+      "foreign": false
+    },
+    {
+      "name": "__va_list_tag",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1087,
+      "startCol": 1,
+      "endLine": 1092,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "url_data",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1027,
+      "startCol": 1,
+      "endLine": 1036,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "__fsid_t",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 493,
+      "startCol": 1,
+      "endLine": 495,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "_IO_codecvt",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 599,
+      "startCol": 1,
+      "endLine": 601,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "C_url_key_value",
+      "filename": "src/main.rs",
+      "startLine": 309,
+      "startCol": 1,
+      "endLine": 312,
+      "endCol": 2,
+      "foreign": false
+    },
+    {
+      "name": "__mbstate_t__bindgen_ty_1",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 537,
+      "startCol": 1,
+      "endLine": 540,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "_IO_FILE",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 610,
+      "startCol": 1,
+      "endLine": 640,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "ldiv_t",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 214,
+      "startCol": 1,
+      "endLine": 217,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "lldiv_t",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 227,
+      "startCol": 1,
+      "endLine": 230,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "url_key_value",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 1021,
+      "startCol": 1,
+      "endLine": 1023,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "_G_fpos64_t",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 577,
+      "startCol": 1,
+      "endLine": 580,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "url_key_value_rust",
+      "filename": "src/main.rs",
+      "startLine": 31,
+      "startCol": 1,
+      "endLine": 34,
+      "endCol": 2,
+      "foreign": false
+    },
+    {
+      "name": "div_t",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 201,
+      "startCol": 1,
+      "endLine": 204,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "__mbstate_t",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 531,
+      "startCol": 1,
+      "endLine": 534,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "_IO_wide_data",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 604,
+      "startCol": 1,
+      "endLine": 606,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "_IO_marker",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 594,
+      "startCol": 1,
+      "endLine": 596,
+      "endCol": 2,
+      "foreign": true
+    },
+    {
+      "name": "_G_fpos_t",
+      "filename": "/app/output/urlparser_aHEzGcWpYk/target/x86_64-unknown-linux-gnu/debug/build/foo-cbb2e67083df2180/out/bindings.rs",
+      "startLine": 563,
+      "startCol": 1,
+      "endLine": 566,
+      "endCol": 2,
+      "foreign": true
+    }
+  ],
+  "enums": []
+}

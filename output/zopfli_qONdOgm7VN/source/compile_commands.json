@@ -1,0 +1,22 @@
+[
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-W",
+            "-Wall",
+            "-Wextra",
+            "-ansi",
+            "-O3",
+            "-Wno-unused-function",
+            "-Wno-pointer-sign",
+            "-fPIC",
+            "-Wall",
+            "-Wextra",
+            "-std=c11",
+            "zopfli.c"
+        ],
+        "directory": "/app/output/zopfli_qONdOgm7VN/source",
+        "file": "zopfli.c"
+    }
+]

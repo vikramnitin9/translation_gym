@@ -1,0 +1,1034 @@
+{
+    "enums": [
+        {
+            "endCol": 3,
+            "endLine": 3664,
+            "filename": "zopfli.c",
+            "name": "",
+            "startCol": 1,
+            "startLine": 3647
+        }
+    ],
+    "files": [],
+    "functions": [
+        {
+            "argNames": [
+                "__nptr"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 1001,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [],
+            "globals": [],
+            "name": "atoi",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "extern __inline __attribute__ ( ( __gnu_inline__ ) ) int __attribute__ ( ( __nothrow__ ) ) atoi ( const char * __nptr ) ",
+            "startCol": 1,
+            "startLine": 997,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "__nptr"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 1006,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [],
+            "globals": [],
+            "name": "atol",
+            "num_args": 1,
+            "returnType": "long",
+            "signature": "extern __inline __attribute__ ( ( __gnu_inline__ ) ) long int __attribute__ ( ( __nothrow__ ) ) atol ( const char * __nptr ) ",
+            "startCol": 1,
+            "startLine": 1002,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "__nptr"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 1013,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [],
+            "globals": [],
+            "name": "atoll",
+            "num_args": 1,
+            "returnType": "long long",
+            "signature": "extern __inline __attribute__ ( ( __gnu_inline__ ) ) long long int __attribute__ ( ( __nothrow__ ) ) atoll ( const char * __nptr ) ",
+            "startCol": 15,
+            "startLine": 1009,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "__key",
+                "__base",
+                "__nmemb",
+                "__size",
+                "__compar"
+            ],
+            "argTypes": [
+                "const void *",
+                "const void *",
+                "size_t",
+                "size_t",
+                "__compar_fn_t"
+            ],
+            "endCol": 1,
+            "endLine": 1133,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [],
+            "globals": [],
+            "name": "bsearch",
+            "num_args": 5,
+            "returnType": "void *",
+            "signature": "extern __inline __attribute__ ( ( __gnu_inline__ ) ) void * bsearch ( const void * __key , const void * __base , size_t __nmemb , size_t __size , __compar_fn_t __compar ) ",
+            "startCol": 1,
+            "startLine": 1109,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "__nptr"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 1216,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [],
+            "globals": [],
+            "name": "atof",
+            "num_args": 1,
+            "returnType": "double",
+            "signature": "extern __inline __attribute__ ( ( __gnu_inline__ ) ) double __attribute__ ( ( __nothrow__ ) ) atof ( const char * __nptr ) ",
+            "startCol": 1,
+            "startLine": 1212,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "__fmt",
+                "__arg"
+            ],
+            "argTypes": [
+                "const char *restrict",
+                "struct __va_list_tag *"
+            ],
+            "endCol": 1,
+            "endLine": 2490,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "stdout"
+                }
+            ],
+            "name": "vprintf",
+            "num_args": 2,
+            "returnType": "int",
+            "signature": "extern __inline __attribute__ ( ( __gnu_inline__ ) ) int vprintf ( const char * __restrict __fmt , __gnuc_va_list __arg ) ",
+            "startCol": 1,
+            "startLine": 2486,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "__c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 2503,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "stdout"
+                }
+            ],
+            "name": "putchar",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "extern __inline __attribute__ ( ( __gnu_inline__ ) ) int putchar ( int __c ) ",
+            "startCol": 1,
+            "startLine": 2499,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "a",
+                "b"
+            ],
+            "argTypes": [
+                "const void *",
+                "const void *"
+            ],
+            "endCol": 1,
+            "endLine": 4376,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [],
+            "globals": [],
+            "name": "LeafComparator",
+            "num_args": 2,
+            "returnType": "int",
+            "signature": "static int LeafComparator ( const void * a , const void * b ) ",
+            "startCol": 1,
+            "startLine": 4373,
+            "structs": [
+                {
+                    "name": "Node"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "chain",
+                "leaves",
+                "bitlengths"
+            ],
+            "argTypes": [
+                "Node *",
+                "Node *",
+                "unsigned int *"
+            ],
+            "endCol": 1,
+            "endLine": 4407,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [],
+            "globals": [],
+            "name": "ExtractBitLengths",
+            "num_args": 3,
+            "returnType": "void",
+            "signature": "static void ExtractBitLengths ( Node * chain , Node * leaves , unsigned * bitlengths ) ",
+            "startCol": 1,
+            "startLine": 4383,
+            "structs": [
+                {
+                    "name": "Node"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "frequencies",
+                "n",
+                "maxbits",
+                "bitlengths"
+            ],
+            "argTypes": [
+                "const size_t *",
+                "int",
+                "int",
+                "unsigned int *"
+            ],
+            "endCol": 1,
+            "endLine": 4564,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [
+                {
+                    "name": "malloc"
+                },
+                {
+                    "name": "free"
+                },
+                {
+                    "name": "qsort"
+                },
+                {
+                    "name": "InitLists"
+                },
+                {
+                    "name": "BoundaryPM"
+                },
+                {
+                    "name": "BoundaryPMFinal"
+                },
+                {
+                    "name": "ExtractBitLengths"
+                }
+            ],
+            "globals": [],
+            "name": "ZopfliLengthLimitedCodeLengths",
+            "num_args": 4,
+            "returnType": "int",
+            "signature": "int ZopfliLengthLimitedCodeLengths ( const size_t * frequencies , int n , int maxbits , unsigned * bitlengths ) ",
+            "startCol": 1,
+            "startLine": 4461,
+            "structs": [
+                {
+                    "name": "Node"
+                },
+                {
+                    "name": "NodePool"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "i",
+                "context"
+            ],
+            "argTypes": [
+                "size_t",
+                "void *"
+            ],
+            "endCol": 1,
+            "endLine": 4728,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [],
+            "globals": [],
+            "name": "SplitCost",
+            "num_args": 2,
+            "returnType": "double",
+            "signature": "static double SplitCost ( size_t i , void * context ) ",
+            "startCol": 1,
+            "startLine": 4724,
+            "structs": [
+                {
+                    "name": "SplitCostContext"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "litlen",
+                "dist",
+                "context"
+            ],
+            "argTypes": [
+                "unsigned int",
+                "unsigned int",
+                "void *"
+            ],
+            "endCol": 1,
+            "endLine": 4761,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [
+                {
+                    "name": "ZopfliGetLengthSymbol"
+                },
+                {
+                    "name": "ZopfliGetLengthExtraBits"
+                },
+                {
+                    "name": "ZopfliGetDistSymbol"
+                },
+                {
+                    "name": "ZopfliGetDistExtraBits"
+                }
+            ],
+            "globals": [],
+            "name": "GetCostStat",
+            "num_args": 3,
+            "returnType": "double",
+            "signature": "static double GetCostStat ( unsigned litlen , unsigned dist , void * context ) ",
+            "startCol": 1,
+            "startLine": 4746,
+            "structs": [
+                {
+                    "name": "SymbolStats"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "litlen",
+                "dist",
+                "unused"
+            ],
+            "argTypes": [
+                "unsigned int",
+                "unsigned int",
+                "void *"
+            ],
+            "endCol": 1,
+            "endLine": 4790,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [
+                {
+                    "name": "ZopfliGetDistExtraBits"
+                },
+                {
+                    "name": "ZopfliGetLengthExtraBits"
+                },
+                {
+                    "name": "ZopfliGetLengthSymbol"
+                }
+            ],
+            "globals": [],
+            "name": "GetCostFixed",
+            "num_args": 3,
+            "returnType": "double",
+            "signature": "static double GetCostFixed ( unsigned litlen , unsigned dist , void * unused ) ",
+            "startCol": 1,
+            "startLine": 4767,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "s",
+                "h",
+                "array",
+                "pos",
+                "size",
+                "limit",
+                "sublen",
+                "distance",
+                "length"
+            ],
+            "argTypes": [
+                "ZopfliBlockState *",
+                "const ZopfliHash *",
+                "const unsigned char *",
+                "size_t",
+                "size_t",
+                "size_t",
+                "unsigned short *",
+                "unsigned short *",
+                "unsigned short *"
+            ],
+            "endCol": 1,
+            "endLine": 5065,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [
+                {
+                    "name": "TryGetFromLongestMatchCache"
+                },
+                {
+                    "name": "__assert_fail"
+                },
+                {
+                    "name": "GetMatch"
+                },
+                {
+                    "name": "StoreInLongestMatchCache"
+                }
+            ],
+            "globals": [],
+            "name": "ZopfliFindLongestMatch",
+            "num_args": 9,
+            "returnType": "void",
+            "signature": "void ZopfliFindLongestMatch ( ZopfliBlockState * s , const ZopfliHash * h , const unsigned char * array , size_t pos , size_t size , size_t limit , unsigned short * sublen , unsigned short * distance , unsigned short * length ) ",
+            "startCol": 1,
+            "startLine": 4928,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "length",
+                "dist",
+                "pos",
+                "store"
+            ],
+            "argTypes": [
+                "unsigned short",
+                "unsigned short",
+                "size_t",
+                "ZopfliLZ77Store *"
+            ],
+            "endCol": 1,
+            "endLine": 5162,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [
+                {
+                    "name": "malloc"
+                },
+                {
+                    "name": "realloc"
+                },
+                {
+                    "name": "__assert_fail"
+                },
+                {
+                    "name": "ZopfliGetLengthSymbol"
+                },
+                {
+                    "name": "ZopfliGetDistSymbol"
+                }
+            ],
+            "globals": [],
+            "name": "ZopfliStoreLitLenDist",
+            "num_args": 4,
+            "returnType": "void",
+            "signature": "void ZopfliStoreLitLenDist ( unsigned short length , unsigned short dist , size_t pos , ZopfliLZ77Store * store ) ",
+            "startCol": 1,
+            "startLine": 5103,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "array",
+                "pos",
+                "end",
+                "h"
+            ],
+            "argTypes": [
+                "const unsigned char *",
+                "size_t",
+                "size_t",
+                "ZopfliHash *"
+            ],
+            "endCol": 1,
+            "endLine": 5201,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [
+                {
+                    "name": "UpdateHashValue"
+                }
+            ],
+            "globals": [],
+            "name": "ZopfliUpdateHash",
+            "num_args": 4,
+            "returnType": "void",
+            "signature": "void ZopfliUpdateHash ( const unsigned char * array , size_t pos , size_t end , ZopfliHash * h ) ",
+            "startCol": 1,
+            "startLine": 5164,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "s",
+                "in",
+                "instart",
+                "inend",
+                "costmodel",
+                "costcontext",
+                "length_array",
+                "h",
+                "costs"
+            ],
+            "argTypes": [
+                "ZopfliBlockState *",
+                "const unsigned char *",
+                "size_t",
+                "size_t",
+                "CostModelFun *",
+                "void *",
+                "unsigned short *",
+                "ZopfliHash *",
+                "float *"
+            ],
+            "endCol": 1,
+            "endLine": 5350,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [
+                {
+                    "name": "GetCostModelMinCost"
+                },
+                {
+                    "name": "ZopfliResetHash"
+                },
+                {
+                    "name": "ZopfliWarmupHash"
+                },
+                {
+                    "name": "ZopfliUpdateHash"
+                },
+                {
+                    "name": "ZopfliFindLongestMatch"
+                },
+                {
+                    "name": "__assert_fail"
+                },
+                {
+                    "name": "zopfli_min"
+                }
+            ],
+            "globals": [],
+            "name": "GetBestLengths",
+            "num_args": 9,
+            "returnType": "double",
+            "signature": "static double GetBestLengths ( ZopfliBlockState * s , const unsigned char * in , size_t instart , size_t inend , CostModelFun * costmodel , void * costcontext , unsigned short * length_array , ZopfliHash * h , float * costs ) ",
+            "startCol": 1,
+            "startLine": 5251,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "s",
+                "in",
+                "instart",
+                "inend",
+                "path",
+                "pathsize",
+                "length_array",
+                "costmodel",
+                "costcontext",
+                "store",
+                "h",
+                "costs"
+            ],
+            "argTypes": [
+                "ZopfliBlockState *",
+                "const unsigned char *",
+                "size_t",
+                "size_t",
+                "unsigned short **",
+                "size_t *",
+                "unsigned short *",
+                "CostModelFun *",
+                "void *",
+                "ZopfliLZ77Store *",
+                "ZopfliHash *",
+                "float *"
+            ],
+            "endCol": 1,
+            "endLine": 5384,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [
+                {
+                    "name": "GetBestLengths"
+                },
+                {
+                    "name": "free"
+                },
+                {
+                    "name": "TraceBackwards"
+                },
+                {
+                    "name": "FollowPath"
+                },
+                {
+                    "name": "__assert_fail"
+                }
+            ],
+            "globals": [],
+            "name": "LZ77OptimalRun",
+            "num_args": 12,
+            "returnType": "double",
+            "signature": "static double LZ77OptimalRun ( ZopfliBlockState * s , const unsigned char * in , size_t instart , size_t inend , unsigned short * * path , size_t * pathsize , unsigned short * length_array , CostModelFun * costmodel , void * costcontext , ZopfliLZ77Store * store , ZopfliHash * h , float * costs ) ",
+            "startCol": 1,
+            "startLine": 5368,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "s",
+                "in",
+                "instart",
+                "inend",
+                "store"
+            ],
+            "argTypes": [
+                "ZopfliBlockState *",
+                "const unsigned char *",
+                "size_t",
+                "size_t",
+                "ZopfliLZ77Store *"
+            ],
+            "endCol": 1,
+            "endLine": 5440,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [
+                {
+                    "name": "malloc"
+                },
+                {
+                    "name": "exit"
+                },
+                {
+                    "name": "ZopfliAllocHash"
+                },
+                {
+                    "name": "LZ77OptimalRun"
+                },
+                {
+                    "name": "free"
+                },
+                {
+                    "name": "ZopfliCleanHash"
+                }
+            ],
+            "globals": [],
+            "name": "ZopfliLZ77OptimalFixed",
+            "num_args": 5,
+            "returnType": "void",
+            "signature": "void ZopfliLZ77OptimalFixed ( ZopfliBlockState * s , const unsigned char * in , size_t instart , size_t inend , ZopfliLZ77Store * store ) ",
+            "startCol": 1,
+            "startLine": 5406,
+            "structs": [
+                {
+                    "name": "ZopfliHash"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "options",
+                "final",
+                "lz77",
+                "lstart",
+                "lend",
+                "expected_data_size",
+                "bp",
+                "out",
+                "outsize"
+            ],
+            "argTypes": [
+                "const ZopfliOptions *",
+                "int",
+                "const ZopfliLZ77Store *",
+                "size_t",
+                "size_t",
+                "size_t",
+                "unsigned char *",
+                "unsigned char **",
+                "size_t *"
+            ],
+            "endCol": 1,
+            "endLine": 5536,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [],
+            "globals": [],
+            "name": "AddLZ77BlockAutoType",
+            "num_args": 9,
+            "returnType": "void",
+            "signature": "static void AddLZ77BlockAutoType ( const ZopfliOptions * options , int final , const ZopfliLZ77Store * lz77 , size_t lstart , size_t lend , size_t expected_data_size , unsigned char * bp , unsigned char * * out , size_t * outsize ) ",
+            "startCol": 1,
+            "startLine": 5472,
+            "structs": [
+                {
+                    "name": "ZopfliBlockState"
+                },
+                {
+                    "name": "ZopfliLZ77Store"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "s",
+                "in",
+                "instart",
+                "inend",
+                "numiterations",
+                "store"
+            ],
+            "argTypes": [
+                "ZopfliBlockState *",
+                "const unsigned char *",
+                "size_t",
+                "size_t",
+                "int",
+                "ZopfliLZ77Store *"
+            ],
+            "endCol": 1,
+            "endLine": 5746,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [
+                {
+                    "name": "malloc"
+                },
+                {
+                    "name": "exit"
+                },
+                {
+                    "name": "InitRanState"
+                },
+                {
+                    "name": "InitStats"
+                },
+                {
+                    "name": "ZopfliInitLZ77Store"
+                },
+                {
+                    "name": "ZopfliAllocHash"
+                },
+                {
+                    "name": "ZopfliLZ77Greedy"
+                },
+                {
+                    "name": "GetStatistics"
+                },
+                {
+                    "name": "ZopfliCleanLZ77Store"
+                },
+                {
+                    "name": "LZ77OptimalRun"
+                },
+                {
+                    "name": "ZopfliCalculateBlockSize"
+                },
+                {
+                    "name": "fprintf"
+                },
+                {
+                    "name": "ZopfliCopyLZ77Store"
+                },
+                {
+                    "name": "CopyStats"
+                },
+                {
+                    "name": "ClearStatFreqs"
+                },
+                {
+                    "name": "AddWeighedStatFreqs"
+                },
+                {
+                    "name": "CalculateStatistics"
+                },
+                {
+                    "name": "RandomizeStatFreqs"
+                },
+                {
+                    "name": "free"
+                },
+                {
+                    "name": "ZopfliCleanHash"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "stderr"
+                }
+            ],
+            "name": "ZopfliLZ77Optimal",
+            "num_args": 6,
+            "returnType": "void",
+            "signature": "void ZopfliLZ77Optimal ( ZopfliBlockState * s , const unsigned char * in , size_t instart , size_t inend , int numiterations , ZopfliLZ77Store * store ) ",
+            "startCol": 1,
+            "startLine": 5658,
+            "structs": [
+                {
+                    "name": "RanState"
+                },
+                {
+                    "name": "SymbolStats"
+                },
+                {
+                    "name": "ZopfliHash"
+                },
+                {
+                    "name": "ZopfliLZ77Store"
+                }
+            ]
+        },
+        {
+            "argNames": [],
+            "argTypes": [],
+            "endCol": 12,
+            "endLine": 5884,
+            "enums": [],
+            "filename": "zopfli.c",
+            "functions": [],
+            "globals": [],
+            "name": "main_0",
+            "num_args": 0,
+            "returnType": "int",
+            "signature": "int main ( ) ;  ",
+            "startCol": 1,
+            "startLine": 5884,
+            "structs": []
+        }
+    ],
+    "globals": [],
+    "structs": [
+        {
+            "endCol": 1,
+            "endLine": 61,
+            "enums": [],
+            "filename": "zopfli.c",
+            "name": "",
+            "startCol": 9,
+            "startLine": 56,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 1995,
+            "enums": [],
+            "filename": "zopfli.c",
+            "name": "_G_fpos_t",
+            "startCol": 9,
+            "startLine": 1991,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 2009,
+            "enums": [],
+            "filename": "zopfli.c",
+            "name": "_G_fpos64_t",
+            "startCol": 9,
+            "startLine": 2005,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 2109,
+            "enums": [],
+            "filename": "zopfli.c",
+            "name": "_IO_FILE",
+            "startCol": 1,
+            "startLine": 2059,
+            "structs": [
+                {
+                    "name": "_IO_FILE"
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 3792,
+            "enums": [],
+            "filename": "zopfli.c",
+            "name": "ZopfliLZ77Store",
+            "startCol": 9,
+            "startLine": 3773,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 3799,
+            "enums": [],
+            "filename": "zopfli.c",
+            "name": "SplitCostContext",
+            "startCol": 9,
+            "startLine": 3794,
+            "structs": [
+                {
+                    "name": "ZopfliLZ77Store"
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 3817,
+            "enums": [],
+            "filename": "zopfli.c",
+            "name": "SymbolStats",
+            "startCol": 9,
+            "startLine": 3806,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 3822,
+            "enums": [],
+            "filename": "zopfli.c",
+            "name": "RanState",
+            "startCol": 9,
+            "startLine": 3819,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 3848,
+            "enums": [],
+            "filename": "zopfli.c",
+            "name": "ZopfliHash",
+            "startCol": 9,
+            "startLine": 3833,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 3860,
+            "enums": [],
+            "filename": "zopfli.c",
+            "name": "Node",
+            "startCol": 1,
+            "startLine": 3855,
+            "structs": [
+                {
+                    "name": "Node"
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 3868,
+            "enums": [],
+            "filename": "zopfli.c",
+            "name": "NodePool",
+            "startCol": 9,
+            "startLine": 3865,
+            "structs": [
+                {
+                    "name": "Node"
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 3883,
+            "enums": [],
+            "filename": "zopfli.c",
+            "name": "ZopfliLongestMatchCache",
+            "startCol": 9,
+            "startLine": 3878,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 3921,
+            "enums": [],
+            "filename": "zopfli.c",
+            "name": "ZopfliOptions",
+            "startCol": 9,
+            "startLine": 3889,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 3938,
+            "enums": [],
+            "filename": "zopfli.c",
+            "name": "ZopfliBlockState",
+            "startCol": 9,
+            "startLine": 3928,
+            "structs": [
+                {
+                    "name": "ZopfliLongestMatchCache"
+                },
+                {
+                    "name": "ZopfliOptions"
+                }
+            ]
+        }
+    ]
+}

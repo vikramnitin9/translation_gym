@@ -1,0 +1,173 @@
+{
+    "avl-tree": {
+        "c_calls": 302,
+        "c_casts": 88,
+        "c_pointer_decls": 196,
+        "c_pointer_derefs": 4,
+        "c_lines": 2541
+    },
+    "avl-tree_0vXxo5bVq9": {
+        "c_calls": 83,
+        "c_casts": 32,
+        "c_pointer_decls": 131,
+        "c_pointer_derefs": 0,
+        "c_lines": 1212,
+        "unsafe_lines": 291,
+        "unsafe_calls": 166,
+        "unsafe_casts": 52,
+        "raw_pointer_derefs": 34,
+        "raw_pointer_decls": 63
+    },
+    "cat": {
+        "c_calls": 309,
+        "c_casts": 144,
+        "c_pointer_decls": 98,
+        "c_pointer_derefs": 121,
+        "c_lines": 3784
+    },
+    "cat_1irjDx5pEM": {
+        "c_calls": 193,
+        "c_casts": 116,
+        "c_pointer_decls": 32,
+        "c_pointer_derefs": 93,
+        "c_lines": 918,
+        "unsafe_lines": 621,
+        "unsafe_calls": 286,
+        "unsafe_casts": 34,
+        "raw_pointer_derefs": 8,
+        "raw_pointer_decls": 49
+    },
+    "split": {
+        "c_calls": 749,
+        "c_casts": 315,
+        "c_pointer_decls": 206,
+        "c_pointer_derefs": 254,
+        "c_lines": 4558
+    },
+    "split_FPaq4tOajT": {
+        "c_calls": 591,
+        "c_casts": 149,
+        "c_pointer_decls": 86,
+        "c_pointer_derefs": 161,
+        "c_lines": 1898,
+        "unsafe_lines": 1675,
+        "unsafe_calls": 722,
+        "unsafe_casts": 82,
+        "raw_pointer_derefs": 25,
+        "raw_pointer_decls": 108
+    },
+    "urlparser": {
+        "c_calls": 90,
+        "c_casts": 25,
+        "c_pointer_decls": 70,
+        "c_pointer_derefs": 45,
+        "c_lines": 509
+    },
+    "urlparser_aHEzGcWpYk": {
+        "c_calls": 57,
+        "c_casts": 12,
+        "c_pointer_decls": 27,
+        "c_pointer_derefs": 21,
+        "c_lines": 359,
+        "unsafe_lines": 1315,
+        "unsafe_calls": 1264,
+        "unsafe_casts": 57,
+        "raw_pointer_derefs": 58,
+        "raw_pointer_decls": 86
+    },
+    "uniq": {
+        "c_calls": 260,
+        "c_casts": 182,
+        "c_pointer_decls": 122,
+        "c_pointer_derefs": 120,
+        "c_lines": 2725
+    },
+    "uniq_J8b2jw84Xv": {
+        "c_calls": 163,
+        "c_casts": 25,
+        "c_pointer_decls": 53,
+        "c_pointer_derefs": 18,
+        "c_lines": 715,
+        "unsafe_lines": 561,
+        "unsafe_calls": 205,
+        "unsafe_casts": 48,
+        "raw_pointer_derefs": 13,
+        "raw_pointer_decls": 47
+    },
+    "head": {
+        "c_calls": 338,
+        "c_casts": 143,
+        "c_pointer_decls": 121,
+        "c_pointer_derefs": 353,
+        "c_lines": 3325
+    },
+    "head_FLe492C4ga": {
+        "c_calls": 156,
+        "c_casts": 25,
+        "c_pointer_decls": 36,
+        "c_pointer_derefs": 59,
+        "c_lines": 1250,
+        "unsafe_lines": 733,
+        "unsafe_calls": 257,
+        "unsafe_casts": 37,
+        "raw_pointer_derefs": 6,
+        "raw_pointer_decls": 55
+    },
+    "pwd": {
+        "c_calls": 91,
+        "c_casts": 17,
+        "c_pointer_decls": 60,
+        "c_pointer_derefs": 12,
+        "c_lines": 1567
+    },
+    "pwd_6qKsqZZ16S": {
+        "c_calls": 43,
+        "c_casts": 5,
+        "c_pointer_decls": 21,
+        "c_pointer_derefs": 9,
+        "c_lines": 251,
+        "unsafe_lines": 393,
+        "unsafe_calls": 243,
+        "unsafe_casts": 13,
+        "raw_pointer_derefs": 2,
+        "raw_pointer_decls": 29
+    },
+    "zopfli": {
+        "c_calls": 536,
+        "c_casts": 133,
+        "c_pointer_decls": 372,
+        "c_pointer_derefs": 685,
+        "c_lines": 4105
+    },
+    "zopfli_qONdOgm7VN": {
+        "c_calls": 158,
+        "c_casts": 48,
+        "c_pointer_decls": 104,
+        "c_pointer_derefs": 180,
+        "c_lines": 1205,
+        "unsafe_lines": 1858,
+        "unsafe_calls": 594,
+        "unsafe_casts": 165,
+        "raw_pointer_derefs": 247,
+        "raw_pointer_decls": 184
+    },
+    "truncate": {
+        "c_calls": 234,
+        "c_casts": 243,
+        "c_pointer_decls": 107,
+        "c_pointer_derefs": 158,
+        "c_lines": 2799
+    },
+    "truncate_fxjqzZ3BuO": {
+        "c_calls": 172,
+        "c_casts": 103,
+        "c_pointer_decls": 49,
+        "c_pointer_derefs": 91,
+        "c_lines": 1297,
+        "unsafe_lines": 543,
+        "unsafe_calls": 242,
+        "unsafe_casts": 22,
+        "raw_pointer_derefs": 5,
+        "raw_pointer_decls": 51
+    }
+}

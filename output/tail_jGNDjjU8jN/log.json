@@ -1,0 +1,42 @@
+{
+    "date": "2025-08-16 16:45:17.087435",
+    "args": {
+        "dataset": "tail",
+        "model": "claude37",
+        "num_attempts": 5,
+        "output_dir": "/app/output/tail_jGNDjjU8jN",
+        "verbose": true
+    },
+    "results": [
+        {
+            "unit": "program_name",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "set_program_name",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "posix2_version",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "strtol_error",
+            "type": "enums",
+            "results": "Repair Failed",
+            "attempts": 1
+        },
+        {
+            "unit": "xstrtoumax",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        }
+    ]
+}

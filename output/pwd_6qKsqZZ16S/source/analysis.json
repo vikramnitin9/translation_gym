@@ -1,0 +1,5427 @@
+{
+    "enums": [
+        {
+            "endCol": 1,
+            "endLine": 8875,
+            "filename": "c32isprint.c",
+            "name": "",
+            "startCol": 1,
+            "startLine": 8848
+        },
+        {
+            "endCol": 3,
+            "endLine": 15167,
+            "filename": "closeout.c",
+            "name": "quoting_style",
+            "startCol": 1,
+            "startLine": 14958
+        },
+        {
+            "endCol": 3,
+            "endLine": 15191,
+            "filename": "closeout.c",
+            "name": "quoting_flags",
+            "startCol": 1,
+            "startLine": 15170
+        },
+        {
+            "endCol": 3,
+            "endLine": 16632,
+            "filename": "pwd.c",
+            "name": "__itimer_which",
+            "startCol": 1,
+            "startLine": 16620
+        },
+        {
+            "endCol": 3,
+            "endLine": 20436,
+            "filename": "pwd.c",
+            "name": "__pid_type",
+            "startCol": 1,
+            "startLine": 20430
+        }
+    ],
+    "files": [],
+    "functions": [
+        {
+            "argNames": [
+                "c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 5126,
+            "enums": [],
+            "filename": "c-ctype.c",
+            "functions": [],
+            "globals": [],
+            "name": "c_isalnum",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "extern inline _Bool c_isalnum ( int c ) ",
+            "startCol": 1,
+            "startLine": 5114,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 5139,
+            "enums": [],
+            "filename": "c-ctype.c",
+            "functions": [],
+            "globals": [],
+            "name": "c_isalpha",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "extern inline _Bool c_isalpha ( int c ) ",
+            "startCol": 1,
+            "startLine": 5128,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 5158,
+            "enums": [],
+            "filename": "c-ctype.c",
+            "functions": [],
+            "globals": [],
+            "name": "c_isascii",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "extern inline _Bool c_isascii ( int c ) ",
+            "startCol": 1,
+            "startLine": 5143,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 5164,
+            "enums": [],
+            "filename": "c-ctype.c",
+            "functions": [],
+            "globals": [],
+            "name": "c_isblank",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "extern inline _Bool c_isblank ( int c ) ",
+            "startCol": 1,
+            "startLine": 5160,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 5176,
+            "enums": [],
+            "filename": "c-ctype.c",
+            "functions": [],
+            "globals": [],
+            "name": "c_iscntrl",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "extern inline _Bool c_iscntrl ( int c ) ",
+            "startCol": 1,
+            "startLine": 5166,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 5188,
+            "enums": [],
+            "filename": "c-ctype.c",
+            "functions": [],
+            "globals": [],
+            "name": "c_isdigit",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "extern inline _Bool c_isdigit ( int c ) ",
+            "startCol": 1,
+            "startLine": 5178,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 5203,
+            "enums": [],
+            "filename": "c-ctype.c",
+            "functions": [],
+            "globals": [],
+            "name": "c_isgraph",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "extern inline _Bool c_isgraph ( int c ) ",
+            "startCol": 1,
+            "startLine": 5190,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 5215,
+            "enums": [],
+            "filename": "c-ctype.c",
+            "functions": [],
+            "globals": [],
+            "name": "c_islower",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "extern inline _Bool c_islower ( int c ) ",
+            "startCol": 1,
+            "startLine": 5205,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 5231,
+            "enums": [],
+            "filename": "c-ctype.c",
+            "functions": [],
+            "globals": [],
+            "name": "c_isprint",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "extern inline _Bool c_isprint ( int c ) ",
+            "startCol": 1,
+            "startLine": 5217,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 5243,
+            "enums": [],
+            "filename": "c-ctype.c",
+            "functions": [],
+            "globals": [],
+            "name": "c_ispunct",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "extern inline _Bool c_ispunct ( int c ) ",
+            "startCol": 1,
+            "startLine": 5233,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 5255,
+            "enums": [],
+            "filename": "c-ctype.c",
+            "functions": [],
+            "globals": [],
+            "name": "c_isspace",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "extern inline _Bool c_isspace ( int c ) ",
+            "startCol": 1,
+            "startLine": 5245,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 5267,
+            "enums": [],
+            "filename": "c-ctype.c",
+            "functions": [],
+            "globals": [],
+            "name": "c_isupper",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "extern inline _Bool c_isupper ( int c ) ",
+            "startCol": 1,
+            "startLine": 5257,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 5280,
+            "enums": [],
+            "filename": "c-ctype.c",
+            "functions": [],
+            "globals": [],
+            "name": "c_isxdigit",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "extern inline _Bool c_isxdigit ( int c ) ",
+            "startCol": 1,
+            "startLine": 5269,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 5297,
+            "enums": [],
+            "filename": "c-ctype.c",
+            "functions": [],
+            "globals": [],
+            "name": "c_toupper",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "extern inline int c_toupper ( int c ) ",
+            "startCol": 1,
+            "startLine": 5287,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 6110,
+            "enums": [],
+            "filename": "c-strcasecmp.c",
+            "functions": [],
+            "globals": [],
+            "name": "c_tolower",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "inline int c_tolower ( int c ) ",
+            "startCol": 1,
+            "startLine": 6100,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "ps"
+            ],
+            "argTypes": [
+                "mbstate_t *"
+            ],
+            "endCol": 1,
+            "endLine": 8503,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "mbszero",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "inline __attribute__ ( ( __nonnull__ ( 1 ) ) ) void mbszero ( mbstate_t * ps ) ",
+            "startCol": 1,
+            "startLine": 8497,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "c"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 9489,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "btoc32",
+            "num_args": 1,
+            "returnType": "wint_t",
+            "signature": "inline __attribute__ ( ( __pure__ ) ) wint_t btoc32 ( int c ) ",
+            "startCol": 1,
+            "startLine": 9481,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "wc"
+            ],
+            "argTypes": [
+                "wint_t"
+            ],
+            "endCol": 1,
+            "endLine": 9511,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "c32isalnum",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "inline int c32isalnum ( wint_t wc ) ",
+            "startCol": 1,
+            "startLine": 9503,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "wc"
+            ],
+            "argTypes": [
+                "wint_t"
+            ],
+            "endCol": 1,
+            "endLine": 9530,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "c32isalpha",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "inline int c32isalpha ( wint_t wc ) ",
+            "startCol": 1,
+            "startLine": 9522,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "wc"
+            ],
+            "argTypes": [
+                "wint_t"
+            ],
+            "endCol": 1,
+            "endLine": 9549,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "c32isblank",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "inline int c32isblank ( wint_t wc ) ",
+            "startCol": 1,
+            "startLine": 9541,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "wc"
+            ],
+            "argTypes": [
+                "wint_t"
+            ],
+            "endCol": 1,
+            "endLine": 9568,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "c32iscntrl",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "inline int c32iscntrl ( wint_t wc ) ",
+            "startCol": 1,
+            "startLine": 9560,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "wc"
+            ],
+            "argTypes": [
+                "wint_t"
+            ],
+            "endCol": 1,
+            "endLine": 9587,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "c32isdigit",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "inline int c32isdigit ( wint_t wc ) ",
+            "startCol": 1,
+            "startLine": 9579,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "wc"
+            ],
+            "argTypes": [
+                "wint_t"
+            ],
+            "endCol": 1,
+            "endLine": 9606,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "c32isgraph",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "inline int c32isgraph ( wint_t wc ) ",
+            "startCol": 1,
+            "startLine": 9598,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "wc"
+            ],
+            "argTypes": [
+                "wint_t"
+            ],
+            "endCol": 1,
+            "endLine": 9625,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "c32islower",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "inline int c32islower ( wint_t wc ) ",
+            "startCol": 1,
+            "startLine": 9617,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "wc"
+            ],
+            "argTypes": [
+                "wint_t"
+            ],
+            "endCol": 1,
+            "endLine": 9648,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "c32ispunct",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "inline int c32ispunct ( wint_t wc ) ",
+            "startCol": 1,
+            "startLine": 9640,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "wc"
+            ],
+            "argTypes": [
+                "wint_t"
+            ],
+            "endCol": 1,
+            "endLine": 9667,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "c32isspace",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "inline int c32isspace ( wint_t wc ) ",
+            "startCol": 1,
+            "startLine": 9659,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "wc"
+            ],
+            "argTypes": [
+                "wint_t"
+            ],
+            "endCol": 1,
+            "endLine": 9686,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "c32isupper",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "inline int c32isupper ( wint_t wc ) ",
+            "startCol": 1,
+            "startLine": 9678,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "wc"
+            ],
+            "argTypes": [
+                "wint_t"
+            ],
+            "endCol": 1,
+            "endLine": 9705,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "c32isxdigit",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "inline int c32isxdigit ( wint_t wc ) ",
+            "startCol": 1,
+            "startLine": 9697,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "wc"
+            ],
+            "argTypes": [
+                "wint_t"
+            ],
+            "endCol": 1,
+            "endLine": 9727,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "c32tolower",
+            "num_args": 1,
+            "returnType": "wint_t",
+            "signature": "inline wint_t c32tolower ( wint_t wc ) ",
+            "startCol": 1,
+            "startLine": 9719,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "wc"
+            ],
+            "argTypes": [
+                "char32_t"
+            ],
+            "endCol": 1,
+            "endLine": 9746,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "c32width",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "inline int c32width ( char32_t wc ) ",
+            "startCol": 1,
+            "startLine": 9738,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "dest",
+                "srcp",
+                "len",
+                "ps"
+            ],
+            "argTypes": [
+                "char32_t *",
+                "const char **",
+                "size_t",
+                "mbstate_t *"
+            ],
+            "endCol": 1,
+            "endLine": 9790,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "mbsrtoc32s",
+            "num_args": 4,
+            "returnType": "size_t",
+            "signature": "inline __attribute__ ( ( __nonnull__ ( 2 ) ) ) size_t mbsrtoc32s ( char32_t * dest , const char * * srcp , size_t len , mbstate_t * ps ) ",
+            "startCol": 1,
+            "startLine": 9782,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "name"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 9833,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "c32_get_type_test",
+            "num_args": 1,
+            "returnType": "c32_type_test_t",
+            "signature": "inline __attribute__ ( ( __nonnull__ ( 1 ) ) ) c32_type_test_t c32_get_type_test ( const char * name ) ",
+            "startCol": 1,
+            "startLine": 9825,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "wc",
+                "property"
+            ],
+            "argTypes": [
+                "wint_t",
+                "c32_type_test_t"
+            ],
+            "endCol": 1,
+            "endLine": 9860,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [],
+            "globals": [],
+            "name": "c32_apply_type_test",
+            "num_args": 2,
+            "returnType": "int",
+            "signature": "inline int c32_apply_type_test ( wint_t wc , c32_type_test_t property ) ",
+            "startCol": 1,
+            "startLine": 9852,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "wc"
+            ],
+            "argTypes": [
+                "wint_t"
+            ],
+            "endCol": 1,
+            "endLine": 11124,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "functions": [
+                {
+                    "name": "iswprint"
+                }
+            ],
+            "globals": [],
+            "name": "c32isprint",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "extern inline int c32isprint ( wint_t wc ) ",
+            "startCol": 1,
+            "startLine": 11111,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "__bsx"
+            ],
+            "argTypes": [
+                "__uint16_t"
+            ],
+            "endCol": 1,
+            "endLine": 6991,
+            "enums": [],
+            "filename": "close-stream.c",
+            "functions": [],
+            "globals": [],
+            "name": "__bswap_16",
+            "num_args": 1,
+            "returnType": "__uint16_t",
+            "signature": "static __inline __uint16_t __bswap_16 ( __uint16_t __bsx ) ",
+            "startCol": 1,
+            "startLine": 6983,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "__bsx"
+            ],
+            "argTypes": [
+                "__uint32_t"
+            ],
+            "endCol": 1,
+            "endLine": 7006,
+            "enums": [],
+            "filename": "close-stream.c",
+            "functions": [],
+            "globals": [],
+            "name": "__bswap_32",
+            "num_args": 1,
+            "returnType": "__uint32_t",
+            "signature": "static __inline __uint32_t __bswap_32 ( __uint32_t __bsx ) ",
+            "startCol": 1,
+            "startLine": 6998,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "__bsx"
+            ],
+            "argTypes": [
+                "__uint64_t"
+            ],
+            "endCol": 1,
+            "endLine": 7017,
+            "enums": [],
+            "filename": "close-stream.c",
+            "functions": [],
+            "globals": [],
+            "name": "__bswap_64",
+            "num_args": 1,
+            "returnType": "__uint64_t",
+            "signature": "static __inline __uint64_t __bswap_64 ( __uint64_t __bsx ) ",
+            "startCol": 15,
+            "startLine": 7009,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "__x"
+            ],
+            "argTypes": [
+                "__uint16_t"
+            ],
+            "endCol": 1,
+            "endLine": 7043,
+            "enums": [],
+            "filename": "close-stream.c",
+            "functions": [],
+            "globals": [],
+            "name": "__uint16_identity",
+            "num_args": 1,
+            "returnType": "__uint16_t",
+            "signature": "static __inline __uint16_t __uint16_identity ( __uint16_t __x ) ",
+            "startCol": 1,
+            "startLine": 7039,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "__x"
+            ],
+            "argTypes": [
+                "__uint32_t"
+            ],
+            "endCol": 1,
+            "endLine": 7049,
+            "enums": [],
+            "filename": "close-stream.c",
+            "functions": [],
+            "globals": [],
+            "name": "__uint32_identity",
+            "num_args": 1,
+            "returnType": "__uint32_t",
+            "signature": "static __inline __uint32_t __uint32_identity ( __uint32_t __x ) ",
+            "startCol": 1,
+            "startLine": 7045,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "__x"
+            ],
+            "argTypes": [
+                "__uint64_t"
+            ],
+            "endCol": 1,
+            "endLine": 7055,
+            "enums": [],
+            "filename": "close-stream.c",
+            "functions": [],
+            "globals": [],
+            "name": "__uint64_identity",
+            "num_args": 1,
+            "returnType": "__uint64_t",
+            "signature": "static __inline __uint64_t __uint64_identity ( __uint64_t __x ) ",
+            "startCol": 1,
+            "startLine": 7051,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "stream"
+            ],
+            "argTypes": [
+                "FILE *"
+            ],
+            "endCol": 1,
+            "endLine": 9048,
+            "enums": [],
+            "filename": "close-stream.c",
+            "functions": [
+                {
+                    "name": "__fpending"
+                },
+                {
+                    "name": "ferror_unlocked"
+                },
+                {
+                    "name": "rpl_fclose"
+                },
+                {
+                    "name": "__errno_location"
+                }
+            ],
+            "globals": [],
+            "name": "close_stream",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "int close_stream ( FILE * stream ) ",
+            "startCol": 1,
+            "startLine": 9025,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "domain",
+                "msg_ctxt_id",
+                "msgid",
+                "category"
+            ],
+            "argTypes": [
+                "const char *",
+                "const char *",
+                "const char *",
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 11637,
+            "enums": [],
+            "filename": "closeout.c",
+            "functions": [],
+            "globals": [],
+            "name": "pgettext_aux",
+            "num_args": 4,
+            "returnType": "const char *",
+            "signature": "__inline static const char * pgettext_aux ( const char * domain , const char * msg_ctxt_id , const char * msgid , int category ) ",
+            "startCol": 1,
+            "startLine": 11621,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "domain",
+                "msg_ctxt_id",
+                "msgid",
+                "msgid_plural",
+                "n",
+                "category"
+            ],
+            "argTypes": [
+                "const char *",
+                "const char *",
+                "const char *",
+                "const char *",
+                "unsigned long",
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 11658,
+            "enums": [],
+            "filename": "closeout.c",
+            "functions": [],
+            "globals": [],
+            "name": "npgettext_aux",
+            "num_args": 6,
+            "returnType": "const char *",
+            "signature": "__inline static const char * npgettext_aux ( const char * domain , const char * msg_ctxt_id , const char * msgid , const char * msgid_plural , unsigned long int n , int category ) ",
+            "startCol": 1,
+            "startLine": 11640,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "domain",
+                "msgctxt",
+                "msgid",
+                "category"
+            ],
+            "argTypes": [
+                "const char *",
+                "const char *",
+                "const char *",
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 14586,
+            "enums": [],
+            "filename": "closeout.c",
+            "functions": [],
+            "globals": [],
+            "name": "dcpgettext_expr",
+            "num_args": 4,
+            "returnType": "const char *",
+            "signature": "__inline static const char * dcpgettext_expr ( const char * domain , const char * msgctxt , const char * msgid , int category ) ",
+            "startCol": 1,
+            "startLine": 14547,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "domain",
+                "msgctxt",
+                "msgid",
+                "msgid_plural",
+                "n",
+                "category"
+            ],
+            "argTypes": [
+                "const char *",
+                "const char *",
+                "const char *",
+                "const char *",
+                "unsigned long",
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 14634,
+            "enums": [],
+            "filename": "closeout.c",
+            "functions": [],
+            "globals": [],
+            "name": "dcnpgettext_expr",
+            "num_args": 6,
+            "returnType": "const char *",
+            "signature": "__inline static const char * dcnpgettext_expr ( const char * domain , const char * msgctxt , const char * msgid , const char * msgid_plural , unsigned long int n , int category ) ",
+            "startCol": 1,
+            "startLine": 14594,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "file"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 15382,
+            "enums": [],
+            "filename": "closeout.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "file_name"
+                }
+            ],
+            "name": "close_stdout_set_file_name",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "void close_stdout_set_file_name ( const char * file ) ",
+            "startCol": 1,
+            "startLine": 15378,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "ignore"
+            ],
+            "argTypes": [
+                "_Bool"
+            ],
+            "endCol": 1,
+            "endLine": 15420,
+            "enums": [],
+            "filename": "closeout.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "ignore_EPIPE"
+                }
+            ],
+            "name": "close_stdout_set_ignore_EPIPE",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "void close_stdout_set_ignore_EPIPE ( _Bool ignore ) ",
+            "startCol": 1,
+            "startLine": 15416,
+            "structs": []
+        },
+        {
+            "argNames": [],
+            "argTypes": [],
+            "endCol": 1,
+            "endLine": 15465,
+            "enums": [],
+            "filename": "closeout.c",
+            "functions": [
+                {
+                    "name": "close_stream"
+                },
+                {
+                    "name": "__errno_location"
+                },
+                {
+                    "name": "gettext"
+                },
+                {
+                    "name": "quotearg_colon"
+                },
+                {
+                    "name": "error"
+                },
+                {
+                    "name": "_exit"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "stderr"
+                },
+                {
+                    "name": "exit_failure"
+                },
+                {
+                    "name": "file_name"
+                },
+                {
+                    "name": "ignore_EPIPE"
+                },
+                {
+                    "name": "stdout"
+                }
+            ],
+            "name": "close_stdout",
+            "num_args": 0,
+            "returnType": "void",
+            "signature": "void close_stdout ( void ) ",
+            "startCol": 1,
+            "startLine": 15445,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "fp"
+            ],
+            "argTypes": [
+                "FILE *"
+            ],
+            "endCol": 1,
+            "endLine": 11652,
+            "enums": [],
+            "filename": "fclose.c",
+            "functions": [
+                {
+                    "name": "fileno"
+                },
+                {
+                    "name": "fclose"
+                },
+                {
+                    "name": "__freading"
+                },
+                {
+                    "name": "lseek"
+                },
+                {
+                    "name": "rpl_fflush"
+                },
+                {
+                    "name": "__errno_location"
+                }
+            ],
+            "globals": [],
+            "name": "rpl_fclose",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "int rpl_fclose ( FILE * fp ) ",
+            "startCol": 1,
+            "startLine": 11617,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "fp"
+            ],
+            "argTypes": [
+                "FILE *"
+            ],
+            "endCol": 1,
+            "endLine": 11657,
+            "enums": [],
+            "filename": "fflush.c",
+            "functions": [
+                {
+                    "name": "rpl_fseeko"
+                }
+            ],
+            "globals": [],
+            "name": "clear_ungetc_buffer_preserving_position",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "static void clear_ungetc_buffer_preserving_position ( FILE * fp ) ",
+            "startCol": 1,
+            "startLine": 11651,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "stream"
+            ],
+            "argTypes": [
+                "FILE *"
+            ],
+            "endCol": 1,
+            "endLine": 11691,
+            "enums": [],
+            "filename": "fflush.c",
+            "functions": [
+                {
+                    "name": "__freading"
+                },
+                {
+                    "name": "fflush"
+                },
+                {
+                    "name": "clear_ungetc_buffer_preserving_position"
+                }
+            ],
+            "globals": [],
+            "name": "rpl_fflush",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "int rpl_fflush ( FILE * stream ) ",
+            "startCol": 1,
+            "startLine": 11660,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "fp",
+                "offset",
+                "whence"
+            ],
+            "argTypes": [
+                "FILE *",
+                "off_t",
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 11525,
+            "enums": [],
+            "filename": "fseeko.c",
+            "functions": [
+                {
+                    "name": "fileno"
+                },
+                {
+                    "name": "lseek"
+                },
+                {
+                    "name": "fseeko"
+                }
+            ],
+            "globals": [],
+            "name": "rpl_fseeko",
+            "num_args": 3,
+            "returnType": "int",
+            "signature": "int rpl_fseeko ( FILE * fp , off_t offset , int whence ) ",
+            "startCol": 1,
+            "startLine": 11489,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "category"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 10349,
+            "enums": [],
+            "filename": "hard-locale.c",
+            "functions": [
+                {
+                    "name": "setlocale_null_r"
+                },
+                {
+                    "name": "strcmp"
+                }
+            ],
+            "globals": [],
+            "name": "hard_locale",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "_Bool hard_locale ( int category ) ",
+            "startCol": 1,
+            "startLine": 10338,
+            "structs": []
+        },
+        {
+            "argNames": [],
+            "argTypes": [],
+            "endCol": 1,
+            "endLine": 9304,
+            "enums": [],
+            "filename": "ialloc.c",
+            "functions": [
+                {
+                    "name": "__errno_location"
+                }
+            ],
+            "globals": [],
+            "name": "_gl_alloc_nomem",
+            "num_args": 0,
+            "returnType": "void *",
+            "signature": "extern inline void * __attribute__ ( ( __cold__ ) ) _gl_alloc_nomem ( void ) ",
+            "startCol": 1,
+            "startLine": 9299,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "s"
+            ],
+            "argTypes": [
+                "idx_t"
+            ],
+            "endCol": 1,
+            "endLine": 9315,
+            "enums": [],
+            "filename": "ialloc.c",
+            "functions": [
+                {
+                    "name": "malloc"
+                },
+                {
+                    "name": "_gl_alloc_nomem"
+                }
+            ],
+            "globals": [],
+            "name": "imalloc",
+            "num_args": 1,
+            "returnType": "void *",
+            "signature": "extern inline __attribute__ ( ( __malloc__ ) ) /*_GL_ATTRIBUTE_DEALLOC_FREE*/ void * imalloc ( idx_t s ) ",
+            "startCol": 1,
+            "startLine": 9309,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "p",
+                "s"
+            ],
+            "argTypes": [
+                "void *",
+                "idx_t"
+            ],
+            "endCol": 1,
+            "endLine": 9338,
+            "enums": [],
+            "filename": "ialloc.c",
+            "functions": [
+                {
+                    "name": "realloc"
+                },
+                {
+                    "name": "_gl_alloc_nomem"
+                }
+            ],
+            "globals": [],
+            "name": "irealloc",
+            "num_args": 2,
+            "returnType": "void *",
+            "signature": "extern inline /*_GL_ATTRIBUTE_DEALLOC_FREE*/ void * irealloc ( void * p , idx_t s ) ",
+            "startCol": 1,
+            "startLine": 9320,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "n",
+                "s"
+            ],
+            "argTypes": [
+                "idx_t",
+                "idx_t"
+            ],
+            "endCol": 1,
+            "endLine": 9361,
+            "enums": [],
+            "filename": "ialloc.c",
+            "functions": [
+                {
+                    "name": "_gl_alloc_nomem"
+                },
+                {
+                    "name": "calloc"
+                }
+            ],
+            "globals": [],
+            "name": "icalloc",
+            "num_args": 2,
+            "returnType": "void *",
+            "signature": "extern inline __attribute__ ( ( __malloc__ ) ) /*_GL_ATTRIBUTE_DEALLOC_FREE*/ void * icalloc ( idx_t n , idx_t s ) ",
+            "startCol": 1,
+            "startLine": 9343,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "p",
+                "n",
+                "s"
+            ],
+            "argTypes": [
+                "void *",
+                "idx_t",
+                "idx_t"
+            ],
+            "endCol": 1,
+            "endLine": 9386,
+            "enums": [],
+            "filename": "ialloc.c",
+            "functions": [
+                {
+                    "name": "reallocarray"
+                },
+                {
+                    "name": "_gl_alloc_nomem"
+                }
+            ],
+            "globals": [],
+            "name": "ireallocarray",
+            "num_args": 3,
+            "returnType": "void *",
+            "signature": "extern inline void * ireallocarray ( void * p , idx_t n , idx_t s ) ",
+            "startCol": 1,
+            "startLine": 9366,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "pwc",
+                "s",
+                "n",
+                "ps"
+            ],
+            "argTypes": [
+                "char32_t *",
+                "const char *",
+                "size_t",
+                "mbstate_t *"
+            ],
+            "endCol": 1,
+            "endLine": 13909,
+            "enums": [],
+            "filename": "mbrtoc32.c",
+            "functions": [
+                {
+                    "name": "mbrtoc32"
+                },
+                {
+                    "name": "mbsinit"
+                },
+                {
+                    "name": "mbszero"
+                },
+                {
+                    "name": "abort"
+                },
+                {
+                    "name": "hard_locale"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "internal_state"
+                }
+            ],
+            "name": "rpl_mbrtoc32",
+            "num_args": 4,
+            "returnType": "size_t",
+            "signature": "size_t rpl_mbrtoc32 ( char32_t * pwc , const char * s , size_t n , mbstate_t * ps ) ",
+            "startCol": 1,
+            "startLine": 13856,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "status"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 20119,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "exit_failure"
+                }
+            ],
+            "name": "initialize_exit_failure",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "static inline void initialize_exit_failure ( int status ) ",
+            "startCol": 1,
+            "startLine": 20114,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "s",
+                "ns"
+            ],
+            "argTypes": [
+                "time_t",
+                "long"
+            ],
+            "endCol": 1,
+            "endLine": 22296,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "make_timespec",
+            "num_args": 2,
+            "returnType": "struct timespec",
+            "signature": "inline struct timespec make_timespec ( time_t s , long int ns ) ",
+            "startCol": 1,
+            "startLine": 22292,
+            "structs": [
+                {
+                    "name": "timespec"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "a",
+                "b"
+            ],
+            "argTypes": [
+                "struct timespec",
+                "struct timespec"
+            ],
+            "endCol": 1,
+            "endLine": 22304,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "timespec_cmp",
+            "num_args": 2,
+            "returnType": "int",
+            "signature": "inline int __attribute__ ( ( __pure__ ) ) timespec_cmp ( struct timespec a , struct timespec b ) ",
+            "startCol": 1,
+            "startLine": 22300,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "a"
+            ],
+            "argTypes": [
+                "struct timespec"
+            ],
+            "endCol": 1,
+            "endLine": 22312,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "timespec_sign",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "inline int __attribute__ ( ( __pure__ ) ) timespec_sign ( struct timespec a ) ",
+            "startCol": 1,
+            "startLine": 22308,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "a"
+            ],
+            "argTypes": [
+                "struct timespec"
+            ],
+            "endCol": 1,
+            "endLine": 22326,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "timespectod",
+            "num_args": 1,
+            "returnType": "double",
+            "signature": "inline double timespectod ( struct timespec a ) ",
+            "startCol": 1,
+            "startLine": 22322,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "ch"
+            ],
+            "argTypes": [
+                "char"
+            ],
+            "endCol": 61,
+            "endLine": 22345,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "to_uchar",
+            "num_args": 1,
+            "returnType": "unsigned char",
+            "signature": "static inline unsigned char to_uchar ( char ch ) ",
+            "startCol": 1,
+            "startLine": 22345,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "n"
+            ],
+            "argTypes": [
+                "uintmax_t"
+            ],
+            "endCol": 1,
+            "endLine": 23273,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "select_plural",
+            "num_args": 1,
+            "returnType": "unsigned long",
+            "signature": "static inline unsigned long int select_plural ( uintmax_t n ) ",
+            "startCol": 1,
+            "startLine": 23266,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "p",
+                "n",
+                "s"
+            ],
+            "argTypes": [
+                "void *",
+                "size_t",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 23636,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "xnrealloc",
+            "num_args": 3,
+            "returnType": "void *",
+            "signature": "inline void * xnrealloc ( void * p , size_t n , size_t s ) ",
+            "startCol": 1,
+            "startLine": 23632,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "a",
+                "b"
+            ],
+            "argTypes": [
+                "const struct stat *",
+                "const struct stat *"
+            ],
+            "endCol": 1,
+            "endLine": 24008,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "psame_inode",
+            "num_args": 2,
+            "returnType": "_Bool",
+            "signature": "inline _Bool psame_inode ( struct stat const * a , struct stat const * b ) ",
+            "startCol": 1,
+            "startLine": 24004,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "fd",
+                "file",
+                "owner",
+                "group"
+            ],
+            "argTypes": [
+                "int",
+                "const char *",
+                "uid_t",
+                "gid_t"
+            ],
+            "endCol": 1,
+            "endLine": 24364,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "chownat",
+            "num_args": 4,
+            "returnType": "int",
+            "signature": "inline int chownat ( int fd , char const * file , uid_t owner , gid_t group ) ",
+            "startCol": 1,
+            "startLine": 24360,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "fd",
+                "file",
+                "owner",
+                "group"
+            ],
+            "argTypes": [
+                "int",
+                "const char *",
+                "uid_t",
+                "gid_t"
+            ],
+            "endCol": 1,
+            "endLine": 24370,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "lchownat",
+            "num_args": 4,
+            "returnType": "int",
+            "signature": "inline int lchownat ( int fd , char const * file , uid_t owner , gid_t group ) ",
+            "startCol": 1,
+            "startLine": 24366,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "fd",
+                "file",
+                "mode"
+            ],
+            "argTypes": [
+                "int",
+                "const char *",
+                "mode_t"
+            ],
+            "endCol": 1,
+            "endLine": 24375,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "chmodat",
+            "num_args": 3,
+            "returnType": "int",
+            "signature": "inline int chmodat ( int fd , char const * file , mode_t mode ) ",
+            "startCol": 1,
+            "startLine": 24371,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "fd",
+                "file",
+                "mode"
+            ],
+            "argTypes": [
+                "int",
+                "const char *",
+                "mode_t"
+            ],
+            "endCol": 1,
+            "endLine": 24381,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "lchmodat",
+            "num_args": 3,
+            "returnType": "int",
+            "signature": "inline int lchmodat ( int fd , char const * file , mode_t mode ) ",
+            "startCol": 1,
+            "startLine": 24377,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "file_name"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 24398,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "dot_or_dotdot",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "static inline _Bool dot_or_dotdot ( char const * file_name ) ",
+            "startCol": 1,
+            "startLine": 24388,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "dirp"
+            ],
+            "argTypes": [
+                "DIR *"
+            ],
+            "endCol": 1,
+            "endLine": 24410,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "readdir_ignoring_dot_and_dotdot",
+            "num_args": 1,
+            "returnType": "const struct dirent *",
+            "signature": "static inline struct dirent const * readdir_ignoring_dot_and_dotdot ( DIR * dirp ) ",
+            "startCol": 1,
+            "startLine": 24401,
+            "structs": [
+                {
+                    "name": "dirent"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "fd_cwd",
+                "dir"
+            ],
+            "argTypes": [
+                "int",
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 24447,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "directory_status",
+            "num_args": 2,
+            "returnType": "int",
+            "signature": "static inline int directory_status ( int fd_cwd , char const * dir ) ",
+            "startCol": 1,
+            "startLine": 24421,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "u",
+                "v"
+            ],
+            "argTypes": [
+                "size_t",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 25118,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "gcd",
+            "num_args": 2,
+            "returnType": "size_t",
+            "signature": "__attribute__ ( ( __const__ ) ) static inline size_t gcd ( size_t u , size_t v ) ",
+            "startCol": 1,
+            "startLine": 25105,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "u",
+                "v"
+            ],
+            "argTypes": [
+                "size_t",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 25129,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "lcm",
+            "num_args": 2,
+            "returnType": "size_t",
+            "signature": "__attribute__ ( ( __const__ ) ) static inline size_t lcm ( size_t u , size_t v ) ",
+            "startCol": 1,
+            "startLine": 25124,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "ptr",
+                "alignment"
+            ],
+            "argTypes": [
+                "const void *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 25142,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "ptr_align",
+            "num_args": 2,
+            "returnType": "void *",
+            "signature": "static inline void * ptr_align ( void const * ptr , size_t alignment ) ",
+            "startCol": 1,
+            "startLine": 25136,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "buf",
+                "length"
+            ],
+            "argTypes": [
+                "const void *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 25194,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "is_nul",
+            "num_args": 2,
+            "returnType": "_Bool",
+            "signature": "__attribute__ ( ( __pure__ ) ) static inline _Bool is_nul ( void const * buf , size_t length ) ",
+            "startCol": 1,
+            "startLine": 25147,
+            "structs": []
+        },
+        {
+            "argNames": [],
+            "argTypes": [],
+            "endCol": 1,
+            "endLine": 25210,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "stdout"
+                }
+            ],
+            "name": "emit_stdin_note",
+            "num_args": 0,
+            "returnType": "void",
+            "signature": "static inline void emit_stdin_note ( void ) ",
+            "startCol": 1,
+            "startLine": 25204,
+            "structs": []
+        },
+        {
+            "argNames": [],
+            "argTypes": [],
+            "endCol": 1,
+            "endLine": 25217,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "stdout"
+                }
+            ],
+            "name": "emit_mandatory_arg_note",
+            "num_args": 0,
+            "returnType": "void",
+            "signature": "static inline void emit_mandatory_arg_note ( void ) ",
+            "startCol": 1,
+            "startLine": 25211,
+            "structs": []
+        },
+        {
+            "argNames": [],
+            "argTypes": [],
+            "endCol": 1,
+            "endLine": 25227,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "stdout"
+                }
+            ],
+            "name": "emit_size_note",
+            "num_args": 0,
+            "returnType": "void",
+            "signature": "static inline void emit_size_note ( void ) ",
+            "startCol": 1,
+            "startLine": 25219,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "program"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 25237,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "emit_blocksize_note",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "static inline void emit_blocksize_note ( char const * program ) ",
+            "startCol": 1,
+            "startLine": 25229,
+            "structs": []
+        },
+        {
+            "argNames": [],
+            "argTypes": [],
+            "endCol": 1,
+            "endLine": 25243,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "stdout"
+                }
+            ],
+            "name": "emit_update_parameters_note",
+            "num_args": 0,
+            "returnType": "void",
+            "signature": "static inline void emit_update_parameters_note ( void ) ",
+            "startCol": 1,
+            "startLine": 25239,
+            "structs": []
+        },
+        {
+            "argNames": [],
+            "argTypes": [],
+            "endCol": 1,
+            "endLine": 25261,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "stdout"
+                }
+            ],
+            "name": "emit_backup_suffix_note",
+            "num_args": 0,
+            "returnType": "void",
+            "signature": "static inline void emit_backup_suffix_note ( void ) ",
+            "startCol": 1,
+            "startLine": 25245,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "default_opt"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 25267,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "emit_symlink_recurse_options",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "static inline void emit_symlink_recurse_options ( char const * default_opt ) ",
+            "startCol": 1,
+            "startLine": 25263,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "program"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 25279,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "emit_exec_status",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "static inline void emit_exec_status ( char const * program ) ",
+            "startCol": 1,
+            "startLine": 25269,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "program"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 25325,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [
+                {
+                    "name": "strcmp"
+                },
+                {
+                    "name": "gettext"
+                },
+                {
+                    "name": "printf"
+                },
+                {
+                    "name": "setlocale"
+                },
+                {
+                    "name": "strncmp"
+                },
+                {
+                    "name": "fputs_unlocked"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "stdout"
+                }
+            ],
+            "name": "emit_ancillary_info",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "static inline void emit_ancillary_info ( char const * program ) ",
+            "startCol": 1,
+            "startLine": 25281,
+            "structs": [
+                {
+                    "name": "infomap"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "t",
+                "buf"
+            ],
+            "argTypes": [
+                "time_t",
+                "char *"
+            ],
+            "endCol": 1,
+            "endLine": 25401,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "timetostr",
+            "num_args": 2,
+            "returnType": "char *",
+            "signature": "static inline char * timetostr ( time_t t , char * buf ) ",
+            "startCol": 1,
+            "startLine": 25395,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "s"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 25407,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "bad_cast",
+            "num_args": 1,
+            "returnType": "char *",
+            "signature": "static inline char * bad_cast ( char const * s ) ",
+            "startCol": 1,
+            "startLine": 25403,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "sb"
+            ],
+            "argTypes": [
+                "const struct stat *"
+            ],
+            "endCol": 1,
+            "endLine": 25415,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "usable_st_size",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "static inline _Bool usable_st_size ( struct stat const * sb ) ",
+            "startCol": 1,
+            "startLine": 25410,
+            "structs": []
+        },
+        {
+            "argNames": [],
+            "argTypes": [],
+            "endCol": 1,
+            "endLine": 25629,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "stdout"
+                }
+            ],
+            "name": "write_error",
+            "num_args": 0,
+            "returnType": "void",
+            "signature": "static inline void write_error ( void ) ",
+            "startCol": 1,
+            "startLine": 25621,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "dest",
+                "src",
+                "len"
+            ],
+            "argTypes": [
+                "char *restrict",
+                "const char *restrict",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 25644,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "stzncpy",
+            "num_args": 3,
+            "returnType": "char *",
+            "signature": "static inline char * stzncpy ( char * __restrict__ dest , char const * __restrict__ src , size_t len ) ",
+            "startCol": 1,
+            "startLine": 25636,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "err"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 25658,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "is_ENOTSUP",
+            "num_args": 1,
+            "returnType": "_Bool",
+            "signature": "static inline _Bool is_ENOTSUP ( int err ) ",
+            "startCol": 1,
+            "startLine": 25654,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "status"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 26430,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [
+                {
+                    "name": "gettext"
+                },
+                {
+                    "name": "fprintf"
+                },
+                {
+                    "name": "printf"
+                },
+                {
+                    "name": "fputs_unlocked"
+                },
+                {
+                    "name": "emit_ancillary_info"
+                },
+                {
+                    "name": "exit"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "stdout"
+                },
+                {
+                    "name": "program_name"
+                },
+                {
+                    "name": "stderr"
+                }
+            ],
+            "name": "usage",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "void usage ( int status ) ",
+            "startCol": 1,
+            "startLine": 26403,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "p"
+            ],
+            "argTypes": [
+                "struct file_name *"
+            ],
+            "endCol": 1,
+            "endLine": 26437,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "file_name_free",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "static void file_name_free ( struct file_name * p ) ",
+            "startCol": 1,
+            "startLine": 26432,
+            "structs": []
+        },
+        {
+            "argNames": [],
+            "argTypes": [],
+            "endCol": 1,
+            "endLine": 26452,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "file_name_init",
+            "num_args": 0,
+            "returnType": "struct file_name *",
+            "signature": "static struct file_name * file_name_init ( void ) ",
+            "startCol": 1,
+            "startLine": 26439,
+            "structs": [
+                {
+                    "name": "file_name"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "p",
+                "s",
+                "s_len"
+            ],
+            "argTypes": [
+                "struct file_name *",
+                "const char *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 26478,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "file_name_prepend",
+            "num_args": 3,
+            "returnType": "void",
+            "signature": "static void file_name_prepend ( struct file_name * p , char const * s , size_t s_len ) ",
+            "startCol": 1,
+            "startLine": 26455,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "n"
+            ],
+            "argTypes": [
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 26494,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "nth_parent",
+            "num_args": 1,
+            "returnType": "char *",
+            "signature": "static char * nth_parent ( size_t n ) ",
+            "startCol": 1,
+            "startLine": 26481,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "dot_sb",
+                "file_name",
+                "parent_height"
+            ],
+            "argTypes": [
+                "struct stat *",
+                "struct file_name *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 26597,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "find_dir_entry",
+            "num_args": 3,
+            "returnType": "void",
+            "signature": "static void find_dir_entry ( struct stat * dot_sb , struct file_name * file_name , size_t parent_height ) ",
+            "startCol": 1,
+            "startLine": 26507,
+            "structs": [
+                {
+                    "name": "dirent"
+                },
+                {
+                    "name": "stat"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "file_name"
+            ],
+            "argTypes": [
+                "struct file_name *"
+            ],
+            "endCol": 1,
+            "endLine": 26649,
+            "enums": [
+                {
+                    "name": "quoting_style"
+                }
+            ],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "robust_getcwd",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "static void robust_getcwd ( struct file_name * file_name ) ",
+            "startCol": 1,
+            "startLine": 26622,
+            "structs": [
+                {
+                    "name": "stat"
+                },
+                {
+                    "name": "dev_ino"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "argc",
+                "argv"
+            ],
+            "argTypes": [
+                "int",
+                "char **"
+            ],
+            "endCol": 37,
+            "endLine": 26661,
+            "enums": [],
+            "filename": "pwd.c",
+            "functions": [],
+            "globals": [],
+            "name": "main_0",
+            "num_args": 2,
+            "returnType": "int",
+            "signature": "int main ( int argc , char * * argv ) ;  ",
+            "startCol": 1,
+            "startLine": 26661,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "o"
+            ],
+            "argTypes": [
+                "struct quoting_options *"
+            ],
+            "endCol": 1,
+            "endLine": 17754,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "__errno_location"
+                },
+                {
+                    "name": "xmemdup"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "default_quoting_options"
+                }
+            ],
+            "name": "clone_quoting_options",
+            "num_args": 1,
+            "returnType": "struct quoting_options *",
+            "signature": "struct quoting_options * clone_quoting_options ( struct quoting_options * o ) ",
+            "startCol": 1,
+            "startLine": 17746,
+            "structs": [
+                {
+                    "name": "quoting_options"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "o"
+            ],
+            "argTypes": [
+                "const struct quoting_options *"
+            ],
+            "endCol": 1,
+            "endLine": 17761,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "default_quoting_options"
+                }
+            ],
+            "name": "get_quoting_style",
+            "num_args": 1,
+            "returnType": "enum quoting_style",
+            "signature": "enum quoting_style get_quoting_style ( struct quoting_options const * o ) ",
+            "startCol": 1,
+            "startLine": 17757,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "o",
+                "s"
+            ],
+            "argTypes": [
+                "struct quoting_options *",
+                "enum quoting_style"
+            ],
+            "endCol": 1,
+            "endLine": 17769,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "default_quoting_options"
+                }
+            ],
+            "name": "set_quoting_style",
+            "num_args": 2,
+            "returnType": "void",
+            "signature": "void set_quoting_style ( struct quoting_options * o , enum quoting_style s ) ",
+            "startCol": 1,
+            "startLine": 17765,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "o",
+                "c",
+                "i"
+            ],
+            "argTypes": [
+                "struct quoting_options *",
+                "char",
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 17786,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "default_quoting_options"
+                }
+            ],
+            "name": "set_char_quoting",
+            "num_args": 3,
+            "returnType": "int",
+            "signature": "int set_char_quoting ( struct quoting_options * o , char c , int i ) ",
+            "startCol": 1,
+            "startLine": 17776,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "o",
+                "i"
+            ],
+            "argTypes": [
+                "struct quoting_options *",
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 17801,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "default_quoting_options"
+                }
+            ],
+            "name": "set_quoting_flags",
+            "num_args": 2,
+            "returnType": "int",
+            "signature": "int set_quoting_flags ( struct quoting_options * o , int i ) ",
+            "startCol": 1,
+            "startLine": 17792,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "o",
+                "left_quote",
+                "right_quote"
+            ],
+            "argTypes": [
+                "struct quoting_options *",
+                "const char *",
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 17814,
+            "enums": [
+                {
+                    "name": "quoting_style"
+                }
+            ],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "abort"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "default_quoting_options"
+                }
+            ],
+            "name": "set_custom_quoting",
+            "num_args": 3,
+            "returnType": "void",
+            "signature": "void set_custom_quoting ( struct quoting_options * o , char const * left_quote , char const * right_quote ) ",
+            "startCol": 1,
+            "startLine": 17803,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "style"
+            ],
+            "argTypes": [
+                "enum quoting_style"
+            ],
+            "endCol": 1,
+            "endLine": 17825,
+            "enums": [
+                {
+                    "name": "quoting_style"
+                }
+            ],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "abort"
+                }
+            ],
+            "globals": [],
+            "name": "quoting_options_from_style",
+            "num_args": 1,
+            "returnType": "struct quoting_options",
+            "signature": "static struct quoting_options /* NOT PURE!! */ quoting_options_from_style ( enum quoting_style style ) ",
+            "startCol": 1,
+            "startLine": 17817,
+            "structs": [
+                {
+                    "name": "quoting_options"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "msgid",
+                "s"
+            ],
+            "argTypes": [
+                "const char *",
+                "enum quoting_style"
+            ],
+            "endCol": 1,
+            "endLine": 17865,
+            "enums": [
+                {
+                    "name": "quoting_style"
+                }
+            ],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "gettext"
+                },
+                {
+                    "name": "locale_charset"
+                },
+                {
+                    "name": "c_strcasecmp"
+                }
+            ],
+            "globals": [],
+            "name": "gettext_quote",
+            "num_args": 2,
+            "returnType": "const char *",
+            "signature": "static char const * gettext_quote ( char const * msgid , enum quoting_style s ) ",
+            "startCol": 1,
+            "startLine": 17831,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "buffer",
+                "buffersize",
+                "arg",
+                "argsize",
+                "quoting_style",
+                "flags",
+                "quote_these_too",
+                "left_quote",
+                "right_quote"
+            ],
+            "argTypes": [
+                "char *",
+                "size_t",
+                "const char *",
+                "size_t",
+                "enum quoting_style",
+                "int",
+                "const unsigned int *",
+                "const char *",
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 18361,
+            "enums": [
+                {
+                    "name": "quoting_style"
+                },
+                {
+                    "name": "quoting_flags"
+                }
+            ],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "__ctype_get_mb_cur_max"
+                },
+                {
+                    "name": "gettext_quote"
+                },
+                {
+                    "name": "strlen"
+                },
+                {
+                    "name": "abort"
+                },
+                {
+                    "name": "memcmp"
+                },
+                {
+                    "name": "__ctype_b_loc"
+                },
+                {
+                    "name": "mbszero"
+                },
+                {
+                    "name": "rpl_mbrtoc32"
+                },
+                {
+                    "name": "c32isprint"
+                },
+                {
+                    "name": "quotearg_buffer_restyled"
+                }
+            ],
+            "globals": [],
+            "name": "quotearg_buffer_restyled",
+            "num_args": 9,
+            "returnType": "size_t",
+            "signature": "static size_t quotearg_buffer_restyled ( char * buffer , size_t buffersize , char const * arg , size_t argsize , enum quoting_style quoting_style , int flags , unsigned int const * quote_these_too , char const * left_quote , char const * right_quote ) ",
+            "startCol": 1,
+            "startLine": 17880,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "buffer",
+                "buffersize",
+                "arg",
+                "argsize",
+                "o"
+            ],
+            "argTypes": [
+                "char *",
+                "size_t",
+                "const char *",
+                "size_t",
+                "const struct quoting_options *"
+            ],
+            "endCol": 1,
+            "endLine": 18384,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "__errno_location"
+                },
+                {
+                    "name": "quotearg_buffer_restyled"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "default_quoting_options"
+                }
+            ],
+            "name": "quotearg_buffer",
+            "num_args": 5,
+            "returnType": "size_t",
+            "signature": "size_t quotearg_buffer ( char * buffer , size_t buffersize , char const * arg , size_t argsize , struct quoting_options const * o ) ",
+            "startCol": 1,
+            "startLine": 18372,
+            "structs": [
+                {
+                    "name": "quoting_options"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "arg",
+                "argsize",
+                "o"
+            ],
+            "argTypes": [
+                "const char *",
+                "size_t",
+                "const struct quoting_options *"
+            ],
+            "endCol": 1,
+            "endLine": 18391,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quotearg_alloc_mem"
+                }
+            ],
+            "globals": [],
+            "name": "quotearg_alloc",
+            "num_args": 3,
+            "returnType": "char *",
+            "signature": "char * quotearg_alloc ( char const * arg , size_t argsize , struct quoting_options const * o ) ",
+            "startCol": 1,
+            "startLine": 18386,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "arg",
+                "argsize",
+                "size",
+                "o"
+            ],
+            "argTypes": [
+                "const char *",
+                "size_t",
+                "size_t *",
+                "const struct quoting_options *"
+            ],
+            "endCol": 1,
+            "endLine": 18419,
+            "enums": [
+                {
+                    "name": "quoting_flags"
+                }
+            ],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "__errno_location"
+                },
+                {
+                    "name": "quotearg_buffer_restyled"
+                },
+                {
+                    "name": "xcharalloc"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "default_quoting_options"
+                }
+            ],
+            "name": "quotearg_alloc_mem",
+            "num_args": 4,
+            "returnType": "char *",
+            "signature": "char * quotearg_alloc_mem ( char const * arg , size_t argsize , size_t * size , struct quoting_options const * o ) ",
+            "startCol": 1,
+            "startLine": 18399,
+            "structs": [
+                {
+                    "name": "quoting_options"
+                }
+            ]
+        },
+        {
+            "argNames": [],
+            "argTypes": [],
+            "endCol": 1,
+            "endLine": 18458,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "free"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "slotvec0"
+                },
+                {
+                    "name": "slot0"
+                },
+                {
+                    "name": "nslots"
+                },
+                {
+                    "name": "slotvec"
+                }
+            ],
+            "name": "quotearg_free",
+            "num_args": 0,
+            "returnType": "void",
+            "signature": "void quotearg_free ( void ) ",
+            "startCol": 1,
+            "startLine": 18439,
+            "structs": [
+                {
+                    "name": "slotvec"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "n",
+                "arg",
+                "argsize",
+                "options"
+            ],
+            "argTypes": [
+                "int",
+                "const char *",
+                "size_t",
+                "const struct quoting_options *"
+            ],
+            "endCol": 1,
+            "endLine": 18520,
+            "enums": [
+                {
+                    "name": "quoting_flags"
+                }
+            ],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "__errno_location"
+                },
+                {
+                    "name": "abort"
+                },
+                {
+                    "name": "xpalloc"
+                },
+                {
+                    "name": "quotearg_buffer_restyled"
+                },
+                {
+                    "name": "free"
+                },
+                {
+                    "name": "xcharalloc"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "slot0"
+                },
+                {
+                    "name": "slotvec0"
+                },
+                {
+                    "name": "nslots"
+                },
+                {
+                    "name": "slotvec"
+                }
+            ],
+            "name": "quotearg_n_options",
+            "num_args": 4,
+            "returnType": "char *",
+            "signature": "static char * quotearg_n_options ( int n , char const * arg , size_t argsize , struct quoting_options const * options ) ",
+            "startCol": 1,
+            "startLine": 18469,
+            "structs": [
+                {
+                    "name": "slotvec"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "n",
+                "arg"
+            ],
+            "argTypes": [
+                "int",
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 18526,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quotearg_n_options"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "default_quoting_options"
+                }
+            ],
+            "name": "quotearg_n",
+            "num_args": 2,
+            "returnType": "char *",
+            "signature": "char * quotearg_n ( int n , char const * arg ) ",
+            "startCol": 1,
+            "startLine": 18522,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "n",
+                "arg",
+                "argsize"
+            ],
+            "argTypes": [
+                "int",
+                "const char *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 18532,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quotearg_n_options"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "default_quoting_options"
+                }
+            ],
+            "name": "quotearg_n_mem",
+            "num_args": 3,
+            "returnType": "char *",
+            "signature": "char * quotearg_n_mem ( int n , char const * arg , size_t argsize ) ",
+            "startCol": 1,
+            "startLine": 18528,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "arg"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 18538,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quotearg_n"
+                }
+            ],
+            "globals": [],
+            "name": "quotearg",
+            "num_args": 1,
+            "returnType": "char *",
+            "signature": "char * quotearg ( char const * arg ) ",
+            "startCol": 1,
+            "startLine": 18534,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "arg",
+                "argsize"
+            ],
+            "argTypes": [
+                "const char *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 18544,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quotearg_n_mem"
+                }
+            ],
+            "globals": [],
+            "name": "quotearg_mem",
+            "num_args": 2,
+            "returnType": "char *",
+            "signature": "char * quotearg_mem ( char const * arg , size_t argsize ) ",
+            "startCol": 1,
+            "startLine": 18540,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "n",
+                "s",
+                "arg"
+            ],
+            "argTypes": [
+                "int",
+                "enum quoting_style",
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 18551,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quoting_options_from_style"
+                },
+                {
+                    "name": "quotearg_n_options"
+                }
+            ],
+            "globals": [],
+            "name": "quotearg_n_style",
+            "num_args": 3,
+            "returnType": "char *",
+            "signature": "char * quotearg_n_style ( int n , enum quoting_style s , char const * arg ) ",
+            "startCol": 1,
+            "startLine": 18546,
+            "structs": [
+                {
+                    "name": "quoting_options"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "n",
+                "s",
+                "arg",
+                "argsize"
+            ],
+            "argTypes": [
+                "int",
+                "enum quoting_style",
+                "const char *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 18559,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quoting_options_from_style"
+                },
+                {
+                    "name": "quotearg_n_options"
+                }
+            ],
+            "globals": [],
+            "name": "quotearg_n_style_mem",
+            "num_args": 4,
+            "returnType": "char *",
+            "signature": "char * quotearg_n_style_mem ( int n , enum quoting_style s , char const * arg , size_t argsize ) ",
+            "startCol": 1,
+            "startLine": 18553,
+            "structs": [
+                {
+                    "name": "quoting_options"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "s",
+                "arg"
+            ],
+            "argTypes": [
+                "enum quoting_style",
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 18565,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quotearg_n_style"
+                }
+            ],
+            "globals": [],
+            "name": "quotearg_style",
+            "num_args": 2,
+            "returnType": "char *",
+            "signature": "char * quotearg_style ( enum quoting_style s , char const * arg ) ",
+            "startCol": 1,
+            "startLine": 18561,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "s",
+                "arg",
+                "argsize"
+            ],
+            "argTypes": [
+                "enum quoting_style",
+                "const char *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 18571,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quotearg_n_style_mem"
+                }
+            ],
+            "globals": [],
+            "name": "quotearg_style_mem",
+            "num_args": 3,
+            "returnType": "char *",
+            "signature": "char * quotearg_style_mem ( enum quoting_style s , char const * arg , size_t argsize ) ",
+            "startCol": 1,
+            "startLine": 18567,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "arg",
+                "argsize",
+                "ch"
+            ],
+            "argTypes": [
+                "const char *",
+                "size_t",
+                "char"
+            ],
+            "endCol": 1,
+            "endLine": 18580,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "set_char_quoting"
+                },
+                {
+                    "name": "quotearg_n_options"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "default_quoting_options"
+                }
+            ],
+            "name": "quotearg_char_mem",
+            "num_args": 3,
+            "returnType": "char *",
+            "signature": "char * quotearg_char_mem ( char const * arg , size_t argsize , char ch ) ",
+            "startCol": 1,
+            "startLine": 18573,
+            "structs": [
+                {
+                    "name": "quoting_options"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "arg",
+                "ch"
+            ],
+            "argTypes": [
+                "const char *",
+                "char"
+            ],
+            "endCol": 1,
+            "endLine": 18586,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quotearg_char_mem"
+                }
+            ],
+            "globals": [],
+            "name": "quotearg_char",
+            "num_args": 2,
+            "returnType": "char *",
+            "signature": "char * quotearg_char ( char const * arg , char ch ) ",
+            "startCol": 1,
+            "startLine": 18582,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "arg"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 18592,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quotearg_char"
+                }
+            ],
+            "globals": [],
+            "name": "quotearg_colon",
+            "num_args": 1,
+            "returnType": "char *",
+            "signature": "char * quotearg_colon ( char const * arg ) ",
+            "startCol": 1,
+            "startLine": 18588,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "arg",
+                "argsize"
+            ],
+            "argTypes": [
+                "const char *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 18598,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quotearg_char_mem"
+                }
+            ],
+            "globals": [],
+            "name": "quotearg_colon_mem",
+            "num_args": 2,
+            "returnType": "char *",
+            "signature": "char * quotearg_colon_mem ( char const * arg , size_t argsize ) ",
+            "startCol": 1,
+            "startLine": 18594,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "n",
+                "s",
+                "arg"
+            ],
+            "argTypes": [
+                "int",
+                "enum quoting_style",
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 18607,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quoting_options_from_style"
+                },
+                {
+                    "name": "set_char_quoting"
+                },
+                {
+                    "name": "quotearg_n_options"
+                }
+            ],
+            "globals": [],
+            "name": "quotearg_n_style_colon",
+            "num_args": 3,
+            "returnType": "char *",
+            "signature": "char * quotearg_n_style_colon ( int n , enum quoting_style s , char const * arg ) ",
+            "startCol": 1,
+            "startLine": 18600,
+            "structs": [
+                {
+                    "name": "quoting_options"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "n",
+                "left_quote",
+                "right_quote",
+                "arg"
+            ],
+            "argTypes": [
+                "int",
+                "const char *",
+                "const char *",
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 18615,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quotearg_n_custom_mem"
+                }
+            ],
+            "globals": [],
+            "name": "quotearg_n_custom",
+            "num_args": 4,
+            "returnType": "char *",
+            "signature": "char * quotearg_n_custom ( int n , char const * left_quote , char const * right_quote , char const * arg ) ",
+            "startCol": 1,
+            "startLine": 18609,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "n",
+                "left_quote",
+                "right_quote",
+                "arg",
+                "argsize"
+            ],
+            "argTypes": [
+                "int",
+                "const char *",
+                "const char *",
+                "const char *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 18625,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "set_custom_quoting"
+                },
+                {
+                    "name": "quotearg_n_options"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "default_quoting_options"
+                }
+            ],
+            "name": "quotearg_n_custom_mem",
+            "num_args": 5,
+            "returnType": "char *",
+            "signature": "char * quotearg_n_custom_mem ( int n , char const * left_quote , char const * right_quote , char const * arg , size_t argsize ) ",
+            "startCol": 1,
+            "startLine": 18617,
+            "structs": [
+                {
+                    "name": "quoting_options"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "left_quote",
+                "right_quote",
+                "arg"
+            ],
+            "argTypes": [
+                "const char *",
+                "const char *",
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 18632,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quotearg_n_custom"
+                }
+            ],
+            "globals": [],
+            "name": "quotearg_custom",
+            "num_args": 3,
+            "returnType": "char *",
+            "signature": "char * quotearg_custom ( char const * left_quote , char const * right_quote , char const * arg ) ",
+            "startCol": 1,
+            "startLine": 18627,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "left_quote",
+                "right_quote",
+                "arg",
+                "argsize"
+            ],
+            "argTypes": [
+                "const char *",
+                "const char *",
+                "const char *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 18640,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quotearg_n_custom_mem"
+                }
+            ],
+            "globals": [],
+            "name": "quotearg_custom_mem",
+            "num_args": 4,
+            "returnType": "char *",
+            "signature": "char * quotearg_custom_mem ( char const * left_quote , char const * right_quote , char const * arg , size_t argsize ) ",
+            "startCol": 1,
+            "startLine": 18634,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "n",
+                "arg",
+                "argsize"
+            ],
+            "argTypes": [
+                "int",
+                "const char *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 18657,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quotearg_n_options"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "quote_quoting_options"
+                }
+            ],
+            "name": "quote_n_mem",
+            "num_args": 3,
+            "returnType": "const char *",
+            "signature": "char const * quote_n_mem ( int n , char const * arg , size_t argsize ) ",
+            "startCol": 1,
+            "startLine": 18653,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "arg",
+                "argsize"
+            ],
+            "argTypes": [
+                "const char *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 18663,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quote_n_mem"
+                }
+            ],
+            "globals": [],
+            "name": "quote_mem",
+            "num_args": 2,
+            "returnType": "const char *",
+            "signature": "char const * quote_mem ( char const * arg , size_t argsize ) ",
+            "startCol": 1,
+            "startLine": 18659,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "n",
+                "arg"
+            ],
+            "argTypes": [
+                "int",
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 18669,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quote_n_mem"
+                }
+            ],
+            "globals": [],
+            "name": "quote_n",
+            "num_args": 2,
+            "returnType": "const char *",
+            "signature": "char const * quote_n ( int n , char const * arg ) ",
+            "startCol": 1,
+            "startLine": 18665,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "arg"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 18675,
+            "enums": [],
+            "filename": "quotearg.c",
+            "functions": [
+                {
+                    "name": "quote_n"
+                }
+            ],
+            "globals": [],
+            "name": "quote",
+            "num_args": 1,
+            "returnType": "const char *",
+            "signature": "char const * quote ( char const * arg ) ",
+            "startCol": 1,
+            "startLine": 18671,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "root_d_i"
+            ],
+            "argTypes": [
+                "struct dev_ino *"
+            ],
+            "endCol": 1,
+            "endLine": 10924,
+            "enums": [],
+            "filename": "root-dev-ino.c",
+            "functions": [
+                {
+                    "name": "lstat"
+                }
+            ],
+            "globals": [],
+            "name": "get_root_dev_ino",
+            "num_args": 1,
+            "returnType": "struct dev_ino *",
+            "signature": "struct dev_ino * get_root_dev_ino ( struct dev_ino * root_d_i ) ",
+            "startCol": 1,
+            "startLine": 10915,
+            "structs": [
+                {
+                    "name": "stat"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "category"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 7125,
+            "enums": [],
+            "filename": "setlocale_null-unlocked.c",
+            "functions": [
+                {
+                    "name": "setlocale"
+                }
+            ],
+            "globals": [],
+            "name": "setlocale_null_unlocked",
+            "num_args": 1,
+            "returnType": "const char *",
+            "signature": "const char * setlocale_null_unlocked ( int category ) ",
+            "startCol": 1,
+            "startLine": 7120,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "category",
+                "buf",
+                "bufsize"
+            ],
+            "argTypes": [
+                "int",
+                "char *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 7164,
+            "enums": [],
+            "filename": "setlocale_null-unlocked.c",
+            "functions": [
+                {
+                    "name": "setlocale_null_unlocked"
+                },
+                {
+                    "name": "strlen"
+                }
+            ],
+            "globals": [],
+            "name": "setlocale_null_r_unlocked",
+            "num_args": 3,
+            "returnType": "int",
+            "signature": "int setlocale_null_r_unlocked ( int category , char * buf , size_t bufsize ) ",
+            "startCol": 1,
+            "startLine": 7127,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "category",
+                "buf",
+                "bufsize"
+            ],
+            "argTypes": [
+                "int",
+                "char *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 10431,
+            "enums": [],
+            "filename": "setlocale_null.c",
+            "functions": [
+                {
+                    "name": "setlocale_null_r_unlocked"
+                }
+            ],
+            "globals": [],
+            "name": "setlocale_null_r",
+            "num_args": 3,
+            "returnType": "int",
+            "signature": "int setlocale_null_r ( int category , char * buf , size_t bufsize ) ",
+            "startCol": 1,
+            "startLine": 10424,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "category"
+            ],
+            "argTypes": [
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 10438,
+            "enums": [],
+            "filename": "setlocale_null.c",
+            "functions": [
+                {
+                    "name": "setlocale_null_unlocked"
+                }
+            ],
+            "globals": [],
+            "name": "setlocale_null",
+            "num_args": 1,
+            "returnType": "const char *",
+            "signature": "const char * setlocale_null ( int category ) ",
+            "startCol": 1,
+            "startLine": 10433,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "stream",
+                "command_name",
+                "package",
+                "version",
+                "authors"
+            ],
+            "argTypes": [
+                "FILE *",
+                "const char *",
+                "const char *",
+                "const char *",
+                "const char *const *"
+            ],
+            "endCol": 1,
+            "endLine": 11996,
+            "enums": [],
+            "filename": "version-etc.c",
+            "functions": [
+                {
+                    "name": "version_etc_arn"
+                }
+            ],
+            "globals": [],
+            "name": "version_etc_ar",
+            "num_args": 5,
+            "returnType": "void",
+            "signature": "void version_etc_ar ( FILE * stream , const char * command_name , const char * package , const char * version , const char * const * authors ) ",
+            "startCol": 1,
+            "startLine": 11986,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "stream",
+                "command_name",
+                "package",
+                "version"
+            ],
+            "argTypes": [
+                "FILE *",
+                "const char *",
+                "const char *",
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 12031,
+            "enums": [],
+            "filename": "version-etc.c",
+            "functions": [
+                {
+                    "name": "version_etc_va"
+                }
+            ],
+            "globals": [],
+            "name": "version_etc",
+            "num_args": 4,
+            "returnType": "void",
+            "signature": "void version_etc ( FILE * stream , const char * command_name , const char * package , const char * version , /* const char *author1, ...*/ ... ) ",
+            "startCol": 1,
+            "startLine": 12021,
+            "structs": []
+        },
+        {
+            "argNames": [],
+            "argTypes": [],
+            "endCol": 1,
+            "endLine": 12054,
+            "enums": [],
+            "filename": "version-etc.c",
+            "functions": [
+                {
+                    "name": "fputs_unlocked"
+                },
+                {
+                    "name": "gettext"
+                },
+                {
+                    "name": "printf"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "stdout"
+                }
+            ],
+            "name": "emit_bug_reporting_address",
+            "num_args": 0,
+            "returnType": "void",
+            "signature": "void emit_bug_reporting_address ( void ) ",
+            "startCol": 1,
+            "startLine": 12033,
+            "structs": []
+        },
+        {
+            "argNames": [],
+            "argTypes": [],
+            "endCol": 1,
+            "endLine": 12698,
+            "enums": [],
+            "filename": "xalloc-die.c",
+            "functions": [
+                {
+                    "name": "gettext"
+                },
+                {
+                    "name": "error"
+                },
+                {
+                    "name": "abort"
+                }
+            ],
+            "globals": [
+                {
+                    "name": "exit_failure"
+                }
+            ],
+            "name": "xalloc_die",
+            "num_args": 0,
+            "returnType": "void",
+            "signature": "void xalloc_die ( void ) ",
+            "startCol": 1,
+            "startLine": 12688,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "p"
+            ],
+            "argTypes": [
+                "void *"
+            ],
+            "endCol": 1,
+            "endLine": 13412,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "xalloc_die"
+                }
+            ],
+            "globals": [],
+            "name": "check_nonnull",
+            "num_args": 1,
+            "returnType": "void *",
+            "signature": "static void * __attribute__ ( ( __pure__ ) ) check_nonnull ( void * p ) ",
+            "startCol": 1,
+            "startLine": 13406,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "s"
+            ],
+            "argTypes": [
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 13420,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "malloc"
+                },
+                {
+                    "name": "check_nonnull"
+                }
+            ],
+            "globals": [],
+            "name": "xmalloc",
+            "num_args": 1,
+            "returnType": "void *",
+            "signature": "void * xmalloc ( size_t s ) ",
+            "startCol": 1,
+            "startLine": 13416,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "s"
+            ],
+            "argTypes": [
+                "idx_t"
+            ],
+            "endCol": 1,
+            "endLine": 13426,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "imalloc"
+                },
+                {
+                    "name": "check_nonnull"
+                }
+            ],
+            "globals": [],
+            "name": "ximalloc",
+            "num_args": 1,
+            "returnType": "void *",
+            "signature": "void * ximalloc ( idx_t s ) ",
+            "startCol": 1,
+            "startLine": 13422,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "n"
+            ],
+            "argTypes": [
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 13432,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "xmalloc"
+                }
+            ],
+            "globals": [],
+            "name": "xcharalloc",
+            "num_args": 1,
+            "returnType": "char *",
+            "signature": "char * xcharalloc ( size_t n ) ",
+            "startCol": 1,
+            "startLine": 13428,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "p",
+                "s"
+            ],
+            "argTypes": [
+                "void *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 13444,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "realloc"
+                },
+                {
+                    "name": "xalloc_die"
+                }
+            ],
+            "globals": [],
+            "name": "xrealloc",
+            "num_args": 2,
+            "returnType": "void *",
+            "signature": "void * xrealloc ( void * p , size_t s ) ",
+            "startCol": 1,
+            "startLine": 13437,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "p",
+                "s"
+            ],
+            "argTypes": [
+                "void *",
+                "idx_t"
+            ],
+            "endCol": 1,
+            "endLine": 13450,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "irealloc"
+                },
+                {
+                    "name": "check_nonnull"
+                }
+            ],
+            "globals": [],
+            "name": "xirealloc",
+            "num_args": 2,
+            "returnType": "void *",
+            "signature": "void * xirealloc ( void * p , idx_t s ) ",
+            "startCol": 1,
+            "startLine": 13446,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "p",
+                "n",
+                "s"
+            ],
+            "argTypes": [
+                "void *",
+                "size_t",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 13462,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "reallocarray"
+                },
+                {
+                    "name": "xalloc_die"
+                }
+            ],
+            "globals": [],
+            "name": "xreallocarray",
+            "num_args": 3,
+            "returnType": "void *",
+            "signature": "void * xreallocarray ( void * p , size_t n , size_t s ) ",
+            "startCol": 1,
+            "startLine": 13455,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "p",
+                "n",
+                "s"
+            ],
+            "argTypes": [
+                "void *",
+                "idx_t",
+                "idx_t"
+            ],
+            "endCol": 1,
+            "endLine": 13468,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "ireallocarray"
+                },
+                {
+                    "name": "check_nonnull"
+                }
+            ],
+            "globals": [],
+            "name": "xireallocarray",
+            "num_args": 3,
+            "returnType": "void *",
+            "signature": "void * xireallocarray ( void * p , idx_t n , idx_t s ) ",
+            "startCol": 1,
+            "startLine": 13464,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "n",
+                "s"
+            ],
+            "argTypes": [
+                "size_t",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 13477,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "xreallocarray"
+                }
+            ],
+            "globals": [],
+            "name": "xnmalloc",
+            "num_args": 2,
+            "returnType": "void *",
+            "signature": "void * xnmalloc ( size_t n , size_t s ) ",
+            "startCol": 1,
+            "startLine": 13473,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "n",
+                "s"
+            ],
+            "argTypes": [
+                "idx_t",
+                "idx_t"
+            ],
+            "endCol": 1,
+            "endLine": 13483,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "xireallocarray"
+                }
+            ],
+            "globals": [],
+            "name": "xinmalloc",
+            "num_args": 2,
+            "returnType": "void *",
+            "signature": "void * xinmalloc ( idx_t n , idx_t s ) ",
+            "startCol": 1,
+            "startLine": 13479,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "p",
+                "ps"
+            ],
+            "argTypes": [
+                "void *",
+                "size_t *"
+            ],
+            "endCol": 1,
+            "endLine": 13495,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "x2nrealloc"
+                }
+            ],
+            "globals": [],
+            "name": "x2realloc",
+            "num_args": 2,
+            "returnType": "void *",
+            "signature": "void * x2realloc ( void * p , size_t * ps ) ",
+            "startCol": 1,
+            "startLine": 13491,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "p",
+                "pn",
+                "s"
+            ],
+            "argTypes": [
+                "void *",
+                "size_t *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 13580,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "xalloc_die"
+                },
+                {
+                    "name": "xreallocarray"
+                }
+            ],
+            "globals": [],
+            "name": "x2nrealloc",
+            "num_args": 3,
+            "returnType": "void *",
+            "signature": "void * x2nrealloc ( void * p , size_t * pn , size_t s ) ",
+            "startCol": 1,
+            "startLine": 13551,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "pa",
+                "pn",
+                "n_incr_min",
+                "n_max",
+                "s"
+            ],
+            "argTypes": [
+                "void *",
+                "idx_t *",
+                "idx_t",
+                "ptrdiff_t",
+                "idx_t"
+            ],
+            "endCol": 1,
+            "endLine": 13648,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "xalloc_die"
+                },
+                {
+                    "name": "xrealloc"
+                }
+            ],
+            "globals": [],
+            "name": "xpalloc",
+            "num_args": 5,
+            "returnType": "void *",
+            "signature": "void * xpalloc ( void * pa , idx_t * pn , idx_t n_incr_min , ptrdiff_t n_max , idx_t s ) ",
+            "startCol": 1,
+            "startLine": 13598,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "s"
+            ],
+            "argTypes": [
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 13658,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "xcalloc"
+                }
+            ],
+            "globals": [],
+            "name": "xzalloc",
+            "num_args": 1,
+            "returnType": "void *",
+            "signature": "void * xzalloc ( size_t s ) ",
+            "startCol": 1,
+            "startLine": 13654,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "s"
+            ],
+            "argTypes": [
+                "idx_t"
+            ],
+            "endCol": 1,
+            "endLine": 13664,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "xicalloc"
+                }
+            ],
+            "globals": [],
+            "name": "xizalloc",
+            "num_args": 1,
+            "returnType": "void *",
+            "signature": "void * xizalloc ( idx_t s ) ",
+            "startCol": 1,
+            "startLine": 13660,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "n",
+                "s"
+            ],
+            "argTypes": [
+                "size_t",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 13673,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "calloc"
+                },
+                {
+                    "name": "check_nonnull"
+                }
+            ],
+            "globals": [],
+            "name": "xcalloc",
+            "num_args": 2,
+            "returnType": "void *",
+            "signature": "void * xcalloc ( size_t n , size_t s ) ",
+            "startCol": 1,
+            "startLine": 13669,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "n",
+                "s"
+            ],
+            "argTypes": [
+                "idx_t",
+                "idx_t"
+            ],
+            "endCol": 1,
+            "endLine": 13679,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "icalloc"
+                },
+                {
+                    "name": "check_nonnull"
+                }
+            ],
+            "globals": [],
+            "name": "xicalloc",
+            "num_args": 2,
+            "returnType": "void *",
+            "signature": "void * xicalloc ( idx_t n , idx_t s ) ",
+            "startCol": 1,
+            "startLine": 13675,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "p",
+                "s"
+            ],
+            "argTypes": [
+                "const void *",
+                "size_t"
+            ],
+            "endCol": 1,
+            "endLine": 13689,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "xmalloc"
+                }
+            ],
+            "globals": [],
+            "name": "xmemdup",
+            "num_args": 2,
+            "returnType": "void *",
+            "signature": "void * xmemdup ( void const * p , size_t s ) ",
+            "startCol": 1,
+            "startLine": 13685,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "p",
+                "s"
+            ],
+            "argTypes": [
+                "const void *",
+                "idx_t"
+            ],
+            "endCol": 1,
+            "endLine": 13695,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "ximalloc"
+                }
+            ],
+            "globals": [],
+            "name": "ximemdup",
+            "num_args": 2,
+            "returnType": "void *",
+            "signature": "void * ximemdup ( void const * p , idx_t s ) ",
+            "startCol": 1,
+            "startLine": 13691,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "p",
+                "s"
+            ],
+            "argTypes": [
+                "const void *",
+                "idx_t"
+            ],
+            "endCol": 1,
+            "endLine": 13706,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "ximalloc"
+                }
+            ],
+            "globals": [],
+            "name": "ximemdup0",
+            "num_args": 2,
+            "returnType": "char *",
+            "signature": "char * ximemdup0 ( void const * p , idx_t s ) ",
+            "startCol": 1,
+            "startLine": 13700,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "string"
+            ],
+            "argTypes": [
+                "const char *"
+            ],
+            "endCol": 1,
+            "endLine": 13714,
+            "enums": [],
+            "filename": "xmalloc.c",
+            "functions": [
+                {
+                    "name": "strlen"
+                },
+                {
+                    "name": "xmemdup"
+                }
+            ],
+            "globals": [],
+            "name": "xstrdup",
+            "num_args": 1,
+            "returnType": "char *",
+            "signature": "char * xstrdup ( char const * string ) ",
+            "startCol": 1,
+            "startLine": 13710,
+            "structs": []
+        }
+    ],
+    "globals": [
+        {
+            "endCol": 22,
+            "endLine": 15374,
+            "filename": "closeout.c",
+            "isStatic": false,
+            "name": "file_name",
+            "startCol": 1,
+            "startLine": 15374,
+            "type": "const char *"
+        },
+        {
+            "endCol": 19,
+            "endLine": 15385,
+            "filename": "closeout.c",
+            "isStatic": false,
+            "name": "ignore_EPIPE",
+            "startCol": 1,
+            "startLine": 15385,
+            "type": "_Bool"
+        },
+        {
+            "endCol": 30,
+            "endLine": 8718,
+            "filename": "exitfail.c",
+            "isStatic": false,
+            "name": "exit_failure",
+            "startCol": 1,
+            "startLine": 8718,
+            "type": "volatile int"
+        },
+        {
+            "endCol": 25,
+            "endLine": 13854,
+            "filename": "mbrtoc32.c",
+            "isStatic": false,
+            "name": "internal_state",
+            "startCol": 1,
+            "startLine": 13854,
+            "type": "mbstate_t"
+        },
+        {
+            "endCol": 38,
+            "endLine": 11650,
+            "filename": "progname.c",
+            "isStatic": false,
+            "name": "program_name",
+            "startCol": 1,
+            "startLine": 11650,
+            "type": "const char *"
+        },
+        {
+            "endCol": 2,
+            "endLine": 26401,
+            "filename": "pwd.c",
+            "isStatic": false,
+            "name": "longopts",
+            "startCol": 1,
+            "startLine": 26394,
+            "type": "const struct option [5]"
+        },
+        {
+            "endCol": 2,
+            "endLine": 17721,
+            "filename": "quotearg.c",
+            "isStatic": false,
+            "name": "quoting_style_args",
+            "startCol": 1,
+            "startLine": 17708,
+            "type": "const char *const [11]"
+        },
+        {
+            "endCol": 2,
+            "endLine": 17737,
+            "filename": "quotearg.c",
+            "isStatic": false,
+            "name": "quoting_style_vals",
+            "startCol": 1,
+            "startLine": 17725,
+            "type": "const enum quoting_style [10]"
+        },
+        {
+            "endCol": 47,
+            "endLine": 17741,
+            "filename": "quotearg.c",
+            "isStatic": false,
+            "name": "default_quoting_options",
+            "startCol": 1,
+            "startLine": 17741,
+            "type": "struct quoting_options"
+        },
+        {
+            "endCol": 16,
+            "endLine": 18431,
+            "filename": "quotearg.c",
+            "isStatic": false,
+            "name": "slot0",
+            "startCol": 1,
+            "startLine": 18431,
+            "type": "char [256]"
+        },
+        {
+            "endCol": 15,
+            "endLine": 18433,
+            "filename": "quotearg.c",
+            "isStatic": false,
+            "name": "nslots",
+            "startCol": 1,
+            "startLine": 18433,
+            "type": "int"
+        },
+        {
+            "endCol": 48,
+            "endLine": 18435,
+            "filename": "quotearg.c",
+            "isStatic": false,
+            "name": "slotvec0",
+            "startCol": 1,
+            "startLine": 18435,
+            "type": "struct slotvec"
+        },
+        {
+            "endCol": 36,
+            "endLine": 18437,
+            "filename": "quotearg.c",
+            "isStatic": false,
+            "name": "slotvec",
+            "startCol": 1,
+            "startLine": 18437,
+            "type": "struct slotvec *"
+        },
+        {
+            "endCol": 4,
+            "endLine": 18651,
+            "filename": "quotearg.c",
+            "isStatic": false,
+            "name": "quote_quoting_options",
+            "startCol": 1,
+            "startLine": 18645,
+            "type": "struct quoting_options"
+        },
+        {
+            "endCol": 51,
+            "endLine": 8715,
+            "filename": "version-etc-fsf.c",
+            "isStatic": false,
+            "name": "version_etc_copyright",
+            "startCol": 1,
+            "startLine": 8711,
+            "type": "const char [47]"
+        },
+        {
+            "endCol": 37,
+            "endLine": 5035,
+            "filename": "version.c",
+            "isStatic": false,
+            "name": "Version",
+            "startCol": 1,
+            "startLine": 5035,
+            "type": "const char *"
+        }
+    ],
+    "structs": [
+        {
+            "endCol": 1,
+            "endLine": 5191,
+            "enums": [],
+            "filename": "c-strcasecmp.c",
+            "name": "",
+            "startCol": 9,
+            "startLine": 5186,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 6303,
+            "enums": [],
+            "filename": "c32isprint.c",
+            "name": "__locale_struct",
+            "startCol": 1,
+            "startLine": 6291,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 5555,
+            "enums": [],
+            "filename": "close-stream.c",
+            "name": "_G_fpos_t",
+            "startCol": 9,
+            "startLine": 5551,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 5569,
+            "enums": [],
+            "filename": "close-stream.c",
+            "name": "_G_fpos64_t",
+            "startCol": 9,
+            "startLine": 5565,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 5669,
+            "enums": [],
+            "filename": "close-stream.c",
+            "name": "_IO_FILE",
+            "startCol": 1,
+            "startLine": 5619,
+            "structs": [
+                {
+                    "name": "_IO_FILE"
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 5735,
+            "enums": [],
+            "filename": "close-stream.c",
+            "name": "_IO_cookie_io_functions_t",
+            "startCol": 9,
+            "startLine": 5729,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 7269,
+            "enums": [],
+            "filename": "close-stream.c",
+            "name": "timeval",
+            "startCol": 1,
+            "startLine": 7265,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 7287,
+            "enums": [],
+            "filename": "close-stream.c",
+            "name": "timespec",
+            "startCol": 1,
+            "startLine": 7280,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 7792,
+            "enums": [],
+            "filename": "close-stream.c",
+            "name": "__pthread_internal_list",
+            "startCol": 9,
+            "startLine": 7788,
+            "structs": [
+                {
+                    "name": "__pthread_internal_list"
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 7797,
+            "enums": [],
+            "filename": "close-stream.c",
+            "name": "__pthread_internal_slist",
+            "startCol": 9,
+            "startLine": 7794,
+            "structs": [
+                {
+                    "name": "__pthread_internal_slist"
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 7850,
+            "enums": [],
+            "filename": "close-stream.c",
+            "name": "__pthread_mutex_s",
+            "startCol": 1,
+            "startLine": 7835,
+            "structs": [
+                {
+                    "name": "__pthread_internal_list"
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 7909,
+            "enums": [],
+            "filename": "close-stream.c",
+            "name": "__pthread_rwlock_arch_t",
+            "startCol": 1,
+            "startLine": 7886,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 7939,
+            "enums": [],
+            "filename": "close-stream.c",
+            "name": "__pthread_cond_s",
+            "startCol": 1,
+            "startLine": 7914,
+            "structs": []
+        },
+        {
+            "endCol": 3,
+            "endLine": 13470,
+            "enums": [],
+            "filename": "closeout.c",
+            "name": "random_data",
+            "startCol": 1,
+            "startLine": 13461,
+            "structs": []
+        },
+        {
+            "endCol": 3,
+            "endLine": 13536,
+            "enums": [],
+            "filename": "closeout.c",
+            "name": "drand48_data",
+            "startCol": 1,
+            "startLine": 13528,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 5262,
+            "enums": [],
+            "filename": "hard-locale.c",
+            "name": "lconv",
+            "startCol": 1,
+            "startLine": 5203,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 5234,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "option",
+            "startCol": 1,
+            "startLine": 5226,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 9443,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "timex",
+            "startCol": 1,
+            "startLine": 9415,
+            "structs": [
+                {
+                    "name": "timeval"
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 9485,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "tm",
+            "startCol": 1,
+            "startLine": 9466,
+            "structs": []
+        },
+        {
+            "endCol": 3,
+            "endLine": 9505,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "itimerspec",
+            "startCol": 1,
+            "startLine": 9501,
+            "structs": [
+                {
+                    "name": "timespec"
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 9994,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "__time_t_must_be_integral",
+            "startCol": 1,
+            "startLine": 9992,
+            "structs": []
+        },
+        {
+            "endCol": 3,
+            "endLine": 10249,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "stat",
+            "startCol": 1,
+            "startLine": 10200,
+            "structs": [
+                {
+                    "name": "timespec"
+                }
+            ]
+        },
+        {
+            "endCol": 3,
+            "endLine": 10293,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "stat64",
+            "startCol": 1,
+            "startLine": 10253,
+            "structs": [
+                {
+                    "name": "timespec"
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 10828,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "statx_timestamp",
+            "startCol": 1,
+            "startLine": 10824,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 10896,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "statx",
+            "startCol": 1,
+            "startLine": 10867,
+            "structs": [
+                {
+                    "name": "statx_timestamp"
+                }
+            ]
+        },
+        {
+            "endCol": 3,
+            "endLine": 12552,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "sigevent",
+            "startCol": 9,
+            "startLine": 12532,
+            "structs": []
+        },
+        {
+            "endCol": 3,
+            "endLine": 12754,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "sigaction",
+            "startCol": 1,
+            "startLine": 12728,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 12852,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "_fpx_sw_bytes",
+            "startCol": 1,
+            "startLine": 12845,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 12858,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "_fpreg",
+            "startCol": 1,
+            "startLine": 12854,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 12865,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "_fpxreg",
+            "startCol": 1,
+            "startLine": 12860,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 12870,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "_xmmreg",
+            "startCol": 1,
+            "startLine": 12867,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 12885,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "_fpstate",
+            "startCol": 1,
+            "startLine": 12871,
+            "structs": [
+                {
+                    "name": "_xmmreg"
+                },
+                {
+                    "name": "_fpxreg"
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 12921,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "sigcontext",
+            "startCol": 1,
+            "startLine": 12887,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 12930,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "_xsave_hdr",
+            "startCol": 1,
+            "startLine": 12925,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 12935,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "_ymmh_state",
+            "startCol": 1,
+            "startLine": 12932,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 12942,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "_xstate",
+            "startCol": 1,
+            "startLine": 12937,
+            "structs": [
+                {
+                    "name": "_ymmh_state"
+                },
+                {
+                    "name": "_xsave_hdr"
+                },
+                {
+                    "name": "_fpstate"
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 13178,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "_libc_fpxreg",
+            "startCol": 1,
+            "startLine": 13173,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 13183,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "_libc_xmmreg",
+            "startCol": 1,
+            "startLine": 13180,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 13199,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "_libc_fpstate",
+            "startCol": 1,
+            "startLine": 13185,
+            "structs": [
+                {
+                    "name": "_libc_xmmreg"
+                },
+                {
+                    "name": "_libc_fpxreg"
+                }
+            ]
+        },
+        {
+            "endCol": 3,
+            "endLine": 13223,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "ucontext_t",
+            "startCol": 9,
+            "startLine": 13214,
+            "structs": [
+                {
+                    "name": "_libc_fpstate"
+                },
+                {
+                    "name": ""
+                },
+                {
+                    "name": "ucontext_t"
+                }
+            ]
+        },
+        {
+            "endCol": 3,
+            "endLine": 13316,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "sigstack",
+            "startCol": 1,
+            "startLine": 13312,
+            "structs": []
+        },
+        {
+            "endCol": 3,
+            "endLine": 16587,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "timezone",
+            "startCol": 1,
+            "startLine": 16583,
+            "structs": []
+        },
+        {
+            "endCol": 3,
+            "endLine": 16642,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "itimerval",
+            "startCol": 1,
+            "startLine": 16636,
+            "structs": [
+                {
+                    "name": "timeval"
+                }
+            ]
+        },
+        {
+            "endCol": 3,
+            "endLine": 20255,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "flock",
+            "startCol": 1,
+            "startLine": 20243,
+            "structs": []
+        },
+        {
+            "endCol": 3,
+            "endLine": 20265,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "flock64",
+            "startCol": 1,
+            "startLine": 20258,
+            "structs": []
+        },
+        {
+            "endCol": 3,
+            "endLine": 20389,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "iovec",
+            "startCol": 1,
+            "startLine": 20385,
+            "structs": []
+        },
+        {
+            "endCol": 3,
+            "endLine": 20443,
+            "enums": [
+                {
+                    "name": "__pid_type"
+                }
+            ],
+            "filename": "pwd.c",
+            "name": "f_owner_ex",
+            "startCol": 1,
+            "startLine": 20439,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 20548,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "file_handle",
+            "startCol": 1,
+            "startLine": 20542,
+            "structs": []
+        },
+        {
+            "endCol": 3,
+            "endLine": 21040,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "dirent",
+            "startCol": 1,
+            "startLine": 21028,
+            "structs": []
+        },
+        {
+            "endCol": 3,
+            "endLine": 21050,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "dirent64",
+            "startCol": 1,
+            "startLine": 21043,
+            "structs": []
+        },
+        {
+            "endCol": 59,
+            "endLine": 25284,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "infomap",
+            "startCol": 3,
+            "startLine": 25284,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 26324,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "dev_ino",
+            "startCol": 1,
+            "startLine": 26320,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 26391,
+            "enums": [],
+            "filename": "pwd.c",
+            "name": "file_name",
+            "startCol": 1,
+            "startLine": 26386,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 17704,
+            "enums": [
+                {
+                    "name": "quoting_style"
+                }
+            ],
+            "filename": "quotearg.c",
+            "name": "quoting_options",
+            "startCol": 1,
+            "startLine": 17687,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 18426,
+            "enums": [],
+            "filename": "quotearg.c",
+            "name": "slotvec",
+            "startCol": 1,
+            "startLine": 18422,
+            "structs": []
+        }
+    ]
+}

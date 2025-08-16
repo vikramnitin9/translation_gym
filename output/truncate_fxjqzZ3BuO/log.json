@@ -1,0 +1,288 @@
+{
+    "date": "2025-08-01 09:38:20.029531",
+    "args": {
+        "dataset": "truncate",
+        "model": "claude37",
+        "num_attempts": 5,
+        "output_dir": "/app/output/truncate_fxjqzZ3BuO",
+        "verbose": true
+    },
+    "results": [
+        {
+            "unit": "program_name",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "set_program_name",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "to_uchar",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "infomap",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "strtol_error",
+            "type": "enums",
+            "results": "repair_failed",
+            "attempts": 1
+        },
+        {
+            "unit": "xstrtoimax",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "exit_failure",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "xrealloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "xpalloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "locale_charset",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "c_tolower",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "c_strcasecmp",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "quoting_style",
+            "type": "enums",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "gettext_quote",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "",
+            "type": "enums",
+            "results": "repair_failed",
+            "attempts": 1
+        },
+        {
+            "unit": "quoting_flags",
+            "type": "enums",
+            "results": "repair_failed",
+            "attempts": 1
+        },
+        {
+            "unit": "quotearg_buffer_restyled",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "check_nonnull",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "xmalloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "xcharalloc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "quotearg_n_options",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "quote_quoting_options",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "quote_n_mem",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "quote_n",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "quote",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "xnumtoimax",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "xdectoimax",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 5
+        },
+        {
+            "unit": "proper_name_lite",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "version_etc_copyright",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "version_etc_arn",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 5
+        },
+        {
+            "unit": "version_etc_va",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "version_etc",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 5
+        },
+        {
+            "unit": "timespec",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "stat",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "quoting_options",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "quoting_options_from_style",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "quotearg_n_style",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "quotearg_style",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "usable_st_size",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "block_mode",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "do_ftruncate",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "Version",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "ref_file",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "no_create",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "longopts",
+            "type": "globals",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "main_0",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        }
+    ]
+}

@@ -1,0 +1,936 @@
+{
+    "enums": [
+        {
+            "endCol": 1,
+            "endLine": 2002,
+            "filename": "avl_bf.c",
+            "name": "avlbf",
+            "startCol": 1,
+            "startLine": 1998
+        },
+        {
+            "endCol": 1,
+            "endLine": 2008,
+            "filename": "avl_bf.c",
+            "name": "avltraversal",
+            "startCol": 1,
+            "startLine": 2004
+        }
+    ],
+    "files": [],
+    "functions": [
+        {
+            "argNames": [
+                "compare_func",
+                "destroy_func"
+            ],
+            "argTypes": [
+                "int (*)(const void *, const void *)",
+                "void (*)(void *)"
+            ],
+            "endCol": 1,
+            "endLine": 2089,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "functions": [
+                {
+                    "name": "malloc"
+                }
+            ],
+            "globals": [],
+            "name": "avl_create",
+            "num_args": 2,
+            "returnType": "avltree *",
+            "signature": "avltree * avl_create ( int ( * compare_func ) ( const void * , const void * ) , void ( * destroy_func ) ( void * ) ) ",
+            "startCol": 1,
+            "startLine": 2063,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "avlt",
+                "data"
+            ],
+            "argTypes": [
+                "avltree *",
+                "void *"
+            ],
+            "endCol": 1,
+            "endLine": 2118,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "functions": [],
+            "globals": [],
+            "name": "avl_find",
+            "num_args": 2,
+            "returnType": "avlnode *",
+            "signature": "avlnode * avl_find ( avltree * avlt , void * data ) ",
+            "startCol": 1,
+            "startLine": 2103,
+            "structs": [
+                {
+                    "name": "avlnode"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "avlt",
+                "node"
+            ],
+            "argTypes": [
+                "avltree *",
+                "avlnode *"
+            ],
+            "endCol": 1,
+            "endLine": 2142,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "functions": [],
+            "globals": [],
+            "name": "avl_successor",
+            "num_args": 2,
+            "returnType": "avlnode *",
+            "signature": "avlnode * avl_successor ( avltree * avlt , avlnode * node ) ",
+            "startCol": 1,
+            "startLine": 2124,
+            "structs": [
+                {
+                    "name": "avlnode"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "avlt",
+                "node",
+                "func",
+                "cookie",
+                "order"
+            ],
+            "argTypes": [
+                "avltree *",
+                "avlnode *",
+                "int (*)(void *, void *)",
+                "void *",
+                "enum avltraversal"
+            ],
+            "endCol": 1,
+            "endLine": 2166,
+            "enums": [
+                {
+                    "name": "avltraversal"
+                }
+            ],
+            "filename": "avl_bf.c",
+            "functions": [
+                {
+                    "name": "avl_apply"
+                }
+            ],
+            "globals": [],
+            "name": "avl_apply",
+            "num_args": 5,
+            "returnType": "int",
+            "signature": "int avl_apply ( avltree * avlt , avlnode * node , int ( * func ) ( void * , void * ) , void * cookie , enum avltraversal order ) ",
+            "startCol": 1,
+            "startLine": 2148,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "avlt",
+                "print_func"
+            ],
+            "argTypes": [
+                "avltree *",
+                "void (*)(void *)"
+            ],
+            "endCol": 1,
+            "endLine": 2176,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "functions": [
+                {
+                    "name": "printf"
+                },
+                {
+                    "name": "print"
+                },
+                {
+                    "name": "check_height"
+                }
+            ],
+            "globals": [],
+            "name": "avl_print",
+            "num_args": 2,
+            "returnType": "void",
+            "signature": "void avl_print ( avltree * avlt , void ( * print_func ) ( void * ) ) ",
+            "startCol": 1,
+            "startLine": 2171,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "avlt"
+            ],
+            "argTypes": [
+                "avltree *"
+            ],
+            "endCol": 1,
+            "endLine": 2195,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "functions": [
+                {
+                    "name": "check_height"
+                }
+            ],
+            "globals": [],
+            "name": "avl_check_height",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "int avl_check_height ( avltree * avlt ) ",
+            "startCol": 1,
+            "startLine": 2189,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "avlt",
+                "data"
+            ],
+            "argTypes": [
+                "avltree *",
+                "void *"
+            ],
+            "endCol": 1,
+            "endLine": 2299,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "functions": [
+                {
+                    "name": "malloc"
+                },
+                {
+                    "name": "fix_insert_leftimbalance"
+                },
+                {
+                    "name": "fix_insert_rightimbalance"
+                }
+            ],
+            "globals": [],
+            "name": "avl_insert",
+            "num_args": 2,
+            "returnType": "avlnode *",
+            "signature": "avlnode * avl_insert ( avltree * avlt , void * data ) ",
+            "startCol": 1,
+            "startLine": 2201,
+            "structs": [
+                {
+                    "name": "avlnode"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "avlt",
+                "node",
+                "keep"
+            ],
+            "argTypes": [
+                "avltree *",
+                "avlnode *",
+                "int"
+            ],
+            "endCol": 1,
+            "endLine": 2426,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "functions": [
+                {
+                    "name": "avl_successor"
+                },
+                {
+                    "name": "fix_delete_rightimbalance"
+                },
+                {
+                    "name": "fix_delete_leftimbalance"
+                },
+                {
+                    "name": "free"
+                }
+            ],
+            "globals": [],
+            "name": "avl_delete",
+            "num_args": 3,
+            "returnType": "void *",
+            "signature": "void * avl_delete ( avltree * avlt , avlnode * node , int keep ) ",
+            "startCol": 1,
+            "startLine": 2305,
+            "structs": [
+                {
+                    "name": "avlnode"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "avlt",
+                "x"
+            ],
+            "argTypes": [
+                "avltree *",
+                "avlnode *"
+            ],
+            "endCol": 1,
+            "endLine": 2455,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "functions": [],
+            "globals": [],
+            "name": "rotate_left",
+            "num_args": 2,
+            "returnType": "avlnode *",
+            "signature": "avlnode * rotate_left ( avltree * avlt , avlnode * x ) ",
+            "startCol": 1,
+            "startLine": 2432,
+            "structs": [
+                {
+                    "name": "avlnode"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "avlt",
+                "x"
+            ],
+            "argTypes": [
+                "avltree *",
+                "avlnode *"
+            ],
+            "endCol": 1,
+            "endLine": 2484,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "functions": [],
+            "globals": [],
+            "name": "rotate_right",
+            "num_args": 2,
+            "returnType": "avlnode *",
+            "signature": "avlnode * rotate_right ( avltree * avlt , avlnode * x ) ",
+            "startCol": 1,
+            "startLine": 2461,
+            "structs": [
+                {
+                    "name": "avlnode"
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "avlt",
+                "p"
+            ],
+            "argTypes": [
+                "avltree *",
+                "avlnode *"
+            ],
+            "endCol": 1,
+            "endLine": 2514,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "functions": [
+                {
+                    "name": "rotate_right"
+                },
+                {
+                    "name": "rotate_left"
+                }
+            ],
+            "globals": [],
+            "name": "fix_insert_leftimbalance",
+            "num_args": 2,
+            "returnType": "avlnode *",
+            "signature": "avlnode * fix_insert_leftimbalance ( avltree * avlt , avlnode * p ) ",
+            "startCol": 1,
+            "startLine": 2490,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "avlt",
+                "p"
+            ],
+            "argTypes": [
+                "avltree *",
+                "avlnode *"
+            ],
+            "endCol": 1,
+            "endLine": 2542,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "functions": [
+                {
+                    "name": "rotate_left"
+                },
+                {
+                    "name": "rotate_right"
+                }
+            ],
+            "globals": [],
+            "name": "fix_insert_rightimbalance",
+            "num_args": 2,
+            "returnType": "avlnode *",
+            "signature": "avlnode * fix_insert_rightimbalance ( avltree * avlt , avlnode * p ) ",
+            "startCol": 1,
+            "startLine": 2520,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "avlt",
+                "p"
+            ],
+            "argTypes": [
+                "avltree *",
+                "avlnode *"
+            ],
+            "endCol": 1,
+            "endLine": 2574,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "functions": [
+                {
+                    "name": "rotate_right"
+                },
+                {
+                    "name": "rotate_left"
+                }
+            ],
+            "globals": [],
+            "name": "fix_delete_leftimbalance",
+            "num_args": 2,
+            "returnType": "avlnode *",
+            "signature": "avlnode * fix_delete_leftimbalance ( avltree * avlt , avlnode * p ) ",
+            "startCol": 1,
+            "startLine": 2548,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "avlt",
+                "p"
+            ],
+            "argTypes": [
+                "avltree *",
+                "avlnode *"
+            ],
+            "endCol": 1,
+            "endLine": 2606,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "functions": [
+                {
+                    "name": "rotate_left"
+                },
+                {
+                    "name": "rotate_right"
+                }
+            ],
+            "globals": [],
+            "name": "fix_delete_rightimbalance",
+            "num_args": 2,
+            "returnType": "avlnode *",
+            "signature": "avlnode * fix_delete_rightimbalance ( avltree * avlt , avlnode * p ) ",
+            "startCol": 1,
+            "startLine": 2580,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "avlt",
+                "n",
+                "min",
+                "max"
+            ],
+            "argTypes": [
+                "avltree *",
+                "avlnode *",
+                "void *",
+                "void *"
+            ],
+            "endCol": 1,
+            "endLine": 2624,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "functions": [],
+            "globals": [],
+            "name": "check_order",
+            "num_args": 4,
+            "returnType": "int",
+            "signature": "int check_order ( avltree * avlt , avlnode * n , void * min , void * max ) ",
+            "startCol": 1,
+            "startLine": 2611,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "avlt",
+                "n"
+            ],
+            "argTypes": [
+                "avltree *",
+                "avlnode *"
+            ],
+            "endCol": 1,
+            "endLine": 2649,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "functions": [
+                {
+                    "name": "check_height"
+                }
+            ],
+            "globals": [],
+            "name": "check_height",
+            "num_args": 2,
+            "returnType": "int",
+            "signature": "int check_height ( avltree * avlt , avlnode * n ) ",
+            "startCol": 1,
+            "startLine": 2629,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "avlt",
+                "n",
+                "print_func",
+                "depth",
+                "label"
+            ],
+            "argTypes": [
+                "avltree *",
+                "avlnode *",
+                "void (*)(void *)",
+                "int",
+                "char *"
+            ],
+            "endCol": 1,
+            "endLine": 2665,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "functions": [
+                {
+                    "name": "print"
+                },
+                {
+                    "name": "printf"
+                }
+            ],
+            "globals": [],
+            "name": "print",
+            "num_args": 5,
+            "returnType": "void",
+            "signature": "void print ( avltree * avlt , avlnode * n , void ( * print_func ) ( void * ) , int depth , char * label ) ",
+            "startCol": 1,
+            "startLine": 2654,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "d1",
+                "d2"
+            ],
+            "argTypes": [
+                "const void *",
+                "const void *"
+            ],
+            "endCol": 1,
+            "endLine": 2071,
+            "enums": [],
+            "filename": "avl_data.c",
+            "functions": [
+                {
+                    "name": "__assert_fail"
+                }
+            ],
+            "globals": [],
+            "name": "compare_func",
+            "num_args": 2,
+            "returnType": "int",
+            "signature": "int compare_func ( const void * d1 , const void * d2 ) ",
+            "startCol": 1,
+            "startLine": 2056,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "d"
+            ],
+            "argTypes": [
+                "void *"
+            ],
+            "endCol": 1,
+            "endLine": 2081,
+            "enums": [],
+            "filename": "avl_data.c",
+            "functions": [
+                {
+                    "name": "__assert_fail"
+                },
+                {
+                    "name": "free"
+                }
+            ],
+            "globals": [],
+            "name": "destroy_func",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "void destroy_func ( void * d ) ",
+            "startCol": 1,
+            "startLine": 2073,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "d"
+            ],
+            "argTypes": [
+                "void *"
+            ],
+            "endCol": 1,
+            "endLine": 2091,
+            "enums": [],
+            "filename": "avl_data.c",
+            "functions": [
+                {
+                    "name": "__assert_fail"
+                },
+                {
+                    "name": "printf"
+                }
+            ],
+            "globals": [],
+            "name": "print_func",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "void print_func ( void * d ) ",
+            "startCol": 1,
+            "startLine": 2083,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "d"
+            ],
+            "argTypes": [
+                "void *"
+            ],
+            "endCol": 1,
+            "endLine": 2101,
+            "enums": [],
+            "filename": "avl_data.c",
+            "functions": [
+                {
+                    "name": "__assert_fail"
+                },
+                {
+                    "name": "printf"
+                }
+            ],
+            "globals": [],
+            "name": "print_char_func",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "void print_char_func ( void * d ) ",
+            "startCol": 1,
+            "startLine": 2093,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "argc",
+                "argv"
+            ],
+            "argTypes": [
+                "int",
+                "char **"
+            ],
+            "endCol": 37,
+            "endLine": 2647,
+            "enums": [],
+            "filename": "avl_test.c",
+            "functions": [],
+            "globals": [],
+            "name": "main_0",
+            "num_args": 2,
+            "returnType": "int",
+            "signature": "int main ( int argc , char * * argv ) ; avltree * tree_create ( ) ; avlnode * tree_find ( avltree * avlt , int key ) ; void tree_print ( avltree * avlt ) ",
+            "startCol": 1,
+            "startLine": 2647,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "avlt"
+            ],
+            "argTypes": [
+                "avltree *"
+            ],
+            "endCol": 1,
+            "endLine": 2664,
+            "enums": [],
+            "filename": "avl_test.c",
+            "functions": [],
+            "globals": [],
+            "name": "tree_print",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "void tree_print ( avltree * avlt ) ",
+            "startCol": 1,
+            "startLine": 2661,
+            "structs": []
+        },
+        {
+            "argNames": [
+                "avlt"
+            ],
+            "argTypes": [
+                "avltree *"
+            ],
+            "endCol": 1,
+            "endLine": 2686,
+            "enums": [],
+            "filename": "avl_test.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "stdout"
+                }
+            ],
+            "name": "tree_check",
+            "num_args": 1,
+            "returnType": "int",
+            "signature": "int tree_check ( avltree * avlt ) ",
+            "startCol": 1,
+            "startLine": 2666,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "a"
+            ],
+            "argTypes": [
+                "char *"
+            ],
+            "endCol": 1,
+            "endLine": 2729,
+            "enums": [],
+            "filename": "avl_test.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "permutation_error"
+                },
+                {
+                    "name": "stdout"
+                }
+            ],
+            "name": "permutation_insert",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "void permutation_insert ( char * a ) ",
+            "startCol": 1,
+            "startLine": 2708,
+            "structs": [
+                {
+                    "name": "avlnode"
+                },
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "argNames": [
+                "a"
+            ],
+            "argTypes": [
+                "char *"
+            ],
+            "endCol": 1,
+            "endLine": 2762,
+            "enums": [],
+            "filename": "avl_test.c",
+            "functions": [],
+            "globals": [
+                {
+                    "name": "permutation_error"
+                },
+                {
+                    "name": "stdout"
+                }
+            ],
+            "name": "permutation_delete",
+            "num_args": 1,
+            "returnType": "void",
+            "signature": "void permutation_delete ( char * a ) ",
+            "startCol": 1,
+            "startLine": 2731,
+            "structs": [
+                {
+                    "name": "avlnode"
+                },
+                {
+                    "name": ""
+                }
+            ]
+        }
+    ],
+    "globals": [
+        {
+            "endCol": 16,
+            "endLine": 2608,
+            "filename": "avl_test.c",
+            "isStatic": false,
+            "name": "mu_tests",
+            "startCol": 1,
+            "startLine": 2608,
+            "type": "int"
+        },
+        {
+            "endCol": 30,
+            "endLine": 2608,
+            "filename": "avl_test.c",
+            "isStatic": false,
+            "name": "mu_fails",
+            "startCol": 1,
+            "startLine": 2608,
+            "type": "int"
+        },
+        {
+            "endCol": 26,
+            "endLine": 2611,
+            "filename": "avl_test.c",
+            "isStatic": false,
+            "name": "permutation_error",
+            "startCol": 1,
+            "startLine": 2611,
+            "type": "int"
+        }
+    ],
+    "structs": [
+        {
+            "endCol": 32,
+            "endLine": 923,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "name": "",
+            "startCol": 9,
+            "startLine": 923,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 1020,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "name": "_G_fpos_t",
+            "startCol": 9,
+            "startLine": 1016,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 1034,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "name": "_G_fpos64_t",
+            "startCol": 9,
+            "startLine": 1030,
+            "structs": [
+                {
+                    "name": ""
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 1134,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "name": "_IO_FILE",
+            "startCol": 1,
+            "startLine": 1084,
+            "structs": [
+                {
+                    "name": "_IO_FILE"
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 2016,
+            "enums": [],
+            "filename": "avl_bf.c",
+            "name": "avlnode",
+            "startCol": 9,
+            "startLine": 2010,
+            "structs": [
+                {
+                    "name": "avlnode"
+                }
+            ]
+        },
+        {
+            "endCol": 1,
+            "endLine": 2279,
+            "enums": [],
+            "filename": "avl_test.c",
+            "name": "tm",
+            "startCol": 1,
+            "startLine": 2260,
+            "structs": []
+        },
+        {
+            "endCol": 1,
+            "endLine": 2344,
+            "enums": [],
+            "filename": "avl_test.c",
+            "name": "timespec",
+            "startCol": 1,
+            "startLine": 2337,
+            "structs": []
+        }
+    ]
+}

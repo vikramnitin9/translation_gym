@@ -1,0 +1,395 @@
+#![allow(non_upper_case_globals)]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+
+use libc;
+use std::{
+    env,
+    error::Error,
+    ffi::{CStr, CString, OsStr},
+    num::{IntErrorKind, ParseIntError},
+    os::raw::{c_char, c_int},
+    path::Path,
+    ptr,
+    str::FromStr,
+    sync::atomic::{AtomicPtr, Ordering},
+};
+include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+include!("main_func.rs");
+pub struct ProgramNameWrapper {
+    val: Option<String>,
+}
+
+impl ProgramNameWrapper {
+    pub fn new() -> Self {
+        Self {
+            val: Self::get_global(),
+        }
+    }
+
+    pub fn get(&self) -> Option<String> {
+        Self::get_global()
+    }
+
+    pub fn set(&mut self, val: Option<String>) {
+        self.val = val.clone();
+
+        // Update the global variable
+        unsafe {
+            if let Some(s) = &val {
+                // Convert String to C string and leak it (since we're setting a global)
+                let c_string = std::ffi::CString::new(s.clone()).unwrap();
+                program_name = c_string.into_raw() as *const ::std::os::raw::c_char;
+            } else {
+                program_name = ptr::null();
+            }
+        }
+    }
+
+    // Helper method to read from the global variable
+    fn get_global() -> Option<String> {
+        unsafe {
+            if program_name.is_null() {
+                None
+            } else {
+                // Convert C string to Rust String
+                let c_str = CStr::from_ptr(program_name);
+                Some(c_str.to_string_lossy().into_owned())
+            }
+        }
+    }
+}
+
+fn set_program_name_rust(argv0: &str, program_name_wrapper: &mut ProgramNameWrapper) {
+    // Sanity check. POSIX requires the invoking process to pass a non-NULL argv[0].
+    if argv0.is_empty() {
+        // It's a bug in the invoking program. Help diagnosing it.
+        eprintln!("A NULL argv[0] was passed through an exec system call.");
+        std::process::abort();
+    }
+
+    // Find the last slash to get the base name
+    let path = Path::new(argv0);
+    let base_name = path
+        .file_name()
+        .map_or(argv0, |name| name.to_str().unwrap_or(argv0));
+
+    // Check if the path contains "/.libs/"
+    let mut final_name = argv0;
+
+    if let Some(parent) = path.parent() {
+        let parent_str = parent.to_str().unwrap_or("");
+        if parent_str.ends_with("/.libs") {
+            final_name = base_name;
+
+            // Check if base_name starts with "lt-"
+            if base_name.starts_with("lt-") {
+                final_name = &base_name[3..]; // Skip "lt-" prefix
+
+                // On glibc systems, remove the "lt-" prefix from program_invocation_short_name
+                unsafe {
+                    if !program_invocation_short_name.is_null() {
+                        let c_str = CString::new(final_name).unwrap();
+                        program_invocation_short_name = c_str.into_raw();
+                    }
+                }
+            }
+        }
+    }
+
+    // Set program_name
+    program_name_wrapper.set(Some(final_name.to_string()));
+
+    // On glibc systems, set program_invocation_name as well
+    unsafe {
+        if !program_invocation_name.is_null() {
+            let c_str = CString::new(final_name).unwrap();
+            program_invocation_name = c_str.into_raw();
+        }
+    }
+}
+#[no_mangle]
+pub unsafe extern "C" fn set_program_name(argv0: *const ::std::os::raw::c_char) {
+    if argv0.is_null() {
+        // Handle null pointer case directly in the wrapper
+        eprintln!("A NULL argv[0] was passed through an exec system call.");
+        std::process::abort();
+    }
+
+    // Convert C string to Rust string
+    let argv0_str = CStr::from_ptr(argv0).to_str().unwrap_or("");
+
+    // Create program_name wrapper
+    let mut program_name_wrapper = ProgramNameWrapper::new();
+
+    // Call the Rust implementation
+    set_program_name_rust(argv0_str, &mut program_name_wrapper);
+}
+
+fn posix2_version_rust() -> i32 {
+    let mut v = 200809;
+
+    // Use Rust's standard library to get environment variable
+    if let Ok(s) = env::var("_POSIX2_VERSION") {
+        if !s.is_empty() {
+            // Parse the string to an integer
+            if let Ok(i) = s.parse::<i32>() {
+                v = i;
+            }
+        }
+    }
+
+    // Apply the bounds checking
+    // Note: i32::MIN is -2147483648, which is what (-2147483647 - 1) evaluates to
+    if v < i32::MIN {
+        i32::MIN
+    } else if v > i32::MAX {
+        i32::MAX
+    } else {
+        v
+    }
+}
+#[no_mangle]
+pub unsafe extern "C" fn posix2_version() -> libc::c_int {
+    posix2_version_rust() as libc::c_int
+}
+
+/// Represents possible errors when parsing integers
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum StrtolError {
+    Ok = 0,
+    InvalidInput = 1,
+    OverflowError = 2,
+    InvalidSuffixChar = 4,
+}
+
+impl StrtolError {
+    fn combine(self, other: StrtolError) -> StrtolError {
+        // Bitwise OR of the enum values
+        let combined_value = self as i32 | other as i32;
+        match combined_value {
+            0 => StrtolError::Ok,
+            1 => StrtolError::InvalidInput,
+            2 => StrtolError::OverflowError,
+            4 => StrtolError::InvalidSuffixChar,
+            5 => StrtolError::InvalidInput, // InvalidInput | InvalidSuffixChar
+            6 => StrtolError::OverflowError, // OverflowError | InvalidSuffixChar
+            _ => StrtolError::InvalidInput, // Default to InvalidInput for other combinations
+        }
+    }
+}
+
+/// Scale a value by a power of the given base
+fn bkm_scale_by_power(value: &mut u64, base: u64, power: u32) -> StrtolError {
+    // Check for overflow
+    let max_value = u64::MAX / base.pow(power);
+    if *value > max_value {
+        return StrtolError::OverflowError;
+    }
+
+    *value *= base.pow(power);
+    StrtolError::Ok
+}
+
+/// Scale a value by the given factor
+fn bkm_scale(value: &mut u64, factor: u64) -> StrtolError {
+    // Check for overflow
+    if *value > u64::MAX / factor {
+        return StrtolError::OverflowError;
+    }
+
+    *value *= factor;
+    StrtolError::Ok
+}
+
+/// Parse a string into an unsigned integer with optional suffixes
+pub fn xstrtoumax_rust(
+    s: &str,
+    strtol_base: i32,
+    valid_suffixes: Option<&str>,
+) -> (StrtolError, u64, usize) {
+    // Validate base
+    assert!(
+        (0 <= strtol_base && strtol_base <= 36),
+        "0 <= strtol_base && strtol_base <= 36"
+    );
+
+    // Check for negative numbers which are invalid for unsigned parsing
+    let s = s.trim_start();
+    if s.starts_with('-') {
+        return (StrtolError::InvalidInput, 0, 0);
+    }
+
+    // Find where the number ends and any suffix begins
+    let mut num_end = 0;
+    let mut in_number = true;
+    for (i, c) in s.char_indices() {
+        if in_number {
+            let is_valid_digit = match strtol_base {
+                0 => {
+                    c.is_digit(10)
+                        || (c == '0'
+                            && i + 1 < s.len()
+                            && (s[i + 1..].starts_with('x') || s[i + 1..].starts_with('X')))
+                }
+                1..=10 => c.is_digit(strtol_base as u32),
+                11..=36 => {
+                    c.is_digit(10)
+                        || ('a'..='z').contains(&c.to_ascii_lowercase())
+                            && (c.to_ascii_lowercase() as u32 - 'a' as u32)
+                                < (strtol_base - 10) as u32
+                }
+                _ => false,
+            };
+
+            if !is_valid_digit {
+                in_number = false;
+                num_end = i;
+            }
+        }
+    }
+
+    if in_number {
+        num_end = s.len();
+    }
+
+    // Parse the number part
+    let num_str = &s[..num_end];
+    let suffix_str = &s[num_end..];
+
+    let mut tmp: u64;
+    let mut err = StrtolError::Ok;
+
+    // If there's no number but there is a valid suffix, assume the number is 1
+    if num_str.is_empty() {
+        if let Some(valid) = valid_suffixes {
+            if !suffix_str.is_empty() && valid.contains(&suffix_str[0..1]) {
+                tmp = 1;
+            } else {
+                return (StrtolError::InvalidInput, 0, 0);
+            }
+        } else {
+            return (StrtolError::InvalidInput, 0, 0);
+        }
+    } else {
+        // Parse the number
+        let parse_result = if strtol_base == 0 {
+            u64::from_str(num_str)
+        } else {
+            u64::from_str_radix(num_str, strtol_base as u32)
+        };
+
+        match parse_result {
+            Ok(val) => tmp = val,
+            Err(e) => match e.kind() {
+                IntErrorKind::PosOverflow => {
+                    err = StrtolError::OverflowError;
+                    tmp = u64::MAX;
+                }
+                _ => return (StrtolError::InvalidInput, 0, 0),
+            },
+        }
+    }
+
+    // If no valid suffixes are allowed, return the parsed value
+    if valid_suffixes.is_none() {
+        return (err, tmp, num_end);
+    }
+
+    // Process suffixes if present
+    if !suffix_str.is_empty() {
+        let valid = valid_suffixes.unwrap_or("");
+        let first_suffix_char = suffix_str.chars().next().unwrap();
+
+        if !valid.contains(first_suffix_char) {
+            return (err.combine(StrtolError::InvalidSuffixChar), tmp, num_end);
+        }
+
+        let mut suffix_len = 1;
+        let mut base = 1024;
+
+        // Check for optional second suffix that can change the base
+        if valid.contains('0') {
+            if suffix_str.len() >= 2 {
+                let second_char = suffix_str.chars().nth(1).unwrap();
+                if second_char == 'i'
+                    && suffix_str.len() >= 3
+                    && suffix_str.chars().nth(2).unwrap() == 'B'
+                {
+                    suffix_len += 2;
+                } else if second_char == 'B' || second_char == 'D' {
+                    base = 1000;
+                    suffix_len += 1;
+                }
+            }
+        }
+
+        // Apply the scaling based on the suffix
+        let overflow = match first_suffix_char {
+            'b' => bkm_scale(&mut tmp, 512),
+            'B' => bkm_scale(&mut tmp, 1024),
+            'c' => StrtolError::Ok,
+            'E' => bkm_scale_by_power(&mut tmp, base, 6),
+            'G' | 'g' => bkm_scale_by_power(&mut tmp, base, 3),
+            'k' | 'K' => bkm_scale_by_power(&mut tmp, base, 1),
+            'M' | 'm' => bkm_scale_by_power(&mut tmp, base, 2),
+            'P' => bkm_scale_by_power(&mut tmp, base, 5),
+            'Q' => bkm_scale_by_power(&mut tmp, base, 10),
+            'R' => bkm_scale_by_power(&mut tmp, base, 9),
+            'T' | 't' => bkm_scale_by_power(&mut tmp, base, 4),
+            'w' => bkm_scale(&mut tmp, 2),
+            'Y' => bkm_scale_by_power(&mut tmp, base, 8),
+            'Z' => bkm_scale_by_power(&mut tmp, base, 7),
+            _ => StrtolError::InvalidSuffixChar,
+        };
+
+        err = err.combine(overflow);
+
+        // Check if there are characters after the valid suffix
+        if suffix_str.len() > suffix_len {
+            err = err.combine(StrtolError::InvalidSuffixChar);
+        }
+
+        num_end += suffix_len;
+    }
+
+    (err, tmp, num_end)
+}
+#[no_mangle]
+pub unsafe extern "C" fn xstrtoumax(
+    s: *const c_char,
+    ptr: *mut *mut c_char,
+    strtol_base: c_int,
+    val: *mut u64,
+    valid_suffixes: *const c_char,
+) -> c_int {
+    // Convert C string to Rust string
+    let s_str = if !s.is_null() {
+        CStr::from_ptr(s).to_str().unwrap_or("")
+    } else {
+        ""
+    };
+
+    // Convert valid_suffixes to Option<&str>
+    let valid_suffixes_str = if !valid_suffixes.is_null() {
+        Some(CStr::from_ptr(valid_suffixes).to_str().unwrap_or(""))
+    } else {
+        None
+    };
+
+    // Call the Rust implementation
+    let (error, result, end_pos) = xstrtoumax_rust(s_str, strtol_base, valid_suffixes_str);
+
+    // Set the output value
+    if !val.is_null() {
+        *val = result;
+    }
+
+    // Set the end pointer if requested
+    if !ptr.is_null() {
+        *ptr = s.add(end_pos) as *mut c_char;
+    }
+
+    // Return the error code
+    error as c_int
+}

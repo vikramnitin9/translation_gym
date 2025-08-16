@@ -1,0 +1,678 @@
+[
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "mkstemp-safer.o",
+            "mkstemp-safer.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "mkstemp-safer.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "safe-write.o",
+            "safe-write.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "safe-write.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "stdbit.o",
+            "stdbit.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "stdbit.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "full-write.o",
+            "full-write.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "full-write.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "basename-lgpl.o",
+            "basename-lgpl.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "basename-lgpl.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "sig2str.o",
+            "sig2str.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "sig2str.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "quotearg.o",
+            "quotearg.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "quotearg.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xdectoimax.o",
+            "xdectoimax.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "xdectoimax.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "version-etc.o",
+            "version-etc.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "version-etc.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xbinary-io.o",
+            "xbinary-io.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "xbinary-io.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "mbrtoc32.o",
+            "mbrtoc32.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "mbrtoc32.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xmalloc.o",
+            "xmalloc.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "xmalloc.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "version-etc-fsf.o",
+            "version-etc-fsf.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "version-etc-fsf.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fpurge.o",
+            "fpurge.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "fpurge.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fflush.o",
+            "fflush.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "fflush.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fseeko.o",
+            "fseeko.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "fseeko.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "localcharset.o",
+            "localcharset.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "localcharset.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fclose.o",
+            "fclose.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "fclose.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "c-strcasecmp.o",
+            "c-strcasecmp.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "c-strcasecmp.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xstrtoimax.o",
+            "xstrtoimax.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "xstrtoimax.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "ialloc.o",
+            "ialloc.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "ialloc.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "setlocale_null.o",
+            "setlocale_null.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "setlocale_null.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "same-inode.o",
+            "same-inode.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "same-inode.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xdectoumax.o",
+            "xdectoumax.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "xdectoumax.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "hard-locale.o",
+            "hard-locale.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "hard-locale.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "split.o",
+            "split.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "split.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xalloc-die.o",
+            "xalloc-die.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "xalloc-die.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "c-ctype.o",
+            "c-ctype.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "c-ctype.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "closeout.o",
+            "closeout.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "closeout.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fcntl.o",
+            "fcntl.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "fcntl.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xalignalloc.o",
+            "xalignalloc.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "xalignalloc.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fd-safer-flag.o",
+            "fd-safer-flag.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "fd-safer-flag.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "exitfail.o",
+            "exitfail.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "exitfail.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "dup-safer.o",
+            "dup-safer.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "dup-safer.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "stdc_leading_zeros.o",
+            "stdc_leading_zeros.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "stdc_leading_zeros.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fd-safer.o",
+            "fd-safer.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "fd-safer.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "mbszero.o",
+            "mbszero.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "mbszero.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "progname.o",
+            "progname.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "progname.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "temp-stream.o",
+            "temp-stream.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "temp-stream.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "binary-io.o",
+            "binary-io.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "binary-io.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "propername-lite.o",
+            "propername-lite.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "propername-lite.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "version.o",
+            "version.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "version.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xstrtoumax.o",
+            "xstrtoumax.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "xstrtoumax.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fd-reopen.o",
+            "fd-reopen.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "fd-reopen.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "close-stream.o",
+            "close-stream.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "close-stream.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "dup-safer-flag.o",
+            "dup-safer-flag.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "dup-safer-flag.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "tmpdir.o",
+            "tmpdir.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "tmpdir.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "open-safer.o",
+            "open-safer.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "open-safer.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fadvise.o",
+            "fadvise.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "fadvise.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "setlocale_null-unlocked.o",
+            "setlocale_null-unlocked.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "setlocale_null-unlocked.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "alignalloc.o",
+            "alignalloc.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "alignalloc.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "c32isprint.o",
+            "c32isprint.c"
+        ],
+        "directory": "/app/output/split_FPaq4tOajT/source",
+        "file": "c32isprint.c"
+    }
+]

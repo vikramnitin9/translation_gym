@@ -1,0 +1,26 @@
+[
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-std=c11",
+            "test.c"
+        ],
+        "directory": "/app/output/urlparser_aHEzGcWpYk/source",
+        "file": "test.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-std=c11",
+            "url.c"
+        ],
+        "directory": "/app/output/urlparser_aHEzGcWpYk/source",
+        "file": "url.c"
+    }
+]

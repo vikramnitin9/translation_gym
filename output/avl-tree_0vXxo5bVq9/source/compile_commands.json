@@ -1,0 +1,38 @@
+[
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-std=c11",
+            "avl_test.c"
+        ],
+        "directory": "/app/output/avl-tree_0vXxo5bVq9/source",
+        "file": "avl_test.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-std=c11",
+            "avl_bf.c"
+        ],
+        "directory": "/app/output/avl-tree_0vXxo5bVq9/source",
+        "file": "avl_bf.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-std=c11",
+            "avl_data.c"
+        ],
+        "directory": "/app/output/avl-tree_0vXxo5bVq9/source",
+        "file": "avl_data.c"
+    }
+]

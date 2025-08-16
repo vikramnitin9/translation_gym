@@ -1,0 +1,204 @@
+{
+    "date": "2025-08-02 09:34:16.073851",
+    "args": {
+        "dataset": "urlparser",
+        "model": "claude37",
+        "num_attempts": 5,
+        "output_dir": "/app/output/urlparser_aHEzGcWpYk",
+        "verbose": true
+    },
+    "results": [
+        {
+            "unit": "unhex",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "Category",
+            "type": "enums",
+            "results": "repair_failed",
+            "attempts": 1
+        },
+        {
+            "unit": "url_key_value",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "decode_percent",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "scan_part",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "url_data",
+            "type": "structs",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "url_free",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "parse_query_string",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "scan_decimal_number",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "url_is_ssh",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "strdup",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "url_parse",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "url_get_query_value",
+            "type": "functions",
+            "results": "Test Failure",
+            "attempts": 5
+        },
+        {
+            "unit": "url_get_port",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "url_get_path",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "url_get_hostname",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "url_get_userinfo",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "url_data_inspect",
+            "type": "functions",
+            "results": "Compile Error",
+            "attempts": 5
+        },
+        {
+            "unit": "url_get_fragment",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 2
+        },
+        {
+            "unit": "url_is_protocol",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 5
+        },
+        {
+            "unit": "test10",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "test9",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "test8",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "test7",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "test6",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "test5",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "test4",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "test3",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 4
+        },
+        {
+            "unit": "test2",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 3
+        },
+        {
+            "unit": "test1",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "run_test",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        },
+        {
+            "unit": "main_0",
+            "type": "functions",
+            "results": "Success",
+            "attempts": 1
+        }
+    ]
+}

@@ -1,0 +1,353 @@
+[
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "version.o",
+            "version.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "version.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fflush.o",
+            "fflush.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "fflush.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "progname.o",
+            "progname.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "progname.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "setlocale_null-unlocked.o",
+            "setlocale_null-unlocked.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "setlocale_null-unlocked.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xstrtoimax.o",
+            "xstrtoimax.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "xstrtoimax.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "c-strcasecmp.o",
+            "c-strcasecmp.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "c-strcasecmp.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fclose.o",
+            "fclose.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "fclose.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "propername-lite.o",
+            "propername-lite.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "propername-lite.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "close-stream.o",
+            "close-stream.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "close-stream.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "version-etc-fsf.o",
+            "version-etc-fsf.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "version-etc-fsf.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "exitfail.o",
+            "exitfail.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "exitfail.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xalloc-die.o",
+            "xalloc-die.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "xalloc-die.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "ialloc.o",
+            "ialloc.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "ialloc.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "c-ctype.o",
+            "c-ctype.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "c-ctype.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xdectoimax.o",
+            "xdectoimax.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "xdectoimax.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "xmalloc.o",
+            "xmalloc.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "xmalloc.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "version-etc.o",
+            "version-etc.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "version-etc.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "truncate.o",
+            "truncate.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "truncate.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "setlocale_null.o",
+            "setlocale_null.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "setlocale_null.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "mbrtoc32.o",
+            "mbrtoc32.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "mbrtoc32.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "fseeko.o",
+            "fseeko.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "fseeko.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "closeout.o",
+            "closeout.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "closeout.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "quotearg.o",
+            "quotearg.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "quotearg.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "c32isprint.o",
+            "c32isprint.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "c32isprint.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "mbszero.o",
+            "mbszero.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "mbszero.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "hard-locale.o",
+            "hard-locale.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "hard-locale.c"
+    },
+    {
+        "arguments": [
+            "clang",
+            "-c",
+            "-I./include",
+            "-g",
+            "-o",
+            "localcharset.o",
+            "localcharset.c"
+        ],
+        "directory": "/app/output/truncate_fxjqzZ3BuO/source",
+        "file": "localcharset.c"
+    }
+]
