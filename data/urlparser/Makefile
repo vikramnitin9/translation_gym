@@ -4,7 +4,7 @@ SRCS = url.c test.c
 OBJS = $(SRCS:.c=.o)
 TARGET = urlparser-test
 
-all: clean $(TARGET)
+all: clean $(OBJS)
 
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^

@@ -43,7 +43,7 @@ class TranslationEngine:
         code_dir = self.output_dir
         self.logger.log_status("Copied over the code to {}".format(code_dir.absolute()))
         self.source_manager = CSourceManager(code_dir/'source', logger=self.logger)
-        
+
         # First compile the source code
         try:
             self.source_manager.compile(instrument=self.dataset.get("instrument", True), timeout=120) # Instrument first compile
@@ -127,7 +127,7 @@ class TranslationEngine:
                         self.logger.log_failure("Repair did not produce any code")
                         result = {
                             'success': False,
-                            'category': 'repair_failed',
+                            'category': 'Repair Failed',
                             'message': 'translator.repair() returned None'
                         }
                         break

@@ -4,7 +4,7 @@ SRCS = avl_bf.c avl_data.c avl_test.c
 OBJS = $(SRCS:.c=.o)
 TARGET = avl-tree-test
 
-all: clean $(TARGET)
+all: clean $(OBJS)
 
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^

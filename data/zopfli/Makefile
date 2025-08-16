@@ -6,7 +6,7 @@ TARGET = zopfli-test
 
 override CFLAGS := -W -Wall -Wextra -ansi -lm -O3 -Wno-unused-function -Wno-pointer-sign -fPIC $(CFLAGS)
 
-all: $(TARGET)
+all: $(OBJS)
 
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ -lm

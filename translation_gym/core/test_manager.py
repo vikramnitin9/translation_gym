@@ -38,7 +38,7 @@ class TestManager:
         self.logger.log_status("Running tests against the following executable: {}".format(executable_host_path))
         # Get the name of the executable
         exec_name = executable_host_path.name
-        cmd = f"docker run -it \
+        cmd = f"docker run --rm -it \
                 -v {executable_host_path}:/executable/{exec_name}\
                 -v {instrumentation_host_path}:/instrumentation \
                     {self.test_docker}"
