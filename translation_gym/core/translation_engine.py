@@ -138,7 +138,7 @@ class TranslationEngine:
                                    'results': "Success" if result['success'] else result['category'],
                                    'attempts': i+1})
     
-        orchestrator.prune(validator, self.test_manager)
+        # orchestrator.prune(validator, self.test_manager)
         
     
     def print_results(self):

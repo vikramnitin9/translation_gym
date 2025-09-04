@@ -31,8 +31,4 @@ check_file
 clear_ungetc_buffer_preserving_position
 swap_lines
 freopen_safer
-<<<<<<< HEAD
 rpl_fflush
-=======
-rpl_fflush
->>>>>>> 96d7d55 (All metric tools work)

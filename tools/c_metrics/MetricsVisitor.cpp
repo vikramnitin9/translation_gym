@@ -7,12 +7,19 @@
 
 using namespace clang;
 
+/* ==== helper: canonicalize type before pointer test (handles typedefs) ==== */
+bool MetricsVisitor::isPointerLike(QualType QT, ASTContext &Ctx) {
+  if (QT.isNull()) return false;
+  QualType Canon = QT.getCanonicalType(); // desugar typedefs/aliases
+  return Canon->isPointerType();
+}
 
+/* ==== ctor ==== */
 MetricsVisitor::MetricsVisitor(ASTContext &ctx,
                                const std::unordered_set<std::string> &coveredFns)
     : context(ctx), covered(coveredFns) {}
 
-
+/* ==== coverage-scoped traversal (unsafeLines unchanged) ==== */
 bool MetricsVisitor::TraverseFunctionDecl(FunctionDecl *F) {
   bool oldCovered = inCovered;
 
@@ -37,19 +44,60 @@ bool MetricsVisitor::TraverseFunctionDecl(FunctionDecl *F) {
   return true;
 }
 
-//counting visitors (apply only when inCovered)
+/* ==== pointer declaration counting ==== */
+
+// VarDecls: count if inside covered fn OR if they have global/file storage.
 bool MetricsVisitor::VisitVarDecl(VarDecl *D) {
-  if (inCovered && D->getType()->isPointerType())
+  if (!D) return true;
+
+  bool isFileScope = D->isFileVarDecl();    // TU-scope var
+  bool isGlobal    = D->hasGlobalStorage(); // includes static at file scope
+
+  if ((inCovered || isFileScope || isGlobal) &&
+      isPointerLike(D->getType(), context)) {
+    ++pointerDecls;
+  }
+  return true;
+}
+
+// FieldDecls (struct/union members): always count if pointer-typed.
+bool MetricsVisitor::VisitFieldDecl(FieldDecl *F) {
+  if (F && isPointerLike(F->getType(), context))
     ++pointerDecls;
   return true;
 }
 
+/* ==== pointer dereference counting ==== */
+
+// *p
 bool MetricsVisitor::VisitUnaryOperator(UnaryOperator *U) {
-  if (inCovered && U->getOpcode() == UO_Deref)
+  if (inCovered && U && U->getOpcode() == UO_Deref)
     ++pointerDerefs;
   return true;
 }
 
+// p->field
+bool MetricsVisitor::VisitMemberExpr(MemberExpr *M) {
+  if (inCovered && M && M->isArrow())
+    ++pointerDerefs;
+  return true;
+}
+
+// p[i]  (when base is a pointer, not a real array variable)
+bool MetricsVisitor::VisitArraySubscriptExpr(ArraySubscriptExpr *A) {
+  if (!inCovered || !A) return true;
+
+  Expr *Base = A->getBase();
+  if (!Base) return true;
+
+  QualType T = Base->IgnoreParenImpCasts()->getType();
+  if (isPointerLike(T, context))
+    ++pointerDerefs;
+
+  return true;
+}
+
+/* ==== casts & calls (unchanged) ==== */
 bool MetricsVisitor::VisitCStyleCastExpr(CStyleCastExpr *) {
   if (inCovered) ++casts;
   return true;
@@ -75,6 +123,7 @@ bool MetricsVisitor::VisitCallExpr(CallExpr *) {
   return true;
 }
 
+/* ==== summary ==== */
 json MetricsVisitor::getData() {
     json data;
     data["pointerDecls"]  = pointerDecls;

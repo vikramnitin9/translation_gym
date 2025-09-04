@@ -13,8 +13,4 @@ main_0
 logical_getcwd
 version_etc
 rpl_fflush
-<<<<<<< HEAD
 locale_charset
-=======
-locale_charset
->>>>>>> 96d7d55 (All metric tools work)

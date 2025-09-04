@@ -1,5 +1,7 @@
 #include <fstream>
 #include <unordered_set>
+#include <algorithm>
+#include <cctype>
 
 #include "MetricsVisitorConsumer.h"
 #include "ToolActionWrapper.h"
@@ -25,47 +27,55 @@ static cl::opt<std::string> CoveredPath(
   cl::init(""),
   cl::cat(MetricsCategory));
 
+static inline std::string trim(std::string s) {
+  auto notspace = [](int ch){ return !std::isspace(ch); };
+  s.erase(s.begin(), std::find_if(s.begin(), s.end(), notspace));
+  s.erase(std::find_if(s.rbegin(), s.rend(), notspace).base(), s.end());
+  return s;
+}
 
 class MetricsFrontendAction : public ASTFrontendAction {
   const std::unordered_set<std::string>& Covered;
+  MetricsVisitorConsumer* consumer = nullptr;   // keep pointer to created consumer
   json data;
+
 public:
   explicit MetricsFrontendAction(const std::unordered_set<std::string>& C)
-      : Covered(C) {
-    data = json::object();
-  }
+      : Covered(C), data(json::object()) {}
 
   std::unique_ptr<ASTConsumer>
   CreateASTConsumer(CompilerInstance& CI, StringRef) override {
-    return std::make_unique<MetricsVisitorConsumer>(CI.getASTContext(),
-                                                    Covered);
+    auto ptr = std::make_unique<MetricsVisitorConsumer>(CI.getASTContext(), Covered);
+    consumer = ptr.get();
+    return ptr;
   }
 
   void EndSourceFileAction() override {
-    // First call the base class implementation
     ASTFrontendAction::EndSourceFileAction();
-    // Next, retrieve the ASTConsumer so that we can get the stored data
-    CompilerInstance &compiler = this->getCompilerInstance();
-    if (!compiler.hasASTConsumer()) {
-      std::cerr << "No ASTConsumer\n";
-      return;
-    }
-    MetricsVisitorConsumer &myConsumer = dynamic_cast<MetricsVisitorConsumer&>(compiler.getASTConsumer());
-    json subData = myConsumer.getData();
-    // Add the updated counts to this->data
-    for (auto& item : subData.items()) {
-      if (item.value().is_null()) {
-        continue; // Skip null values
+
+    if (!consumer) return;
+    json sub = consumer->getData();
+
+    // Safely add numeric counters without inserting nulls.
+    for (auto &kv : sub.items()) {
+      const auto &k = kv.key();
+      const auto &v = kv.value();
+
+      if (!v.is_number_integer()) continue;  // ignore non-integer fields defensively
+      int rhs = v.get<int>();
+
+      int lhs = 0;
+      auto it = data.find(k);
+      if (it != data.end() && it->is_number_integer()) {
+        lhs = it->get<int>();
       }
-      const auto& key = item.key();
-      const auto& value = item.value();
-      this->data[key] = this->data.value(key, 0) + value.get<int>();
+      data[k] = lhs + rhs;  // assign AFTER computing lhs (no null insertion math)
     }
+
+    consumer = nullptr; // don’t reuse between TUs
   }
 
-  json getData() const {
-    return data;
-  }
+  json getData() const { return data; }
 };
 
 int main(int argc, const char** argv) {
@@ -81,8 +91,13 @@ int main(int argc, const char** argv) {
   std::unordered_set<std::string> Covered;
   if (!CoveredPath.empty()) {
     std::ifstream in(CoveredPath);
-    for (std::string line; std::getline(in, line); )
+    for (std::string line; std::getline(in, line); ) {
+      // strip comments and whitespace
+      auto hash = line.find('#');
+      if (hash != std::string::npos) line.resize(hash);
+      line = trim(line);
       if (!line.empty()) Covered.insert(line);
+    }
   }
 
   ClangTool Tool(ExpectedParser->getCompilations(),
@@ -90,22 +105,22 @@ int main(int argc, const char** argv) {
 
   ToolActionWrapper actionWrapper(new MetricsFrontendAction(Covered));
   Tool.run(&actionWrapper);
-  MetricsFrontendAction* action = dynamic_cast<MetricsFrontendAction*>(actionWrapper.getAction());
+
+  auto *action = dynamic_cast<MetricsFrontendAction*>(actionWrapper.getAction());
   if (!action) {
     errs() << "Failed to cast ToolActionWrapper to MetricsFrontendAction\n";
     return 1;
   }
+
   json data = action->getData();
-  // Print the JSON data
   if (data.is_null()) {
     errs() << "No data collected\n";
     return 1;
   }
+
   for (const auto& item : data.items()) {
-    if (item.value().is_null()) {
-      continue; // Skip null values
-    }
-    llvm::outs() << item.key() << ": " << item.value().get<int>() << "\n";
+    if (!item.value().is_number_integer()) continue;
+    outs() << item.key() << ": " << item.value().get<int>() << "\n";
   }
 
   return 0;

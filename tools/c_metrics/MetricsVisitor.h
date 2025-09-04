@@ -12,13 +12,17 @@ using json = nlohmann::json;
 
 namespace clang {
   class VarDecl;
+  class FieldDecl;
   class UnaryOperator;
+  class MemberExpr;
+  class ArraySubscriptExpr;
   class CStyleCastExpr;
   class CallExpr;
   class CXXStaticCastExpr;
   class CXXReinterpretCastExpr;
   class CXXConstCastExpr;
   class FunctionDecl;
+  class QualType;
 }
 
 class MetricsVisitor
@@ -28,9 +32,12 @@ public:
   MetricsVisitor(clang::ASTContext &ctx,
                  const std::unordered_set<std::string> &coveredFns);
 
-  /* overrides counting events */
+  /* counting visitors */
   bool VisitVarDecl(clang::VarDecl *D);
+  bool VisitFieldDecl(clang::FieldDecl *F);                 // NEW: struct/union fields
   bool VisitUnaryOperator(clang::UnaryOperator *U);
+  bool VisitMemberExpr(clang::MemberExpr *M);               // NEW: p->field
+  bool VisitArraySubscriptExpr(clang::ArraySubscriptExpr*); // NEW: p[i] with pointer base
   bool VisitCStyleCastExpr(clang::CStyleCastExpr *C);
   bool VisitCXXStaticCastExpr(clang::CXXStaticCastExpr *C);
   bool VisitCXXReinterpretCastExpr(clang::CXXReinterpretCastExpr *C);
@@ -50,6 +57,9 @@ public:
   int unsafeLines   = 0;   ///< total physical lines of all covered functions
 
 private:
+  // helper: treat typedefs etc. uniformly when checking pointer-ness
+  static bool isPointerLike(clang::QualType QT, clang::ASTContext &Ctx);
+
   clang::ASTContext &context;
   const std::unordered_set<std::string> &covered;
   bool inCovered = false;

@@ -13,6 +13,8 @@ int reset_counter(void) {
     return prev;
 }
 
+
+
 // Increment the counter in place, return the new value
 int increment_counter(void) {
     global_counter++;
